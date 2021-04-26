@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { FC, useState, useContext } from "react";
 import { LoginContext } from "./context/LoginContext";
 
 function Login() {

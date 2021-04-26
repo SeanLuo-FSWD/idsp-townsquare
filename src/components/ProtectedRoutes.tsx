@@ -2,7 +2,7 @@ import React from "react";
 // react router
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // pages
-import Home from "./Posts";
+import Home from "./Feed";
 import Users from "./Users";
 import Navbar from "./Navbar";
 const ReactRouterSetup = () => {
