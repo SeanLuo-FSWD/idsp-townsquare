@@ -6,7 +6,6 @@ import { doFetchFeed } from "./redux/actions/feed";
 import { getFeed, getFeedError } from "./redux/selector/Feed";
 import IFeed from "./interfaces/redux";
 import Post from "./Post";
-
 interface IProps {
   children?: React.ReactNode;
   onFetchFeed: Function;
@@ -26,7 +25,7 @@ const Feed = (props: IProps) => {
       <h2>Welcome: {username} </h2>
 
       <div>
-        {props.feed ? (
+        {props.feed.posts.length > 0 ? (
           props.feed.posts.map((post) => {
             return <Post key={post.postId} {...post}></Post>;
           })
@@ -47,8 +46,10 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onFetchFeed: () => dispatch(doFetchFeed()),
-});
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onFetchFeed: () => dispatch(doFetchFeed()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);

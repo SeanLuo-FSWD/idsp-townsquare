@@ -1,19 +1,23 @@
 import { FEED_FETCH, FEED_FETCH_ERROR } from "../constants/actionTypes";
 import fetchFeed from "../../api/posts";
+import IPost from "../../interfaces/IPost";
 
 const INITIAL_STATE = {
   posts: [],
   error: null,
 };
 
-function feedReducer(state = INITIAL_STATE, action: { type: string }) {
+interface FeedFetchAction {
+  type: typeof FEED_FETCH;
+  payload: any;
+}
+
+function feedReducer(state = INITIAL_STATE, action: FeedFetchAction) {
   switch (action.type) {
     case FEED_FETCH: {
-      return { ...state, posts: fetchFeed() };
+      return { ...state, posts: action.payload.data };
     }
-    case FEED_FETCH_ERROR: {
-      return { ...state, error: "an error occured" };
-    }
+
     default:
       return state;
   }
