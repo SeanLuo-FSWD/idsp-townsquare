@@ -1,4 +1,4 @@
-import { posts } from "../../FakeDb/posts";
+// import { posts } from "../../FakeDb/posts";
 import axios from "axios";
 import SERVER_URL from "../../constants/server_url";
 
