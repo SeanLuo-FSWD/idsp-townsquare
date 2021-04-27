@@ -1,5 +1,6 @@
-import React, { FC, useState, useContext } from "react";
-import { LoginContext } from "./context/LoginContext";
+import React, { useContext } from "react";
+import { LoginContext } from "../../store/context/LoginContext";
+import { Link } from "react-router-dom";
 
 function Login() {
   const { setUsername, setIsAuthenticated } = useContext(LoginContext);
@@ -7,7 +8,7 @@ function Login() {
   return (
     <div>
       <h2>Please login</h2>
-      <form>
+      <div>
         <label htmlFor="uname">
           <b>username</b>
         </label>
@@ -31,12 +32,20 @@ function Login() {
         />
         <button
           onClick={() => {
+            console.log("setIsAuthenticated toggled to true");
             setIsAuthenticated(true);
           }}
         >
           Login
         </button>
-      </form>
+      </div>
+      <div>
+        <ul>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

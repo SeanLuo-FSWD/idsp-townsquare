@@ -1,5 +1,5 @@
 import React from "react";
-import IPost from "./interfaces/IPost";
+import IPost from "../interfaces/IPost";
 
 const Post = (props: IPost) => {
   return (

@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 
 import { Link } from "react-router-dom";
-import { LoginContext } from "./context/LoginContext";
+import { LoginContext } from "../store/context/LoginContext";
 
 function Navbar() {
   const { setIsAuthenticated } = useContext(LoginContext);

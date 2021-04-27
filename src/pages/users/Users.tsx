@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { LoginContext } from "./context/LoginContext";
+import { LoginContext } from "../../store/context/LoginContext";
 
 function Users() {
   const { username } = useContext(LoginContext);

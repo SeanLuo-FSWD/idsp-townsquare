@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { LoginContext } from "./context/LoginContext";
+import { LoginContext } from "../../store/context/LoginContext";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { doFetchFeed } from "./redux/actions/feed";
-import { getFeed, getFeedError } from "./redux/selector/Feed";
-import IFeed from "./interfaces/redux";
-import Post from "./Post";
+import { doFetchFeed } from "../../store/redux/actions/feed";
+import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
+import IFeed from "../../interfaces/redux";
+import Post from "../../components/Post";
+import "./Feed.scss";
+
 interface IProps {
   children?: React.ReactNode;
   onFetchFeed: Function;
   feed: IFeed;
 }
 
-const Feed = (props: IProps) => {
+const Feed = (props: any) => {
   const { username } = useContext(LoginContext);
 
   useEffect(() => {
@@ -25,8 +27,10 @@ const Feed = (props: IProps) => {
       <h2>Welcome: {username} </h2>
 
       <div>
-        {props.feed.posts.length > 0 ? (
-          props.feed.posts.map((post) => {
+        {props.feed.error ? (
+          <h2 className="error">{props.feed.error}</h2>
+        ) : props.feed.posts.length > 0 ? (
+          props.feed.posts.map((post: any) => {
             return <Post key={post.postId} {...post}></Post>;
           })
         ) : (

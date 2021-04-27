@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "./style/App.css";
-import RouteProtector from "./RouteProtector";
-import ProtectedRoutes from "./ProtectedRoutes";
-import { LoginContext } from "./context/LoginContext";
+import "./App.css";
+import { LoginContext } from "./store/context/LoginContext";
+import Routing from "./components/Routing";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,9 +11,7 @@ function App() {
     <LoginContext.Provider
       value={{ isAuthenticated, username, setUsername, setIsAuthenticated }}
     >
-      <RouteProtector>
-        <ProtectedRoutes />
-      </RouteProtector>
+      <Routing />
     </LoginContext.Provider>
   );
 }

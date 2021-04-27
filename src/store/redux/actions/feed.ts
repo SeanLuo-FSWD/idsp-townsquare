@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import fetchFeed from "../../api/posts";
+import IPost from "../../../interfaces/IPost";
+import fetchFeed from "../../../utils/api/posts";
 
 import {
   FEED_FETCH,
@@ -14,8 +15,13 @@ const doAddPost = (post: {}) => ({
 });
 
 const doFetchFeed = () => async (dispatch: Dispatch) => {
-  const posts = fetchFeed();
-  dispatch({ type: "FEED_FETCH", payload: posts });
+  fetchFeed((err: Error, result: IPost[]) => {
+    if (err) {
+      dispatch({ type: FEED_FETCH_ERROR, payload: err.message });
+    } else {
+      dispatch({ type: FEED_FETCH, payload: result });
+    }
+  });
 };
 
 const doFetchFeedError = (error: string) => ({
