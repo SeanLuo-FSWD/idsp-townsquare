@@ -5,21 +5,21 @@ import fetchFeed from "../../../utils/api/posts";
 
 import {
   FEED_FETCH,
-  POST_ADD,
   FEED_FETCH_ERROR,
+  FeedActionTypes,
 } from "../constants/actionTypes";
 
-const doAddPost = (post: {}) => ({
-  type: POST_ADD,
-  post,
-});
+// const doAddPost = (post: {}) => ({
+//   type: POST_ADD,
+//   post,
+// });
 
 const doFetchFeed = () => async (dispatch: Dispatch) => {
   fetchFeed((err: Error, result: IPost[]) => {
     if (err) {
-      dispatch({ type: FEED_FETCH_ERROR, payload: err.message });
+      dispatch({ type: FEED_FETCH_ERROR, error: err.message });
     } else {
-      dispatch({ type: FEED_FETCH, payload: result });
+      dispatch({ type: FEED_FETCH, posts: result });
     }
   });
 };
@@ -29,4 +29,4 @@ const doFetchFeedError = (error: string) => ({
   error,
 });
 
-export { doAddPost, doFetchFeed, doFetchFeedError };
+export { doFetchFeed, doFetchFeedError };
