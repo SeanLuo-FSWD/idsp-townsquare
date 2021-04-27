@@ -6,10 +6,18 @@ import Routing from "./components/Routing";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
+  const [signUpStatus, setSignUpStatus] = useState(false);
 
   return (
     <LoginContext.Provider
-      value={{ isAuthenticated, username, setUsername, setIsAuthenticated }}
+      value={{
+        isAuthenticated,
+        username,
+        setUsername,
+        setIsAuthenticated,
+        signUpStatus,
+        setSignUpStatus,
+      }}
     >
       <Routing />
     </LoginContext.Provider>
