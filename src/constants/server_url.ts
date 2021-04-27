@@ -1,7 +1,8 @@
-const is_heroku = process.env.IS_HEROKU || false;
+let SERVER_URL = "";
 
-let SERVER_URL = "http://localhost:8080";
-if (is_heroku) {
+if (process.env.NODE_ENV != "production") {
+  SERVER_URL = "http://localhost:8080";
+} else {
   SERVER_URL = `https://idsp-mock-server.herokuapp.com`;
 }
 export default SERVER_URL;
