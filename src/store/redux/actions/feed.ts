@@ -1,10 +1,14 @@
-import axios from "axios";
 import { Dispatch } from "redux";
-import { IPost } from "../../../interfaces/IPost";
-import { fetchFeed, addComment } from "../../../utils/api/posts";
+import { IPost, TLikes } from "../../../interfaces/IPost";
+import { fetchFeed, addComment, likePost } from "../../../utils/api/posts";
 import { TComment } from "../../../interfaces/IPost";
 
-import { FEED_FETCH, API_ERROR, COMMENT_ADD } from "../constants/actionTypes";
+import {
+  FEED_FETCH,
+  API_ERROR,
+  COMMENT_ADD,
+  POST_LIKE,
+} from "../constants/actionTypes";
 
 // const doAddPost = (post: {}) => ({
 //   type: POST_ADD,
@@ -36,4 +40,16 @@ const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
   });
 };
 
-export { doFetchFeed, doFetchFeedError, doPostComment };
+const doLikePost = (userId: string, username: string, postId: string) => async (
+  dispatch: Dispatch
+) => {
+  likePost(userId, username, postId, (err: Error, result: TLikes) => {
+    if (err) {
+      dispatch({ type: API_ERROR, error: err.message });
+    } else {
+      dispatch({ type: POST_LIKE, post_like: result });
+    }
+  });
+};
+
+export { doFetchFeed, doFetchFeedError, doPostComment, doLikePost };

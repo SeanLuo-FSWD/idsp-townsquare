@@ -12,16 +12,22 @@ const fetchFeed = async (cb: Function) => {
   }
 };
 
-const likePost = async (userId: string, postId: string, cb: Function) => {
+const likePost = async (
+  userId: string,
+  username: string,
+  postId: string,
+  cb: Function
+) => {
   axios
     .post(`${SERVER_URL}/ts/like_post`, {
       userId: userId,
+      username: username,
       postId: postId,
     })
     .then((response) => {
       console.log("likePost response");
       console.log(response);
-      cb(null, response.status);
+      cb(null, response.data);
     })
     .catch((err) => {
       console.log("likePost error");

@@ -1,9 +1,10 @@
-import { IPost, TComment } from "../../../interfaces/IPost";
+import { IPost, TComment, TLikes } from "../../../interfaces/IPost";
 
 // export const POST_ADD = "POST_ADD";
 export const FEED_FETCH = "FEED_FETCH";
 export const API_ERROR = "API_ERROR";
 export const COMMENT_ADD = "COMMENT_ADD";
+export const POST_LIKE = "POST_LIKE";
 
 export interface FeedFetchAction {
   type: typeof FEED_FETCH;
@@ -20,6 +21,15 @@ export interface CommentAddAction {
   comment_obj: TComment;
 }
 
-export type FeedAction = FeedFetchAction | ErrorAction | CommentAddAction;
+export interface LikeAction {
+  type: typeof POST_LIKE;
+  post_like: { userId: string; username: string; postId: string };
+}
+
+export type FeedAction =
+  | FeedFetchAction
+  | ErrorAction
+  | CommentAddAction
+  | LikeAction;
 
 export type FeedActionTypes = FeedAction;
