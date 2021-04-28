@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import IPost from "../../../interfaces/IPost";
-import fetchFeed from "../../../utils/api/posts";
+import { IPost } from "../../../interfaces/IPost";
+import { fetchFeed } from "../../../utils/api/posts";
 
 import {
   FEED_FETCH,

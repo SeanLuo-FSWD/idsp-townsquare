@@ -1,4 +1,4 @@
-import IPost from "../../../interfaces/IPost";
+import { IPost } from "../../../interfaces/IPost";
 import IFeed from "../../../interfaces/redux";
 
 const getFeed = (feedState: IFeed) => {

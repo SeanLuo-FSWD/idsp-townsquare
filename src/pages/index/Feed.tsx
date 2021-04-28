@@ -1,18 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
 import { doFetchFeed } from "../../store/redux/actions/feed";
 import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
-import IFeed from "../../interfaces/redux";
 import Post from "../../components/Post";
-import "./Feed.scss";
-
-interface IProps {
-  children?: React.ReactNode;
-  onFetchFeed: Function;
-  feed: IFeed;
-}
+import Error from "../../components/Error";
 
 const Feed = (props: any) => {
   const { username } = useContext(LoginContext);
@@ -28,7 +20,7 @@ const Feed = (props: any) => {
 
       <div>
         {props.feed.error ? (
-          <h2 className="error">{props.feed.error}</h2>
+          <Error message={props.feed.error} />
         ) : props.feed.posts.length > 0 ? (
           props.feed.posts.map((post: any) => {
             return <Post key={post.postId} {...post}></Post>;

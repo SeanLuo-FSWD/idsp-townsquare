@@ -11,4 +11,22 @@ const fetchFeed = async (cb: Function) => {
   }
 };
 
-export default fetchFeed;
+const likePost = async (userId: string, postId: string, cb: Function) => {
+  axios
+    .post(`${SERVER_URL}/ts/like_post`, {
+      userId: userId,
+      postId: postId,
+    })
+    .then((response) => {
+      console.log("likePost response");
+      console.log(response);
+      cb(null, response.status);
+    })
+    .catch((err) => {
+      console.log("likePost error");
+      console.log(err);
+      cb(err);
+    });
+};
+
+export { fetchFeed, likePost };

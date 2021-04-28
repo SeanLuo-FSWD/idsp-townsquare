@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
+import { register } from "../../utils/api/auth";
+import Error from "../../components/Error";
 
 const Register = () => {
   const history = useHistory();
   const [person, setPerson] = useState({ email: "", password: "" });
   const { setSignUpStatus } = useContext(LoginContext);
+  const [signUpError, setSignUpError] = useState("");
 
-  // xlr_controlled_input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -16,15 +18,22 @@ const Register = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (person.email && person.password) {
-      // First handle post api here.
-      // setPerson({ email: "", password: "" });
-      setSignUpStatus(true);
-      history.push("/");
+      register(person.email, person.password, (err: Error, result: any) => {
+        if (err) {
+          console.log(err);
+          setSignUpError(err.message);
+        } else {
+          setSignUpError("");
+          setSignUpStatus(true);
+          history.push("/");
+        }
+      });
     }
   };
   return (
     <>
       <article className="form">
+        {signUpError && <Error message={signUpError} />}
         <form>
           <div className="form-control">
             <label htmlFor="email">Email : </label>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 function Login() {
   const {
@@ -9,13 +9,8 @@ function Login() {
     setSignUpStatus,
     setUsername,
     setIsAuthenticated,
+    setUserId,
   } = useContext(LoginContext);
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log("signUpStatus");
-    console.log(signUpStatus);
-  });
 
   return (
     <div>
@@ -32,6 +27,7 @@ function Login() {
           required
           onChange={(event) => {
             setUsername(event.target.value);
+            setUserId(uuidv4());
           }}
         />
         <label htmlFor="psw">

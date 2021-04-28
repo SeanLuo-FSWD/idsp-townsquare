@@ -1,4 +1,4 @@
-import IPost from "../../../interfaces/IPost";
+import { IPost } from "../../../interfaces/IPost";
 
 // export const POST_ADD = "POST_ADD";
 export const FEED_FETCH = "FEED_FETCH";

@@ -3,8 +3,8 @@ import {
   FEED_FETCH_ERROR,
   FeedActionTypes,
 } from "../constants/actionTypes";
-import fetchFeed from "../../../utils/api/posts";
-import IPost from "../../../interfaces/IPost";
+import { fetchFeed } from "../../../utils/api/posts";
+import { IPost } from "../../../interfaces/IPost";
 
 const INITIAL_STATE = {
   posts: [],
