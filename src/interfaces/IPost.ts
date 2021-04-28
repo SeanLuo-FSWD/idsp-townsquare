@@ -13,9 +13,10 @@ export type TLikes = {
 };
 
 export type TComment = {
+  commentId: string;
   userId: string;
   username: string;
   createdAt: Date;
   message: string;
-  commentId: string;
+  postId: string;
 };

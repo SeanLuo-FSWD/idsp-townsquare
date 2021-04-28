@@ -1,13 +1,10 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { IPost } from "../../../interfaces/IPost";
-import { fetchFeed } from "../../../utils/api/posts";
+import { fetchFeed, addComment } from "../../../utils/api/posts";
+import { TComment } from "../../../interfaces/IPost";
 
-import {
-  FEED_FETCH,
-  FEED_FETCH_ERROR,
-  FeedActionTypes,
-} from "../constants/actionTypes";
+import { FEED_FETCH, API_ERROR, COMMENT_ADD } from "../constants/actionTypes";
 
 // const doAddPost = (post: {}) => ({
 //   type: POST_ADD,
@@ -17,7 +14,7 @@ import {
 const doFetchFeed = () => async (dispatch: Dispatch) => {
   fetchFeed((err: Error, result: IPost[]) => {
     if (err) {
-      dispatch({ type: FEED_FETCH_ERROR, error: err.message });
+      dispatch({ type: API_ERROR, error: err.message });
     } else {
       dispatch({ type: FEED_FETCH, posts: result });
     }
@@ -25,8 +22,18 @@ const doFetchFeed = () => async (dispatch: Dispatch) => {
 };
 
 const doFetchFeedError = (error: string) => ({
-  type: FEED_FETCH_ERROR,
+  type: API_ERROR,
   error,
 });
 
-export { doFetchFeed, doFetchFeedError };
+const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
+  addComment(comment_obj, (err: Error, result: IPost[]) => {
+    if (err) {
+      dispatch({ type: API_ERROR, error: err.message });
+    } else {
+      dispatch({ type: COMMENT_ADD, comment_obj: result });
+    }
+  });
+};
+
+export { doFetchFeed, doFetchFeedError, doPostComment };

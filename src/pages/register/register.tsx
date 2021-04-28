@@ -55,7 +55,7 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" className="btn" onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit}>
             Register
           </button>
         </form>

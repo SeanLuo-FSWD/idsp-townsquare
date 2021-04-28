@@ -1,33 +1,48 @@
 import {
   FEED_FETCH,
-  FEED_FETCH_ERROR,
+  API_ERROR,
   FeedActionTypes,
+  COMMENT_ADD,
 } from "../constants/actionTypes";
 import { fetchFeed } from "../../../utils/api/posts";
 import { IPost } from "../../../interfaces/IPost";
 
 const INITIAL_STATE = {
-  posts: [],
+  posts: <any[]>[],
   error: null,
 };
 
-function feedReducer(state = INITIAL_STATE, action: FeedActionTypes) {
+function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
   switch (action.type) {
     case FEED_FETCH: {
       console.log("FEED_FETCH");
       console.log(action.posts);
 
-      return { ...state, posts: action.posts };
+      return { ...feedState, posts: action.posts };
     }
-    case FEED_FETCH_ERROR: {
-      console.log("FEED_FETCH_ERROR");
+    case API_ERROR: {
+      console.log("API_ERROR");
       console.log(action.error);
 
-      return { ...state, error: action.error };
+      return { ...feedState, error: action.error };
+    }
+
+    case COMMENT_ADD: {
+      const new_state_post = feedState.posts.map((post) => {
+        if (post.postId == action.comment_obj.postId) {
+          const new_commentList = [...post.commentList, action.comment_obj];
+
+          return { ...post, commentList: new_commentList };
+        } else {
+          return post;
+        }
+      });
+
+      return { ...feedState, posts: new_state_post };
     }
 
     default:
-      return state;
+      return feedState;
   }
 }
 
