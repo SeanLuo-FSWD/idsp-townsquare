@@ -23,7 +23,13 @@ export interface CommentAddAction {
 
 export interface LikeAction {
   type: typeof POST_LIKE;
-  post_like: { userId: string; username: string; postId: string };
+  post_like: {
+    id: string;
+    userId: string;
+    username: string;
+    postId: string;
+    liked: boolean;
+  };
 }
 
 export type FeedAction =

@@ -1,0 +1,23 @@
+oop term project:
+/Users/xiaoluo/Documents/aa4_2YEARS_COURSES/COMP2523-OOP/BIG_project/CODES/WORKING_copy/src/public/js/notifications.js
+
+smilga 10 hours:
+/Users/xiaoluo/Documents/aa3_2YEARS_Languages/React/Resources/Lessons/smilga_10_hours/Directory.txt
+
+German todo:
+/Users/xiaoluo/Documents/aa4_2YEARS_COURSES/IDSP2380/Resources/wieruch_redux/taming-the-state-todo-app/src/index.js
+
+FAKE Server:
+/Users/xiaoluo/Documents/aa4_2YEARS_COURSES/IDSP2380/CODE/comp2350-week6-sean-luo/routes/router.js
+
+FB clone sammy:
+/Users/xiaoluo/Documents/aa4_2YEARS_COURSES/IDSP2380/Resources/fb-clone/src/Post.js
+
+ES6 import:
+/Users/xiaoluo/Documents/aa3_2YEARS_Languages/JAVASCRIPT/12_Typescript/Setup/IMPORT/My_Modules.html
+
+
+IDSP Resources:
+/Users/xiaoluo/Documents/aa4_2YEARS_COURSES/IDSP2380/Resources/anchor.txt
+
+

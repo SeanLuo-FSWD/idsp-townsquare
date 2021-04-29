@@ -16,12 +16,14 @@ const likePost = async (
   userId: string,
   username: string,
   postId: string,
+  liked: boolean,
   cb: Function
 ) => {
   axios
     .post(`${SERVER_URL}/ts/like_post`, {
       userId: userId,
       username: username,
+      liked: liked,
       postId: postId,
     })
     .then((response) => {

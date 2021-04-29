@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import { TComment } from "../interfaces/IPost";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import PostLike from "./PostLike";
 import PostComment from "./PostComment";
 import { LoginContext } from "../store/context/LoginContext";
@@ -9,12 +7,15 @@ import _ from "lodash";
 import Error from "./Error";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { doPostComment, doLikePost } from "../store/redux/actions/feed";
+import { getPost } from "../store/redux/selector/Feed";
 
 const Post = (props: any) => {
   const { username, userId } = useContext(LoginContext);
 
   const [comment, setComment] = useState("");
+
+  console.log("props props props props");
+  console.log(props);
 
   const commentSubmit = (e: any) => {
     e.preventDefault();
@@ -31,38 +32,25 @@ const Post = (props: any) => {
     props.onPostComment(comment_obj);
   };
 
-  const handleLike = () => {
-    props.onLikeComment(userId, username, props.postId);
-  };
-
   function displayComments() {
-    return props.commentList.map((c: TComment) => {
-      return <PostComment key={c.commentId} {...c} />;
+    return props.post[0].commentList.map((c: any) => {
+      return <PostComment key={c} {...c} />;
     });
-  }
-
-  function checkLiked(): boolean {
-    return _.filter(props.likes, (o) => o.userId == userId).length != 0;
   }
 
   return (
     <>
-      <h2>{props.userName}</h2>
-      <h3>{props.message}</h3>
+      <h2>{props.post[0].userName}</h2>
+      <h3>{props.post[0].message}</h3>
       <div style={{ display: "flex" }}>
-        {checkLiked() ? (
-          <ThumbUpIcon onClick={handleLike} />
-        ) : (
-          <ThumbUpAltOutlinedIcon onClick={handleLike} />
-        )}
-        <PostLike like_arr={props.likes} />
+        <PostLike postId={props.post[0].id} />
       </div>
       <div>
         <div>{displayComments()}</div>
         <form onSubmit={commentSubmit}>
           <input
             type="text"
-            id="comment"
+            id={uuidv4()}
             name="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -74,14 +62,20 @@ const Post = (props: any) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    onPostComment: (comment_obj: TComment) =>
-      dispatch(doPostComment(comment_obj)),
-    onLikeComment: (userId: string, username: string, postId: string) =>
-      dispatch(doLikePost(userId, username, postId)),
+    post: getPost(state.feedState, ownProps.id),
   };
 };
 
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     onPostComment: (comment_obj: TComment) =>
+//       dispatch(doPostComment(comment_obj)),
+//     onLikePost: (userId: string, username: string, postId: string) =>
+//       dispatch(doLikePost(userId, username, postId)),
+//   };
+// };
+
 // export default Post;
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(Post);
