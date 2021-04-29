@@ -46,7 +46,7 @@ const Post = (props: any) => {
   }
 
   return (
-    <>
+    <div key={props.key}>
       <h2>{props.userName}</h2>
       <h3>{props.message}</h3>
       <div style={{ display: "flex" }}>
@@ -70,7 +70,7 @@ const Post = (props: any) => {
           <button type="submit">add Comment</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

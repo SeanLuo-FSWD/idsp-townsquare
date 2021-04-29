@@ -1,13 +1,11 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
 import SERVER_URL from "../../constants/server_url";
+import API_URL from "../../constants/api_url";
 
-const register = async (email: string, password: string, cb: Function) => {
+const logout = (cb: Function) => {
   axios
-    .post(`http://671cdc1794ca.ngrok.io/api/user/signUp`, {
-      email: email,
-      password: password,
-    })
+    .get(`${API_URL}/user/logout`)
     .then((response) => {
       console.log("post register response");
       console.log(response);
@@ -20,4 +18,34 @@ const register = async (email: string, password: string, cb: Function) => {
     });
 };
 
-export { register };
+const login = (user_obj: {}, cb: Function) => {
+  axios
+    .post(`${API_URL}/user/login`, user_obj)
+    .then((response) => {
+      console.log("post register response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("post register error");
+      console.log(error);
+      cb(error);
+    });
+};
+
+const register = (user_obj: {}, cb: Function) => {
+  axios
+    .post(`${API_URL}/user/signUp`, user_obj)
+    .then((response) => {
+      console.log("post register response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("post register error");
+      console.log(error);
+      cb(error);
+    });
+};
+
+export { register, login, logout };
