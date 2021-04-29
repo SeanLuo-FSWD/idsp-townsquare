@@ -41,8 +41,8 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
         ...feedState.posts.entities.likes,
         [action.post_like.userId]: {
           id: action.post_like.id,
-          postId: action.post_like.postId,
           userId: action.post_like.userId,
+          postId: action.post_like.postId,
           username: action.post_like.username,
         },
       };
@@ -70,6 +70,8 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
         },
       };
 
+      console.log("yyyyyyyyyyy");
+      console.log(ref_state);
       return ref_state;
     }
 
