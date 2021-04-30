@@ -102,7 +102,7 @@ function Login() {
           //   setIsAuthenticated(true);
           //   setSignUpStatus(false);
           // }}
-          onClick={handleLogin_test}
+          onClick={handleLogin}
         >
           Login
         </button>
