@@ -1,11 +1,15 @@
 body {
 
     margin: 7em auto;
-    padding: 0 20px;
     background-color: #85171B;
     color: #F6EFE8;
     display: inline-block;
-
+    margin: 10em 10em 10em 5em;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    
+    
 }
 
 body img {
@@ -15,12 +19,12 @@ body img {
     border-radius: 7px;
 }
 
-.townSquareTitle {
-    text-shadow: 2px 2px #333333;
-}
-
 body b {
     margin-right: 5px;
+}
+
+.signUpTitle {
+  text-shadow: 2px 2px #333333;
 }
 
 button {
@@ -38,5 +42,11 @@ button:active {
      -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
           box-shadow: inset 0px 0px 5px #c1c1c1;
    outline: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgb(197, 197, 197);
+  font-style: italic;
+  text-align: center;
 }
 

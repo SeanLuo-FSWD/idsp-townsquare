@@ -73,8 +73,9 @@ function Login() {
       {signUpStatus && <h2>Sign up success</h2>}
       {loginError && <Error message={loginError} />}
       <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
-      <h2>Please login</h2>
-      <h4>bob@bob.com</h4>
+      <h1 className="townSquareTitle">TownSquare</h1>
+      <h2>Login</h2>
+      {/* <h4>bob@bob.com</h4> */}
       <div>
         <label htmlFor="uname">
           <b>email</b>
@@ -116,7 +117,9 @@ function Login() {
           Don't have an account?
           <br></br>
           <div className="register">
-            <Link to="/register">Register</Link>
+            <button>
+              <Link to="/register">Register</Link>
+            </button>
           </div>
         </p>
       </div>
