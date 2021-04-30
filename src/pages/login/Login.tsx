@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth";
 import Error from "../../components/Error/Error";
+import "./Login.scss"
 
 function Login() {
   const {
@@ -71,6 +72,7 @@ function Login() {
     <div>
       {signUpStatus && <h2>Sign up success</h2>}
       {loginError && <Error message={loginError} />}
+      <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
       <h2>Please login</h2>
       <h4>bob@bob.com</h4>
       <div>
@@ -85,6 +87,7 @@ function Login() {
           value={person.email}
           onChange={handleChange}
         />
+        <br></br>
         <label htmlFor="psw">
           <b>Password</b>
         </label>
@@ -96,6 +99,7 @@ function Login() {
           value={person.password}
           onChange={handleChange}
         />
+        <br></br>
         <button
           // onClick={() => {
           //   console.log("setIsAuthenticated toggled to true");
@@ -108,11 +112,13 @@ function Login() {
         </button>
       </div>
       <div>
-        <ul>
-          <li>
+        <p>
+          Don't have an account?
+          <br></br>
+          <div className="register">
             <Link to="/register">Register</Link>
-          </li>
-        </ul>
+          </div>
+        </p>
       </div>
     </div>
   );
