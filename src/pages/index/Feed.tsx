@@ -3,8 +3,8 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { connect } from "react-redux";
 import { doFetchFeed } from "../../store/redux/actions/feed";
 import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
-import Post from "../../components/Post";
-import Error from "../../components/Error";
+import Post from "../../components/Post/Post";
+import Error from "../../components/Error/Error";
 
 const Feed = (props: any) => {
   const { username } = useContext(LoginContext);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import { LoginContext } from "./store/context/LoginContext";
-import Routing from "./components/Routing";
+import Routing from "./components/Routing/Routing";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

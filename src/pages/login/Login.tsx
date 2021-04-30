@@ -3,7 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth";
-import Error from "../../components/Error";
+import Error from "../../components/Error/Error";
 
 function Login() {
   const {
@@ -55,6 +55,16 @@ function Login() {
     } else {
       setLoginError("You are missing some credentials");
     }
+  };
+
+  const handleLogin_test = (e: any) => {
+    e.preventDefault();
+    setUsername("tester");
+    setUserId("tester123");
+    setLoginError("");
+
+    setIsAuthenticated(true);
+    setSignUpStatus(false);
   };
 
   return (

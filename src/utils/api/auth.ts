@@ -20,7 +20,12 @@ const logout = (cb: Function) => {
 
 const login = (user_obj: {}, cb: Function) => {
   axios
-    .post(`${API_URL}/user/login`, user_obj)
+    .post(`${API_URL}/user/login`, user_obj, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
     .then((response) => {
       console.log("post register response");
       console.log(response);

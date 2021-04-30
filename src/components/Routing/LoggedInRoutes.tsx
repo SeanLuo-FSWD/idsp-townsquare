@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Home from "../pages/index/Feed";
-import Users from "../pages/users/Users";
+import Home from "../../pages/index/Feed";
+import Users from "../../pages/users/Users";
 const ReactRouterSetup = () => {
   return (
     <>

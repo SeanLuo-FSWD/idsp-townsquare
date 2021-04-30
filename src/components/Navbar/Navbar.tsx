@@ -1,18 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../store/context/LoginContext";
-import { logout } from "../utils/api/auth";
+import { LoginContext } from "../../store/context/LoginContext";
+import { logout } from "../../utils/api/auth";
+import styles from "./Navbar.module.scss";
 
 function Navbar() {
   const [logoutError, setLogoutError] = useState("");
 
-  const {
-    signUpStatus,
-    setSignUpStatus,
-    setUsername,
-    setIsAuthenticated,
-    setUserId,
-  } = useContext(LoginContext);
+  const { setUsername, setIsAuthenticated, setUserId } = useContext(
+    LoginContext
+  );
 
   function handleLogout() {
     logout((err: Error, result: any) => {
@@ -32,18 +29,16 @@ function Navbar() {
     });
   }
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/users">Users</Link>
-        </li>
-        <li>
-          <button onClick={handleLogout}>Logout</button>
-        </li>
-      </ul>
+    <div className={`${styles.navBar} flex--space-around`}>
+      <div className={styles.navBar__item}>
+        <Link to="/">Home</Link>
+      </div>
+      <div className={styles.navBar__item}>
+        <Link to="/users">Users</Link>
+      </div>
+      <div className={styles.navBar__item}>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
     </div>
   );
 }

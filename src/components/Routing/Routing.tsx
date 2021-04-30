@@ -2,8 +2,8 @@ import React from "react";
 import LoggedInRoutesKeeper from "./LoggedInRoutesKeeper";
 import LoggedInRoutes from "./LoggedInRoutes";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Register from "../pages/register/register";
-import Navbar from "../components/Navbar";
+import Register from "../../pages/register/register";
+import Navbar from "../Navbar/Navbar";
 
 const Routing = () => {
   return (

@@ -1,0 +1,27 @@
+// Layout styling
+body {
+  max-width: 600px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+// custom classes
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex--center {
+  @extend .flex;
+  justify-content: center;
+}
+
+.flex--space-around {
+  @extend .flex;
+  justify-content: space-around;
+}
+
+.flex--space-between {
+  @extend .flex;
+  justify-content: space-between;
+}

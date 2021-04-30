@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth";
-import Error from "../../components/Error";
+import Error from "../../components/Error/Error";
 
 const Register = () => {
   const history = useHistory();

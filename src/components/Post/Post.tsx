@@ -1,20 +1,21 @@
 import React, { useState, useContext } from "react";
-import { TComment } from "../interfaces/IPost";
+import { TComment } from "../../interfaces/IPost";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import PostLike from "./PostLike";
 import PostComment from "./PostComment";
-import { LoginContext } from "../store/context/LoginContext";
+import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
-import Error from "./Error";
+import Error from "../Error/Error";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { doPostComment, doLikePost } from "../store/redux/actions/feed";
+import { doPostComment, doLikePost } from "../../store/redux/actions/feed";
 
 const Post = (props: any) => {
   const { username, userId } = useContext(LoginContext);
 
   const [comment, setComment] = useState("");
+  const [commentsVisible, setCommentsVisible] = useState(false);
 
   const commentSubmit = (e: any) => {
     e.preventDefault();
@@ -47,29 +48,42 @@ const Post = (props: any) => {
 
   return (
     <div key={props.key}>
-      <h2>{props.userName}</h2>
-      <h3>{props.message}</h3>
-      <div style={{ display: "flex" }}>
-        {checkLiked() ? (
-          <ThumbUpIcon onClick={handleLike} />
-        ) : (
-          <ThumbUpAltOutlinedIcon onClick={handleLike} />
-        )}
-        <PostLike like_arr={props.likes} />
+      <h3>{props.userName}</h3>
+      <h2>{props.message}</h2>
+
+      <div className="flex--space-between">
+        <div style={{ display: "flex" }}>
+          {checkLiked() ? (
+            <ThumbUpIcon onClick={handleLike} />
+          ) : (
+            <ThumbUpAltOutlinedIcon onClick={handleLike} />
+          )}
+          <PostLike like_arr={props.likes} />
+        </div>
+        <div>
+          <h3 onClick={() => setCommentsVisible(!commentsVisible)}>Comments</h3>
+        </div>
       </div>
-      <div>
-        <div>{displayComments()}</div>
-        <form onSubmit={commentSubmit}>
-          <input
-            type="text"
-            id="comment"
-            name="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <button type="submit">add Comment</button>
-        </form>
-      </div>
+
+      {commentsVisible && (
+        <div>
+          <div>
+            {props.commentList.map((c: TComment) => {
+              return <PostComment key={c.commentId} {...c} />;
+            })}
+          </div>
+          <form onSubmit={commentSubmit}>
+            <input
+              type="text"
+              id="comment"
+              name="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <button type="submit">add Comment</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

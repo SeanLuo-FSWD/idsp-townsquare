@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TLikes } from "../interfaces/IPost";
+import { TLikes } from "../../interfaces/IPost";
 
 const PostLike = (props: any) => {
   const [show, setShow] = useState(false);
