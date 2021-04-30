@@ -72,6 +72,7 @@ function Login() {
       {signUpStatus && <h2>Sign up success</h2>}
       {loginError && <Error message={loginError} />}
       <h2>Please login</h2>
+      <h4>bob@bob.com</h4>
       <div>
         <label htmlFor="uname">
           <b>email</b>
