@@ -12,7 +12,7 @@ const logout = (cb: Function) => {
       cb(null, response);
     })
     .catch((error) => {
-      console.log("post register error");
+      console.log("post logout error");
       console.log(error);
       cb(error);
     });
@@ -27,12 +27,12 @@ const login = (user_obj: {}, cb: Function) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log("post register response");
+      console.log("post login response");
       console.log(response);
       cb(null, response);
     })
     .catch((error) => {
-      console.log("post register error");
+      console.log("post login error");
       console.log(error);
       cb(error);
     });
