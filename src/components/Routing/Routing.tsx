@@ -22,10 +22,18 @@ const Routing = () => {
         console.log(err);
         console.log("axios request error, or server down?");
       } else {
-        setIsAuthenticated(true);
-        setSignUpStatus(false);
-        setUsername(result.data.username);
-        setUserId(result.data.userId);
+        if (
+          result.data.message != "Unauthorized" &&
+          result.data.username &&
+          result.data.userId
+        ) {
+          setIsAuthenticated(true);
+          setSignUpStatus(false);
+          setUsername(result.data.username);
+          setUserId(result.data.userId);
+        } else {
+          console.log("user not authenticated: " + result.data.message);
+        }
       }
     });
   }, []);
