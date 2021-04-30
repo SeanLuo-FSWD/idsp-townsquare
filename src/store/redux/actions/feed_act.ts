@@ -31,6 +31,7 @@ const doFetchFeed = () => async (dispatch: Dispatch) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });
     } else {
+      result.reverse();
       dispatch({ type: FEED_FETCH, posts: result });
     }
   });
@@ -51,10 +52,8 @@ const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
   });
 };
 
-const doLikePost = (userId: string, username: string, postId: string) => async (
-  dispatch: Dispatch
-) => {
-  likePost(userId, username, postId, (err: Error, result: TLikes) => {
+const doLikePost = (like_obj: any) => async (dispatch: Dispatch) => {
+  likePost(like_obj, (err: Error, result: any) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });
     } else {

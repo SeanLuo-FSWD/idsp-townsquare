@@ -23,18 +23,16 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
 
       const feedStore = {
         ...feedState,
-        posts: [...posts, action.post_obj_res],
+        posts: [...[action.post_obj_res.post_obj], ...feedState.posts],
       };
-      return feedState;
+
+      return feedStore;
     }
     case FEED_FETCH: {
       console.log("case FEED_FETCH");
       console.log(action.posts);
 
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-
       const feedStore = { ...feedState, posts: action.posts };
-      console.log(feedStore);
 
       return feedStore;
     }
@@ -48,39 +46,82 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
     case POST_LIKE: {
       console.log("case POST_LIKE");
 
-      const new_liking_posts = feedState.posts.map((post) => {
-        if (post.postId == action.post_like.postId) {
-          const if_liked = _.filter(
-            post.likes,
-            (o) => o.userId == action.post_like.userId
-          );
+      let new_likes_arr = [];
 
-          if (if_liked.length == 0) {
-            const new_likes = [
-              ...post.likes,
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(feedState.posts);
+
+      console.log("sssssssssssssssssssssssss");
+      console.log(action.post_like);
+
+      for (let i = 0; i < feedState.posts.length; i++) {
+        if (feedState.posts[i].id == action.post_like.postId) {
+          if (!action.post_like.isLike) {
+            new_likes_arr = _.filter(
+              feedState.posts[i].likes,
+              (w) => w.userId != action.post_like.userId
+            );
+          } else {
+            new_likes_arr = [
+              ...feedState.posts[i].likes,
               ...[
                 {
+                  id: action.post_like.id,
                   userId: action.post_like.userId,
+                  postId: action.post_like.postId,
                   username: action.post_like.username,
                 },
               ],
             ];
-
-            return { ...post, likes: new_likes };
-          } else {
-            const new_unlikes = _.filter(
-              post.likes,
-              (o) => o.userId != action.post_like.userId
-            );
-
-            return { ...post, likes: new_unlikes };
           }
-        } else {
-          return post;
+          break;
         }
-      });
+      }
 
-      return { ...feedState, posts: new_liking_posts };
+      const updated_likes = {
+        ...feedState.posts[action.post_like.postId],
+        likes: new_likes_arr,
+      };
+
+      // const final_state3 = {
+      //   ...feedState,
+      //   posts: {
+      //     ...feedState.posts[action.post_like.postId],
+      //     likes: updated_likes,
+      //   },
+      // };
+
+      console.log("fffffffffffffffffffffff");
+      console.log(updated_likes);
+
+      // const final_state = {
+      //   ...feedState,
+      //   posts: {
+      //     ...feedState.posts[action.post_like.postId],
+      //     likes: {
+      //       ...feedState.posts[action.post_like.postId],
+      //       likes: updated_likes,
+      //     },
+      //   },
+      // };
+
+      const final_state = {
+        ...feedState,
+        posts: {
+          ...feedState.posts,
+          [action.post_like.postId]: {
+            ...feedState.posts[action.post_like.postId],
+            likes: updated_likes,
+          },
+        },
+      };
+
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(final_state);
+
+      console.log("ddddddddddddddddddddddd");
+      console.log(feedState);
+      return feedState;
     }
 
     case COMMENT_ADD: {

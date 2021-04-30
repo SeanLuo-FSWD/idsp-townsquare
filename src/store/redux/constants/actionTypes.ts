@@ -24,12 +24,12 @@ export interface CommentAddAction {
 
 export interface LikeAction {
   type: typeof POST_LIKE;
-  post_like: { userId: string; username: string; postId: string };
+  post_like: any;
 }
 
 export interface postCreateAction {
   type: typeof POST_CREATE;
-  post_obj_res: {};
+  post_obj_res: any;
 }
 
 export type FeedAction =

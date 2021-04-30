@@ -9,7 +9,8 @@ import _ from "lodash";
 import Error from "../Error/Error";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { doPostComment, doLikePost } from "../../store/redux/actions/feed";
+import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
+import styles from "./Post.module.scss";
 
 const Post = (props: any) => {
   const { username, userId } = useContext(LoginContext);
@@ -26,14 +27,22 @@ const Post = (props: any) => {
       createdAt: new Date(),
       message: comment,
       id: uuidv4(),
-      postId: props.postId,
+      postId: props.id,
     };
 
     props.onPostComment(comment_obj);
   };
 
-  const handleLike = () => {
-    props.onLikeComment(userId, username, props.postId);
+  const handleLike = (isLike: boolean) => {
+    const like_obj = {
+      id: uuidv4(),
+      userId: userId,
+      username: username,
+      postId: props.id,
+      isLike: isLike,
+    };
+
+    props.onLikeComment(like_obj);
   };
 
   function checkLiked(): boolean {
@@ -41,7 +50,7 @@ const Post = (props: any) => {
   }
 
   return (
-    <div key={props.postId}>
+    <div key={props.postId} className={styles.post}>
       <div className="flex--space-between">
         <h4>{props.userName}</h4>
         <h4>{props.createdAt}</h4>
@@ -51,9 +60,17 @@ const Post = (props: any) => {
       <div className="flex--space-between">
         <div className="flex">
           {checkLiked() ? (
-            <ThumbUpIcon onClick={handleLike} />
+            <ThumbUpIcon
+              onClick={() => {
+                handleLike(false);
+              }}
+            />
           ) : (
-            <ThumbUpAltOutlinedIcon onClick={handleLike} />
+            <ThumbUpAltOutlinedIcon
+              onClick={() => {
+                handleLike(true);
+              }}
+            />
           )}
           <PostLike like_arr={props.likes} />
         </div>
@@ -94,8 +111,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onPostComment: (comment_obj: TComment) =>
       dispatch(doPostComment(comment_obj)),
-    onLikeComment: (userId: string, username: string, postId: string) =>
-      dispatch(doLikePost(userId, username, postId)),
+    onLikeComment: (like_obj: any) => dispatch(doLikePost(like_obj)),
   };
 };
 

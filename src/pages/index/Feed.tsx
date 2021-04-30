@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { connect } from "react-redux";
-import { doFetchFeed, doPostCreate } from "../../store/redux/actions/feed";
+import { doFetchFeed, doPostCreate } from "../../store/redux/actions/feed_act";
 import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
 import Post from "../../components/Post/Post";
 import Error from "../../components/Error/Error";
@@ -22,7 +22,7 @@ const Feed = (props: any) => {
     e.preventDefault();
 
     const post_obj: IPost = {
-      postId: uuidv4(),
+      id: uuidv4(),
       userName: username,
       createdAt: new Date(),
       title: title,

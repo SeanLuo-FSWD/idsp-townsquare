@@ -29,18 +29,9 @@ const fetchFeed = async (cb: Function) => {
   }
 };
 
-const likePost = async (
-  userId: string,
-  username: string,
-  postId: string,
-  cb: Function
-) => {
+const likePost = async (like_obj: any, cb: Function) => {
   axios
-    .post(`${SERVER_URL}/ts/like_post`, {
-      userId: userId,
-      username: username,
-      postId: postId,
-    })
+    .post(`${SERVER_URL}/ts/like_post`, like_obj)
     .then((response) => {
       console.log("likePost response");
       console.log(response);
