@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
-import { register } from "../../utils/api/auth";
+import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
 
 const Register = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
-import { logout } from "../../utils/api/auth";
+import { logout } from "../../utils/api/auth.api";
 import styles from "./Navbar.module.scss";
 
 function Navbar() {

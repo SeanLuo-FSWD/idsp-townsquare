@@ -3,6 +3,20 @@ import axios from "axios";
 import SERVER_URL from "../../constants/server_url";
 import API_URL from "../../constants/api_url";
 
+const authenticate = (cb: Function) => {
+  axios
+    .get(`${API_URL}/user/authenticate`)
+    .then((response) => {
+      console.log("authenticate response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("authenticate error");
+      cb(error);
+    });
+};
+
 const logout = (cb: Function) => {
   axios
     .get(`${API_URL}/user/logout`)
@@ -53,4 +67,4 @@ const register = (user_obj: {}, cb: Function) => {
     });
 };
 
-export { register, login, logout };
+export { register, login, logout, authenticate };
