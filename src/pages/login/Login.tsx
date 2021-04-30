@@ -70,11 +70,12 @@ function Login() {
 
   return (
     <div>
-      {signUpStatus && <h2>Sign up success</h2>}
-      {loginError && <Error message={loginError} />}
+
       <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
       <h1 className="townSquareTitle">TownSquare</h1>
       <h2>Login</h2>
+      {signUpStatus && <h2>Sign up success</h2>}
+      {loginError && <Error message={loginError} />}
       {/* <h4>bob@bob.com</h4> */}
       <div>
         <label htmlFor="uname">
@@ -101,7 +102,7 @@ function Login() {
           onChange={handleChange}
         />
         <br></br>
-        <button
+        <button 
           // onClick={() => {
           //   console.log("setIsAuthenticated toggled to true");
           //   setIsAuthenticated(true);
