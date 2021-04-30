@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
+import "./Login.scss"
 
 function Login() {
   const {
@@ -69,10 +70,13 @@ function Login() {
 
   return (
     <div>
+
+      <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
+      <h1 className="townSquareTitle">TownSquare</h1>
+      <h2>Login</h2>
       {signUpStatus && <h2>Sign up success</h2>}
       {loginError && <Error message={loginError} />}
-      <h2>Please login</h2>
-      <h4>bob@bob.com</h4>
+      {/* <h4>bob@bob.com</h4> */}
       <div>
         <label htmlFor="uname">
           <b>email</b>
@@ -85,6 +89,7 @@ function Login() {
           value={person.email}
           onChange={handleChange}
         />
+        <br></br>
         <label htmlFor="psw">
           <b>Password</b>
         </label>
@@ -96,7 +101,8 @@ function Login() {
           value={person.password}
           onChange={handleChange}
         />
-        <button
+        <br></br>
+        <button 
           // onClick={() => {
           //   console.log("setIsAuthenticated toggled to true");
           //   setIsAuthenticated(true);
@@ -108,11 +114,15 @@ function Login() {
         </button>
       </div>
       <div>
-        <ul>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
+        <p>
+          Don't have an account?
+          <br></br>
+          <div className="register">
+            <button>
+              <Link to="/register">Register</Link>
+            </button>
+          </div>
+        </p>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
+import "./Register.scss"
 
 const Register = () => {
   const history = useHistory();
@@ -46,6 +47,8 @@ const Register = () => {
   };
   return (
     <>
+      <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
+      <h2 className="signUpTitle">Sign Up</h2>
       <article className="form">
         {signUpError && <Error message={signUpError} />}
         <form>
@@ -55,6 +58,7 @@ const Register = () => {
               type="username"
               id="username"
               name="username"
+              placeholder="Create a username"
               value={person.username}
               onChange={handleChange}
             />
@@ -65,6 +69,7 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="Please enter your email"
               value={person.email}
               onChange={handleChange}
             />
@@ -75,6 +80,7 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Create a password"
               value={person.password}
               onChange={handleChange}
             />
