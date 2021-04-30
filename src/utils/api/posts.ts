@@ -3,6 +3,23 @@ import axios from "axios";
 import SERVER_URL from "../../constants/server_url";
 import { TComment } from "../../interfaces/IPost";
 
+const postCreate = async (post_obj: {}, cb: Function) => {
+  axios
+    .post(`${SERVER_URL}/ts/create_post`, {
+      post_obj,
+    })
+    .then((response) => {
+      console.log("postCreate response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((err) => {
+      console.log("postCreate error");
+      console.log(err);
+      cb(err);
+    });
+};
+
 const fetchFeed = async (cb: Function) => {
   try {
     const posts = await axios.get(`${SERVER_URL}/ts/posts`);
@@ -44,7 +61,7 @@ const addComment = async (comment_obj: TComment, cb: Function) => {
   axios
     .post(`${SERVER_URL}/ts/add_comment`, {
       userId: comment_obj.userId,
-      commentId: comment_obj.commentId,
+      id: comment_obj.id,
       username: comment_obj.username,
       createdAt: comment_obj.createdAt,
       message: comment_obj.message,
@@ -62,4 +79,4 @@ const addComment = async (comment_obj: TComment, cb: Function) => {
     });
 };
 
-export { fetchFeed, likePost, addComment };
+export { fetchFeed, likePost, addComment, postCreate };

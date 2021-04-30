@@ -4,6 +4,7 @@ import {
   FeedActionTypes,
   COMMENT_ADD,
   POST_LIKE,
+  POST_CREATE,
 } from "../constants/actionTypes";
 import { fetchFeed } from "../../../utils/api/posts";
 import { IPost } from "../../../interfaces/IPost";
@@ -16,11 +17,26 @@ const INITIAL_STATE = {
 
 function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
   switch (action.type) {
+    case POST_CREATE: {
+      console.log("case POST_CREATE");
+      console.log(action.post_obj_res);
+
+      const feedStore = {
+        ...feedState,
+        posts: [...posts, action.post_obj_res],
+      };
+      return feedState;
+    }
     case FEED_FETCH: {
       console.log("case FEED_FETCH");
       console.log(action.posts);
 
-      return { ...feedState, posts: action.posts };
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+
+      const feedStore = { ...feedState, posts: action.posts };
+      console.log(feedStore);
+
+      return feedStore;
     }
     case API_ERROR: {
       console.log("case API_ERROR");

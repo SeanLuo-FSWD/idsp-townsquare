@@ -1,6 +1,11 @@
 import { Dispatch } from "redux";
 import { IPost, TLikes } from "../../../interfaces/IPost";
-import { fetchFeed, addComment, likePost } from "../../../utils/api/posts";
+import {
+  fetchFeed,
+  addComment,
+  likePost,
+  postCreate,
+} from "../../../utils/api/posts";
 import { TComment } from "../../../interfaces/IPost";
 
 import {
@@ -8,12 +13,18 @@ import {
   API_ERROR,
   COMMENT_ADD,
   POST_LIKE,
+  POST_CREATE,
 } from "../constants/actionTypes";
 
-// const doAddPost = (post: {}) => ({
-//   type: POST_ADD,
-//   post,
-// });
+const doPostCreate = (post_obj: {}) => async (dispatch: Dispatch) => {
+  postCreate(post_obj, (err: Error, result: IPost[]) => {
+    if (err) {
+      dispatch({ type: API_ERROR, error: err.message });
+    } else {
+      dispatch({ type: POST_CREATE, post_obj_res: result });
+    }
+  });
+};
 
 const doFetchFeed = () => async (dispatch: Dispatch) => {
   fetchFeed((err: Error, result: IPost[]) => {
@@ -52,4 +63,10 @@ const doLikePost = (userId: string, username: string, postId: string) => async (
   });
 };
 
-export { doFetchFeed, doFetchFeedError, doPostComment, doLikePost };
+export {
+  doFetchFeed,
+  doFetchFeedError,
+  doPostComment,
+  doLikePost,
+  doPostCreate,
+};

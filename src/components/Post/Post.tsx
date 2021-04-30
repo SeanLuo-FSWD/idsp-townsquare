@@ -25,7 +25,7 @@ const Post = (props: any) => {
       username: username,
       createdAt: new Date(),
       message: comment,
-      commentId: uuidv4(),
+      id: uuidv4(),
       postId: props.postId,
     };
 
@@ -36,23 +36,20 @@ const Post = (props: any) => {
     props.onLikeComment(userId, username, props.postId);
   };
 
-  function displayComments() {
-    return props.commentList.map((c: TComment) => {
-      return <PostComment key={c.commentId} {...c} />;
-    });
-  }
-
   function checkLiked(): boolean {
     return _.filter(props.likes, (o) => o.userId == userId).length != 0;
   }
 
   return (
-    <div key={props.key}>
-      <h3>{props.userName}</h3>
-      <h2>{props.message}</h2>
-
+    <div key={props.postId}>
       <div className="flex--space-between">
-        <div style={{ display: "flex" }}>
+        <h4>{props.userName}</h4>
+        <h4>{props.createdAt}</h4>
+      </div>
+      <h2>{props.title}</h2>
+      <h5 style={{ paddingLeft: "20px" }}>{props.message}</h5>
+      <div className="flex--space-between">
+        <div className="flex">
           {checkLiked() ? (
             <ThumbUpIcon onClick={handleLike} />
           ) : (
@@ -61,7 +58,12 @@ const Post = (props: any) => {
           <PostLike like_arr={props.likes} />
         </div>
         <div>
-          <h3 onClick={() => setCommentsVisible(!commentsVisible)}>Comments</h3>
+          <h4
+            style={{ textDecoration: "underline" }}
+            onClick={() => setCommentsVisible(!commentsVisible)}
+          >
+            See Comments
+          </h4>
         </div>
       </div>
 
@@ -69,7 +71,7 @@ const Post = (props: any) => {
         <div>
           <div>
             {props.commentList.map((c: TComment) => {
-              return <PostComment key={c.commentId} {...c} />;
+              return <PostComment key={c.id} {...c} />;
             })}
           </div>
           <form onSubmit={commentSubmit}>

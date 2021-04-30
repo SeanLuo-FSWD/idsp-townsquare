@@ -2,6 +2,7 @@ export interface IPost {
   postId: string;
   userName: string;
   createdAt: Date;
+  title: string;
   message: string;
   likes: TLikes[];
   commentList: TComment[];
@@ -13,7 +14,7 @@ export type TLikes = {
 };
 
 export type TComment = {
-  commentId: string;
+  id: string;
   userId: string;
   username: string;
   createdAt: Date;
