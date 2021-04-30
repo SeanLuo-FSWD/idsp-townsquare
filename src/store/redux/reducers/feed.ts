@@ -46,13 +46,7 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
     case POST_LIKE: {
       console.log("case POST_LIKE");
 
-      let new_likes_arr = [];
-
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(feedState.posts);
-
-      console.log("sssssssssssssssssssssssss");
-      console.log(action.post_like);
+      let new_likes_arr: any[] = [];
 
       for (let i = 0; i < feedState.posts.length; i++) {
         if (feedState.posts[i].id == action.post_like.postId) {
@@ -78,57 +72,29 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
         }
       }
 
-      const updated_likes = {
-        ...feedState.posts[action.post_like.postId],
-        likes: new_likes_arr,
-      };
-
-      // const final_state3 = {
-      //   ...feedState,
-      //   posts: {
-      //     ...feedState.posts[action.post_like.postId],
-      //     likes: updated_likes,
-      //   },
-      // };
-
-      console.log("fffffffffffffffffffffff");
-      console.log(updated_likes);
-
-      // const final_state = {
-      //   ...feedState,
-      //   posts: {
-      //     ...feedState.posts[action.post_like.postId],
-      //     likes: {
-      //       ...feedState.posts[action.post_like.postId],
-      //       likes: updated_likes,
-      //     },
-      //   },
-      // };
+      const new_post_list = feedState.posts.map((post) => {
+        if (post.id == action.post_like.postId) {
+          return {
+            ...post,
+            likes: new_likes_arr,
+          };
+        }
+        return { ...post };
+      });
 
       const final_state = {
         ...feedState,
-        posts: {
-          ...feedState.posts,
-          [action.post_like.postId]: {
-            ...feedState.posts[action.post_like.postId],
-            likes: updated_likes,
-          },
-        },
+        posts: new_post_list,
       };
 
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(final_state);
-
-      console.log("ddddddddddddddddddddddd");
-      console.log(feedState);
-      return feedState;
+      return final_state;
     }
 
     case COMMENT_ADD: {
       console.log("case COMMENT_ADD");
 
       const new_state_post = feedState.posts.map((post) => {
-        if (post.postId == action.comment_obj.postId) {
+        if (post.id == action.comment_obj.postId) {
           const new_commentList = [...post.commentList, action.comment_obj];
 
           return { ...post, commentList: new_commentList };

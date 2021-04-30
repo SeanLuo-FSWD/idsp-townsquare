@@ -7,10 +7,10 @@ const PostLike = (props: any) => {
     console.log("like like like");
     console.log(props.like_arr);
 
-    return props.like_arr.map((like: TLikes) => {
+    return props.like_arr.map((like: any) => {
       console.log(like);
 
-      return <li key={like.userId}>{like.username}</li>;
+      return <li key={like.id}>{like.username}</li>;
     });
   }
 
