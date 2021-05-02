@@ -8,6 +8,8 @@ function App() {
   const [userId, setUserId] = useState("");
   const [username, setUsername] = useState("");
   const [signUpStatus, setSignUpStatus] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalProps, setModalProps] = useState(false);
 
   return (
     <LoginContext.Provider
@@ -20,6 +22,10 @@ function App() {
         setIsAuthenticated,
         signUpStatus,
         setSignUpStatus,
+        showModal,
+        setShowModal,
+        modalProps,
+        setModalProps,
       }}
     >
       <Routing />

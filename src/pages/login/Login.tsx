@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
-import "./Login.scss"
+import style from "./Login.module.scss";
 
 function Login() {
   const {
@@ -58,20 +58,13 @@ function Login() {
     }
   };
 
-  const handleLogin_test = (e: any) => {
-    e.preventDefault();
-    setUsername("tester");
-    setUserId("tester123");
-    setLoginError("");
-
-    setIsAuthenticated(true);
-    setSignUpStatus(false);
-  };
-
   return (
     <div>
-
-      <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
+      <img
+        id="logo"
+        src="https://i.imgur.com/0ldmkwI.png"
+        alt="TownSquareLogo"
+      ></img>
       <h1 className="townSquareTitle">TownSquare</h1>
       <h2>Login</h2>
       {signUpStatus && <h2>Sign up success</h2>}
@@ -102,27 +95,18 @@ function Login() {
           onChange={handleChange}
         />
         <br></br>
-        <button 
-          // onClick={() => {
-          //   console.log("setIsAuthenticated toggled to true");
-          //   setIsAuthenticated(true);
-          //   setSignUpStatus(false);
-          // }}
-          onClick={handleLogin}
-        >
-          Login
-        </button>
+        <button onClick={handleLogin}>Login</button>
       </div>
       <div>
-        <p>
-          Don't have an account?
+        <div>
+          <p>Don't have an account?</p>
           <br></br>
           <div className="register">
             <button>
               <Link to="/register">Register</Link>
             </button>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ import {
   POST_CREATE,
 } from "../constants/actionTypes";
 
-const doPostCreate = (post_obj: {}) => async (dispatch: Dispatch) => {
+const doPostCreate = (post_obj: any) => async (dispatch: Dispatch) => {
   postCreate(post_obj, (err: Error, result: IPost[]) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });

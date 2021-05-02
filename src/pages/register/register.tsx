@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
-import "./Register.scss"
+import style from "./Register.module.scss";
 
 const Register = () => {
   const history = useHistory();
@@ -47,7 +47,11 @@ const Register = () => {
   };
   return (
     <>
-      <img id="logo" src="https://i.imgur.com/0ldmkwI.png" alt="TownSquareLogo"></img>
+      <img
+        id="logo"
+        src="https://i.imgur.com/0ldmkwI.png"
+        alt="TownSquareLogo"
+      ></img>
       <h2 className="signUpTitle">Sign Up</h2>
       <article className="form">
         {signUpError && <Error message={signUpError} />}

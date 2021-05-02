@@ -3,7 +3,7 @@ import axios from "axios";
 import SERVER_URL from "../../constants/server_url";
 import { TComment } from "../../interfaces/IPost";
 
-const postCreate = async (post_obj: {}, cb: Function) => {
+const postCreate_old = (post_obj: {}, cb: Function) => {
   axios
     .post(`${SERVER_URL}/ts/create_post`, {
       post_obj,
@@ -20,6 +20,26 @@ const postCreate = async (post_obj: {}, cb: Function) => {
     });
 };
 
+const postCreate = (bodyFormData: any, cb: Function) => {
+  axios({
+    method: "POST",
+    // url: `${SERVER_URL}/ts/create_post`,
+    url: `http://474b3a2f0df2.ngrok.io/images`,
+    data: bodyFormData,
+    headers: { "Content-Type": "multipart/form-data" },
+  })
+    .then(function (response) {
+      console.log("postCreate response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch(function (err) {
+      console.log("postCreate error");
+      console.log(err);
+      cb(err);
+    });
+};
+
 const fetchFeed = async (cb: Function) => {
   try {
     const posts = await axios.get(`${SERVER_URL}/ts/posts`);
@@ -29,7 +49,7 @@ const fetchFeed = async (cb: Function) => {
   }
 };
 
-const likePost = async (like_obj: any, cb: Function) => {
+const likePost = (like_obj: any, cb: Function) => {
   axios
     .post(`${SERVER_URL}/ts/like_post`, like_obj)
     .then((response) => {
@@ -44,7 +64,7 @@ const likePost = async (like_obj: any, cb: Function) => {
     });
 };
 
-const addComment = async (comment_obj: TComment, cb: Function) => {
+const addComment = (comment_obj: TComment, cb: Function) => {
   console.log("comment_objcomment_objcomment_objcomment_obj");
 
   console.log(comment_obj);

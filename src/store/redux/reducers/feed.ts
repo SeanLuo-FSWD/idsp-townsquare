@@ -23,7 +23,7 @@ function feedReducer(feedState = INITIAL_STATE, action: FeedActionTypes) {
 
       const feedStore = {
         ...feedState,
-        posts: [...[action.post_obj_res.post_obj], ...feedState.posts],
+        posts: [...[action.post_obj_res], ...feedState.posts],
       };
 
       return feedStore;

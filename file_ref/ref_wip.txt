@@ -1,0 +1,13 @@
+bundle with server. 
+
+1. build first. 
+2. put in public directory.
+3. Middleware bundling? initHostingReactUI
+
+
+refresh setState. Check cookie. 
+Login page > call API useEffect. cookie check api to backend, backend respond with usernames. Can you respond with username and ID?
+
+get will attach cookie automatically, from domain name. 
+
+App itself, not login page

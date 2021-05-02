@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
 import styles from "./Post.module.scss";
+import ImageSlider from "../../UI/ImageSlider";
 
 const Post = (props: any) => {
   const { username, userId } = useContext(LoginContext);
@@ -55,8 +56,10 @@ const Post = (props: any) => {
         <h4>{props.userName}</h4>
         <h4>{props.createdAt}</h4>
       </div>
-      <h2>{props.title}</h2>
+      {/* <h2>{props.title}</h2> */}
       <h5 style={{ paddingLeft: "20px" }}>{props.message}</h5>
+
+      <ImageSlider slides={props.img_urls} />
       <div className="flex--space-between">
         <div className="flex">
           {checkLiked() ? (
