@@ -67,6 +67,11 @@ function Login() {
       ></img>
       <h1 className="townSquareTitle">TownSquare</h1>
       <h2>Login</h2>
+
+      <h3>For default user, login with:</h3>
+      <h4>email: bob@bob.com</h4>
+      <h4>password: bob@bob.com</h4>
+
       {signUpStatus && <h2>Sign up success</h2>}
       {loginError && <Error message={loginError} />}
       {/* <h4>bob@bob.com</h4> */}
