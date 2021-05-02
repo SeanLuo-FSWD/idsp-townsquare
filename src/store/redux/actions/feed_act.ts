@@ -5,7 +5,7 @@ import {
   addComment,
   likePost,
   postCreate,
-} from "../../../utils/api/posts";
+} from "../../../utils/api/posts.api";
 import { TComment } from "../../../interfaces/IPost";
 
 import {

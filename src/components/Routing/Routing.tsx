@@ -17,12 +17,12 @@ const Routing = () => {
   } = useContext(LoginContext);
 
   // Faking login for dev, to remove for production and uncomment Below!
-  // useEffect(() => {
-  //   setIsAuthenticated(true);
-  //   setSignUpStatus(false);
-  //   setUsername("tester");
-  //   setUserId("tester_id");
-  // }, []);
+  useEffect(() => {
+    setIsAuthenticated(true);
+    setSignUpStatus(false);
+    setUsername("tester");
+    setUserId("tester_id");
+  }, []);
 
   // useEffect(() => {
   //   authenticate((err: Error, result: any) => {

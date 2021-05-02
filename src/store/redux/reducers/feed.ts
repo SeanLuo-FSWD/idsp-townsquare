@@ -6,7 +6,7 @@ import {
   POST_LIKE,
   POST_CREATE,
 } from "../constants/actionTypes";
-import { fetchFeed } from "../../../utils/api/posts";
+import { fetchFeed } from "../../../utils/api/posts.api";
 import { IPost } from "../../../interfaces/IPost";
 import _ from "lodash";
 

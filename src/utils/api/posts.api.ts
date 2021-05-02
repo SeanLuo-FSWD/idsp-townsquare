@@ -24,7 +24,7 @@ const postCreate = (bodyFormData: any, cb: Function) => {
   axios({
     method: "POST",
     url: `${SERVER_URL}/ts/create_post`,
-    // url: `http://474b3a2f0df2.ngrok.io/images`,
+    // url: `http://474b3a2f0df2.ngrok.io/api/post`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
   })

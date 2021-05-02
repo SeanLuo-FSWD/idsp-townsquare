@@ -23,7 +23,7 @@ const ImageSlider = ({ slides }: any) => {
   return (
     <section className={styles.slider}>
       <IoIosArrowBack className={styles.left_arrow} onClick={prevSlide} />
-      <IoIosArrowForward className={styles.right_arrow} onClick={nextSlide} />
+
       <div className={styles.img_container}>
         {slides.map((slide: any, index: number) => {
           return (
@@ -42,6 +42,7 @@ const ImageSlider = ({ slides }: any) => {
           );
         })}
       </div>
+      <IoIosArrowForward className={styles.right_arrow} onClick={nextSlide} />
     </section>
   );
 };

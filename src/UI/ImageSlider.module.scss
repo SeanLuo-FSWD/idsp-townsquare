@@ -8,7 +8,8 @@
 }
 
 .img_container {
-  padding: 0 20px;
+  padding: 0 10px;
+  width: 440px;
 }
 
 .image {
@@ -18,9 +19,9 @@
 }
 
 .right_arrow {
-  position: absolute;
+  // position: absolute;
   right: 0;
-  font-size: 3rem;
+  font-size: 3em;
   color: black;
   z-index: 10;
   cursor: pointer;
@@ -28,9 +29,9 @@
 }
 
 .left_arrow {
-  position: absolute;
+  // position: absolute;
   left: 0;
-  font-size: 3rem;
+  font-size: 3em;
   color: black;
   z-index: 10;
   cursor: pointer;
@@ -40,6 +41,11 @@
 .slide {
   opacity: 0;
   transition-duration: 1s;
+  display: flex;
+  justify-content: center;
+  img {
+    max-height: 300px;
+  }
 }
 
 .slide.active {
