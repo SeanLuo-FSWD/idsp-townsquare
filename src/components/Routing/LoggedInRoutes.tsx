@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Home from "../../pages/index/Feed";
-import Users from "../../pages/users/Users";
+import Home from "../../pages/index/FeedPg";
+import Person from "../../pages/person/Person";
+import Users from "../../pages/users/UsersPg";
 const ReactRouterSetup = () => {
   return (
     <>
@@ -16,6 +17,8 @@ const ReactRouterSetup = () => {
       <Route path="/users">
         <Users />
       </Route>
+
+      <Route path="/person/:id" children={<Person />}></Route>
     </>
   );
 };

@@ -14,7 +14,7 @@ import {
   COMMENT_ADD,
   POST_LIKE,
   POST_CREATE,
-} from "../constants/actionTypes";
+} from "../constants/feedActionTypes";
 
 const doPostCreate = (post_obj: any) => async (dispatch: Dispatch) => {
   postCreate(post_obj, (err: Error, result: IPost[]) => {
@@ -53,6 +53,7 @@ const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
 };
 
 const doLikePost = (like_obj: any) => async (dispatch: Dispatch) => {
+  console.log("sssssssssssssssssssssssss");
   likePost(like_obj, (err: Error, result: any) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });

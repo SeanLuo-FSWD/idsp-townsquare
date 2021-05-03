@@ -6,7 +6,6 @@ import PostLike from "./PostLike";
 import PostComment from "./PostComment";
 import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
-import Error from "../Error/Error";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
@@ -35,6 +34,7 @@ const Post = (props: any) => {
   };
 
   const handleLike = (isLike: boolean) => {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
     const like_obj = {
       id: uuidv4(),
       userId: userId,

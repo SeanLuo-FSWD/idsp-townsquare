@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { connect } from "react-redux";
-import { doFetchFeed, doPostCreate } from "../../store/redux/actions/feed_act";
-import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
-import Post from "../../components/Post/Post";
-import Error from "../../components/Error/Error";
 import { v4 as uuidv4 } from "uuid";
-import { IPost } from "../../interfaces/IPost";
 import Modal from "../../UI/Modal";
-import Button from "react-bootstrap/Button";
+import Feed from "../../components/Feed/Feed";
+import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
+import { doPostCreate } from "../../store/redux/actions/feed_act";
 
-const Feed = (props: any) => {
+const FeedPg = (props: any) => {
   const {
     userId,
     username,
@@ -22,18 +19,15 @@ const Feed = (props: any) => {
   } = useContext(LoginContext);
 
   let img_src = "";
-  // const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
 
   let file_arr: any[] = [];
   let src_arr: string[] = [];
 
   useEffect(() => {
-    props.onFetchFeed();
-  }, []);
-
-  useEffect(() => {
-    window.URL.revokeObjectURL(img_src);
+    src_arr.forEach((src) => {
+      window.URL.revokeObjectURL(src);
+    });
   });
 
   const postSubmit = (e: any) => {
@@ -47,8 +41,10 @@ const Feed = (props: any) => {
     //should be done server side
     bodyFormData.append("id", uuidv4());
 
-    for (let i = 0; i < modalProps.file_arr.length; i++) {
-      bodyFormData.append("filesToUpload[]", modalProps.file_arr[i]);
+    if (file_arr.length > 0) {
+      for (let i = 0; i < modalProps.file_arr.length; i++) {
+        bodyFormData.append("filesToUpload[]", modalProps.file_arr[i]);
+      }
     }
 
     src_arr = [];
@@ -73,8 +69,6 @@ const Feed = (props: any) => {
     console.log(e.target.files);
 
     file_arr = Array.from(e.target.files);
-    console.log("fffffffffffffffffffffff");
-    console.log(file_arr);
     file_arr.map((img) => {
       let binaryData = [];
       binaryData.push(img);
@@ -109,7 +103,6 @@ const Feed = (props: any) => {
             <input
               type="file"
               id="myFile"
-              // style={{ display: "none" }}
               name="filename"
               accept="image/png"
               multiple
@@ -133,40 +126,19 @@ const Feed = (props: any) => {
         />
         <h2>Welcome: {username}</h2>
         <button onClick={() => setShowModal(true)}>Upload Post</button>
-        <div>
-          {props.feed.error ? (
-            <Error message={props.feed.error} />
-          ) : props.feed.posts.length > 0 ? (
-            props.feed.posts.map((post: any) => {
-              console.log("sssssssssssssssssssssssss");
-              console.log(post);
-
-              return <Post key={post.id} {...post}></Post>;
-            })
-          ) : (
-            <div>
-              <h2>loading...</h2>
-            </div>
-          )}
-        </div>
+        <Feed />
       </div>
       {showModal && <Modal data={src_arr}>{modalContent()}</Modal>}
     </>
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    feed: getFeed(state.feedState),
-    error: getFeedError(state.feedState),
-  };
-};
+// export default FeedPg;
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onFetchFeed: () => dispatch(doFetchFeed()),
     onPostCreate: (post_obj: IPost) => dispatch(doPostCreate(post_obj)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default connect(null, mapDispatchToProps)(FeedPg);

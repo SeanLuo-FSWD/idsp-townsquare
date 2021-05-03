@@ -1,0 +1,22 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  justify-items: center;
+
+  .userTile {
+    border: solid;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    img {
+      width: 100%;
+    }
+
+    a {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  }
+}

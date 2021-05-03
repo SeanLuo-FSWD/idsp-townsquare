@@ -1,6 +1,6 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
-import SERVER_URL from "../../constants/server_url";
+import SERVER_URL from "../../constants/mock_server_url";
 import { TComment } from "../../interfaces/IPost";
 
 const postCreate_old = (post_obj: {}, cb: Function) => {

@@ -5,9 +5,8 @@ import {
   COMMENT_ADD,
   POST_LIKE,
   POST_CREATE,
-} from "../constants/actionTypes";
+} from "../constants/feedActionTypes";
 import { fetchFeed } from "../../../utils/api/posts.api";
-import { IPost } from "../../../interfaces/IPost";
 import _ from "lodash";
 
 const INITIAL_STATE = {
