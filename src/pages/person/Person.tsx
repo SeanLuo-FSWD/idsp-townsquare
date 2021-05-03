@@ -1,30 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser, getUserFeed } from "../../store/redux/selector/Users";
 import UserInfo from "./UserInfo";
+import { fetchPerson } from "../../utils/api/people.api";
+import Error from "../../components/Error/Error";
 
-let userId = "";
-function Person(props: any) {
+function Person() {
   const { id } = useParams() as any;
-  userId = id;
-  console.log(id);
-  console.log("fffffffffffffffffffffff");
-  console.log(userId);
-  console.log(props.user);
+  const [error, setError] = useState("");
+  const [person, setPerson] = useState(null) as any;
 
-  if (props.user) {
+  useEffect(() => {
+    fetchPerson(id, (err: Error, result: any) => {
+      if (err) {
+        setError(err.message);
+      } else {
+        console.log("ddddddddddddddddddddddd");
+        console.log(result.data);
+
+        setPerson(result.data);
+      }
+    });
+  }, []);
+
+  if (error) {
+    return <Error message={error} />;
+  }
+  if (person) {
     return (
       <div>
         <h2>{id}</h2>
         <Link to="/users" className="btn">
           Back
         </Link>
-
         <div>
-          <h2>userName: {props.user.userName}</h2>
-          <h2>age: {props.user.age}</h2>
-          <h2>gender: {props.user.gender}</h2>
+          <h2>userName: {person.userName}</h2>
+          <h2>age: {person.age}</h2>
+          <h2>gender: {person.gender}</h2>
         </div>
       </div>
     );
@@ -32,17 +44,21 @@ function Person(props: any) {
   return <div>Loading</div>;
 }
 
-const mapStateToProps = (state: any) => {
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  return {
-    user: getUser(state.usersState, userId),
-    userFeed: getUserFeed(state.usersState),
-    error: state.usersState.error,
-  };
-};
+// const mapStateToProps = (state: any) => {
+//   console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+//   return {
+//     user: getUser(state.usersState, userId),
+//     userFeed: getUserFeed(state.usersState),
+//     error: state.usersState.error,
+//   };
+// };
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     onPersonFeed: (id: string) => dispatch(doPersonFeed(id)),
+//   };
+// };
 
-export default connect(mapStateToProps)(Person);
+// export default connect(null, mapDispatchToProps)(Person);
 
-// export default Person;
+export default Person;

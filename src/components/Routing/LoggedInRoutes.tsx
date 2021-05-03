@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Home from "../../pages/index/FeedPg";
 import Person from "../../pages/person/Person";
-import Users from "../../pages/users/UsersPg";
+import Users from "../../pages/people/PeoplePg";
 const ReactRouterSetup = () => {
   return (
     <>

@@ -5,10 +5,10 @@ import { IUser } from "../../interfaces/IUser";
 import styles from "./UserGrid.module.scss";
 import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
 
-function UserGrid({ users }: any) {
+function UserGrid(props: any) {
   return (
     <div className={styles.grid}>
-      {users.map((user: any) => {
+      {props.people.map((user: any) => {
         const profile_pic = user.img
           ? user.img
           : "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png";

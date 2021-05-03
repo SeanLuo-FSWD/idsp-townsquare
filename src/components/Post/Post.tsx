@@ -34,7 +34,6 @@ const Post = (props: any) => {
   };
 
   const handleLike = (isLike: boolean) => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
     const like_obj = {
       id: uuidv4(),
       userId: userId,

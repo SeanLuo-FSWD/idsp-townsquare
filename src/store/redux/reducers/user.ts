@@ -2,7 +2,7 @@ import {
   USERS_FETCH,
   API_ERROR,
   UsersActionTypes,
-} from "../constants/usersActionTypes";
+} from "../constants/peopleActionTypes";
 import _ from "lodash";
 
 const INITIAL_STATE = {

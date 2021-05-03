@@ -1,6 +1,5 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
-import SERVER_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
 
 const authenticate = (cb: Function) => {
