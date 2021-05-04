@@ -14,6 +14,7 @@ const Register = () => {
   });
   const { setSignUpStatus } = useContext(LoginContext);
   const [signUpError, setSignUpError] = useState("");
+  const [registerStatus, setRegisterStatus] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -37,8 +38,9 @@ const Register = () => {
           setSignUpStatus(true);
           console.log("registration result message");
           console.log(result.data.message);
+          setRegisterStatus(true);
 
-          history.push("/");
+          // history.push("/");
         }
       });
     } else {
@@ -53,48 +55,56 @@ const Register = () => {
         alt="TownSquareLogo"
       ></img>
       <h2 className="signUpTitle">Sign Up</h2>
-      <article className="form">
-        {signUpError && <Error message={signUpError} />}
-        <form>
-          <div className="form-control">
-            <label htmlFor="username">username : </label>
-            <input
-              type="username"
-              id="username"
-              name="username"
-              placeholder="Create a username"
-              value={person.username}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="email">Email : </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Please enter your email"
-              value={person.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="password">password : </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a password"
-              value={person.password}
-              onChange={handleChange}
-            />
-          </div>
+      {registerStatus ? (
+        <div>
+          <h1>
+            Registration success, please check your email for verification link
+          </h1>
+        </div>
+      ) : (
+        <article className="form">
+          {signUpError && <Error message={signUpError} />}
+          <form>
+            <div className="form-control">
+              <label htmlFor="username">username : </label>
+              <input
+                type="username"
+                id="username"
+                name="username"
+                placeholder="Create a username"
+                value={person.username}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="email">Email : </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Please enter your email"
+                value={person.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="password">password : </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                value={person.password}
+                onChange={handleChange}
+              />
+            </div>
 
-          <button type="submit" onClick={handleRegister}>
-            Register
-          </button>
-        </form>
-      </article>
+            <button type="submit" onClick={handleRegister}>
+              Register
+            </button>
+          </form>
+        </article>
+      )}
     </>
   );
 };

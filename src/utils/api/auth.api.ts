@@ -1,6 +1,6 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
-import SERVER_URL from "../../constants/mock_server_url";
+import MOCK_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
 // axios.defaults.withCredentials = true;
 
@@ -22,7 +22,7 @@ const verify = (query: string, cb: Function) => {
 
 const editProfile = (person: any, cb: Function) => {
   axios
-    .put(`${SERVER_URL}/ts/user/edit`, person)
+    .put(`${MOCK_URL}/ts/user/edit`, person)
     .then((response) => {
       console.log("editProfile response");
       console.log(response);
@@ -85,7 +85,7 @@ const login = (user_obj: {}, cb: Function) => {
 
 const register = (user_obj: {}, cb: Function) => {
   axios
-    .post(`${API_URL}/user/signUp`, user_obj)
+    .post(`${MOCK_URL}/user/signUp`, user_obj)
     .then((response) => {
       console.log("post register response");
       console.log(response);

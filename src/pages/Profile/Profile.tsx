@@ -3,13 +3,11 @@ import { editProfile } from "../../utils/api/auth.api";
 import { fetchPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Navbar from "../../components/Navbar/Navbar";
+import styles from "./Profile.module.scss";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
-  const [person, setPerson] = useState({
-    userName: "bob",
-    age: 5,
-  }) as any;
+  const [person, setPerson] = useState(null) as any;
   //   const [pwRetype, setPwRetype] = useState(false);
 
   const {
@@ -30,7 +28,7 @@ function Profile() {
       if (err) {
         setCerror(err.message);
       } else {
-        // setPerson(result.data); // Uncontrolled
+        setPerson(result.data.info); // Uncontrolled
         console.log("null");
       }
     });
@@ -38,7 +36,7 @@ function Profile() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setPerson({ ...person, [name]: value }); //controlled
+    setPerson({ ...person, ["name"]: value }); //controlled
   };
 
   function handleProfileEdit(e: any) {
@@ -64,13 +62,54 @@ function Profile() {
     return;
   }
 
+  function getImg(e: any) {
+    const imgFile = e.target.files[0];
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log(imgFile);
+    let binaryData = [];
+    binaryData.push(imgFile);
+    const blob = new Blob(binaryData);
+    const img_src = window.URL.createObjectURL(blob);
+    setPerson({ ...person, ["img"]: img_src });
+  }
+
   if (person) {
+    console.log("ddddddddddddddddddddddd");
+    console.log(person.img);
+
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
 
         <h2>Update Profile</h2>
-        <form>
+
+        <div>
+          <div>
+            <img className={styles.profileImg} src={person.img} alt="" />
+            <input
+              type="file"
+              id="myFile"
+              name="filename"
+              accept="image/png"
+              onChange={(e) => getImg(e)}
+            />
+            <button>Edit</button>
+          </div>
+          <div>
+            <h2>userName: {person.userName}</h2>
+            <button>Edit</button>
+          </div>
+          <div>
+            <h2>age: {person.age}</h2>
+            <button>Edit</button>
+          </div>
+          <div>
+            <h2>gender: {person.gender}</h2>
+            <button>Edit</button>
+          </div>
+        </div>
+
+        {/* <form>
           <div className="form-control">
             <label htmlFor="username">username : </label>
             <input
@@ -104,41 +143,11 @@ function Profile() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-control">
-            <label htmlFor="email">Email : </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Please enter your email"
-              value={person.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="password">password : </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="enter new password"
-              value={person.password}
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              id="password Retype"
-              name="password Retype"
-              placeholder="Retype your password"
-              value={person.password}
-              onChange={handleChange}
-            />
-          </div>
 
           <button type="submit" onClick={handleProfileEdit}>
             Submit Edit
           </button>
-        </form>
+        </form> */}
       </div>
     );
   }

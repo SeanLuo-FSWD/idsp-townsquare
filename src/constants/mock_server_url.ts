@@ -1,8 +1,8 @@
-let SERVER_URL = "";
+let MOCK_URL = "";
 
 if (process.env.NODE_ENV != "production") {
-  SERVER_URL = "http://localhost:8080";
+  MOCK_URL = "http://localhost:8080";
 } else {
-  SERVER_URL = `https://comp2350-week6-sean-luo.herokuapp.com`;
+  MOCK_URL = `https://comp2350-week6-sean-luo.herokuapp.com`;
 }
-export default SERVER_URL;
+export default MOCK_URL;

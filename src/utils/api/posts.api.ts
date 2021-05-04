@@ -1,12 +1,12 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
-import SERVER_URL from "../../constants/mock_server_url";
+import MOCK_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
 import { TComment } from "../../interfaces/IPost";
 
 const postCreate_old = (post_obj: {}, cb: Function) => {
   axios
-    .post(`${SERVER_URL}/ts/create_post`, {
+    .post(`${MOCK_URL}/ts/create_post`, {
       post_obj,
     })
     .then((response) => {
@@ -24,8 +24,8 @@ const postCreate_old = (post_obj: {}, cb: Function) => {
 const postCreate = (bodyFormData: any, cb: Function) => {
   axios({
     method: "POST",
-    // url: `${SERVER_URL}/ts/create_post`,
-    url: `${SERVER_URL}/post`,
+    // url: `${MOCK_URL}/ts/create_post`,
+    url: `${API_URL}/post`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
@@ -44,7 +44,7 @@ const postCreate = (bodyFormData: any, cb: Function) => {
 
 const fetchFeed = async (cb: Function) => {
   try {
-    const posts = await axios.get(`${SERVER_URL}/api/post`);
+    const posts = await axios.get(`${MOCK_URL}/api/post`);
 
     console.log(posts.data.reverse());
 
@@ -56,7 +56,7 @@ const fetchFeed = async (cb: Function) => {
 
 const likePost = (like_obj: any, cb: Function) => {
   axios
-    .post(`${SERVER_URL}/ts/like_post`, like_obj)
+    .post(`${MOCK_URL}/ts/like_post`, like_obj)
     .then((response) => {
       console.log("likePost response");
       console.log(response);
@@ -75,7 +75,7 @@ const addComment = (comment_obj: TComment, cb: Function) => {
   console.log(comment_obj);
 
   axios
-    .post(`${SERVER_URL}/ts/add_comment`, {
+    .post(`${MOCK_URL}/ts/add_comment`, {
       userId: comment_obj.userId,
       id: comment_obj.id,
       username: comment_obj.username,

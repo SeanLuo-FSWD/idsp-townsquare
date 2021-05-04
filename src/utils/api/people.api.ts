@@ -1,9 +1,9 @@
 import axios from "axios";
-import SERVER_URL from "../../constants/mock_server_url";
+import MOCK_URL from "../../constants/mock_server_url";
 
 const fetchPeople = (cb: Function) => {
   axios
-    .get(`${SERVER_URL}/ts/allusers`)
+    .get(`${MOCK_URL}/ts/allusers`)
     .then((response) => {
       console.log("get fetchPeople response");
       console.log(response);
@@ -18,7 +18,7 @@ const fetchPeople = (cb: Function) => {
 
 const fetchPerson = (id: string, cb: Function) => {
   axios
-    .get(`${SERVER_URL}/ts/person/${id}`)
+    .get(`${MOCK_URL}/ts/person/${id}`)
     .then((response) => {
       console.log("get fetchPerson response");
       console.log(response);

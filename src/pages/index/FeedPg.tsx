@@ -34,7 +34,7 @@ const FeedPg = (props: any) => {
   let img_src = "";
 
   let file_arr: any[] = [];
-  let src_arr: string[] = [];
+  let src_arr: string[] = []; // Used to display images
 
   useEffect(() => {
     src_arr.forEach((src) => {
