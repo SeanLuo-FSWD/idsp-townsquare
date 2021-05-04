@@ -1,12 +1,11 @@
 import { Dispatch } from "redux";
-import { IPost, TLikes } from "../../../interfaces/IPost";
+import { IPost, TLikes, TComment } from "../../../interfaces/IPost";
 import {
   fetchFeed,
   addComment,
   likePost,
   postCreate,
 } from "../../../utils/api/posts.api";
-import { TComment } from "../../../interfaces/IPost";
 
 import {
   FEED_FETCH,
@@ -53,7 +52,6 @@ const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
 };
 
 const doLikePost = (like_obj: any) => async (dispatch: Dispatch) => {
-  console.log("sssssssssssssssssssssssss");
   likePost(like_obj, (err: Error, result: any) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TComment } from "../../interfaces/IPost";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
@@ -11,12 +11,27 @@ import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
 import styles from "./Post.module.scss";
 import ImageSlider from "../../UI/ImageSlider";
+import {
+  fetchFeed,
+  addComment,
+  likePost,
+  postCreate,
+} from "../../utils/api/posts.api";
+
+import { IPost, TLikes } from "../../interfaces/IPost";
 
 const Post = (props: any) => {
-  const { username, userId } = useContext(LoginContext);
+  const { username, userId, setCerror } = useContext(LoginContext);
+  const [likes, setLikes] = useState([]) as any;
 
   const [comment, setComment] = useState("");
+  const [commentList, setCommentList] = useState([]) as any;
+
   const [commentsVisible, setCommentsVisible] = useState(false);
+
+  useEffect(() => {
+    setLikes(props.post.likes);
+  }, []);
 
   const commentSubmit = (e: any) => {
     e.preventDefault();
@@ -27,10 +42,21 @@ const Post = (props: any) => {
       createdAt: new Date(),
       message: comment,
       id: uuidv4(),
-      postId: props.id,
+      postId: props.post.id,
     };
 
-    props.onPostComment(comment_obj);
+    addComment(comment_obj, (err: Error, result: IPost[]) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        console.log("fffffffffffffffffffffff");
+        console.log(result);
+
+        setCommentList([...commentList, result]);
+      }
+    });
+
+    // props.post.onPostComment(comment_obj);
   };
 
   const handleLike = (isLike: boolean) => {
@@ -38,27 +64,49 @@ const Post = (props: any) => {
       id: uuidv4(),
       userId: userId,
       username: username,
-      postId: props.id,
+      postId: props.post.id,
       isLike: isLike,
     };
 
-    props.onLikeComment(like_obj);
+    likePost(like_obj, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        delete result["isLike"];
+
+        // const new_likes = isLike
+        //   ? _.filter(likes, (o) => o.userId == userId)
+        //   : [...likes, result];
+
+        const new_likes = isLike
+          ? [...likes, result]
+          : _.filter(likes, (o) => o.userId != userId);
+
+        console.log("fffffffffffffffffffffff");
+        console.log(new_likes);
+
+        setLikes(new_likes);
+      }
+    });
+
+    // props.post.onLikeComment(like_obj);
   };
 
   function checkLiked(): boolean {
-    return _.filter(props.likes, (o) => o.userId == userId).length != 0;
+    // return TRUE if liked
+    return _.filter(likes, (o) => o.userId == userId).length != 0;
   }
 
   return (
-    <div key={props.postId} className={styles.post}>
+    <div key={props.post.postId} className={styles.post}>
       <div className="flex--space-between">
-        <h4>{props.userName}</h4>
-        <h4>{props.createdAt}</h4>
+        <h4>{props.post.userName}</h4>
+        <h4>{props.post.createdAt}</h4>
       </div>
       {/* <h2>{props.title}</h2> */}
-      <h5 style={{ paddingLeft: "20px" }}>{props.message}</h5>
+      <h5 style={{ paddingLeft: "20px" }}>{props.post.message}</h5>
 
-      <ImageSlider slides={props.img_urls} />
+      <ImageSlider slides={props.post.img_urls} />
       <div className="flex--space-between">
         <div className="flex">
           {checkLiked() ? (
@@ -74,14 +122,14 @@ const Post = (props: any) => {
               }}
             />
           )}
-          <PostLike like_arr={props.likes} />
+          <PostLike like_arr={likes} />
         </div>
         <div>
           <h4
             style={{ textDecoration: "underline" }}
             onClick={() => setCommentsVisible(!commentsVisible)}
           >
-            See Comments
+            See comments
           </h4>
         </div>
       </div>
@@ -89,7 +137,7 @@ const Post = (props: any) => {
       {commentsVisible && (
         <div>
           <div>
-            {props.commentList.map((c: TComment) => {
+            {commentList.map((c: TComment) => {
               return <PostComment key={c.id} {...c} />;
             })}
           </div>
@@ -109,13 +157,15 @@ const Post = (props: any) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onPostComment: (comment_obj: TComment) =>
-      dispatch(doPostComment(comment_obj)),
-    onLikeComment: (like_obj: any) => dispatch(doLikePost(like_obj)),
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     onPostComment: (comment_obj: TComment) =>
+//       dispatch(doPostComment(comment_obj)),
+//     onLikeComment: (like_obj: any) => dispatch(doLikePost(like_obj)),
+//   };
+// };
 
 // export default Post;
-export default connect(null, mapDispatchToProps)(Post);
+// export default connect(null, mapDispatchToProps)(Post);
+
+export default Post;

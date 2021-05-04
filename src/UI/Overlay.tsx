@@ -9,7 +9,7 @@ function Overlay() {
       className={styles.overlay}
       onClick={() => {
         setModalProps(null);
-        setShowModal(false);
+        setShowModal("");
       }}
     ></div>
   );

@@ -7,8 +7,21 @@ import Feed from "../../components/Feed/Feed";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
 import { doPostCreate } from "../../store/redux/actions/feed_act";
+import { postCreate } from "../../utils/api/posts.api";
+import Error from "../../components/Error/Error";
+import { fetchFeed } from "../../utils/api/posts.api";
+import SubNav from "../../components/Navbar/SubNav";
+import styles from "./FeedPg.module.scss";
+import Navbar from "../../components/Navbar/Navbar";
+import _ from "lodash";
+import { Filter } from "@material-ui/icons";
+import FeedFilter from "../../components/Filter/FeedFilter";
 
 const FeedPg = (props: any) => {
+  const [feed, setFeed] = useState(null) as any;
+  const [message, setMessage] = useState("");
+  const [modalContent, setModalContent] = useState(null) as any;
+
   const {
     userId,
     username,
@@ -16,10 +29,10 @@ const FeedPg = (props: any) => {
     setShowModal,
     modalProps,
     setModalProps,
+    setCerror,
   } = useContext(LoginContext);
 
   let img_src = "";
-  const [message, setMessage] = useState("");
 
   let file_arr: any[] = [];
   let src_arr: string[] = [];
@@ -29,6 +42,16 @@ const FeedPg = (props: any) => {
       window.URL.revokeObjectURL(src);
     });
   });
+
+  useEffect(() => {
+    fetchFeed((err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        setFeed(result);
+      }
+    });
+  }, []);
 
   const postSubmit = (e: any) => {
     e.preventDefault();
@@ -49,20 +72,24 @@ const FeedPg = (props: any) => {
 
     src_arr = [];
     file_arr = [];
-    setShowModal(false);
+    setShowModal("");
     setModalProps(null);
 
-    // const post_obj: IPost = {
-    //   id: uuidv4(),
-    //   userName: username,
-    //   createdAt: new Date(),
-    //   title: title,
-    //   message: message,
-    //   likes: [],
-    //   commentList: [],
-    // };
+    postCreate(bodyFormData, (err: Error, result: IPost[]) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        console.log("fffffffffffffffffffffff");
+        console.log(result);
+        setCerror("");
+        // setFeed(feed.unshift(result));
+        setFeed(_.concat(result, feed));
 
-    props.onPostCreate(bodyFormData);
+        // setCommentList([...commentList, result]);
+      }
+    });
+    setMessage("");
+    // props.onPostCreate(bodyFormData);
   };
 
   function getImg(e: any) {
@@ -82,16 +109,10 @@ const FeedPg = (props: any) => {
     setModalProps({ src_arr: src_arr, file_arr: file_arr });
   }
 
-  function modalContent() {
+  function PostModalContent() {
     return (
       <>
         <form style={{ marginBottom: "50px" }} onSubmit={postSubmit}>
-          {/* <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        /> */}
           <textarea
             rows={4}
             cols={50}
@@ -116,29 +137,49 @@ const FeedPg = (props: any) => {
     );
   }
 
+  function feedModalContent() {
+    return (
+      <Filter>
+        <FeedFilter></FeedFilter>
+      </Filter>
+    );
+  }
+
   return (
     <>
+      <Navbar currentPath={window.location.pathname} />
+      <SubNav>
+        <div className={`flex--space-around ${styles.SubNavWrap}`}>
+          <h2>{username}</h2>
+          {/* <button onClick={() => setShowModal(true)}>Upload Post</button> */}
+          <button onClick={() => setShowModal("postUpload")}>
+            Upload Post
+          </button>
+
+          <button onClick={() => setShowModal("filter")}>Filter</button>
+        </div>
+      </SubNav>
       <div>
-        <h1>Posts feed page</h1>
-        <img
-          src="https://idsp2.s3-us-west-1.amazonaws.com//images/1619930874561_07_optional_middle_name_1.png"
-          alt=""
-        />
-        <h2>Welcome: {username}</h2>
-        <button onClick={() => setShowModal(true)}>Upload Post</button>
-        <Feed />
+        <Feed feed={feed} />
       </div>
-      {showModal && <Modal data={src_arr}>{modalContent()}</Modal>}
+      {showModal ? (
+        showModal == "postUpload" ? (
+          <Modal>{PostModalContent()}</Modal>
+        ) : (
+          <Modal>{feedModalContent()}</Modal>
+        )
+      ) : null}
     </>
   );
 };
 
 // export default FeedPg;
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onPostCreate: (post_obj: IPost) => dispatch(doPostCreate(post_obj)),
-  };
-};
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     onPostCreate: (post_obj: IPost) => dispatch(doPostCreate(post_obj)),
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(FeedPg);
+// export default connect(null, mapDispatchToProps)(FeedPg);
+export default FeedPg;

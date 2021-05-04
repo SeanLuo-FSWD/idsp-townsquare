@@ -6,7 +6,6 @@ import { API_ERROR, USERS_FETCH } from "../constants/peopleActionTypes";
 
 const doFetchPeople = () => async (dispatch: Dispatch) => {
   fetchPeople((err: Error, result: any) => {
-    console.log("sssssssssssssssssssssssss");
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });
     } else {

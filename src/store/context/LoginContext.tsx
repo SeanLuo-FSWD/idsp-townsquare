@@ -9,10 +9,12 @@ export interface ILoginContext {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   signUpStatus: boolean;
   setSignUpStatus: Dispatch<SetStateAction<boolean>>;
-  showModal: boolean;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
+  showModal: string;
+  setShowModal: Dispatch<SetStateAction<string>>;
   modalProps: any;
   setModalProps: Dispatch<SetStateAction<any>>;
+  cerror: any;
+  setCerror: Dispatch<SetStateAction<any>>;
 }
 
 export const LoginContext = createContext({} as ILoginContext);

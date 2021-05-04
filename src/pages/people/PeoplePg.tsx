@@ -4,26 +4,32 @@ import { fetchPeople } from "../../utils/api/people.api";
 
 import UserGrid from "../../components/Users/UserGrid";
 import Error from "../../components/Error/Error";
+import Navbar from "../../components/Navbar/Navbar";
 
-function UsersPg() {
-  const [error, setError] = useState("");
+function PeoplePg() {
   const [people, setPeople] = useState(null);
+  const {
+    userId,
+    username,
+    showModal,
+    setShowModal,
+    modalProps,
+    setModalProps,
+    cerror,
+    setCerror,
+  } = useContext(LoginContext);
 
   useEffect(() => {
     fetchPeople((err: Error, result: any) => {
       if (err) {
-        setError(err.message);
+        setCerror(err.message);
       } else {
         setPeople(result.data);
       }
     });
   }, []);
 
-  const { username } = useContext(LoginContext);
-
-  if (error) {
-    return <Error message={error} />;
-  } else if (!people) {
+  if (!people) {
     return (
       <div>
         <h2>Loading</h2>
@@ -32,6 +38,7 @@ function UsersPg() {
   }
   return (
     <>
+      <Navbar currentPath={window.location.pathname} />
       <div>
         <h1>Users page</h1>
         <h2>Welcome: {username} </h2>
@@ -42,4 +49,4 @@ function UsersPg() {
   );
 }
 
-export default UsersPg;
+export default PeoplePg;

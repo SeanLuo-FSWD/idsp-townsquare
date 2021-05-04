@@ -1,43 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import UserInfo from "./UserInfo";
 import { fetchPerson } from "../../utils/api/people.api";
 import Error from "../../components/Error/Error";
+import Feed from "../../components/Feed/Feed";
+import { LoginContext } from "../../store/context/LoginContext";
+import { fetchFeed } from "../../utils/api/posts.api";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Person() {
   const { id } = useParams() as any;
-  const [error, setError] = useState("");
   const [person, setPerson] = useState(null) as any;
+  const {
+    userId,
+    username,
+    showModal,
+    setShowModal,
+    modalProps,
+    setModalProps,
+    setCerror,
+  } = useContext(LoginContext);
 
   useEffect(() => {
     fetchPerson(id, (err: Error, result: any) => {
       if (err) {
-        setError(err.message);
+        setCerror(err.message);
       } else {
-        console.log("ddddddddddddddddddddddd");
-        console.log(result.data);
-
         setPerson(result.data);
       }
     });
   }, []);
 
-  if (error) {
-    return <Error message={error} />;
-  }
   if (person) {
     return (
       <div>
-        <h2>{id}</h2>
+        <Navbar currentPath={window.location.pathname} />
         <Link to="/users" className="btn">
           Back
         </Link>
         <div>
-          <h2>userName: {person.userName}</h2>
-          <h2>age: {person.age}</h2>
-          <h2>gender: {person.gender}</h2>
+          <img src={person.info.img} alt="" />
+          <h2>userName: {person.info.userName}</h2>
+          <h2>age: {person.info.age}</h2>
+          <h2>gender: {person.info.gender}</h2>
         </div>
+
+        <Feed feed={person.feed} />
       </div>
     );
   }

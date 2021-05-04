@@ -43,6 +43,9 @@ const postCreate = (bodyFormData: any, cb: Function) => {
 const fetchFeed = async (cb: Function) => {
   try {
     const posts = await axios.get(`${SERVER_URL}/ts/posts`);
+
+    console.log(posts.data.reverse());
+
     cb(null, posts.data);
   } catch (error) {
     cb(error);
