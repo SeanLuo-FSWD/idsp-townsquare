@@ -11,6 +11,8 @@ function Login() {
     signUpStatus,
     setSignUpStatus,
     setUsername,
+    currentUser,
+    setCurrentUser,
     setIsAuthenticated,
     setUserId,
   } = useContext(LoginContext);
@@ -51,6 +53,11 @@ function Login() {
           console.log(result);
           setUsername(result.data.username);
           setUserId(result.data.userId);
+          setCurrentUser({
+            ...currentUser,
+            id: result.data.userId,
+            username: result.data.username,
+          });
         }
       });
     } else {

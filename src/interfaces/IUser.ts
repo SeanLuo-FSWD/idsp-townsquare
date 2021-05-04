@@ -6,5 +6,4 @@ export interface IUser {
   gender: string;
   location: string;
   img: string;
-  last_login: Date;
 }

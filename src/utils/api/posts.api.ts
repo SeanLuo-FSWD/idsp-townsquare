@@ -1,6 +1,7 @@
 // import { posts } from "../../FakeDb/posts";
 import axios from "axios";
 import SERVER_URL from "../../constants/mock_server_url";
+import API_URL from "../../constants/api_url";
 import { TComment } from "../../interfaces/IPost";
 
 const postCreate_old = (post_obj: {}, cb: Function) => {
@@ -23,10 +24,11 @@ const postCreate_old = (post_obj: {}, cb: Function) => {
 const postCreate = (bodyFormData: any, cb: Function) => {
   axios({
     method: "POST",
-    url: `${SERVER_URL}/ts/create_post`,
-    // url: `http://474b3a2f0df2.ngrok.io/api/post`,
+    // url: `${SERVER_URL}/ts/create_post`,
+    url: `${SERVER_URL}/post`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
+    withCredentials: true,
   })
     .then(function (response) {
       console.log("postCreate response");
@@ -42,7 +44,7 @@ const postCreate = (bodyFormData: any, cb: Function) => {
 
 const fetchFeed = async (cb: Function) => {
   try {
-    const posts = await axios.get(`${SERVER_URL}/ts/posts`);
+    const posts = await axios.get(`${SERVER_URL}/api/post`);
 
     console.log(posts.data.reverse());
 

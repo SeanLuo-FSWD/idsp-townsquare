@@ -9,13 +9,13 @@ import Navbar from "../../components/Navbar/Navbar";
 function PeoplePg() {
   const [people, setPeople] = useState(null);
   const {
-    userId,
     username,
     showModal,
     setShowModal,
     modalProps,
     setModalProps,
     cerror,
+    currentUser,
     setCerror,
   } = useContext(LoginContext);
 
@@ -41,7 +41,7 @@ function PeoplePg() {
       <Navbar currentPath={window.location.pathname} />
       <div>
         <h1>Users page</h1>
-        <h2>Welcome: {username} </h2>
+        <h2>Welcome: {currentUser.username} </h2>
       </div>
 
       <UserGrid people={people} />

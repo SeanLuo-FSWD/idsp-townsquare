@@ -7,9 +7,14 @@ import styles from "./Navbar.module.scss";
 function Navbar(props: any) {
   const [currentPath, setCurrentPath] = useState("");
 
-  const { setUsername, setCerror, setIsAuthenticated, setUserId } = useContext(
-    LoginContext
-  );
+  const {
+    setUsername,
+    currentUser,
+    setCurrentUser,
+    setCerror,
+    setIsAuthenticated,
+    setUserId,
+  } = useContext(LoginContext);
   function handleLogout() {
     logout((err: Error, result: any) => {
       if (err) {
@@ -17,6 +22,7 @@ function Navbar(props: any) {
         setCerror(err.message);
       } else {
         setCerror("");
+        setCurrentUser(null);
 
         setUsername("");
         setUserId("");

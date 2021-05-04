@@ -2,6 +2,23 @@
 import axios from "axios";
 import SERVER_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
+// axios.defaults.withCredentials = true;
+
+const verify = (query: string, cb: Function) => {
+  axios
+    .get(`http://bb7a42c6c8a5.ngrok.io/api/user/verify?id=${query}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("verify response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("verify error");
+      cb(null, error);
+    });
+};
 
 const editProfile = (person: any, cb: Function) => {
   axios
@@ -52,7 +69,7 @@ const login = (user_obj: {}, cb: Function) => {
       headers: {
         "Content-Type": "application/json",
       },
-      // withCredentials: true,
+      withCredentials: true,
     })
     .then((response) => {
       console.log("post login response receive");
@@ -81,4 +98,4 @@ const register = (user_obj: {}, cb: Function) => {
     });
 };
 
-export { register, login, logout, authenticate, editProfile };
+export { register, login, logout, authenticate, editProfile, verify };

@@ -22,6 +22,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.1.9",
     "axios": "^0.21.1",
+    "axios-hooks": "^2.6.1",
     "bootstrap": "^4.6.0",
     "lodash": "^4.17.21",
     "node-sass": "^5.0.0",

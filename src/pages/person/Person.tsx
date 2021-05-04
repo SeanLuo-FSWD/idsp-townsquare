@@ -8,6 +8,7 @@ import Feed from "../../components/Feed/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
 import { fetchFeed } from "../../utils/api/posts.api";
 import Navbar from "../../components/Navbar/Navbar";
+import styles from "./Person.module.scss";
 
 function Person() {
   const { id } = useParams() as any;
@@ -39,11 +40,13 @@ function Person() {
         <Link to="/users" className="btn">
           Back
         </Link>
-        <div>
-          <img src={person.info.img} alt="" />
-          <h2>userName: {person.info.userName}</h2>
-          <h2>age: {person.info.age}</h2>
-          <h2>gender: {person.info.gender}</h2>
+        <div className="flex">
+          <img className={styles.profileImg} src={person.info.img} alt="" />
+          <div>
+            <h2>userName: {person.info.userName}</h2>
+            <h2>age: {person.info.age}</h2>
+            <h2>gender: {person.info.gender}</h2>
+          </div>
         </div>
 
         <Feed feed={person.feed} />

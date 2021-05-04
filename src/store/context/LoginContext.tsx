@@ -1,10 +1,13 @@
 import { createContext, Dispatch, SetStateAction } from "react";
+import { IUser } from "../../interfaces/IUser";
 
 export interface ILoginContext {
   userId: string;
   setUserId: Dispatch<SetStateAction<string>>;
   username: string;
   setUsername: Dispatch<SetStateAction<string>>;
+  currentUser: any | null;
+  setCurrentUser: Dispatch<SetStateAction<any | null>>;
   isAuthenticated: boolean;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   signUpStatus: boolean;

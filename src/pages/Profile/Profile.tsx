@@ -6,7 +6,10 @@ import Navbar from "../../components/Navbar/Navbar";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
-  const [person, setPerson] = useState({}) as any;
+  const [person, setPerson] = useState({
+    userName: "bob",
+    age: 5,
+  }) as any;
   //   const [pwRetype, setPwRetype] = useState(false);
 
   const {
@@ -15,41 +18,45 @@ function Profile() {
     showModal,
     setShowModal,
     setUsername,
+    setCurrentUser,
     modalProps,
+    currentUser,
     setModalProps,
     setCerror,
   } = useContext(LoginContext);
 
   useEffect(() => {
-    fetchPerson(userId, (err: Error, result: any) => {
+    fetchPerson(currentUser.id, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("sssssssssssssssssssssssss");
-        console.log(result.data);
-
-        setPerson(result.data);
+        // setPerson(result.data); // Uncontrolled
+        console.log("null");
       }
     });
   }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setPerson({ ...person, [name]: value });
+    setPerson({ ...person, [name]: value }); //controlled
   };
 
   function handleProfileEdit(e: any) {
     e.preventDefault();
-    console.log("--------------");
-    console.log(person);
-
     editProfile(person, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(result);
+        // return the current user object
         setUsername(result.username);
+        setCurrentUser({
+          username: "bob",
+          email: "bob@bob.com",
+          img:
+            "https://static.wikia.nocookie.net/spongebob/images/d/d7/SpongeBob_stock_art.png/revision/latest?cb=20190921125147",
+          age: 5,
+          sex: "male",
+        });
 
         return result;
       }
@@ -58,9 +65,6 @@ function Profile() {
   }
 
   if (person) {
-    console.log("fffffffffffffffffffffff");
-    console.log(person);
-
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />

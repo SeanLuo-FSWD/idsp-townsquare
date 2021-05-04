@@ -7,9 +7,7 @@ import Feed from "../../components/Feed/Feed";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
 import { doPostCreate } from "../../store/redux/actions/feed_act";
-import { postCreate } from "../../utils/api/posts.api";
-import Error from "../../components/Error/Error";
-import { fetchFeed } from "../../utils/api/posts.api";
+import { postCreate, fetchFeed } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
@@ -25,6 +23,7 @@ const FeedPg = (props: any) => {
   const {
     userId,
     username,
+    currentUser,
     showModal,
     setShowModal,
     modalProps,
@@ -57,12 +56,12 @@ const FeedPg = (props: any) => {
     e.preventDefault();
 
     let bodyFormData = new FormData();
-    bodyFormData.append("userId", userId);
-    bodyFormData.append("message", message);
-    bodyFormData.append("img_name", uuidv4());
+    // bodyFormData.append("userId", userId);
+    bodyFormData.append("text", message);
+    // bodyFormData.append("img_name", uuidv4());
 
     //should be done server side
-    bodyFormData.append("id", uuidv4());
+    // bodyFormData.append("id", uuidv4());
 
     if (file_arr.length > 0) {
       for (let i = 0; i < modalProps.file_arr.length; i++) {
@@ -79,8 +78,6 @@ const FeedPg = (props: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("fffffffffffffffffffffff");
-        console.log(result);
         setCerror("");
         // setFeed(feed.unshift(result));
         setFeed(_.concat(result, feed));
@@ -93,9 +90,13 @@ const FeedPg = (props: any) => {
   };
 
   function getImg(e: any) {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
     console.log(e.target.files);
 
     file_arr = Array.from(e.target.files);
+
+    console.log("sssssssssssssssssssssssss");
+    console.log(file_arr);
     file_arr.map((img) => {
       let binaryData = [];
       binaryData.push(img);
@@ -150,7 +151,7 @@ const FeedPg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav>
         <div className={`flex--space-around ${styles.SubNavWrap}`}>
-          <h2>{username}</h2>
+          <h2>{currentUser.username}</h2>
           {/* <button onClick={() => setShowModal(true)}>Upload Post</button> */}
           <button onClick={() => setShowModal("postUpload")}>
             Upload Post

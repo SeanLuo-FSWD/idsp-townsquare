@@ -21,7 +21,7 @@ import {
 import { IPost, TLikes } from "../../interfaces/IPost";
 
 const Post = (props: any) => {
-  const { username, userId, setCerror } = useContext(LoginContext);
+  const { username, userId, setCerror, currentUser } = useContext(LoginContext);
   const [likes, setLikes] = useState([]) as any;
 
   const [comment, setComment] = useState("");
@@ -36,9 +36,18 @@ const Post = (props: any) => {
   const commentSubmit = (e: any) => {
     e.preventDefault();
 
+    // const comment_obj: TComment = {
+    //   userId: userId,
+    //   username: username,
+    //   createdAt: new Date(),
+    //   message: comment,
+    //   id: uuidv4(),
+    //   postId: props.post.id,
+    // };
+
     const comment_obj: TComment = {
-      userId: userId,
-      username: username,
+      userId: currentUser.id,
+      username: currentUser.username,
       createdAt: new Date(),
       message: comment,
       id: uuidv4(),
@@ -49,9 +58,6 @@ const Post = (props: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("fffffffffffffffffffffff");
-        console.log(result);
-
         setCommentList([...commentList, result]);
       }
     });
@@ -81,9 +87,6 @@ const Post = (props: any) => {
         const new_likes = isLike
           ? [...likes, result]
           : _.filter(likes, (o) => o.userId != userId);
-
-        console.log("fffffffffffffffffffffff");
-        console.log(new_likes);
 
         setLikes(new_likes);
       }

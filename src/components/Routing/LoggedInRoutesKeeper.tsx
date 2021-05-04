@@ -3,9 +3,9 @@ import { LoginContext } from "../../store/context/LoginContext";
 import Login from "../../pages/login/LoginPg";
 
 const LoggedInRoutesKeeper = (props: any) => {
-  const { isAuthenticated } = useContext(LoginContext);
+  const { isAuthenticated, currentUser } = useContext(LoginContext);
 
-  return <>{isAuthenticated ? props.children : <Login />}</>;
+  return <>{currentUser ? props.children : <Login />}</>;
 
   // return props.children;
 };

@@ -27,8 +27,6 @@ const Feed = (props: any) => {
   //   return <Error message={props.feed.error} />;
   // }
 
-  console.log("sssssssssssssssssssssssss");
-  console.log(props.feed);
   if (!props.feed) {
     return (
       <div>
@@ -38,6 +36,9 @@ const Feed = (props: any) => {
   }
 
   return props.feed.map((post: any) => {
+    console.log("sssssssssssssssssssssssss");
+    console.log(post.id);
+
     return <Post key={post.id} post={post}></Post>;
   });
 
