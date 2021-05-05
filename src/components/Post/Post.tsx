@@ -103,7 +103,7 @@ const Post = (props: any) => {
   return (
     <div key={props.post.postId} className={styles.post}>
       <div className="flex--space-between">
-        <h4>{props.post.userName}</h4>
+        <h4>{props.post.username}</h4>
         <h4>{props.post.createdAt}</h4>
       </div>
       {/* <h2>{props.title}</h2> */}

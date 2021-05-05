@@ -23,22 +23,22 @@ const Routing = () => {
   } = useContext(LoginContext);
 
   // Faking login for dev, to remove for production and uncomment Below!
-  // useEffect(() => {
-  //   setIsAuthenticated(true);
-  //   setSignUpStatus(false);
-  //   // setUsername("tester");
-  //   // setUserId("1");
-  //   setCurrentUser({
-  //     id: "1",
-  //     username: "bob",
-  //     email: "bob@bob.com",
-  //     img:
-  //       "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
-  //     age: 5,
-  //     gender: "male",
-  //     location: "Burnaby",
-  //   });
-  // }, []);
+  useEffect(() => {
+    setIsAuthenticated(true);
+    setSignUpStatus(false);
+    // setUsername("tester");
+    // setUserId("1");
+    setCurrentUser({
+      id: "1",
+      username: "bob",
+      email: "bob@bob.com",
+      img:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+      age: 5,
+      gender: "male",
+      location: "Burnaby",
+    });
+  }, []);
 
   return (
     <Router>

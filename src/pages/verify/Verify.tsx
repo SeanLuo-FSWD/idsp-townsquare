@@ -36,7 +36,7 @@ function Verify() {
         // Ask to login user on backend, AND send userId + username + email here.
         setUserId("1");
         setUsername("bob");
-        setCurrentUser({ id: "stub", username: "stub", email: "stub" });
+        setCurrentUser({ id: "stub", username: "stub" });
         setIsAuthenticated(true);
 
         setStatus(true);

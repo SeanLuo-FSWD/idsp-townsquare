@@ -43,7 +43,7 @@ function Person() {
         <div className="flex">
           <img className={styles.profileImg} src={person.info.img} alt="" />
           <div>
-            <h2>userName: {person.info.userName}</h2>
+            <h2>username: {person.info.username}</h2>
             <h2>age: {person.info.age}</h2>
             <h2>gender: {person.info.gender}</h2>
           </div>

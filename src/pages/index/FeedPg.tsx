@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
-import { connect } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 import Modal from "../../UI/Modal";
 import Feed from "../../components/Feed/Feed";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
-import { doPostCreate } from "../../store/redux/actions/feed_act";
 import { postCreate, fetchFeed } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
@@ -18,11 +15,8 @@ import FeedFilter from "../../components/Filter/FeedFilter";
 const FeedPg = (props: any) => {
   const [feed, setFeed] = useState(null) as any;
   const [message, setMessage] = useState("");
-  const [modalContent, setModalContent] = useState(null) as any;
 
   const {
-    userId,
-    username,
     currentUser,
     showModal,
     setShowModal,
@@ -34,7 +28,7 @@ const FeedPg = (props: any) => {
   let img_src = "";
 
   let file_arr: any[] = [];
-  let src_arr: string[] = []; // Used to display images
+  let src_arr: string[] = [];
 
   useEffect(() => {
     src_arr.forEach((src) => {
@@ -56,19 +50,13 @@ const FeedPg = (props: any) => {
     e.preventDefault();
 
     let bodyFormData = new FormData();
-    // bodyFormData.append("userId", userId);
     bodyFormData.append("text", message);
-    // bodyFormData.append("img_name", uuidv4());
 
-    //should be done server side
-    // bodyFormData.append("id", uuidv4());
-
-    if (file_arr.length > 0) {
+    if (modalProps.file_arr.length > 0) {
       for (let i = 0; i < modalProps.file_arr.length; i++) {
         bodyFormData.append("filesToUpload[]", modalProps.file_arr[i]);
       }
     }
-
     src_arr = [];
     file_arr = [];
     setShowModal("");
@@ -79,24 +67,15 @@ const FeedPg = (props: any) => {
         setCerror(err.message);
       } else {
         setCerror("");
-        // setFeed(feed.unshift(result));
         setFeed(_.concat(result, feed));
-
-        // setCommentList([...commentList, result]);
       }
     });
     setMessage("");
-    // props.onPostCreate(bodyFormData);
   };
 
   function getImg(e: any) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-    console.log(e.target.files);
-
     file_arr = Array.from(e.target.files);
 
-    console.log("sssssssssssssssssssssssss");
-    console.log(file_arr);
     file_arr.map((img) => {
       let binaryData = [];
       binaryData.push(img);
@@ -152,7 +131,6 @@ const FeedPg = (props: any) => {
       <SubNav>
         <div className={`flex--space-around ${styles.SubNavWrap}`}>
           <h2>{currentUser.username}</h2>
-          {/* <button onClick={() => setShowModal(true)}>Upload Post</button> */}
           <button onClick={() => setShowModal("postUpload")}>
             Upload Post
           </button>
@@ -174,13 +152,4 @@ const FeedPg = (props: any) => {
   );
 };
 
-// export default FeedPg;
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     onPostCreate: (post_obj: IPost) => dispatch(doPostCreate(post_obj)),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(FeedPg);
 export default FeedPg;

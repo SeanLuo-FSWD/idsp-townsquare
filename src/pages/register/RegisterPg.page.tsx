@@ -16,7 +16,7 @@ const Register = () => {
   const [signUpError, setSignUpError] = useState("");
   const [registerStatus, setRegisterStatus] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;
     setPerson({ ...person, [name]: value });

@@ -4,12 +4,22 @@ import { fetchPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Profile.module.scss";
+import _, { String } from "lodash";
+import SubNav from "../../components/Navbar/SubNav";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
-  const [person, setPerson] = useState(null) as any;
+  const [person, setPerson] = useState({
+    id: "",
+    filename: "",
+    username: "",
+    age: "",
+    gender: "",
+    location: "",
+  }) as any;
   //   const [pwRetype, setPwRetype] = useState(false);
-
+  const [fieldArr, setFieldArr] = useState([]) as any;
+  const [updateStatus, setUpdateStatus] = useState(false);
   const {
     userId,
     username,
@@ -33,28 +43,51 @@ function Profile() {
       }
     });
   }, []);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;
-    setPerson({ ...person, ["name"]: value }); //controlled
+    console.log("sssssssssssssssssssssssss");
+    console.log("name " + name + " value " + value);
+
+    setPerson({ ...person, [name]: value }); //controlled
   };
+
+  function handleEditOpen(e: any) {
+    console.log("ddddddddddddddddddddddd");
+    console.log(e.target.getAttribute("data-edit"));
+    setFieldArr([...fieldArr, e.target.getAttribute("data-edit")]);
+  }
+
+  function handleEditClose(e: any) {
+    let new_likes_arr = _.filter(
+      fieldArr,
+      (o) => o != e.target.getAttribute("data-edit")
+    );
+
+    setFieldArr(new_likes_arr);
+  }
 
   function handleProfileEdit(e: any) {
     e.preventDefault();
+    console.log("fffffffffffffffffffffff");
     editProfile(person, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
+        // setUsername(result.username);
         // return the current user object
-        setUsername(result.username);
-        setCurrentUser({
-          username: "bob",
-          email: "bob@bob.com",
-          img:
-            "https://static.wikia.nocookie.net/spongebob/images/d/d7/SpongeBob_stock_art.png/revision/latest?cb=20190921125147",
-          age: 5,
-          sex: "male",
-        });
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(person);
+
+        // setCurrentUser({
+        //   username: "patrick",
+        //   id: "patrick_id",
+        //   img:
+        //     "https://static.wikia.nocookie.net/characters/images/6/6b/309.png/revision/latest/top-crop/width/360/height/450?cb=20141230071329",
+        // });
+
+        setUpdateStatus(true);
+        setFieldArr([]);
 
         return result;
       }
@@ -64,8 +97,6 @@ function Profile() {
 
   function getImg(e: any) {
     const imgFile = e.target.files[0];
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-    console.log(imgFile);
     let binaryData = [];
     binaryData.push(imgFile);
     const blob = new Blob(binaryData);
@@ -73,51 +104,153 @@ function Profile() {
     setPerson({ ...person, ["img"]: img_src });
   }
 
-  if (person) {
-    console.log("ddddddddddddddddddddddd");
-    console.log(person.img);
+  if (person.id) {
+    const ageArr = [];
+    for (let i = 1; i <= 100; i++) {
+      ageArr.push(i);
+    }
 
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
-
-        <h2>Update Profile</h2>
+        <SubNav>
+          <div className={`flex--space-around ${styles.SubNavWrap}`}>
+            <h2>Update Profile</h2>
+          </div>
+        </SubNav>
 
         <div>
           <div>
-            <img className={styles.profileImg} src={person.img} alt="" />
-            <input
-              type="file"
-              id="myFile"
-              name="filename"
-              accept="image/png"
-              onChange={(e) => getImg(e)}
-            />
-            <button>Edit</button>
+            <div className={`flex`}>
+              <img className={styles.profileImg} src={person.img} alt="" />
+              <button data-edit="editImg" onClick={handleEditOpen}>
+                Edit
+              </button>
+              {fieldArr.find((ele: string) => ele === "editImg") && (
+                <div className={`flex`}>
+                  <input
+                    type="file"
+                    id="myFile"
+                    name="filename"
+                    accept="image/png"
+                    onChange={(e) => getImg(e)}
+                  />
+                  <p data-edit="editImg" onClick={handleEditClose}>
+                    x
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
           <div>
-            <h2>userName: {person.userName}</h2>
-            <button>Edit</button>
+            <div className={`flex`}>
+              <h2>username: {person.username}</h2>
+              <button data-edit="editUsername" onClick={handleEditOpen}>
+                Edit
+              </button>
+              {fieldArr.find((ele: string) => ele === "editUsername") && (
+                <div className={`flex`}>
+                  <input
+                    type="username"
+                    id="username"
+                    name="username"
+                    placeholder="Create a username"
+                    // value={person.username}
+                    onChange={handleChange}
+                  />
+                  <p data-edit="editUsername" onClick={handleEditClose}>
+                    x
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
           <div>
-            <h2>age: {person.age}</h2>
-            <button>Edit</button>
+            <div className={`flex`}>
+              <h2>age: {person.age}</h2>
+              <button data-edit="editAge" onClick={handleEditOpen}>
+                Edit
+              </button>
+              {fieldArr.find((ele: string) => ele === "editAge") && (
+                <div className={`flex`}>
+                  <select name="age" onChange={handleChange} value={person.age}>
+                    {ageArr.map((year) => {
+                      return <option key={year}>{year}</option>;
+                    })}
+                  </select>
+                  <p data-edit="editAge" onClick={handleEditClose}>
+                    x
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
           <div>
-            <h2>gender: {person.gender}</h2>
-            <button>Edit</button>
+            <div className={`flex`}>
+              <h2>Location: {person.location}</h2>
+              <button data-edit="editLocation" onClick={handleEditOpen}>
+                Edit
+              </button>
+              {fieldArr.find((ele: string) => ele === "editLocation") && (
+                <div className={`flex`}>
+                  <select
+                    name="location"
+                    onChange={handleChange}
+                    value={person.location}
+                  >
+                    <option value="Abbotsford">Abbotsford</option>
+                    <option value="Burnaby">Burnaby</option>
+                    <option value="Coquitlam">Coquitlam</option>
+                    <option value="Richmond">Richmond</option>
+                    <option value="Vancouver">Vancouver</option>
+                  </select>
+                  <p data-edit="editLocation" onClick={handleEditClose}>
+                    x
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <div className={`flex`}>
+              <h2>gender: {person.gender}</h2>
+              <button data-edit="editGender" onClick={handleEditOpen}>
+                Edit
+              </button>
+              {fieldArr.find((ele: string) => ele === "editGender") && (
+                <div className={`flex`}>
+                  <select
+                    name="gender"
+                    onChange={handleChange}
+                    value={person.gender}
+                  >
+                    <option value="female">female</option>
+                    <option value="male">male</option>
+                    <option value="other">other</option>
+                  </select>
+                  <p data-edit="editGender" onClick={handleEditClose}>
+                    x
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+        {updateStatus && <h3>Profile updated!</h3>}
+
+        <button onClick={handleProfileEdit} style={{ float: "right" }}>
+          Submit
+        </button>
 
         {/* <form>
           <div className="form-control">
             <label htmlFor="username">username : </label>
             <input
               type="text"
-              id="userName"
-              name="userName"
+              id="username"
+              name="username"
               placeholder="Edit username"
-              value={person.userName}
+              value={person.username}
               onChange={handleChange}
             />
           </div>

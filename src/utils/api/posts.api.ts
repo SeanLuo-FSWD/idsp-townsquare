@@ -24,8 +24,8 @@ const postCreate_old = (post_obj: {}, cb: Function) => {
 const postCreate = (bodyFormData: any, cb: Function) => {
   axios({
     method: "POST",
-    // url: `${MOCK_URL}/ts/create_post`,
-    url: `${API_URL}/post`,
+    url: `${MOCK_URL}/post`,
+    // url: `${API_URL}/post`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
