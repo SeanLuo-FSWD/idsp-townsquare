@@ -7,26 +7,6 @@ import Post from "../../components/Post/Post";
 import { fetchFeed } from "../../utils/api/posts.api";
 
 const Feed = (props: any) => {
-  // useEffect(() => {
-  //   props.onFetchFeed();
-  // }, []);
-  const [error, setError] = useState("");
-  const [feed, setFeed] = useState(null) as any;
-
-  // useEffect(() => {
-  //   fetchFeed((err: Error, result: any) => {
-  //     if (err) {
-  //       setError(err.message);
-  //     } else {
-  //       setFeed(result);
-  //     }
-  //   });
-  // }, []);
-
-  // if (error) {
-  //   return <Error message={props.feed.error} />;
-  // }
-
   if (!props.feed) {
     return (
       <div>
@@ -36,9 +16,6 @@ const Feed = (props: any) => {
   }
 
   return props.feed.map((post: any) => {
-    console.log("sssssssssssssssssssssssss");
-    console.log(post.id);
-
     return <Post key={post.id} post={post}></Post>;
   });
 

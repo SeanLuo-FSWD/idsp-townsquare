@@ -46,8 +46,6 @@ function Profile() {
   const handleChange = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log("sssssssssssssssssssssssss");
-    console.log("name " + name + " value " + value);
 
     setPerson({ ...person, [name]: value }); //controlled
   };

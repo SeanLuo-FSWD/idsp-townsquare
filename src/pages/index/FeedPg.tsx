@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import _ from "lodash";
 import { Filter } from "@material-ui/icons";
 import FeedFilter from "../../components/Filter/FeedFilter";
+import { v4 as uuidv4 } from "uuid";
 
 const FeedPg = (props: any) => {
   const [feed, setFeed] = useState(null) as any;
@@ -52,7 +53,7 @@ const FeedPg = (props: any) => {
     let bodyFormData = new FormData();
     bodyFormData.append("text", message);
 
-    if (modalProps.file_arr.length > 0) {
+    if (modalProps && modalProps.file_arr.length > 0) {
       for (let i = 0; i < modalProps.file_arr.length; i++) {
         bodyFormData.append("filesToUpload[]", modalProps.file_arr[i]);
       }
@@ -62,7 +63,32 @@ const FeedPg = (props: any) => {
     setShowModal("");
     setModalProps(null);
 
-    postCreate(bodyFormData, (err: Error, result: IPost[]) => {
+    // postCreate(bodyFormData, (err: Error, result: IPost[]) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //   } else {
+    //     setCerror("");
+    //     setFeed(_.concat(result, feed));
+    //   }
+    // });
+
+    // Faking the post here, above commented is the actual method
+
+    console.log("sssssssssssssssssssssssss");
+    console.log("sssssssssssssssssssssssss");
+    console.log(modalProps.src_arr);
+
+    let fake_post = {
+      commentList: [],
+      createdAt: new Date().toDateString(),
+      id: uuidv4(),
+      likes: [],
+      message: message,
+      userId: currentUser.id,
+      username: currentUser.username,
+      img_urls: modalProps.src_arr,
+    };
+    postCreate(fake_post, (err: Error, result: IPost[]) => {
       if (err) {
         setCerror(err.message);
       } else {

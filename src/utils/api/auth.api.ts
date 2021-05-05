@@ -2,6 +2,7 @@
 import axios from "axios";
 import MOCK_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
+import { users, posts } from "../../FakeDb/FakeDb";
 // axios.defaults.withCredentials = true;
 
 const verify = (query: string, cb: Function) => {
@@ -63,24 +64,16 @@ const logout = (cb: Function) => {
     });
 };
 
-const login = (user_obj: {}, cb: Function) => {
-  axios
-    .post(`${API_URL}/user/login`, user_obj, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    })
-    .then((response) => {
-      console.log("post login response receive");
-      console.log(response);
-      cb(null, response);
-    })
-    .catch((error) => {
-      console.log("post login error");
-      console.log(error);
-      cb(error);
-    });
+const login = (user_obj: any, cb: Function) => {
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log(user_obj);
+  users.forEach((u) => {
+    if (user_obj.email == u.email && user_obj.password == u.password) {
+      cb(null, user_obj);
+    } else {
+      cb(new Error("user not found"));
+    }
+  });
 };
 
 const register = (user_obj: {}, cb: Function) => {

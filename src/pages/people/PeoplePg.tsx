@@ -24,7 +24,7 @@ function PeoplePg() {
       if (err) {
         setCerror(err.message);
       } else {
-        setPeople(result.data);
+        setPeople(result);
       }
     });
   }, []);

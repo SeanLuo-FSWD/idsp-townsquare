@@ -28,7 +28,7 @@ function Person() {
       if (err) {
         setCerror(err.message);
       } else {
-        setPerson(result.data);
+        setPerson(result);
       }
     });
   }, []);
@@ -41,11 +41,11 @@ function Person() {
           Back
         </Link>
         <div className="flex">
-          <img className={styles.profileImg} src={person.info.img} alt="" />
+          <img className={styles.profileImg} src={person.img} alt="" />
           <div>
-            <h2>username: {person.info.username}</h2>
-            <h2>age: {person.info.age}</h2>
-            <h2>gender: {person.info.gender}</h2>
+            <h2>username: {person.username}</h2>
+            <h2>age: {person.age}</h2>
+            <h2>gender: {person.gender}</h2>
           </div>
         </div>
 

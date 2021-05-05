@@ -51,12 +51,12 @@ function Login() {
           // Can I get username back here?
           console.log("login result message");
           console.log(result);
-          setUsername(result.data.username);
-          setUserId(result.data.userId);
+          setUsername(result.username);
+          setUserId(result.userId);
           setCurrentUser({
             ...currentUser,
-            id: result.data.userId,
-            username: result.data.username,
+            id: result.userId,
+            username: result.username,
           });
         }
       });
