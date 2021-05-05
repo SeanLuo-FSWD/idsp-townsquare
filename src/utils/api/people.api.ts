@@ -1,5 +1,5 @@
 import axios from "axios";
-import MOCK_URL from "../../constants/mock_server_url";
+// import MOCK_URL from "../../constants/mock_server_url";
 import { users, posts } from "../../FakeDb/FakeDb";
 import _ from "lodash";
 
@@ -36,10 +36,6 @@ const fetchPerson = (id: string, cb: Function) => {
   let profile_obj;
 
   for (let i = 0; i < users.length; i++) {
-    console.log("ddddddddddddddddddddddd");
-    console.log(users[i].id);
-    console.log("ddddddddddddddddddddddd");
-    console.log(id);
     if (users[i].id == id) {
       profile_obj = users[i] as any;
       profile_obj["feed"] = _.filter(posts, (w) => w.userId == id);

@@ -20,25 +20,14 @@ function Profile() {
   //   const [pwRetype, setPwRetype] = useState(false);
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
-  const {
-    userId,
-    username,
-    showModal,
-    setShowModal,
-    setUsername,
-    setCurrentUser,
-    modalProps,
-    currentUser,
-    setModalProps,
-    setCerror,
-  } = useContext(LoginContext);
+  const { currentUser, setCerror } = useContext(LoginContext);
 
   useEffect(() => {
     fetchPerson(currentUser.id, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        setPerson(result.data.info); // Uncontrolled
+        setPerson(result); // Uncontrolled
         console.log("null");
       }
     });
@@ -51,8 +40,6 @@ function Profile() {
   };
 
   function handleEditOpen(e: any) {
-    console.log("ddddddddddddddddddddddd");
-    console.log(e.target.getAttribute("data-edit"));
     setFieldArr([...fieldArr, e.target.getAttribute("data-edit")]);
   }
 
@@ -67,15 +54,13 @@ function Profile() {
 
   function handleProfileEdit(e: any) {
     e.preventDefault();
-    console.log("fffffffffffffffffffffff");
     editProfile(person, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        // setUsername(result.username);
         // return the current user object
         console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(person);
+        console.log(result);
 
         // setCurrentUser({
         //   username: "patrick",
@@ -86,11 +71,8 @@ function Profile() {
 
         setUpdateStatus(true);
         setFieldArr([]);
-
-        return result;
       }
     });
-    return;
   }
 
   function getImg(e: any) {
