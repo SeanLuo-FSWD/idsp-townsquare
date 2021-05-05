@@ -29,11 +29,6 @@ const Post = (props: any) => {
 
   const [commentsVisible, setCommentsVisible] = useState(false);
 
-  console.log("sssssssssssssssssssssssss");
-  console.log("sssssssssssssssssssssssss");
-
-  console.log(props.post);
-
   useEffect(() => {
     setLikes(props.post.likes);
     setCommentList(props.post.commentList.reverse());

@@ -26,6 +26,10 @@ import { users, posts } from "../../FakeDb/FakeDb";
 //     });
 // };
 
+const postFilterSubmit = (filter: any, cb: Function) => {
+  cb(null, posts);
+};
+
 const postCreate = (fake_post: any, cb: Function) => {
   cb(null, fake_post);
 };
@@ -88,4 +92,4 @@ const addComment = (comment_obj: TComment, cb: Function) => {
   cb(null, comment_obj);
 };
 
-export { fetchFeed, likePost, addComment, postCreate };
+export { fetchFeed, likePost, addComment, postCreate, postFilterSubmit };

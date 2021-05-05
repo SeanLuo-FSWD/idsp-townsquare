@@ -59,8 +59,6 @@ function Profile() {
         setCerror(err.message);
       } else {
         // return the current user object
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(result);
 
         // setCurrentUser({
         //   username: "patrick",
