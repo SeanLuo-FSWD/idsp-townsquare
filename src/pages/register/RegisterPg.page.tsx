@@ -50,6 +50,8 @@ const Register = () => {
   return (
     <>
       <div className={styles.card}>
+        <br></br>
+        <br></br>
         <img
           className={styles.logo}
           id="logo"

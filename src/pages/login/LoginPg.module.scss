@@ -1,12 +1,10 @@
-@media only screen and (max-width: 700px) {
+
 
     /*
     .devInfo is going to be removed
     */
     
-    body {
-    background-color: #92002F;
-    }
+
 
     .devInfo {
         font-size: 8px;
@@ -68,11 +66,9 @@
     }
 
     .card {
-        margin-top: 2em;
         text-align: center;
         color: white;
         background-color: #92002F;
-        padding: 2.1em 1em 2.1em 1em;
         /* Add shadows to create the "card" effect */
         transition: 0.3s;
         width: auto;
@@ -91,12 +87,14 @@
           font-size: 24px;
           padding-top: 1em;
           padding-bottom: 1em;
-          padding-right: 5em;
-          padding-left: 5em;
+          padding-right: 4.2em;
+          padding-left: 4.2em;
           border-color: white;
           border-style: none;
           border-radius: 50px; /* 5px rounded corners */
           box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          max-width: 300px;
+          margin: auto;
       }
 
       .registerButton {
@@ -120,5 +118,5 @@
           color: white;
       }
 
-}
+
 

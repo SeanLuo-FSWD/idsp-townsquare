@@ -66,7 +66,9 @@ function Login() {
   };
 
   return (
+
     <div className={styles.card}>
+      <div className={styles.container}>
       <img
         className={styles.logo}
         src="https://i.imgur.com/0ldmkwI.png"
@@ -120,6 +122,7 @@ function Login() {
               </button>
             </div>
           </div>
+        </div>
         </div>
       </div>
   );
