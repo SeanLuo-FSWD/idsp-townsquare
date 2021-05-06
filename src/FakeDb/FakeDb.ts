@@ -18,7 +18,7 @@ export const users = [
     username: "alice",
     age: 50,
     gender: "female",
-    location: "vancouver",
+    location: "Burnaby",
     img: "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
     last_login: new Date().toDateString(),
     following: ["1", "3"],
@@ -30,7 +30,7 @@ export const users = [
     username: "josh",
     age: 30,
     gender: "male",
-    location: "richmond",
+    location: "Vancouver",
     img:
       "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
     last_login: new Date().toDateString(),
@@ -43,7 +43,7 @@ export const users = [
     username: "bill",
     age: 30,
     gender: "other",
-    location: "richmond",
+    location: "Richmond",
     img:
       "https://kids.kiddle.co/images/thumb/b/b4/Cow_eating_some_grass.jpg/500px-Cow_eating_some_grass.jpg",
     last_login: new Date().toDateString(),
@@ -58,9 +58,9 @@ export const posts = [
     userId: "1",
     username: "bob",
     createdAt: new Date().toDateString(),
-    title: "Lorem, ipsum dolor ",
+    img_urls: [],
     message:
-      "sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
+      "333 Dave wasn't exactly sure how he had ended up in this predicament. He ran through all the events that had lead to this current situation and it still didn't make sense. He wanted to spend some time to try and make sense of it all, but he had higher priorities at the moment.",
     likes: [
       {
         id: "l51",
@@ -100,11 +100,13 @@ export const posts = [
   {
     id: "4",
     userId: "2",
-    title: "super post",
     username: "alice",
     createdAt: new Date().toDateString(),
+    img_urls: [
+      "https://i.pinimg.com/originals/b8/fe/0d/b8fe0da10ed33f5a31a44ae9d03cd40e.jpg",
+    ],
     message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
+      "222 333 She's asked the question so many times that she barely listened to the answers anymore. The answers were always the same. Well, not exactly the same, but the same in a general sense. A more accurate description was the answers never surprised her.",
     likes: [
       {
         id: "l41",
@@ -130,11 +132,10 @@ export const posts = [
     id: "3",
     userId: "3",
     username: "josh",
-    title: "title post 2 lorem",
     createdAt: new Date().toDateString(),
-
+    img_urls: [],
     message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime deserunt debitis voluptatem modi commodi nostrum officiis minima ut ipsa harum temporibus eum, asperiores soluta, repudiandae qui culpa vel sit dolores.",
+      "111 222 333 There was something in the tree. It was difficult to tell from the ground, but Rachael could see movement. She squinted her eyes and peered in the direction of the movement, trying to decipher exactly what she had spied.",
     likes: [
       {
         id: "l31",

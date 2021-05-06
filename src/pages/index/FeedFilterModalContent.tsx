@@ -9,7 +9,10 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
-import { doFeedFilterSubmit } from "../../store/redux/actions/filter_act";
+import {
+  doFeedFilterUpdate,
+  doFeedFilterRemove,
+} from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
 
 function FeedFilterModalContent(props: any) {
@@ -19,26 +22,31 @@ function FeedFilterModalContent(props: any) {
 
   const [showPeopleFilter, setShowPeopleFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState({});
-  const [peopleFilter, setPeopleFilter] = useState(null);
+  const [peopleFilter, setPeopleFilter] = useState({});
 
   const peopleFilterProps = (ppl_filter: any) => {
-    setPeopleFilter(ppl_filter);
+    // setPeopleFilter(ppl_filter);
+    const key_name_pair = Object.entries(ppl_filter)[0];
+    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
   };
 
-  const feedFilterProps = (post_filter: any) => {
-    setFeedFilter({ keywords: post_filter });
+  const feedFilterProps = (post_filter: Object) => {
+    const key_name_pair = Object.entries(post_filter)[0];
+    setFeedFilter({ ...feedFilter, [key_name_pair[0]]: key_name_pair[1] });
+
+    // setFeedFilter({ keywords: post_filter });
   };
 
-  props.onPostFilterSubmit = () => {
-    console.log("fffffffffffffffffffffff");
-    console.log("fffffffffffffffffffffff");
-
+  const onFeedFilterClick = () => {
     const f_filter_obj = {
       feedFilter: feedFilter,
       peopleFilter: peopleFilter,
     };
 
-    console.log(f_filter_obj);
+    props.onFeedFilterSubmit(f_filter_obj);
+
+    setModalProps(null);
+    setShowModal("");
 
     // postFilterSubmit(f_filter_obj, (err: Error, result: any) => {
     //   if (err) {
@@ -49,9 +57,17 @@ function FeedFilterModalContent(props: any) {
     // });
   };
 
+  if (props.error) {
+    setCerror(props.error.message);
+    return <></>;
+  }
+
   return (
     <div>
-      <FeedFilter feedFilterProps={feedFilterProps} />
+      <FeedFilter
+        feedFilterProps={feedFilterProps}
+        feedFilterSaved={props.mstpFilter ? props.mstpFilter.feedFilter : {}}
+      />
 
       <div className="flex">
         {showPeopleFilter ? (
@@ -69,15 +85,21 @@ function FeedFilterModalContent(props: any) {
       </div>
 
       {showPeopleFilter && (
-        <PeopleFilter peopleFilterProps={peopleFilterProps} />
+        <PeopleFilter
+          peopleFilterProps={peopleFilterProps}
+          peopleFilterSaved={
+            props.mstpFilter ? props.mstpFilter.peopleFilter : {}
+          }
+        />
       )}
 
       <div className="flex">
-        <button onClick={props.onPostFilterSubmit}>Submit</button>
+        <button onClick={onFeedFilterClick}>Submit</button>
         <button
           onClick={() => {
             setModalProps(null);
             setShowModal("");
+            props.onFeedFilterRemove();
           }}
         >
           Cancel
@@ -88,12 +110,23 @@ function FeedFilterModalContent(props: any) {
 }
 
 // export default FeedFilterModalContent;
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: any) => {
   return {
-    onPostFilterSubmit: (f_filter_obj: any) =>
-      dispatch(doFeedFilterSubmit(f_filter_obj)),
+    mstpFilter: state.filterState.feed,
+    error: state.filterState.error,
   };
 };
 
-export default connect(null, mapDispatchToProps)(FeedFilterModalContent);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onFeedFilterSubmit: (f_filter_obj: any) =>
+      dispatch(doFeedFilterUpdate(f_filter_obj)),
+
+    onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FeedFilterModalContent);

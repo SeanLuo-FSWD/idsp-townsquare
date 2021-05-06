@@ -8,21 +8,45 @@ import Slider from "@material-ui/core/Slider";
 import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 
-function PeopleFilter({ peopleFilterProps }: any) {
+function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
   const { showModal, setModalProps, setShowModal, setCerror } = useContext(
     LoginContext
   );
 
-  useEffect(() => {
-    peopleFilterProps(peopleFilter);
-  });
-  const [location, setLocation] = useState({
+  console.log("vvvvvvvvvvvvvvvvvvv");
+  console.log("vvvvvvvvvvvvvvvvvvv");
+  console.log(peopleFilterSaved);
+
+  let default_loc: any = {
     Burnaby: false,
     Richmond: false,
     Coquitlam: false,
     Vancouver: false,
     Surrey: false,
-  }) as any;
+  } as Object;
+
+  if (peopleFilterSaved.location) {
+    ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"].forEach(
+      (city) => {
+        if (peopleFilterSaved.location.includes(city as any)) {
+          // default_loc.city = true;
+          console.log("ddddddddddddddddddddddd");
+          console.log(city);
+
+          default_loc = { ...default_loc, [city]: true };
+        }
+      }
+    );
+  }
+
+  // useEffect(() => {
+  //   peopleFilterProps(peopleFilter);
+  // });
+  const [location, setLocation] = useState(default_loc) as any;
+  const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
+  console.log("ggggggggggggggggggggggg");
+  console.log("ggggggggggggggggggggggg");
+  console.log(location);
 
   const [peopleFilter, setPeopleFilter] = useState({});
 
@@ -32,22 +56,39 @@ function PeopleFilter({ peopleFilterProps }: any) {
     other: false,
   });
 
+  const [age, setAge] = React.useState<number[]>([20, 37]);
+
   const { female, male, other } = gender;
-  const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
 
   const handleGenderFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const gender_obj = { ...gender, [event.target.name]: event.target.checked };
     setGender(gender_obj);
-    setPeopleFilter({ ...peopleFilter, ["gender"]: gender_obj });
+
+    let gd_obj_arr = Object.entries(gender_obj);
+    let gdArr: any = [];
+
+    gd_obj_arr.forEach((l) => {
+      if (l[1] === true) {
+        gdArr.push(l[0]);
+      }
+    });
+    setPeopleFilter({ ...peopleFilter, ["gender"]: gdArr });
   };
 
   const handleLocationFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const loc_obj = { ...location, [event.target.name]: event.target.checked };
     setLocation(loc_obj);
-    setPeopleFilter({ ...peopleFilter, ["location"]: loc_obj });
-  };
+    let loc_obj_arr = Object.entries(loc_obj);
+    let locArr: any = [];
 
-  const [age, setAge] = React.useState<number[]>([20, 37]);
+    loc_obj_arr.forEach((l) => {
+      if (l[1] === true) {
+        locArr.push(l[0]);
+      }
+    });
+    setPeopleFilter({ ...peopleFilter, ["location"]: locArr });
+    peopleFilterProps({ location: locArr });
+  };
 
   const handleAgeChange = (event: any, newValue: number | number[]) => {
     setAge(newValue as number[]);
@@ -58,13 +99,6 @@ function PeopleFilter({ peopleFilterProps }: any) {
     <div>
       <div className="flex">
         <h3>age</h3>
-        <button
-          onClick={() => {
-            console.log(age);
-          }}
-        >
-          Onclick
-        </button>
         <h4>Min age: {age[0]}</h4>
         <h4>Max age: {age[1]}</h4>
         <Slider
@@ -76,14 +110,6 @@ function PeopleFilter({ peopleFilterProps }: any) {
       </div>
       <div className="flex">
         <h3>gender</h3>
-        <button
-          onClick={() => {
-            console.log(gender);
-          }}
-        >
-          Onclick
-        </button>
-
         <FormGroup style={{ flexDirection: "row" }}>
           <FormControlLabel
             control={
@@ -119,13 +145,6 @@ function PeopleFilter({ peopleFilterProps }: any) {
       </div>
       <div className="flex">
         <h3>location</h3>
-        <button
-          onClick={() => {
-            console.log(location);
-          }}
-        >
-          Onclick
-        </button>
         <FormGroup style={{ flexDirection: "row" }}>
           <FormControlLabel
             control={

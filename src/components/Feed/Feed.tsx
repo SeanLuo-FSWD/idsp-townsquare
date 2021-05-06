@@ -18,38 +18,6 @@ const Feed = (props: any) => {
   return props.feed.map((post: any) => {
     return <Post key={post.id} post={post}></Post>;
   });
-
-  // return (
-  //   <div>
-
-  //     {error ? (
-  //       <Error message={props.feed.error} />
-  //     ) : feed.length > 0 ? (
-  //       feed.map((post: any) => {
-  //         return <Post key={post.id} post={post}></Post>;
-  //       })
-  //     ) : (
-  //       <div>
-  //         <h2>loading...</h2>
-  //       </div>
-  //     )}
-  //   </div>
-  // );
 };
-
-// const mapStateToProps = (state: any) => {
-//   return {
-//     feed: getFeed(state.feedState),
-//     error: getFeedError(state.feedState),
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     onFetchFeed: () => dispatch(doFetchFeed()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Feed);
 
 export default Feed;

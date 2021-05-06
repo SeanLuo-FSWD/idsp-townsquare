@@ -9,8 +9,10 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { fetchFeed } from "../../utils/api/posts.api";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
+import { useHistory } from "react-router-dom";
 
 function Person() {
+  const history = useHistory();
   const { id } = useParams() as any;
   const [person, setPerson] = useState(null) as any;
   const {
@@ -37,9 +39,10 @@ function Person() {
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
-        <Link to="/users" className="btn">
+        {/* <Link to="/users" className="btn">
           Back
-        </Link>
+        </Link> */}
+        <button onClick={history.goBack}>Back</button>
         <div className="flex">
           <img className={styles.profileImg} src={person.img} alt="" />
           <div>

@@ -9,6 +9,7 @@ import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
+import { useHistory } from "react-router-dom";
 import styles from "./Post.module.scss";
 import ImageSlider from "../../UI/ImageSlider";
 import {
@@ -21,6 +22,7 @@ import {
 import { IPost, TLikes } from "../../interfaces/IPost";
 
 const Post = (props: any) => {
+  const history = useHistory();
   const { setCerror, currentUser } = useContext(LoginContext);
   const [likes, setLikes] = useState([]) as any;
 
@@ -98,10 +100,17 @@ const Post = (props: any) => {
     return liked;
   }
 
+  function profileRedirect() {
+    console.log("vvvvvvvvvvvvvvvvvvv");
+    console.log(props.post);
+
+    history.push(`/person/${props.post.userId}`);
+  }
+
   return (
     <div key={props.post.postId} className={styles.post}>
       <div className="flex--space-between">
-        <h4>{props.post.username}</h4>
+        <h4 onClick={profileRedirect}>{props.post.username}</h4>
         <h4>{props.post.createdAt}</h4>
       </div>
       {/* <h2>{props.title}</h2> */}

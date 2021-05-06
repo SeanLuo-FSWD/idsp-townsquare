@@ -1,17 +1,19 @@
 import { Dispatch } from "redux";
 
-import { FEED_FILTER_FETCH, API_ERROR } from "../constants/filterActionTypes";
+import {
+  FEED_FILTER_UPDATE,
+  API_ERROR,
+  FEED_FILTER_REMOVE,
+} from "../constants/filterActionTypes";
 
-import { fetchFeed } from "../../../utils/api/posts.api";
+// import { fetchFeed } from "../../../utils/api/posts.api";
 
-const doFeedFilterSubmit = (f_filter: Object) => async (dispatch: Dispatch) => {
-  fetchFeed(f_filter, (err: Error, result: any) => {
-    if (err) {
-      dispatch({ type: API_ERROR, error: err.message });
-    } else {
-      dispatch({ type: FEED_FILTER_FETCH, feed: result });
-    }
-  });
+const doFeedFilterUpdate = (f_filter: Object) => async (dispatch: Dispatch) => {
+  dispatch({ type: FEED_FILTER_UPDATE, filter: f_filter });
 };
 
-export { doFeedFilterSubmit };
+const doFeedFilterRemove = () => async (dispatch: Dispatch) => {
+  dispatch({ type: FEED_FILTER_REMOVE });
+};
+
+export { doFeedFilterUpdate, doFeedFilterRemove };

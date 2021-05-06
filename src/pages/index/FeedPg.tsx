@@ -12,15 +12,18 @@ import FeedFilter from "../../components/Filter/FeedFilter";
 import { v4 as uuidv4 } from "uuid";
 import PostModalContent from "./PostModalContent";
 import FeedFilterModalContent from "./FeedFilterModalContent";
-const FeedPg = () => {
-  const [feed, setFeed] = useState(null) as any;
+import { connect } from "react-redux";
 
+const FeedPg = (props: any) => {
+  const [feed, setFeed] = useState(null) as any;
   const { currentUser, showModal, setShowModal, setCerror } = useContext(
     LoginContext
   );
 
   useEffect(() => {
-    fetchFeed(null, (err: Error, result: any) => {
+    fetchFeed(props.feedFilter, (err: Error, result: any) => {
+      console.log("SHOULD BE CALLEEEEEED");
+
       if (err) {
         setCerror(err.message);
       } else {
@@ -30,7 +33,7 @@ const FeedPg = () => {
         setFeed(result);
       }
     });
-  }, []);
+  }, [props.feedFilter]);
 
   const addPostProp = (result: any) => {
     setFeed(_.concat(result, feed));
@@ -71,4 +74,14 @@ const FeedPg = () => {
   );
 };
 
-export default FeedPg;
+// export default FeedPg;
+
+const mapStateToProps = (state: any) => {
+  const errState = state.filterReducer ? state.filterReducer.error : null;
+  return {
+    feedFilter: state.filterState,
+    error: errState,
+  };
+};
+
+export default connect(mapStateToProps)(FeedPg);
