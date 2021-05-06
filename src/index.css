@@ -25,4 +25,5 @@ html {
   margin: auto;
   height: 100%;
   min-width: 300px;
+  overflow: hidden;
 }
