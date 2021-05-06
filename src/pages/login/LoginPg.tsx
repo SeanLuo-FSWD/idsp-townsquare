@@ -97,6 +97,7 @@ function Login() {
               value={person.email}
               onChange={handleChange}
             />
+            <br></br>
             <label htmlFor="psw">
               {/* <p className={styles.labelText}>Password</p> */}
             </label>
@@ -109,6 +110,7 @@ function Login() {
               value={person.password}
               onChange={handleChange}
             />
+            <br></br>
             <button className={styles.loginButton} onClick={handleLogin}>Login</button>
           </form>
         </div>
