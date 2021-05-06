@@ -9,8 +9,10 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
+import { doFeedFilterSubmit } from "../../store/redux/actions/filter_act";
+import { connect } from "react-redux";
 
-function FeedFilterModalContent({ filterPostProp }: any) {
+function FeedFilterModalContent(props: any) {
   const { showModal, setModalProps, setShowModal, setCerror } = useContext(
     LoginContext
   );
@@ -27,23 +29,24 @@ function FeedFilterModalContent({ filterPostProp }: any) {
     setFeedFilter({ keywords: post_filter });
   };
 
-  const onPostFilterSubmit = () => {
+  props.onPostFilterSubmit = () => {
     console.log("fffffffffffffffffffffff");
-    console.log(peopleFilter);
-    console.log(feedFilter);
+    console.log("fffffffffffffffffffffff");
 
-    const filter_obj = {
+    const f_filter_obj = {
       feedFilter: feedFilter,
       peopleFilter: peopleFilter,
     };
 
-    postFilterSubmit(filter_obj, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        filterPostProp(result);
-      }
-    });
+    console.log(f_filter_obj);
+
+    // postFilterSubmit(f_filter_obj, (err: Error, result: any) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //   } else {
+    //     props.filterPostProp(result);
+    //   }
+    // });
   };
 
   return (
@@ -70,7 +73,7 @@ function FeedFilterModalContent({ filterPostProp }: any) {
       )}
 
       <div className="flex">
-        <button onClick={onPostFilterSubmit}>Submit</button>
+        <button onClick={props.onPostFilterSubmit}>Submit</button>
         <button
           onClick={() => {
             setModalProps(null);
@@ -86,6 +89,11 @@ function FeedFilterModalContent({ filterPostProp }: any) {
 
 // export default FeedFilterModalContent;
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onPostFilterSubmit: (f_filter_obj: any) =>
+      dispatch(doFeedFilterSubmit(f_filter_obj)),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(FeedFilterModalContent);

@@ -25,8 +25,10 @@ const doPostCreate = (post_obj: any) => async (dispatch: Dispatch) => {
   });
 };
 
-const doFetchFeed = () => async (dispatch: Dispatch) => {
-  fetchFeed((err: Error, result: IPost[]) => {
+const doFetchFeed = (f_filter_obj: Object | null) => async (
+  dispatch: Dispatch
+) => {
+  fetchFeed(f_filter_obj, (err: Error, result: IPost[]) => {
     if (err) {
       dispatch({ type: API_ERROR, error: err.message });
     } else {

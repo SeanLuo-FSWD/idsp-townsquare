@@ -34,7 +34,7 @@ const postCreate = (fake_post: any, cb: Function) => {
   cb(null, fake_post);
 };
 
-const fetchFeed = async (cb: Function) => {
+const fetchFeed = async (f_filter: Object | null, cb: Function) => {
   // try {
   //   const posts = await axios.get(`${MOCK_URL}/api/post`);
 
@@ -44,6 +44,7 @@ const fetchFeed = async (cb: Function) => {
   // } catch (error) {
   //   cb(error);
   // }
+
   cb(null, posts);
 };
 

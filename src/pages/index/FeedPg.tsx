@@ -20,7 +20,7 @@ const FeedPg = () => {
   );
 
   useEffect(() => {
-    fetchFeed((err: Error, result: any) => {
+    fetchFeed(null, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
