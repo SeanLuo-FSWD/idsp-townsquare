@@ -29,36 +29,49 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
     ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"].forEach(
       (city) => {
         if (peopleFilterSaved.location.includes(city as any)) {
-          // default_loc.city = true;
-          console.log("ddddddddddddddddddddddd");
-          console.log(city);
-
           default_loc = { ...default_loc, [city]: true };
         }
       }
     );
   }
 
-  // useEffect(() => {
-  //   peopleFilterProps(peopleFilter);
-  // });
-  const [location, setLocation] = useState(default_loc) as any;
-  const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
-  console.log("ggggggggggggggggggggggg");
-  console.log("ggggggggggggggggggggggg");
-  console.log(location);
-
-  const [peopleFilter, setPeopleFilter] = useState({});
-
-  const [gender, setGender] = React.useState({
+  let default_gender: any = {
     female: false,
     male: false,
     other: false,
-  });
+  } as Object;
 
-  const [age, setAge] = React.useState<number[]>([20, 37]);
+  if (peopleFilterSaved.gender) {
+    ["female", "male", "other"].forEach((gender) => {
+      if (peopleFilterSaved.gender.includes(gender as any)) {
+        // default_loc.city = true;
+        default_gender = { ...default_gender, [gender]: true };
+      }
+    });
+  }
 
+  const [gender, setGender] = React.useState(default_gender);
   const { female, male, other } = gender;
+
+  console.log("ggggggggggggggggggggggg");
+  console.log("ggggggggggggggggggggggg");
+  console.log(gender);
+
+  // useEffect(() => {
+  //   peopleFilterProps(peopleFilter);
+  // });
+
+  let default_age = [0, 100];
+  if (peopleFilterSaved.age) {
+    default_age = peopleFilterSaved.age;
+  }
+
+  const [age, setAge] = React.useState<number[]>(default_age);
+
+  const [location, setLocation] = useState(default_loc) as any;
+  const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
+
+  const [peopleFilter, setPeopleFilter] = useState({});
 
   const handleGenderFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const gender_obj = { ...gender, [event.target.name]: event.target.checked };
@@ -73,6 +86,7 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
       }
     });
     setPeopleFilter({ ...peopleFilter, ["gender"]: gdArr });
+    peopleFilterProps({ gender: gdArr });
   };
 
   const handleLocationFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,9 +104,10 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
     peopleFilterProps({ location: locArr });
   };
 
-  const handleAgeChange = (event: any, newValue: number | number[]) => {
+  const handleAgeFilter = (event: any, newValue: number | number[]) => {
     setAge(newValue as number[]);
     setPeopleFilter({ ...peopleFilter, ["age"]: newValue });
+    peopleFilterProps({ age: newValue });
   };
 
   return (
@@ -103,7 +118,7 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
         <h4>Max age: {age[1]}</h4>
         <Slider
           value={age}
-          onChange={handleAgeChange}
+          onChange={handleAgeFilter}
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
         />
