@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
-import style from "./Register.module.scss";
+import styles from "./RegisterPg.module.scss";
 
 const Register = () => {
   const history = useHistory();
@@ -49,62 +49,84 @@ const Register = () => {
   };
   return (
     <>
-      <img
-        id="logo"
-        src="https://i.imgur.com/0ldmkwI.png"
-        alt="TownSquareLogo"
-      ></img>
-      <h2 className="signUpTitle">Sign Up</h2>
-      {registerStatus ? (
-        <div>
-          <h1>
-            Registration success, please check your email for verification link
-          </h1>
-        </div>
-      ) : (
-        <article className="form">
-          {signUpError && <Error message={signUpError} />}
-          <form>
-            <div className="form-control">
-              <label htmlFor="username">username : </label>
-              <input
-                type="username"
-                id="username"
-                name="username"
-                placeholder="Create a username"
-                value={person.username}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-control">
-              <label htmlFor="email">Email : </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Please enter your email"
-                value={person.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-control">
-              <label htmlFor="password">password : </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Create a password"
-                value={person.password}
-                onChange={handleChange}
-              />
-            </div>
 
-            <button type="submit" onClick={handleRegister}>
-              Register
-            </button>
-          </form>
-        </article>
-      )}
+      <div className={styles.card}>
+        <div className={styles.backgroundSquare}>
+          <br></br>
+          <br></br>
+          <img
+            className={styles.logo}
+            id="logo"
+            src="https://i.imgur.com/0ldmkwI.png"
+            alt="TownSquareLogo"
+          ></img>
+          <h1 className="signUpTitle">Sign Up</h1>
+          {registerStatus ? (
+            <div>
+              <h1>
+                Registration success, please check your email for verification link
+              </h1>
+            </div>
+          ) : (
+            <article className="form">
+              {signUpError && <Error message={signUpError} />}
+              <form>
+                <div className="form-control">
+                  <div className="inputForm">
+                    {/* <label  className={styles.labelText} htmlFor="username">username : </label> */}
+                    <input
+                      className={styles.inputForm}
+                      type="username"
+                      id="username"
+                      name="username"
+                      placeholder="Create a username"
+                      value={person.username}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-control">
+                    {/* <label className={styles.labelText} htmlFor="email">Email : </label> */}
+                    <input
+                      className={styles.inputForm}
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Please enter your email"
+                      value={person.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-control">
+                    {/* <label className={styles.labelText} htmlFor="password">Password : </label> */}
+                    <input
+                      className={styles.inputForm}
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Create a password"
+                      value={person.password}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <br></br>
+                <button className={styles.registerButton} type="submit" onClick={handleRegister}>
+                  Sign Up
+                </button>
+
+              </form>
+
+
+            </article>
+          )}
+        </div>
+        <div className={styles.loginButtonContainer}>
+            <p className={styles.alreadyHaveAccount}>Already have an account?</p>
+              <button className={styles.backToSignUp}>
+                Log In
+              </button>
+          </div>
+      </div>
     </>
   );
 };
