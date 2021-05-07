@@ -12,11 +12,8 @@ import FeedFilter from "../../components/Filter/FeedFilter";
 import {
   doFeedFilterUpdate,
   doFeedFilterRemove,
-  doFilterUpdate,
-  doFilterRemove,
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
-import FeedFilterModalContent from "./FeedFilterModalContent";
 
 function FilterModalContent(props: any) {
   const { showModal, setModalProps, setShowModal, setCerror } = useContext(
@@ -42,19 +39,19 @@ function FilterModalContent(props: any) {
   };
 
   const onFeedFilterClick = () => {
-    const filter_obj = {
+    const f_filter_obj = {
       feedFilter: feedFilter,
       peopleFilter: peopleFilter,
     };
 
     console.log("444444444444444444");
-    console.log(filter_obj);
-    props.onFilterSubmit(filter_obj);
+    console.log(f_filter_obj);
+    props.onFeedFilterSubmit(f_filter_obj);
 
     setModalProps(null);
     setShowModal("");
 
-    // postFilterSubmit(filter_obj, (err: Error, result: any) => {
+    // postFilterSubmit(f_filter_obj, (err: Error, result: any) => {
     //   if (err) {
     //     setCerror(err.message);
     //   } else {
@@ -69,30 +66,66 @@ function FilterModalContent(props: any) {
   }
 
   return (
-    <>
-      <FeedFilterModalContent
-        peopleFilterProps={peopleFilterProps}
+    <div>
+      <FeedFilter
         feedFilterProps={feedFilterProps}
-        onFilterSubmit={props.onFilterSubmit}
+        feedFilterSaved={props.mstpFilter ? props.mstpFilter.feedFilter : {}}
       />
-    </>
+
+      <div className="flex">
+        {showPeopleFilter ? (
+          <button onClick={() => setShowPeopleFilter(false)}>
+            Hide User Filter
+          </button>
+        ) : (
+          <button onClick={() => setShowPeopleFilter(true)}>
+            Show User Filter
+          </button>
+        )}
+        <p>
+          Apply user filter to posts (Will show posts from matching users only)
+        </p>
+      </div>
+
+      {showPeopleFilter && (
+        <PeopleFilter
+          peopleFilterProps={peopleFilterProps}
+          peopleFilterSaved={
+            props.mstpFilter ? props.mstpFilter.peopleFilter : {}
+          }
+        />
+      )}
+
+      <div className="flex">
+        <button onClick={onFeedFilterClick}>Submit</button>
+        <button
+          onClick={() => {
+            setModalProps(null);
+            setShowModal("");
+            props.onFeedFilterRemove();
+          }}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   );
 }
 
 // export default FilterModalContent;
 const mapStateToProps = (state: any) => {
   return {
-    //   mstpFilter: state.filterState.feed,
-    mstpFilter: state.filterState,
+    mstpFilter: state.filterState.feed,
     error: state.filterState.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onFilterSubmit: (filter_obj: any) => dispatch(doFilterUpdate(filter_obj)),
+    onFeedFilterSubmit: (f_filter_obj: any) =>
+      dispatch(doFeedFilterUpdate(f_filter_obj)),
 
-    onFilterRemove: () => dispatch(doFilterRemove()),
+    onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
   };
 };
 

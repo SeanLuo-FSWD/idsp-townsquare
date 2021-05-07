@@ -24,6 +24,20 @@ function FeedFilterModalContent(props: any) {
   const [feedFilter, setFeedFilter] = useState({});
   const [peopleFilter, setPeopleFilter] = useState({});
 
+  const peopleFilterProps = (ppl_filter: any) => {
+    // setPeopleFilter(ppl_filter);
+    const key_name_pair = Object.entries(ppl_filter)[0];
+
+    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
+  };
+
+  const feedFilterProps = (post_filter: Object) => {
+    const key_name_pair = Object.entries(post_filter)[0];
+    setFeedFilter({ ...feedFilter, [key_name_pair[0]]: key_name_pair[1] });
+
+    // setFeedFilter({ keywords: post_filter });
+  };
+
   const onFeedFilterClick = () => {
     const f_filter_obj = {
       feedFilter: feedFilter,
@@ -54,7 +68,7 @@ function FeedFilterModalContent(props: any) {
   return (
     <div>
       <FeedFilter
-        feedFilterProps={props.feedFilterProps}
+        feedFilterProps={feedFilterProps}
         feedFilterSaved={props.mstpFilter ? props.mstpFilter.feedFilter : {}}
       />
 
@@ -75,7 +89,7 @@ function FeedFilterModalContent(props: any) {
 
       {showPeopleFilter && (
         <PeopleFilter
-          peopleFilterProps={props.peopleFilterProps}
+          peopleFilterProps={peopleFilterProps}
           peopleFilterSaved={
             props.mstpFilter ? props.mstpFilter.peopleFilter : {}
           }

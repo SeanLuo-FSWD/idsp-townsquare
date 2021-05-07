@@ -15,13 +15,6 @@ import FeedFilterModalContent from "./FeedFilterModalContent";
 import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory } from "react-router-dom";
-import {
-  doFeedFilterUpdate,
-  doFeedFilterRemove,
-  doFilterUpdate,
-  doFilterRemove,
-} from "../../store/redux/actions/filter_act";
-import FilterModalContent from "./FilterModalContent";
 
 const FeedPg = (props: any) => {
   const [feed, setFeed] = useState(null) as any;
@@ -32,17 +25,17 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("FeedPg props.feedFilter.feed props.feedFilter.feed");
-    console.log(props.feedFilter.feed);
+    console.log("FeedPg props.feedFilter props.feedFilter");
+    console.log(props.feedFilter);
 
-    fetchFeed(props.feedFilter.feed, (err: Error, result: any) => {
+    fetchFeed(props.feedFilter, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
         setFeed(result);
       }
     });
-  }, [props.feedFilter.feed]);
+  }, [props.feedFilter]);
 
   const addPostProp = (result: any) => {
     setFeed(_.concat(result, feed));
@@ -68,7 +61,7 @@ const FeedPg = (props: any) => {
             </button>
 
             <button
-              className={props.feedFilter.feed && styles.applied}
+              className={props.feedFilter && styles.applied}
               onClick={() => setShowModal("filter")}
             >
               Filter
@@ -107,8 +100,7 @@ const FeedPg = (props: any) => {
             </Modal>
           ) : (
             <Modal>
-              <FilterModalContent />
-              {/* <FeedFilterModalContent filterPostProp={filterPostProp} /> */}
+              <FeedFilterModalContent filterPostProp={filterPostProp} />
             </Modal>
           )
         ) : null}
@@ -124,17 +116,9 @@ const FeedPg = (props: any) => {
 const mapStateToProps = (state: any) => {
   // const errState = state.filterState ? state.filterState.error : null;
   return {
-    feedFilter: state.filterState.filt,
+    feedFilter: state.filterState.feed,
     error: state.filterState.error,
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onFilterSubmit: (filter_obj: any) => dispatch(doFilterUpdate(filter_obj)),
-
-    onFilterRemove: () => dispatch(doFilterRemove()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FeedPg);
+export default connect(mapStateToProps)(FeedPg);
