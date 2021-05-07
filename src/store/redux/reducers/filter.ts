@@ -28,6 +28,9 @@ function filterReducer(filterState = INITIAL_STATE, action: FilterActionTypes) {
       console.log(action);
 
       const filterStore = { ...filterState, feed: action.filter };
+      console.log("ddddddddddddddddddddddd");
+      console.log(filterStore);
+
       return filterStore;
     }
     case FEED_FILTER_REMOVE: {

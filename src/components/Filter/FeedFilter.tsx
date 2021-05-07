@@ -20,10 +20,6 @@ function FeedFilter({ feedFilterProps, feedFilterSaved }: any) {
     feedFilterProps({ hasImg: event.target.checked });
   };
 
-  console.log("xxxxxxxxxxxxxxxxxxxxxx");
-  console.log("xxxxxxxxxxxxxxxxxxxxxx");
-  console.log(feedFilterSaved);
-
   return (
     <div>
       <div>

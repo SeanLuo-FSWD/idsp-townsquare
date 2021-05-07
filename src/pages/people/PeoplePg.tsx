@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { fetchPeople } from "../../utils/api/people.api";
-
 import UserGrid from "../../components/Users/UserGrid";
 import Error from "../../components/Error/Error";
 import Navbar from "../../components/Navbar/Navbar";
+import SubNav from "../../components/Navbar/SubNav";
+import styles from "./PeoplePg.module.scss";
+import { connect } from "react-redux";
+import Modal from "../../UI/Modal";
+import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
-function PeoplePg() {
+const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
   const {
     username,
@@ -29,6 +33,10 @@ function PeoplePg() {
     });
   }, []);
 
+  const filterPeopleProp = (result: any) => {
+    setPeople(result);
+  };
+
   if (!people) {
     return (
       <div>
@@ -36,17 +44,45 @@ function PeoplePg() {
       </div>
     );
   }
+  if (props.error) {
+    setCerror(props.error.message);
+    return <></>;
+  }
   return (
     <>
       <Navbar currentPath={window.location.pathname} />
-      <div>
-        <h1>Users page</h1>
-        <h2>Welcome: {currentUser.username} </h2>
-      </div>
+      <SubNav>
+        <div className={`flex--space-around ${styles.SubNavWrap}`}>
+          <h2>{currentUser.username}</h2>
+          <button
+            className={props.feedFilter && styles.applied}
+            onClick={() => setShowModal("filter")}
+          >
+            Filter
+          </button>
+        </div>
+      </SubNav>
 
       <UserGrid people={people} />
+      {showModal
+        ? showModal === "filter" && (
+            <Modal>
+              <PeopleFilterModalContent filterPostProp={filterPeopleProp} />
+            </Modal>
+          )
+        : null}
     </>
   );
-}
+};
 
-export default PeoplePg;
+// export default PeoplePg;
+
+const mapStateToProps = (state: any) => {
+  // const errState = state.filterState ? state.filterState.error : null;
+  return {
+    peopleFilter: state.filterState.people,
+    error: state.filterState.error,
+  };
+};
+
+export default connect(mapStateToProps)(PeoplePg);

@@ -18,34 +18,34 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
   console.log(peopleFilterSaved);
 
   let default_loc: any = {
-    Burnaby: false,
-    Richmond: false,
-    Coquitlam: false,
-    Vancouver: false,
-    Surrey: false,
+    Burnaby: true,
+    Richmond: true,
+    Coquitlam: true,
+    Vancouver: true,
+    Surrey: true,
   } as Object;
 
   if (peopleFilterSaved.location) {
     ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"].forEach(
       (city) => {
-        if (peopleFilterSaved.location.includes(city as any)) {
-          default_loc = { ...default_loc, [city]: true };
+        if (!peopleFilterSaved.location.includes(city as any)) {
+          default_loc = { ...default_loc, [city]: false };
         }
       }
     );
   }
 
   let default_gender: any = {
-    female: false,
-    male: false,
-    other: false,
+    female: true,
+    male: true,
+    other: true,
   } as Object;
 
   if (peopleFilterSaved.gender) {
     ["female", "male", "other"].forEach((gender) => {
-      if (peopleFilterSaved.gender.includes(gender as any)) {
+      if (!peopleFilterSaved.gender.includes(gender as any)) {
         // default_loc.city = true;
-        default_gender = { ...default_gender, [gender]: true };
+        default_gender = { ...default_gender, [gender]: false };
       }
     });
   }
@@ -71,8 +71,19 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
   const [location, setLocation] = useState(default_loc) as any;
   const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
 
-  const [peopleFilter, setPeopleFilter] = useState({});
+  let default_followed = false;
 
+  if (peopleFilterSaved.followed) {
+    default_followed = peopleFilterSaved.followed;
+  }
+  const [followed, setFollowed] = useState(default_followed);
+
+  function handleFollowedFilter(event: React.ChangeEvent<HTMLInputElement>) {
+    setFollowed(event.target.checked);
+    peopleFilterProps({ followed: event.target.checked });
+  }
+
+  // const [peopleFilter, setPeopleFilter] = useState({});
   const handleGenderFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const gender_obj = { ...gender, [event.target.name]: event.target.checked };
     setGender(gender_obj);
@@ -85,7 +96,7 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
         gdArr.push(l[0]);
       }
     });
-    setPeopleFilter({ ...peopleFilter, ["gender"]: gdArr });
+    // setPeopleFilter({ ...peopleFilter, ["gender"]: gdArr });
     peopleFilterProps({ gender: gdArr });
   };
 
@@ -100,13 +111,13 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
         locArr.push(l[0]);
       }
     });
-    setPeopleFilter({ ...peopleFilter, ["location"]: locArr });
+    // setPeopleFilter({ ...peopleFilter, ["location"]: locArr });
     peopleFilterProps({ location: locArr });
   };
 
   const handleAgeFilter = (event: any, newValue: number | number[]) => {
     setAge(newValue as number[]);
-    setPeopleFilter({ ...peopleFilter, ["age"]: newValue });
+    // setPeopleFilter({ ...peopleFilter, ["age"]: newValue });
     peopleFilterProps({ age: newValue });
   };
 
@@ -210,6 +221,21 @@ function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
               />
             }
             label="Surrey"
+          />
+        </FormGroup>
+      </div>
+      <div className="flex">
+        <h3>Followed</h3>
+        <FormGroup style={{ flexDirection: "row" }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={followed}
+                onChange={handleFollowedFilter}
+                name="followed"
+              />
+            }
+            label="followed"
           />
         </FormGroup>
       </div>

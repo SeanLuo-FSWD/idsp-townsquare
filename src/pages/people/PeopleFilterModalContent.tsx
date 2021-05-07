@@ -15,7 +15,7 @@ import {
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
 
-function FeedFilterModalContent(props: any) {
+function PeopleFilterModalContent(props: any) {
   const { showModal, setModalProps, setShowModal, setCerror } = useContext(
     LoginContext
   );
@@ -27,6 +27,10 @@ function FeedFilterModalContent(props: any) {
   const peopleFilterProps = (ppl_filter: any) => {
     // setPeopleFilter(ppl_filter);
     const key_name_pair = Object.entries(ppl_filter)[0];
+
+    console.log("3333333333333333");
+    console.log("3333333333333333");
+    console.log(key_name_pair);
 
     setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
   };
@@ -132,4 +136,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FeedFilterModalContent);
+)(PeopleFilterModalContent);

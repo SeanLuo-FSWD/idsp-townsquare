@@ -7,7 +7,7 @@ export const users = [
     gender: "male",
     location: "Burnaby",
     last_login: new Date().toDateString(),
-    following: ["2"],
+    followed: ["2"],
     password: "bob@bob.com",
     img:
       "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
@@ -21,7 +21,7 @@ export const users = [
     location: "Burnaby",
     img: "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
     last_login: new Date().toDateString(),
-    following: ["1", "3"],
+    followed: ["1", "3"],
     password: "alice@alice.com",
   },
   {
@@ -34,7 +34,7 @@ export const users = [
     img:
       "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
     last_login: new Date().toDateString(),
-    following: [],
+    followed: [],
     password: "josh@josh.com",
   },
   {
@@ -47,7 +47,7 @@ export const users = [
     img:
       "https://kids.kiddle.co/images/thumb/b/b4/Cow_eating_some_grass.jpg/500px-Cow_eating_some_grass.jpg",
     last_login: new Date().toDateString(),
-    following: [],
+    followed: [],
     password: "Denisha",
   },
 ];

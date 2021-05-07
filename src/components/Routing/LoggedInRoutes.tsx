@@ -1,8 +1,10 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Home from "../../pages/index/FeedPg";
-import PeoplePg from "../../pages/person/Person";
-import Users from "../../pages/people/PeoplePg";
+import Person from "../../pages/person/Person";
+// import Users from "../../pages/people/PeoplePg";
+import PeoplePg from "../../pages/people/PeoplePg";
+
 import Profile from "../../pages/Profile/Profile";
 
 const ReactRouterSetup = () => {
@@ -17,14 +19,14 @@ const ReactRouterSetup = () => {
       */}
 
       <Route path="/users">
-        <Users />
+        <PeoplePg />
       </Route>
 
       <Route path="/profile">
         <Profile />
       </Route>
 
-      <Route path="/person/:id" children={<PeoplePg />}></Route>
+      <Route path="/person/:id" children={<Person />}></Route>
     </>
   );
 };

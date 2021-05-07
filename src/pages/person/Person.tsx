@@ -10,6 +10,7 @@ import { fetchFeed } from "../../utils/api/posts.api";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
 import { useHistory } from "react-router-dom";
+import Post from "../../components/Post/Post";
 
 function Person() {
   const history = useHistory();
@@ -52,7 +53,15 @@ function Person() {
           </div>
         </div>
 
-        <Feed feed={person.feed} />
+        {person.feed.map((post: any) => {
+          return (
+            <div key={post.id} className={styles.postWrapper}>
+              <h4>{post.createdAt}</h4>
+              <Post post={post}></Post>
+            </div>
+          );
+        })}
+        {/* <Feed feed={person.feed} /> */}
       </div>
     );
   }

@@ -93,26 +93,16 @@ const Post = (props: any) => {
     // return TRUE if liked
     const liked =
       _.filter(likes, (o) => o.userId == currentUser.id).length != 0;
-    console.log("always return false for first run?");
-
-    console.log(liked);
 
     return liked;
   }
 
-  function profileRedirect() {
-    console.log("vvvvvvvvvvvvvvvvvvv");
-    console.log(props.post);
-
-    history.push(`/person/${props.post.userId}`);
-  }
-
   return (
     <div key={props.post.postId} className={styles.post}>
-      <div className="flex--space-between">
+      {/* <div className="flex--space-between">
         <h4 onClick={profileRedirect}>{props.post.username}</h4>
         <h4>{props.post.createdAt}</h4>
-      </div>
+      </div> */}
       {/* <h2>{props.title}</h2> */}
       <h5 style={{ paddingLeft: "20px" }}>{props.post.message}</h5>
 

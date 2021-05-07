@@ -15,7 +15,7 @@ import {
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
 
-function FeedFilterModalContent(props: any) {
+function FilterModalContent(props: any) {
   const { showModal, setModalProps, setShowModal, setCerror } = useContext(
     LoginContext
   );
@@ -112,7 +112,7 @@ function FeedFilterModalContent(props: any) {
   );
 }
 
-// export default FeedFilterModalContent;
+// export default FilterModalContent;
 const mapStateToProps = (state: any) => {
   return {
     mstpFilter: state.filterState.feed,
@@ -129,7 +129,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedFilterModalContent);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterModalContent);
