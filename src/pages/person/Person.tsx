@@ -36,7 +36,7 @@ function Person() {
   if (person) {
     return (
       <div>
-        
+
         <Navbar currentPath={window.location.pathname} />
         <Link to="/users" className="btn">
           Back
