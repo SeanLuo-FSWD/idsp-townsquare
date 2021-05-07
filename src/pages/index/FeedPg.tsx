@@ -6,6 +6,9 @@ import { fetchFeed } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import createPost from "./createPost.svg"
+import filter from "./filter.svg"
+import townSquareLogo from "./townSquareLogo.png"
 import _ from "lodash";
 import { Filter } from "@material-ui/icons";
 import FeedFilter from "../../components/Filter/FeedFilter";
@@ -42,17 +45,22 @@ const FeedPg = () => {
 
   return (
     <>
-      <Navbar currentPath={window.location.pathname} />
+      <Navbar currentPath={window.location.pathname} /> 
       <SubNav>
-        <div className={`flex--space-around ${styles.SubNavWrap}`}>
-          <h2>{currentUser.username}</h2>
-          <button onClick={() => setShowModal("postUpload")}>
-            Upload Post
-          </button>
+        <div className={`flex--space-subNav ${styles.SubNavWrap}`}>
+          <div className={styles.username}>
+            <img className={styles.logo} src={townSquareLogo}/>
+          </div>
 
-          <button onClick={() => setShowModal("filter")}>Filter</button>
+          <img className={styles.createPost} src={createPost} onClick={() => setShowModal("postUpload")} />
+          <img src={filter} onClick={() => setShowModal("filter")}/>
+        
+          
         </div>
       </SubNav>
+        <div className={styles.navContainer}>
+
+        </div>
       <div>
         <Feed feed={feed} />
       </div>
@@ -67,6 +75,8 @@ const FeedPg = () => {
           </Modal>
         )
       ) : null}
+
+
     </>
   );
 };

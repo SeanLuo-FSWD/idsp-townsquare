@@ -1,8 +1,14 @@
+import { Home } from "@material-ui/icons";
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { logout } from "../../utils/api/auth.api";
 import styles from "./Navbar.module.scss";
+import homeIcon from "./home.svg";
+import settingsIcon from "./settings.svg";
+import logoutIcon from "./logoutIcon.svg";
+import usersIcon from "./users.svg";
+
 
 function Navbar(props: any) {
   const [currentPath, setCurrentPath] = useState("");
@@ -32,7 +38,7 @@ function Navbar(props: any) {
   }
 
   return (
-    <div className={`${styles.navBar} flex--space-around`}>
+    <div className={`${styles.navBar} flex--navBar`}>
       <div
         className={
           props.currentPath == "/"
@@ -40,7 +46,9 @@ function Navbar(props: any) {
             : `${styles.navBar__item}`
         }
       >
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <img src={homeIcon}></img>
+        </Link>
       </div>
       <div
         className={
@@ -49,7 +57,9 @@ function Navbar(props: any) {
             : `${styles.navBar__item}`
         }
       >
-        <Link to="/users">Users</Link>
+        <Link to="/users">
+          <img src={usersIcon}></img>
+        </Link>
       </div>
       <div
         className={
@@ -58,10 +68,12 @@ function Navbar(props: any) {
             : `${styles.navBar__item}`
         }
       >
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile">
+          <img src={settingsIcon}></img>
+        </Link>
       </div>
       <div className={styles.navBar__item}>
-        <button onClick={handleLogout}>Logout</button>
+        <img src={logoutIcon} onClick={handleLogout}/>
       </div>
     </div>
   );

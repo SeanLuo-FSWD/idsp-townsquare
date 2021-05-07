@@ -17,6 +17,14 @@
   justify-content: center;
 }
 
+.flex--navBar {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+  
+}
+
 .flex--space-around {
   @extend .flex;
   justify-content: space-around;
@@ -25,4 +33,33 @@
 .flex--space-between {
   @extend .flex;
   justify-content: space-between;
+}
+
+.flex--space-left {
+  @extend .flex;
+
+  padding: 0px 12px;
+  flex-basis: 100%;
+  flex: 1 1 auto;
+  flex-grow: 1;
+  background-color: #dfc5c5;
+}
+
+.flex--space-right {
+  @extend .flex;
+  justify-content: flex-end;
+  flex-basis: 90%;
+  font-size: 14px;
+}
+
+.flex--space-subNav {
+  display: flex;
+
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  :first-child {
+    align-self: stretch;
+  }
+
 }

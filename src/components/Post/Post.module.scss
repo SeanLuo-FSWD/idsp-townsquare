@@ -1,5 +1,21 @@
 .post {
-  border-style: solid;
-  border-width: thin;
-  padding: 10px;
+
+  border-width: 2px;
+  border-radius: 2px;
+
+}
+
+.flexItem {
+  padding: 0px 0px 0px 7px;
+  font-size: 17px;
+}
+
+.postContainer {
+  background-color: #F6EFE8;
+  margin: 0px 0px 10px 0px;
+}
+
+.textContainer {
+
+  padding: 0px 10px;
 }
