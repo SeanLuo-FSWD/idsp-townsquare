@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { fetchPeople } from "../../utils/api/people.api";
-
+import styles from "./peoplePg.module.scss"
 import UserGrid from "../../components/Users/UserGrid";
 import Error from "../../components/Error/Error";
 import Navbar from "../../components/Navbar/Navbar";
@@ -39,12 +39,16 @@ function PeoplePg() {
   return (
     <>
       <Navbar currentPath={window.location.pathname} />
-      <div>
-        <h1>Users page</h1>
-        <h2>Welcome: {currentUser.username} </h2>
+      <div className={styles.header}>
+        <p>Explore users near you!</p>
+        <p>Welcome: {currentUser.username} </p>
+        
       </div>
 
-      <UserGrid people={people} />
+      <div className={styles.userContainer}>
+        <UserGrid people={people} />
+      </div>
+
     </>
   );
 }

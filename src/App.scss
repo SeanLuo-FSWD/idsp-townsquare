@@ -1,6 +1,9 @@
 /*** Layout styling ***/
 
 /*** custom classes ***/
+.body {
+  font-family: 'Poppins', sans-serif;
+}
 
 .disable_scroll {
   height: 100%;
@@ -37,12 +40,13 @@
 
 .flex--space-left {
   @extend .flex;
-
+  height: 50px;
   padding: 0px 12px;
   flex-basis: 100%;
   flex: 1 1 auto;
   flex-grow: 1;
   background-color: #dfc5c5;
+  border-radius: 3px;
 }
 
 .flex--space-right {
