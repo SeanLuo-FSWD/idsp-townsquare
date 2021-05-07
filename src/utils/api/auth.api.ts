@@ -70,8 +70,6 @@ const logout = (cb: Function) => {
 };
 
 const login = (user_obj: any, cb: Function) => {
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log(user_obj);
   users.forEach((u) => {
     if (user_obj.email == u.email && user_obj.password == u.password) {
       cb(null, user_obj);

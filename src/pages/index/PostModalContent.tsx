@@ -70,6 +70,8 @@ function PostModalContent({ addPostProp }: any) {
     // });
 
     // Faking the post here, above commented is the actual method
+
+    const img_urls = modalProps ? modalProps.src_arr : [];
     let fake_post = {
       commentList: [],
       createdAt: new Date().toDateString(),
@@ -78,9 +80,17 @@ function PostModalContent({ addPostProp }: any) {
       message: message,
       userId: currentUser.id,
       username: currentUser.username,
-      img_urls: modalProps.src_arr,
+      user: {
+        img:
+          "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+        username: "bob",
+      },
+      img_urls: img_urls,
     };
     postCreate(fake_post, (err: Error, result: IPost[]) => {
+      console.log("fake_post fake_post fake_post");
+      console.log(fake_post.img_urls);
+
       if (err) {
         setCerror(err.message);
       } else {

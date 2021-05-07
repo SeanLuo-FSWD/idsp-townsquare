@@ -5,7 +5,7 @@ import axios from "axios";
 // import API_URL from "../../constants/api_url";
 import { TComment } from "../../interfaces/IPost";
 import { users, posts } from "../../FakeDb/FakeDb";
-
+import { DbHelper } from "./_dbHelper";
 // const postCreate = (bodyFormData: any, cb: Function) => {
 //   axios({
 //     method: "POST",
@@ -32,139 +32,106 @@ const postFilterSubmit = (filter: any, cb: Function) => {
 };
 
 const postCreate = (fake_post: any, cb: Function) => {
+  console.log("ggggggggggggggggggggggg");
+  console.log("ggggggggggggggggggggggg");
+  console.log(fake_post);
+
+  // posts.push(fake_post);
+  // posts.unshift(fake_post);
+
   cb(null, fake_post);
 };
 
-const fetchFeed = async (f_filter: any, cb: Function) => {
+const fetchFeed = (feedPg: any, cb: Function) => {
   let filtered_posts: any = [];
   let desired_posts: any = [];
-  console.log("ggggggggggggggggggggggg");
-  console.log("ggggggggggggggggggggggg");
-  console.log(f_filter);
+  let feed_filter_posts: any = [];
 
-  let feed_filter_posts = [];
+  if (!feedPg.applied) {
+    desired_posts = posts;
 
-  if (!f_filter.applied) {
-    cb(null, posts);
-  }
-  if (f_filter.feed.keywords.length != 0) {
-    let kw_posts = [];
-    console.log("1111111111111111111111");
-    console.log(f_filter.feed.keywords);
+    for (let i = 0; i < desired_posts.length; i++) {
+      for (let j = 0; j < users.length; j++) {
+        console.log("???????? look for new post");
+        console.log(desired_posts[i]);
 
-    const kw_arr = f_filter.feed.keywords;
-    for (let i = 0; i < posts.length; i++) {
-      let alive = true;
-      for (let j = 0; j < kw_arr.length; j++) {
-        console.log("2222222222222222");
-        console.log(posts[i].message);
-        console.log(kw_arr[j]);
+        if (users[j].id === desired_posts[i].userId) {
+          console.log("--------------------");
+          console.log("fffffffffffffffffffffff");
+          console.log(users[j]);
+          console.log("desired_posts[i].userId " + desired_posts[i].userId);
 
-        if (posts[i].message.includes(kw_arr[j])) {
-          console.log("3333333333333333");
+          desired_posts[i] = {
+            ...desired_posts[i],
+            ["user"]: { username: users[j].username, img: users[j].img },
+          };
 
-          continue;
-        } else {
-          alive = false;
-          break;
+          console.log("xxxxxxxxxxxxxxxxxxxxxx");
+          console.log(desired_posts[i]);
         }
       }
-
-      if (alive) {
-        console.log("444444444444444444");
-        kw_posts.push(posts[i]);
-      }
     }
-
-    feed_filter_posts = kw_posts;
+    cb(null, desired_posts);
   } else {
-    feed_filter_posts = posts;
-  }
+    let db_helper = new DbHelper(feedPg);
 
-  if (f_filter.feed.hasImg) {
-    feed_filter_posts = feed_filter_posts.filter((post: any) => {
-      return post.img_urls.length > 0;
-    });
-  }
+    feed_filter_posts = db_helper.getPostFromPost();
 
-  filtered_posts = feed_filter_posts;
-  //// ==================================== all above objectified
+    filtered_posts = feed_filter_posts;
+    //// ==================================== all above objectified
 
-  const pf = f_filter.people;
-  filtered_posts = filtered_posts.filter((p: any) => {
-    // get Person
-
-    let user = users.find((u) => u.id == p.userId);
-
-    if (user) {
-      //perform all logic for that p
-      let ageCondition = true;
-      let genderCondition = true;
-      let locCondition = true;
-      if (pf.age) {
-        ageCondition = user.age >= pf.age[0] && user.age <= pf.age[1];
-      }
-      if (pf.gender) {
-        genderCondition = pf.gender.includes(user.gender);
-      }
-      if (pf.location) {
-        locCondition = pf.location.includes(user.location);
-      }
-
-      // if (pf.followed) {
-      //   console.log("55555555555555555");
-      //   console.log(p.userId);
-      //   console.log(user.followed);
-
-      //   followedCondition = user.followed.includes(p.userId);
-      // }
-
-      if (ageCondition && genderCondition && locCondition) {
-        return p;
-      }
-    } else {
-      cb(new Error("user not found"));
-    }
-  });
-
-  if (pf.followed) {
-    //Faking the followed user here, in real BE, would use req.user
+    const pf = feedPg.people;
     filtered_posts = filtered_posts.filter((p: any) => {
-      if (["2"].includes(p.userId)) {
-        return p;
+      // get Person
+
+      let user = users.find((u) => u.id == p.userId);
+      console.log("okay why is this even running given no filter applied?");
+      console.log(feedPg.people);
+
+      if (feedPg.people) {
+        if (db_helper.checkPersonFromPerson(user)) {
+          return p;
+        }
       }
     });
-  }
 
-  // cb(null, filtered_posts);
-  desired_posts = filtered_posts;
+    // cb(null, filtered_posts);
+    desired_posts = filtered_posts;
 
-  for (let i = 0; i < desired_posts.length; i++) {
-    for (let j = 0; j < users.length; j++) {
-      if (users[j].id === desired_posts[i].userId) {
-        desired_posts[i] = {
-          ...desired_posts[i],
-          ["user"]: { username: users[j].username, img: users[j].img },
-        };
+    console.log("ddddddddddddddddddddddd");
+    console.log("ddddddddddddddddddddddd");
+    for (let i = 0; i < desired_posts.length; i++) {
+      for (let j = 0; j < users.length; j++) {
+        if (users[j].id === desired_posts[i].userId) {
+          console.log("fffffffffffffffffffffff");
+          console.log("fffffffffffffffffffffff");
+          console.log("users[j].id " + users[j]);
+          console.log("desired_posts[i].userId " + desired_posts[i].userId);
+
+          desired_posts[i] = {
+            ...desired_posts[i],
+            ["user"]: { username: users[j].username, img: users[j].img },
+          };
+        }
       }
     }
+
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log("desired posts");
+    console.log(desired_posts);
+
+    cb(null, desired_posts);
+
+    // try {
+    //   const posts = await axios.get(`${MOCK_URL}/api/post`);
+
+    //   console.log(posts.data.reverse());
+
+    //   cb(null, posts.data);
+    // } catch (error) {
+    //   cb(error);
+    // }
   }
-
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log("desired posts");
-  console.log(desired_posts);
-
-  cb(null, desired_posts);
-
-  // try {
-  //   const posts = await axios.get(`${MOCK_URL}/api/post`);
-
-  //   console.log(posts.data.reverse());
-
-  //   cb(null, posts.data);
-  // } catch (error) {
-  //   cb(error);
-  // }
 };
 
 const likePost = (like_arr: any, cb: Function) => {

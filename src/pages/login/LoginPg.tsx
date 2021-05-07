@@ -55,9 +55,23 @@ function Login() {
           setUserId(result.userId);
           setCurrentUser({
             ...currentUser,
-            id: result.userId,
+            // id: result.userId,
+            id: "2",
             username: result.username,
+            img:
+              "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
           });
+
+          // setCurrentUser({
+          //   id: "1",
+          //   username: "bob",
+          //   email: "bob@bob.com",
+          //   img:
+          //     "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+          //   age: 5,
+          //   gender: "male",
+          //   location: "Burnaby",
+          // });
         }
       });
     } else {

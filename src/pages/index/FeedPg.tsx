@@ -31,14 +31,27 @@ const FeedPg = (props: any) => {
     fetchFeed(props.feedPg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
+        return;
       } else {
         setFeed(result);
+        return;
       }
     });
   }, [props.feedPg]);
 
   const addPostProp = (result: any) => {
+    console.log("addPostProp called?");
+
     setFeed(_.concat(result, feed));
+    // fetchFeed(props.feedPg, (err: Error, result: any) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //     return;
+    //   } else {
+    //     setFeed(result);
+    //     return;
+    //   }
+    // });
   };
 
   const filterPostProp = (result: any) => {
@@ -73,6 +86,10 @@ const FeedPg = (props: any) => {
           {/* <Feed feed={feed} /> */}
 
           {feed.map((post: any) => {
+            console.log("55555555555555555");
+            console.log("55555555555555555");
+            console.log(post);
+
             return (
               <div key={post.id} className={styles.postWrapper}>
                 <div className="flex--space-between">

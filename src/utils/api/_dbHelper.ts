@@ -51,8 +51,6 @@ export class DbHelper {
       console.log("1111111111111111111111");
       console.log("1111111111111111111111");
       feed_filter_posts = feed_filter_posts.filter((post: any) => {
-        console.log("2222222222222222");
-        console.log(post);
         return post.img_urls.length > 0;
       });
     }
@@ -64,7 +62,13 @@ export class DbHelper {
     let ageCondition = true;
     let genderCondition = true;
     let locCondition = true;
-    if (this.filter.people.age) {
+
+    console.log(this.filter.people);
+    const pplfilter = this.filter.people;
+    console.log("wtf wtf wtf wtf");
+    console.log(pplfilter.age);
+
+    if (pplfilter.age.length > 0) {
       ageCondition =
         user.age >= this.filter.people.age[0] &&
         user.age <= this.filter.people.age[1];
@@ -78,15 +82,13 @@ export class DbHelper {
 
     if (ageCondition && genderCondition && locCondition) {
       if (this.filter.people.followed) {
-        //Faking the followed user here, in real BE, would use req.user
-        console.log("wassssup here?");
-
-        if (user.id === "2") {
+        if (user.id === "2" || user.id === "3") {
           return user;
         }
       } else {
         return user;
       }
     }
+    return; // added
   };
 }

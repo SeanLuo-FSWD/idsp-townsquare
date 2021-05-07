@@ -50,6 +50,7 @@ function Person() {
             <h2>username: {person.username}</h2>
             <h2>age: {person.age}</h2>
             <h2>gender: {person.gender}</h2>
+            <h2>location: {person.location}</h2>
           </div>
         </div>
 

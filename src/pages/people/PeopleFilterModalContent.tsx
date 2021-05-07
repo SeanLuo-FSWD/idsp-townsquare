@@ -26,7 +26,7 @@ function PeopleFilterModalContent(props: any) {
   const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
   const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
 
-  const [hasSync, setHasSync] = React.useState(props.peoplePg.applyOtherPg);
+  const [hasSync, setHasSync] = React.useState(false);
 
   const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setHasSync(event.target.checked);
@@ -66,9 +66,16 @@ function PeopleFilterModalContent(props: any) {
     console.log("ddddddddddddddddddddddd");
     console.log(hasSync);
 
-    // if (hasSync) {
-    //   props.onFeedFilterSubmit(peoplePgSlice);
-    // }
+    if (hasSync) {
+      const feedPgSlice = {
+        feedPg: {
+          applied: true,
+          people: peopleFilter,
+          feed: feedFilter,
+        },
+      };
+      props.onFeedFilterSubmit(feedPgSlice);
+    }
 
     setModalProps(null);
     setShowModal("");

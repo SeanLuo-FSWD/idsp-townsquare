@@ -26,6 +26,14 @@ function FeedFilterModalContent(props: any) {
   const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
   const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
 
+  // const [hasSync, setHasSync] = React.useState(props.feedPg.applyOtherPg);
+  const [hasSync, setHasSync] = React.useState(false);
+
+  const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHasSync(event.target.checked);
+    // feedFilterProps({ hasSync: event.target.checked });
+  };
+
   const peopleFilterProps = (ppl_filter: any) => {
     // setPeopleFilter(ppl_filter);
     const key_name_pair = Object.entries(ppl_filter)[0];
@@ -74,6 +82,17 @@ function FeedFilterModalContent(props: any) {
 
     console.log(feedPgSlice);
     props.onFeedFilterSubmit(feedPgSlice);
+
+    if (hasSync) {
+      const peoplePgSlice = {
+        peoplePg: {
+          applied: true,
+          people: peopleFilter,
+          feed: feedFilter,
+        },
+      };
+      props.onPeopleFilterSubmit(peoplePgSlice);
+    }
 
     setModalProps(null);
     setShowModal("");
@@ -125,6 +144,16 @@ function FeedFilterModalContent(props: any) {
         >
           Cancel
         </button>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={hasSync}
+              onChange={handleHasSyncFilter}
+              name="Have_image"
+            />
+          }
+          label="Apply to User page"
+        />
       </div>
     </div>
   );
@@ -132,11 +161,6 @@ function FeedFilterModalContent(props: any) {
 
 // export default FeedFilterModalContent;
 const mapStateToProps = (state: any) => {
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log(state.filterState.feedPg);
-
   return {
     feedPg: state.filterState.feedPg,
     error: state.filterState.error,
@@ -147,7 +171,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onFeedFilterSubmit: (feedPgSlice: any) =>
       dispatch(doFeedFilterUpdate(feedPgSlice)),
-
+    onPeopleFilterSubmit: (peoplePgSlice: any) =>
+      dispatch(doPeopleFilterUpdate(peoplePgSlice)),
     onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
   };
 };
