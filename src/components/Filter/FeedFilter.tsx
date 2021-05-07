@@ -3,18 +3,18 @@ import styles from "./SubNav.module.scss";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-function FeedFilter({ feedFilterProps, feedFilterSaved }: any) {
-  const default_kw = feedFilterSaved.keywords ? feedFilterSaved.keywords : [];
-  const default_hasImg = feedFilterSaved.hasImg
-    ? feedFilterSaved.hasImg
-    : false;
-  const [keywords, setKeywords] = useState(default_kw) as any;
+function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
+  console.log("fffffffffffffffffffffff");
+  console.log("fffffffffffffffffffffff");
+  console.log(feedPg_Feed);
+
+  const [keywords, setKeywords] = useState(feedPg_Feed.keywords) as any;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const kwArray = e.target.value.split(" ");
     setKeywords(kwArray);
     feedFilterProps({ keywords: kwArray });
   };
-  const [hasImg, setHasImg] = React.useState(default_hasImg);
+  const [hasImg, setHasImg] = React.useState(feedPg_Feed.hasImg);
   const handleHasImgFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setHasImg(event.target.checked);
     feedFilterProps({ hasImg: event.target.checked });

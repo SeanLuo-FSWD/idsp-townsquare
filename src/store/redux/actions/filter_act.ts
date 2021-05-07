@@ -8,8 +8,10 @@ import {
 
 // import { fetchFeed } from "../../../utils/api/posts.api";
 
-const doFeedFilterUpdate = (f_filter: Object) => async (dispatch: Dispatch) => {
-  dispatch({ type: FEED_FILTER_UPDATE, filter: f_filter });
+const doFeedFilterUpdate = (feedPgSlice: Object) => async (
+  dispatch: Dispatch
+) => {
+  dispatch({ type: FEED_FILTER_UPDATE, filter: feedPgSlice });
 };
 
 const doFeedFilterRemove = () => async (dispatch: Dispatch) => {

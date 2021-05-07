@@ -21,43 +21,60 @@ function FeedFilterModalContent(props: any) {
   );
 
   const [showPeopleFilter, setShowPeopleFilter] = useState(false);
-  const [feedFilter, setFeedFilter] = useState({});
-  const [peopleFilter, setPeopleFilter] = useState({});
+  const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
+  const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
 
   const peopleFilterProps = (ppl_filter: any) => {
     // setPeopleFilter(ppl_filter);
     const key_name_pair = Object.entries(ppl_filter)[0];
+    // setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
 
-    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
+    setPeopleFilter({
+      ...props.feedPg.people,
+      [key_name_pair[0]]: key_name_pair[1],
+    });
   };
 
   const feedFilterProps = (post_filter: Object) => {
     const key_name_pair = Object.entries(post_filter)[0];
-    setFeedFilter({ ...feedFilter, [key_name_pair[0]]: key_name_pair[1] });
-
-    // setFeedFilter({ keywords: post_filter });
+    setFeedFilter({
+      ...props.feedPg.feed,
+      [key_name_pair[0]]: key_name_pair[1],
+    });
+    // setFeedFilter({
+    //   ...props.feedPg,
+    //   feed: {
+    //     ...props.feedPg.feed,
+    //     [key_name_pair[0]]: key_name_pair[1],
+    //   },
+    // });
   };
 
   const onFeedFilterClick = () => {
-    const f_filter_obj = {
-      feedFilter: feedFilter,
-      peopleFilter: peopleFilter,
-    };
+    // const f_filter_obj = {
+    //   feedFilter: feedFilter,
+    //   peopleFilter: peopleFilter,
+    // };
 
     console.log("444444444444444444");
-    console.log(f_filter_obj);
-    props.onFeedFilterSubmit(f_filter_obj);
+    console.log("444444444444444444");
+
+    console.log(feedFilter);
+    console.log(peopleFilter);
+
+    const feedPgSlice = {
+      feedPg: {
+        applied: true,
+        people: peopleFilter,
+        feed: feedFilter,
+      },
+    };
+
+    console.log(feedPgSlice);
+    props.onFeedFilterSubmit(feedPgSlice);
 
     setModalProps(null);
     setShowModal("");
-
-    // postFilterSubmit(f_filter_obj, (err: Error, result: any) => {
-    //   if (err) {
-    //     setCerror(err.message);
-    //   } else {
-    //     props.filterPostProp(result);
-    //   }
-    // });
   };
 
   if (props.error) {
@@ -69,7 +86,8 @@ function FeedFilterModalContent(props: any) {
     <div>
       <FeedFilter
         feedFilterProps={feedFilterProps}
-        feedFilterSaved={props.mstpFilter ? props.mstpFilter.feedFilter : {}}
+        // feedFilterSaved={props.feedPg ? props.feedPg.feedFilter : {}}
+        feedPg_Feed={props.feedPg.feed}
       />
 
       <div className="flex">
@@ -90,9 +108,7 @@ function FeedFilterModalContent(props: any) {
       {showPeopleFilter && (
         <PeopleFilter
           peopleFilterProps={peopleFilterProps}
-          peopleFilterSaved={
-            props.mstpFilter ? props.mstpFilter.peopleFilter : {}
-          }
+          feedPg_People={props.feedPg.people}
         />
       )}
 
@@ -114,16 +130,21 @@ function FeedFilterModalContent(props: any) {
 
 // export default FeedFilterModalContent;
 const mapStateToProps = (state: any) => {
+  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
+  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
+  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
+  console.log(state.filterState.feedPg);
+
   return {
-    mstpFilter: state.filterState.feed,
+    feedPg: state.filterState.feedPg,
     error: state.filterState.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onFeedFilterSubmit: (f_filter_obj: any) =>
-      dispatch(doFeedFilterUpdate(f_filter_obj)),
+    onFeedFilterSubmit: (feedPgSlice: any) =>
+      dispatch(doFeedFilterUpdate(feedPgSlice)),
 
     onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
   };

@@ -42,106 +42,101 @@ const fetchFeed = async (f_filter: any, cb: Function) => {
   console.log("ggggggggggggggggggggggg");
   console.log(f_filter);
 
-  if (f_filter) {
-    if (f_filter.feedFilter && Object.keys(f_filter.feedFilter).length !== 0) {
-      let feed_filter_posts = [];
-      if (f_filter.feedFilter.keywords) {
-        let kw_posts = [];
-        console.log("1111111111111111111111");
-        console.log(f_filter.feedFilter.keywords);
+  let feed_filter_posts = [];
 
-        const kw_arr = f_filter.feedFilter.keywords;
-        for (let i = 0; i < posts.length; i++) {
-          let alive = true;
-          for (let j = 0; j < kw_arr.length; j++) {
-            console.log("2222222222222222");
-            console.log(posts[i].message);
-            console.log(kw_arr[j]);
-
-            if (posts[i].message.includes(kw_arr[j])) {
-              console.log("3333333333333333");
-
-              continue;
-            } else {
-              alive = false;
-              break;
-            }
-          }
-
-          if (alive) {
-            console.log("444444444444444444");
-            kw_posts.push(posts[i]);
-          }
-        }
-
-        feed_filter_posts = kw_posts;
-      } else {
-        feed_filter_posts = posts;
-      }
-
-      if (f_filter.feedFilter.hasImg) {
-        feed_filter_posts = feed_filter_posts.filter((post: any) => {
-          return post.img_urls.length > 0;
-        });
-      }
-
-      filtered_posts = feed_filter_posts;
-    }
-
-    if (f_filter && f_filter.peopleFilter) {
-      const pf = f_filter.peopleFilter;
-      filtered_posts = filtered_posts.filter((p: any) => {
-        // get Person
-
-        let user = users.find((u) => u.id == p.userId);
-
-        if (user) {
-          //perform all logic for that p
-          let ageCondition = true;
-          let genderCondition = true;
-          let locCondition = true;
-          if (pf.age) {
-            ageCondition = user.age >= pf.age[0] && user.age <= pf.age[1];
-          }
-          if (pf.gender) {
-            genderCondition = pf.gender.includes(user.gender);
-          }
-          if (pf.location) {
-            locCondition = pf.location.includes(user.location);
-          }
-
-          // if (pf.followed) {
-          //   console.log("55555555555555555");
-          //   console.log(p.userId);
-          //   console.log(user.followed);
-
-          //   followedCondition = user.followed.includes(p.userId);
-          // }
-
-          if (ageCondition && genderCondition && locCondition) {
-            return p;
-          }
-        } else {
-          cb(new Error("user not found"));
-          return;
-        }
-      });
-
-      if (pf.followed) {
-        filtered_posts = filtered_posts.filter((p: any) => {
-          if (["2"].includes(p.userId)) {
-            return p;
-          }
-        });
-      }
-    }
-
-    // cb(null, filtered_posts);
-    desired_posts = filtered_posts;
-  } else {
-    // cb(null, posts);
-    desired_posts = posts;
+  if (!f_filter.applied) {
+    cb(null, posts);
   }
+  if (f_filter.feed.keywords.length != 0) {
+    let kw_posts = [];
+    console.log("1111111111111111111111");
+    console.log(f_filter.feed.keywords);
+
+    const kw_arr = f_filter.feed.keywords;
+    for (let i = 0; i < posts.length; i++) {
+      let alive = true;
+      for (let j = 0; j < kw_arr.length; j++) {
+        console.log("2222222222222222");
+        console.log(posts[i].message);
+        console.log(kw_arr[j]);
+
+        if (posts[i].message.includes(kw_arr[j])) {
+          console.log("3333333333333333");
+
+          continue;
+        } else {
+          alive = false;
+          break;
+        }
+      }
+
+      if (alive) {
+        console.log("444444444444444444");
+        kw_posts.push(posts[i]);
+      }
+    }
+
+    feed_filter_posts = kw_posts;
+  } else {
+    feed_filter_posts = posts;
+  }
+
+  if (f_filter.feed.hasImg) {
+    feed_filter_posts = feed_filter_posts.filter((post: any) => {
+      return post.img_urls.length > 0;
+    });
+  }
+
+  filtered_posts = feed_filter_posts;
+
+  const pf = f_filter.people;
+  filtered_posts = filtered_posts.filter((p: any) => {
+    // get Person
+
+    let user = users.find((u) => u.id == p.userId);
+
+    if (user) {
+      //perform all logic for that p
+      let ageCondition = true;
+      let genderCondition = true;
+      let locCondition = true;
+      if (pf.age) {
+        ageCondition = user.age >= pf.age[0] && user.age <= pf.age[1];
+      }
+      if (pf.gender) {
+        genderCondition = pf.gender.includes(user.gender);
+      }
+      if (pf.location) {
+        locCondition = pf.location.includes(user.location);
+      }
+
+      // if (pf.followed) {
+      //   console.log("55555555555555555");
+      //   console.log(p.userId);
+      //   console.log(user.followed);
+
+      //   followedCondition = user.followed.includes(p.userId);
+      // }
+
+      if (ageCondition && genderCondition && locCondition) {
+        return p;
+      }
+    } else {
+      cb(new Error("user not found"));
+    }
+  });
+
+  if (pf.followed) {
+    //Faking the followed user here, in real BE, would use req.user
+    filtered_posts = filtered_posts.filter((p: any) => {
+      if (["2"].includes(p.userId)) {
+        return p;
+      }
+    });
+  }
+
+  // cb(null, filtered_posts);
+  desired_posts = filtered_posts;
 
   for (let i = 0; i < desired_posts.length; i++) {
     for (let j = 0; j < users.length; j++) {

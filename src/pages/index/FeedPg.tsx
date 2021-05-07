@@ -25,17 +25,17 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("FeedPg props.feedFilter props.feedFilter");
-    console.log(props.feedFilter);
+    console.log("FeedPg props.feedPg props.feedPg");
+    console.log(props.feedPg);
 
-    fetchFeed(props.feedFilter, (err: Error, result: any) => {
+    fetchFeed(props.feedPg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
         setFeed(result);
       }
     });
-  }, [props.feedFilter]);
+  }, [props.feedPg]);
 
   const addPostProp = (result: any) => {
     setFeed(_.concat(result, feed));
@@ -61,7 +61,8 @@ const FeedPg = (props: any) => {
             </button>
 
             <button
-              className={props.feedFilter && styles.applied}
+              // className={props.feedPg.applied && styles.applied}
+              className={`${props.feedPg.applied ? styles.applied : ""}`}
               onClick={() => setShowModal("filter")}
             >
               Filter
@@ -116,7 +117,7 @@ const FeedPg = (props: any) => {
 const mapStateToProps = (state: any) => {
   // const errState = state.filterState ? state.filterState.error : null;
   return {
-    feedFilter: state.filterState.feed,
+    feedPg: state.filterState.feedPg,
     error: state.filterState.error,
   };
 };

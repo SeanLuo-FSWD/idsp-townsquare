@@ -8,75 +8,41 @@ import Slider from "@material-ui/core/Slider";
 import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 
-function PeopleFilter({ peopleFilterProps, peopleFilterSaved }: any) {
-  const { showModal, setModalProps, setShowModal, setCerror } = useContext(
-    LoginContext
-  );
-
+function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
   console.log("vvvvvvvvvvvvvvvvvvv");
   console.log("vvvvvvvvvvvvvvvvvvv");
-  console.log(peopleFilterSaved);
+  console.log(feedPg_People);
 
-  let default_loc: any = {
-    Burnaby: true,
-    Richmond: true,
-    Coquitlam: true,
-    Vancouver: true,
-    Surrey: true,
+  let location_as_state = {
+    Burnaby: false,
+    Richmond: false,
+    Coquitlam: false,
+    Vancouver: false,
+    Surrey: false,
   } as Object;
 
-  if (peopleFilterSaved.location) {
-    ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"].forEach(
-      (city) => {
-        if (!peopleFilterSaved.location.includes(city as any)) {
-          default_loc = { ...default_loc, [city]: false };
-        }
-      }
-    );
-  }
+  feedPg_People.location.forEach((city: string) => {
+    location_as_state = { ...location_as_state, [city]: true };
+  });
 
-  let default_gender: any = {
-    female: true,
-    male: true,
-    other: true,
-  } as Object;
-
-  if (peopleFilterSaved.gender) {
-    ["female", "male", "other"].forEach((gender) => {
-      if (!peopleFilterSaved.gender.includes(gender as any)) {
-        // default_loc.city = true;
-        default_gender = { ...default_gender, [gender]: false };
-      }
-    });
-  }
-
-  const [gender, setGender] = React.useState(default_gender);
-  const { female, male, other } = gender;
-
-  console.log("ggggggggggggggggggggggg");
-  console.log("ggggggggggggggggggggggg");
-  console.log(gender);
-
-  // useEffect(() => {
-  //   peopleFilterProps(peopleFilter);
-  // });
-
-  let default_age = [0, 100];
-  if (peopleFilterSaved.age) {
-    default_age = peopleFilterSaved.age;
-  }
-
-  const [age, setAge] = React.useState<number[]>(default_age);
-
-  const [location, setLocation] = useState(default_loc) as any;
+  const [location, setLocation] = useState(location_as_state) as any;
   const { Burnaby, Richmond, Coquitlam, Vancouver, Surrey } = location;
 
-  let default_followed = false;
+  let gender_as_state = {
+    female: false,
+    male: false,
+    other: false,
+  };
 
-  if (peopleFilterSaved.followed) {
-    default_followed = peopleFilterSaved.followed;
-  }
-  const [followed, setFollowed] = useState(default_followed);
+  feedPg_People.gender.forEach((sex: string) => {
+    gender_as_state = { ...gender_as_state, [sex]: true };
+  });
+  const [gender, setGender] = React.useState(gender_as_state);
+  const { female, male, other } = gender;
+
+  const [age, setAge] = React.useState<number[]>(feedPg_People.age);
+
+  const [followed, setFollowed] = useState(feedPg_People.followed);
 
   function handleFollowedFilter(event: React.ChangeEvent<HTMLInputElement>) {
     setFollowed(event.target.checked);
