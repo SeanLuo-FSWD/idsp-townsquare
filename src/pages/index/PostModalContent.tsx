@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
 import _ from "lodash";
+import styles from "./PostModal.module.scss"
+
 
 function PostModalContent({ addPostProp }: any) {
   const [message, setMessage] = useState("");
@@ -94,8 +96,9 @@ function PostModalContent({ addPostProp }: any) {
 
   return (
     <>
-      <form style={{ marginBottom: "50px" }} onSubmit={postSubmit}>
+      <form className={styles.form} onSubmit={postSubmit}>
         <textarea
+          className={styles.form}
           rows={4}
           cols={50}
           name="message"
