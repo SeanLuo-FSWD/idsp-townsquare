@@ -103,7 +103,12 @@ const Post = (props: any) => {
     <div className={styles.postContainer}>
       <div key={props.post.postId} className={styles.post}>
         <div className="flex--space-left">
-          <img className="flex-item" src={user}></img>
+          {/* <img className="flex-item" src={user}></img> */}
+          <img
+            src={props.post.user.img}
+            alt="img"
+            className={styles.postWrapper__img}
+          />
           <h4 className={styles.flexItem}>{props.post.username}</h4>
           <h4 className="flex--space-right">{props.post.createdAt}</h4>
         </div>

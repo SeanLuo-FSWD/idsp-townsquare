@@ -1,18 +1,29 @@
 .header {
-    background-color: #92002f;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 20;
-    max-width: 600px;
-    margin: 0;
-    border-bottom-left-radius: .1rem;
-    border-bottom-right-radius: .1rem;
-    padding: 0px 10px;
+  background-color: #92002f;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  max-width: 600px;
+  margin: 0;
+  border-bottom-left-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
+  padding: 0px 10px;
+}
 
+.peopleNav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  max-width: 600px;
+  margin: 0;
+  border-bottom-left-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
+  /* padding: 0px 10px; */
+  display: flex;
 }
 
 .userContainer {
-    margin-top: 150px;
-
+  margin-top: 150px;
 }

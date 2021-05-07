@@ -89,7 +89,7 @@ const FeedPg = (props: any) => {
           {feed.map((post: any) => {
             return (
               <div key={post.id} className={styles.postWrapper}>
-                <div className="flex--space-between">
+                {/* <div className="flex--space-between">
                   <div
                     className="flex"
                     onClick={() => profileRedirect(post.userId)}
@@ -102,7 +102,7 @@ const FeedPg = (props: any) => {
                     <h4>{post.username}</h4>
                   </div>
                   <h4>{post.createdAt}</h4>
-                </div>
+                </div> */}
                 <Post post={post}></Post>
               </div>
             );
