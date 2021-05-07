@@ -38,11 +38,12 @@ body {
 }
 
 .postWrapper {
-  border-style: solid;
+
   border-width: thin;
 }
 
 .postWrapper__img {
   height: 50px;
   width: 50px;
+  border-radius: 100%;
 }
