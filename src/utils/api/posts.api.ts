@@ -88,6 +88,7 @@ const fetchFeed = async (f_filter: any, cb: Function) => {
   }
 
   filtered_posts = feed_filter_posts;
+  //// ==================================== all above objectified
 
   const pf = f_filter.people;
   filtered_posts = filtered_posts.filter((p: any) => {

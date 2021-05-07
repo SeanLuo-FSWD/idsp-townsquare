@@ -115,7 +115,6 @@ const FeedPg = (props: any) => {
 // export default FeedPg;
 
 const mapStateToProps = (state: any) => {
-  // const errState = state.filterState ? state.filterState.error : null;
   return {
     feedPg: state.filterState.feedPg,
     error: state.filterState.error,

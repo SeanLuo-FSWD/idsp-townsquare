@@ -24,14 +24,14 @@ const PeoplePg = (props: any) => {
   } = useContext(LoginContext);
 
   useEffect(() => {
-    fetchPeople((err: Error, result: any) => {
+    fetchPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
         setPeople(result);
       }
     });
-  }, []);
+  }, [props.peoplePg]);
 
   const filterPeopleProp = (result: any) => {
     setPeople(result);
@@ -55,7 +55,7 @@ const PeoplePg = (props: any) => {
         <div className={`flex--space-around ${styles.SubNavWrap}`}>
           <h2>{currentUser.username}</h2>
           <button
-            className={props.feedFilter && styles.applied}
+            className={`${props.peoplePg.applied ? styles.applied : ""}`}
             onClick={() => setShowModal("filter")}
           >
             Filter
@@ -78,9 +78,8 @@ const PeoplePg = (props: any) => {
 // export default PeoplePg;
 
 const mapStateToProps = (state: any) => {
-  // const errState = state.filterState ? state.filterState.error : null;
   return {
-    peopleFilter: state.filterState.people,
+    peoplePg: state.filterState.peoplePg,
     error: state.filterState.error,
   };
 };

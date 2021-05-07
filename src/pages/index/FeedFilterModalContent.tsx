@@ -12,6 +12,8 @@ import FeedFilter from "../../components/Filter/FeedFilter";
 import {
   doFeedFilterUpdate,
   doFeedFilterRemove,
+  doPeopleFilterUpdate,
+  doPeopleFilterRemove,
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
 

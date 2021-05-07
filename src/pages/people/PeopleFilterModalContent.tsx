@@ -10,6 +10,8 @@ import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
 import {
+  doPeopleFilterUpdate,
+  doPeopleFilterRemove,
   doFeedFilterUpdate,
   doFeedFilterRemove,
 } from "../../store/redux/actions/filter_act";
@@ -21,16 +23,21 @@ function PeopleFilterModalContent(props: any) {
   );
 
   const [showFeedFilter, setShowFeedFilter] = useState(false);
-  const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
-  const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
+  const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
+  const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
+
+  const [hasSync, setHasSync] = React.useState(props.peoplePg.applyOtherPg);
+
+  const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHasSync(event.target.checked);
+    feedFilterProps({ hasSync: event.target.checked });
+  };
 
   const peopleFilterProps = (ppl_filter: any) => {
-    // setPeopleFilter(ppl_filter);
     const key_name_pair = Object.entries(ppl_filter)[0];
-    // setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
 
     setPeopleFilter({
-      ...props.feedPg.people,
+      ...props.peoplePg.people,
       [key_name_pair[0]]: key_name_pair[1],
     });
   };
@@ -38,40 +45,30 @@ function PeopleFilterModalContent(props: any) {
   const feedFilterProps = (post_filter: Object) => {
     const key_name_pair = Object.entries(post_filter)[0];
     setFeedFilter({
-      ...props.feedPg.feed,
+      ...props.peoplePg.feed,
       [key_name_pair[0]]: key_name_pair[1],
     });
-    // setFeedFilter({
-    //   ...props.feedPg,
-    //   feed: {
-    //     ...props.feedPg.feed,
-    //     [key_name_pair[0]]: key_name_pair[1],
-    //   },
-    // });
   };
 
   const onPeopleFilterClick = () => {
-    // const f_filter_obj = {
-    //   feedFilter: feedFilter,
-    //   peopleFilter: peopleFilter,
-    // };
-
-    console.log("444444444444444444");
-    console.log("444444444444444444");
-
-    console.log(feedFilter);
-    console.log(peopleFilter);
-
-    const feedPgSlice = {
-      feedPg: {
+    const peoplePgSlice = {
+      peoplePg: {
         applied: true,
         people: peopleFilter,
         feed: feedFilter,
       },
     };
 
-    console.log(feedPgSlice);
-    props.onFeedFilterSubmit(feedPgSlice);
+    console.log(peoplePgSlice);
+    props.onPeopleFilterSubmit(peoplePgSlice);
+
+    console.log("ddddddddddddddddddddddd");
+    console.log("ddddddddddddddddddddddd");
+    console.log(hasSync);
+
+    // if (hasSync) {
+    //   props.onFeedFilterSubmit(peoplePgSlice);
+    // }
 
     setModalProps(null);
     setShowModal("");
@@ -86,7 +83,7 @@ function PeopleFilterModalContent(props: any) {
     <div>
       <PeopleFilter
         peopleFilterProps={peopleFilterProps}
-        feedPg_People={props.feedPg.people}
+        feedPg_People={props.peoplePg.people}
       />
 
       <div className="flex">
@@ -108,8 +105,7 @@ function PeopleFilterModalContent(props: any) {
       {showFeedFilter && (
         <FeedFilter
           feedFilterProps={feedFilterProps}
-          // feedFilterSaved={props.feedPg ? props.feedPg.feedFilter : {}}
-          feedPg_Feed={props.feedPg.feed}
+          feedPg_Feed={props.peoplePg.feed}
         />
       )}
 
@@ -119,11 +115,21 @@ function PeopleFilterModalContent(props: any) {
           onClick={() => {
             setModalProps(null);
             setShowModal("");
-            props.onFeedFilterRemove();
+            props.onPeopleFilterRemove();
           }}
         >
           Cancel
         </button>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={hasSync}
+              onChange={handleHasSyncFilter}
+              name="Have_image"
+            />
+          }
+          label="Apply to Feed page"
+        />
       </div>
     </div>
   );
@@ -131,23 +137,19 @@ function PeopleFilterModalContent(props: any) {
 
 // export default FeedFilterModalContent;
 const mapStateToProps = (state: any) => {
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-  console.log(state.filterState.feedPg);
-
   return {
-    feedPg: state.filterState.feedPg,
+    peoplePg: state.filterState.peoplePg,
     error: state.filterState.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
+    onPeopleFilterSubmit: (peoplePgSlice: any) =>
+      dispatch(doPeopleFilterUpdate(peoplePgSlice)),
     onFeedFilterSubmit: (feedPgSlice: any) =>
       dispatch(doFeedFilterUpdate(feedPgSlice)),
-
-    onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
+    onPeopleFilterRemove: () => dispatch(doPeopleFilterRemove()),
   };
 };
 

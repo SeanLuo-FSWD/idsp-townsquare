@@ -15,6 +15,7 @@ import IFilter from "../../../interfaces/redux";
 const INITIAL_STATE: any = {
   feedPg: {
     applied: false,
+    applyOtherPg: false,
     people: {
       age: [0, 100],
       gender: ["female", "male", "other"],
@@ -28,6 +29,7 @@ const INITIAL_STATE: any = {
   },
   peoplePg: {
     applied: false,
+    applyOtherPg: false,
     people: {
       age: [0, 100],
       gender: ["female", "male", "other"],
@@ -50,6 +52,11 @@ function filterReducer(filterState = INITIAL_STATE, action: FilterActionTypes) {
     }
     case FEED_FILTER_UPDATE: {
       console.log("FEED_FILTER_UPDATE");
+      console.log("FEED_FILTER_UPDATE");
+
+      console.log("FEED_FILTER_UPDATE");
+      console.log("FEED_FILTER_UPDATE");
+
       console.log(action);
 
       const filterStore = { ...filterState, feedPg: action.filter.feedPg };

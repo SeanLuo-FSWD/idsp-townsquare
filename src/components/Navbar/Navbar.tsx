@@ -53,6 +53,15 @@ function Navbar(props: any) {
       </div>
       <div
         className={
+          props.currentPath == "/chat"
+            ? `${styles.navBar__item} ${styles.active}`
+            : `${styles.navBar__item}`
+        }
+      >
+        <Link to="/chat">Chat</Link>
+      </div>
+      <div
+        className={
           props.currentPath == "/profile"
             ? `${styles.navBar__item} ${styles.active}`
             : `${styles.navBar__item}`
@@ -60,9 +69,9 @@ function Navbar(props: any) {
       >
         <Link to="/profile">Profile</Link>
       </div>
-      <div className={styles.navBar__item}>
+      {/* <div className={styles.navBar__item}>
         <button onClick={handleLogout}>Logout</button>
-      </div>
+      </div> */}
     </div>
   );
 }

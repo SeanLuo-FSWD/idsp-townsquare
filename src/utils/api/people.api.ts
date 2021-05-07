@@ -3,7 +3,9 @@ import axios from "axios";
 import { users, posts } from "../../FakeDb/FakeDb";
 import _ from "lodash";
 
-const fetchPeople = (cb: Function) => {
+import { DbHelper } from "./_dbHelper";
+
+const fetchPeople = (peoplePg: any, cb: Function) => {
   // axios
   //   .get(`${MOCK_URL}/ts/allusers`)
   //   .then((response) => {
@@ -16,8 +18,48 @@ const fetchPeople = (cb: Function) => {
   //     console.log(error);
   //     cb(error);
   //   });
+  console.log("sssssssssssssssssssssssss");
+  console.log("sssssssssssssssssssssssss");
+  console.log(peoplePg);
 
-  cb(null, users);
+  if (!peoplePg.applied) {
+    cb(null, users);
+  }
+
+  let db_helper = new DbHelper(peoplePg);
+
+  let feed_filter_posts = db_helper.getPostFromPost();
+
+  let desired_users: any[] = [];
+
+  console.log("vvvvvvvvvvvvvvvvvvv");
+  console.log("vvvvvvvvvvvvvvvvvvv");
+  console.log(feed_filter_posts);
+  if (peoplePg.feed.keywords.length != 0 || peoplePg.feed.hasImg) {
+    for (let i = 0; i < feed_filter_posts.length; i++) {
+      for (let j = 0; j < users.length; j++) {
+        if (feed_filter_posts[i].userId === users[j].id) {
+          desired_users.push(users[j]);
+        }
+      }
+    }
+  } else {
+    desired_users = users;
+  }
+
+  console.log("55555555555555555");
+  console.log("55555555555555555");
+  console.log(desired_users);
+
+  desired_users = desired_users.filter((u) => {
+    return db_helper.checkPersonFromPerson(u);
+  });
+
+  console.log("3333333333333333");
+  console.log("3333333333333333");
+  console.log(desired_users);
+
+  cb(null, desired_users);
 };
 
 const fetchPerson = (id: string, cb: Function) => {

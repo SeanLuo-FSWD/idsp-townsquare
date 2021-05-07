@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Profile.module.scss";
 import _, { String } from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
+import { logout } from "../../utils/api/auth.api";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
@@ -20,8 +21,14 @@ function Profile() {
   //   const [pwRetype, setPwRetype] = useState(false);
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
-  const { currentUser, setCerror } = useContext(LoginContext);
-
+  const {
+    setUsername,
+    currentUser,
+    setCurrentUser,
+    setCerror,
+    setIsAuthenticated,
+    setUserId,
+  } = useContext(LoginContext);
   useEffect(() => {
     fetchPerson(currentUser.id, (err: Error, result: any) => {
       if (err) {
@@ -82,6 +89,22 @@ function Profile() {
     setPerson({ ...person, ["img"]: img_src });
   }
 
+  function handleLogout() {
+    logout((err: Error, result: any) => {
+      if (err) {
+        console.log(err);
+        setCerror(err.message);
+      } else {
+        setCerror("");
+        setCurrentUser(null);
+
+        setUsername("");
+        setUserId("");
+        setIsAuthenticated(false);
+      }
+    });
+  }
+
   if (person.id) {
     const ageArr = [];
     for (let i = 1; i <= 100; i++) {
@@ -93,7 +116,8 @@ function Profile() {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <h2>Update Profile</h2>
+            <h2>{currentUser.username}</h2>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         </SubNav>
 
