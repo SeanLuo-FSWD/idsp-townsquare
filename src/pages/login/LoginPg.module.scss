@@ -1,0 +1,137 @@
+
+
+    /*
+    .devInfo is going to be removed
+    */
+
+    .devInfo {
+        font-size: 8px;
+    }
+
+    .townSquareTitle {
+        font-family: sans-serif;
+        font-size: 100px;
+
+    }
+
+    .loginForm {
+        width: 100%;
+    }
+
+    .inputField {
+        position: relative;
+        max-width: 225px;
+        margin: 10px 0px;
+        width: 75%;
+        padding: 7px;
+        height: 1.5em;
+        border-radius: 10px;
+        color: white;
+        border-color: white;
+        border-style: solid;
+        border-width: 2px;
+        background-color: #92002F;
+        font-family: 'Poppins', sans-serif;
+
+    }
+
+    ::placeholder {
+        color: white;
+        opacity: 1;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+       
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .labelText {
+        font-size: 24px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .noAccount {
+        position: relative;
+        top: 10px;
+        bottom: 20px;
+        padding: 20px;
+    }
+
+    .logo {
+        min-width: 100px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+        height: auto;
+        border-radius: 18px; /* 5px rounded corners */
+    }
+
+    .card {
+        text-align: center;
+        color: white;
+        background-color: #92002F;
+        /* Add shadows to create the "card" effect */
+        transition: 0.3s;
+        width: auto;
+        height: 100%;
+
+
+      }
+
+      
+      /* Add some padding inside the card container */
+      .container {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .loginButton {
+          font-size: 28px;
+          position: relative;
+          top: 20px;
+          bottom: 20px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-right: 100px;
+          padding-left: 100px;
+          border-color: white;
+          border-style: none;
+          border-radius: 50px; /* 5px rounded corners */
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          max-width: 300px;
+          margin: auto;
+      }
+
+      .registerButton {
+        font-size: 18px;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-right: 3em;
+        padding-left: 3em;
+        border-radius: 50px; /* 5px rounded corners */
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        border-color: white;
+        border-style: solid;
+        border-width: 2px;
+
+        background-color: #92002F;
+
+      }
+
+      .link {
+          text-decoration: none;
+          color: white;
+      }
+
+
+

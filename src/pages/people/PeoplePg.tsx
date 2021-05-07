@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { fetchPeople } from "../../utils/api/people.api";
+import styles from "./peoplePg.module.scss";
 import UserGrid from "../../components/Users/UserGrid";
 import Error from "../../components/Error/Error";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
-import styles from "./PeoplePg.module.scss";
 import { connect } from "react-redux";
 import Modal from "../../UI/Modal";
+import filter from "./filter.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
 const PeoplePg = (props: any) => {
@@ -52,18 +53,16 @@ const PeoplePg = (props: any) => {
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav>
-        <div className={`flex--space-around ${styles.SubNavWrap}`}>
-          <h2>{currentUser.username}</h2>
-          <button
-            className={`${props.peoplePg.applied ? styles.applied : ""}`}
-            onClick={() => setShowModal("filter")}
-          >
-            Filter
-          </button>
+        <div className={styles.header}>
+          <p>Explore users near you!</p>
+          <p>Welcome: {currentUser.username} </p>
+          <img src={filter} onClick={() => setShowModal("filter")} />
         </div>
       </SubNav>
 
-      <UserGrid people={people} />
+      <div className={styles.userContainer}>
+        <UserGrid people={people} />
+      </div>
       {showModal
         ? showModal === "filter" && (
             <Modal>

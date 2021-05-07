@@ -1,16 +1,42 @@
 .navBar {
-  padding: 20px;
+
   background-color: #92002f;
-  position: sticky;
-  top: 0px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   z-index: 20;
+  max-width: 600px;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: .7rem 1.7rem;
+  border-top-left-radius: .1rem;
+  border-top-right-radius: .1rem;
 
   .navBar__item a {
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 1.2em;
+    margin: 0;
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
   }
 
   .active {
-    background-color: blue;
+    background-color: rgba(187, 96, 96, 0.39);
+    position: relative;
+    border-radius: 5px;
+    padding: 0.2rem;
   }
+
 }
+
+.home {
+  font-size: 10px;
+}
+
+
+

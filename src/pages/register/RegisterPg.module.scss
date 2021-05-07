@@ -1,0 +1,171 @@
+body {
+    background-color: #E5E5E5;
+}
+
+    /*
+    .devInfo is going to be removed
+    */
+    
+    .devInfo {
+        font-size: 8px;
+    }
+
+    .backgroundSquare {
+        background-color: #92002F;
+        padding: 20px 0px 50px 0px; 
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        
+    }
+
+    .alreadyHaveAccount {
+        color: #85171B;
+        font-size: 20px;
+
+    }
+
+    .loginButtonContainer {
+        position: relative;
+        top: 30px;
+    }
+
+    .signUpTitle {
+        font-family: 'Poppins', sans-serif;
+
+    }
+
+    .loginForm {
+        width: 100%;
+    }
+
+    .inputForm {
+        text-align: left;
+        width: 75%;
+        padding: 7px;
+        margin: .75em 3em .75em 3em;
+        height: 1.5em;
+        border-radius: 10px;
+        color: white;
+        border-color: white;
+        border-style: solid;
+        border-width: 2px;
+        background-color: #92002F;
+        font-family: 'Poppins', sans-serif;
+        
+
+    }
+
+    .inputForm {
+        max-width: 225px;
+    }
+
+    .form {
+        text-align: left;
+        
+        width: 75%;
+        padding: 7px;
+        margin: .75em 3em .75em 3em;
+        height: 1.5em;
+        border-radius: 10px;
+        color: white;
+        border-color: white;
+        border-style: solid;
+        border-width: 2px;
+        background-color: #92002F;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    ::placeholder {
+        color: white;
+        opacity: 1;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+       
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .labelText {
+        font-size: 24px;
+        text-align: left;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .logo {
+        display: block;
+        min-width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+
+        width: 25%;
+        height: auto;
+        border-radius: 18px; /* 5px rounded corners */
+    }
+
+    .card {
+        text-align: center;
+        color: white;
+        background-color: #E5E5E5;
+        /* Add shadows to create the "card" effect */
+        transition: 0.3s;
+        width: auto;
+        height: 100%;
+
+
+      }
+
+
+
+      
+      /* Add some padding inside the card container */
+      .container {
+        margin: 0;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .registerButton {
+        font-size: 18px;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-right: 5em;
+        padding-left: 5em;
+        border-color: white;
+        border-style: none;
+        border-radius: 50px; /* 5px rounded corners */
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+
+      .backToSignUp {
+        font-size: 18px;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-right: 3em;
+        padding-left: 3em;
+        border-radius: 50px; /* 5px rounded corners */
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        border-color: white;
+        border-style: none;
+        border-width: 2px;
+        color: white;
+        background-color: #45393D;
+        ;
+
+      }
+
+
+      .link {
+          text-decoration: none;
+          color: white;
+      }
+
+
+

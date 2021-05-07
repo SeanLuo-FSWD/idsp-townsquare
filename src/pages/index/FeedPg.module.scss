@@ -1,8 +1,36 @@
 .SubNavWrap {
   height: 100%;
   h2 {
-    margin: 0;
+    margin: 1rem 0rem;
   }
+  
+}
+
+.logo {
+  min-width: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10px;
+  height: auto;
+  border-radius: 8px;
+
+}
+
+body {
+  background: #e4dee0;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  
+}
+
+.createPost {
+  color: white;
 }
 
 .applied {

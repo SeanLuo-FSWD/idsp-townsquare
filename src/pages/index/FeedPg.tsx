@@ -6,6 +6,9 @@ import { fetchFeed } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import createPost from "./createPost.svg";
+import filter from "./filter.svg";
+import townSquareLogo from "./townSquareLogo.png";
 import _ from "lodash";
 import { Filter } from "@material-ui/icons";
 import FeedFilter from "../../components/Filter/FeedFilter";
@@ -67,29 +70,23 @@ const FeedPg = (props: any) => {
       <>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <h2>{currentUser.username}</h2>
-            <button onClick={() => setShowModal("postUpload")}>
-              Upload Post
-            </button>
+          <div className={`flex--space-subNav ${styles.SubNavWrap}`}>
+            <div className={styles.username}>
+              <img className={styles.logo} src={townSquareLogo} />
+            </div>
 
-            <button
-              // className={props.feedPg.applied && styles.applied}
-              className={`${props.feedPg.applied ? styles.applied : ""}`}
-              onClick={() => setShowModal("filter")}
-            >
-              Filter
-            </button>
+            <img
+              className={styles.createPost}
+              src={createPost}
+              onClick={() => setShowModal("postUpload")}
+            />
+            <img src={filter} onClick={() => setShowModal("filter")} />
           </div>
         </SubNav>
         <div>
           {/* <Feed feed={feed} /> */}
 
           {feed.map((post: any) => {
-            console.log("55555555555555555");
-            console.log("55555555555555555");
-            console.log(post);
-
             return (
               <div key={post.id} className={styles.postWrapper}>
                 <div className="flex--space-between">

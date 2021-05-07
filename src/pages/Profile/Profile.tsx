@@ -123,7 +123,7 @@ function Profile() {
 
         <div>
           <div>
-            <div className={`flex`}>
+            <div  className={styles.container}>
               <img className={styles.profileImg} src={person.img} alt="" />
               <button data-edit="editImg" onClick={handleEditOpen}>
                 Edit

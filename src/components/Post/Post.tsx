@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
 import { useHistory } from "react-router-dom";
 import styles from "./Post.module.scss";
+import user from "./user.svg";
+import comments from "./comments.svg";
 import ImageSlider from "../../UI/ImageSlider";
 import {
   fetchFeed,
@@ -98,61 +100,67 @@ const Post = (props: any) => {
   }
 
   return (
-    <div key={props.post.postId} className={styles.post}>
-      {/* <div className="flex--space-between">
-        <h4 onClick={profileRedirect}>{props.post.username}</h4>
-        <h4>{props.post.createdAt}</h4>
-      </div> */}
-      {/* <h2>{props.title}</h2> */}
-      <h5 style={{ paddingLeft: "20px" }}>{props.post.message}</h5>
-
-      <ImageSlider slides={props.post.img_urls} />
-      <div className="flex--space-between">
-        <div className="flex">
-          {checkLiked() ? (
-            <ThumbUpIcon
-              onClick={() => {
-                handleLike(false);
-              }}
-            />
-          ) : (
-            <ThumbUpAltOutlinedIcon
-              onClick={() => {
-                handleLike(true);
-              }}
-            />
-          )}
-          <PostLike like_arr={likes} />
+    <div className={styles.postContainer}>
+      <div key={props.post.postId} className={styles.post}>
+        <div className="flex--space-left">
+          <img className="flex-item" src={user}></img>
+          <h4 className={styles.flexItem}>{props.post.username}</h4>
+          <h4 className="flex--space-right">{props.post.createdAt}</h4>
         </div>
-        <div>
-          <h4
-            style={{ textDecoration: "underline" }}
-            onClick={() => setCommentsVisible(!commentsVisible)}
-          >
-            See comments
-          </h4>
+
+        <div className={styles.textContainer}>
+          <h2>{props.title}</h2>
+          <h5>{props.post.message}</h5>
+        </div>
+
+        <ImageSlider slides={props.post.img_urls} />
+
+        <div className={styles.textContainer}>
+          <div className="flex--space-between">
+            <div className="flex">
+              {checkLiked() ? (
+                <ThumbUpIcon
+                  onClick={() => {
+                    handleLike(false);
+                  }}
+                />
+              ) : (
+                <ThumbUpAltOutlinedIcon
+                  onClick={() => {
+                    handleLike(true);
+                  }}
+                />
+              )}
+              <PostLike like_arr={likes} />
+            </div>
+
+            <img
+              src={comments}
+              onClick={() => setCommentsVisible(!commentsVisible)}
+            />
+          </div>
+
+          {commentsVisible && (
+            <div>
+              <form onSubmit={commentSubmit}>
+                <input
+                  type="text"
+                  id="comment"
+                  name="comment"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <button type="submit">add Comment</button>
+              </form>
+              <div>
+                {commentList.map((c: TComment) => {
+                  return <PostComment key={c.id} {...c} />;
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {commentsVisible && (
-        <div>
-          <form onSubmit={commentSubmit}>
-            <input
-              type="text"
-              id="comment"
-              name="comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <button type="submit">add Comment</button>
-          </form>
-          <div>
-            {commentList.map((c: TComment) => {
-              return <PostComment key={c.id} {...c} />;
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
