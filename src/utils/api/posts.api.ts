@@ -38,17 +38,29 @@ const postCreate = (fake_post: any, cb: Function) => {
 const fetchFeed = async (f_filter: any, cb: Function) => {
   let filtered_posts: any = [];
   let desired_posts: any = [];
-  console.log("2222222222222222");
+  console.log("ggggggggggggggggggggggg");
+  console.log("ggggggggggggggggggggggg");
   console.log(f_filter);
 
   if (f_filter) {
     if (f_filter.feedFilter && Object.keys(f_filter.feedFilter).length !== 0) {
+      let feed_filter_posts = [];
       if (f_filter.feedFilter.keywords) {
+        let kw_posts = [];
+        console.log("1111111111111111111111");
+        console.log(f_filter.feedFilter.keywords);
+
         const kw_arr = f_filter.feedFilter.keywords;
         for (let i = 0; i < posts.length; i++) {
           let alive = true;
           for (let j = 0; j < kw_arr.length; j++) {
+            console.log("2222222222222222");
+            console.log(posts[i].message);
+            console.log(kw_arr[j]);
+
             if (posts[i].message.includes(kw_arr[j])) {
+              console.log("3333333333333333");
+
               continue;
             } else {
               alive = false;
@@ -57,36 +69,33 @@ const fetchFeed = async (f_filter: any, cb: Function) => {
           }
 
           if (alive) {
-            filtered_posts.push(posts[i]);
+            console.log("444444444444444444");
+            kw_posts.push(posts[i]);
           }
         }
+
+        feed_filter_posts = kw_posts;
       } else {
-        filtered_posts = posts;
+        feed_filter_posts = posts;
       }
 
       if (f_filter.feedFilter.hasImg) {
-        filtered_posts = filtered_posts.filter((post: any) => {
+        feed_filter_posts = feed_filter_posts.filter((post: any) => {
           return post.img_urls.length > 0;
         });
       }
+
+      filtered_posts = feed_filter_posts;
     }
 
     if (f_filter && f_filter.peopleFilter) {
       const pf = f_filter.peopleFilter;
-      filtered_posts = posts.filter((p: any) => {
+      filtered_posts = filtered_posts.filter((p: any) => {
         // get Person
-        console.log("3333333333333333");
-        console.log(filtered_posts);
-        console.log(p);
 
         let user = users.find((u) => u.id == p.userId);
 
         if (user) {
-          console.log("444444444444444444");
-
-          console.log(user);
-          console.log(pf);
-
           //perform all logic for that p
           let ageCondition = true;
           let genderCondition = true;
@@ -98,16 +107,7 @@ const fetchFeed = async (f_filter: any, cb: Function) => {
             genderCondition = pf.gender.includes(user.gender);
           }
           if (pf.location) {
-            console.log("55555555555555555");
-            console.log("55555555555555555");
-            console.log(pf.location);
-            console.log(user.location);
-
             locCondition = pf.location.includes(user.location);
-            console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-            console.log(ageCondition);
-            console.log(genderCondition);
-            console.log(locCondition);
           }
 
           // if (pf.followed) {
@@ -155,7 +155,7 @@ const fetchFeed = async (f_filter: any, cb: Function) => {
   }
 
   console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log("desired posts");
   console.log(desired_posts);
 
   cb(null, desired_posts);
