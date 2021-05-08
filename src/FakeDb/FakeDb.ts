@@ -8,7 +8,7 @@ const db = {
       gender: "male",
       location: "Burnaby",
       last_login: new Date().toDateString(),
-      followed: ["2", "3", "4"],
+      followed: ["2", "3"],
       password: "bob@bob.com",
       img:
         "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",

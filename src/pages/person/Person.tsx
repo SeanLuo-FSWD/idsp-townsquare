@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import UserInfo from "./UserInfo";
-import { fetchPerson } from "../../utils/api/people.api";
+import { fetchPerson, userFollow } from "../../utils/api/people.api";
 import Error from "../../components/Error/Error";
 import Feed from "../../components/Feed/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
@@ -12,18 +12,13 @@ import styles from "./Person.module.scss";
 import { useHistory } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import _ from "lodash";
+import SubNav from "../../components/Navbar/SubNav";
 
 function Person() {
   const history = useHistory();
   const { id } = useParams() as any;
   const [person, setPerson] = useState(null) as any;
-  const {
-    showModal,
-    setShowModal,
-    modalProps,
-    setModalProps,
-    setCerror,
-  } = useContext(LoginContext);
+  const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
   useEffect(() => {
     fetchPerson(id, (err: Error, result: any) => {
@@ -50,18 +45,52 @@ function Person() {
     });
   };
 
-  console.log("eeeeeeeeeeeeeeeeeeeeee");
-  console.log("eeeeeeeeeeeeeeeeeeeeee");
-  console.log(person);
+  const onFollowHandle = (userId: string, follow: boolean) => {
+    userFollow(userId, follow, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        let newFollowArr = [];
+        if (!follow) {
+          console.log("unfollow unfollow");
+          console.log(follow);
+
+          newFollowArr = _.filter(currentUser.followed, (f) => f !== userId);
+          console.log(newFollowArr);
+        } else {
+          console.log("follow follow");
+          console.log(follow);
+          newFollowArr = [...currentUser.followed, userId];
+          console.log(newFollowArr);
+        }
+
+        const newUser = { ...currentUser, followed: newFollowArr };
+        setCurrentUser(newUser);
+      }
+    });
+  };
 
   if (person) {
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
+        <SubNav className="flex--space-between">
+          <button onClick={history.goBack}>Back</button>
+          {person.id !== currentUser.id ? (
+            currentUser.followed.includes(person.id) ? (
+              <button onClick={() => onFollowHandle(person.id, false)}>
+                Unfollow
+              </button>
+            ) : (
+              <button onClick={() => onFollowHandle(person.id, true)}>
+                Follow
+              </button>
+            )
+          ) : null}
+        </SubNav>
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
-        <button onClick={history.goBack}>Back</button>
         <div className="flex">
           <img className={styles.profileImg} src={person.img} alt="" />
           <div>
@@ -77,13 +106,16 @@ function Person() {
             <div key={post.id} className={styles.postWrapper}>
               <div className="flex">
                 <h4>{post.createdAt}</h4>
-                <button
-                  onClick={() => {
-                    onRemovePost(post.id);
-                  }}
-                >
-                  Delete
-                </button>
+
+                {post.userId === currentUser.id && (
+                  <button
+                    onClick={() => {
+                      onRemovePost(post.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
 
               <Post post={post}></Post>
