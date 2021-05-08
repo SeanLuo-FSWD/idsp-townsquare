@@ -99,9 +99,6 @@ const Post = (props: any) => {
     return liked;
   }
 
-  console.log("Post component -- props.post");
-  console.log(props.post);
-
   return (
     <div className={styles.postContainer}>
       <div key={props.post.id} className={styles.post}>

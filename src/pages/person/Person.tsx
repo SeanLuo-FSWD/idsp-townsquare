@@ -13,12 +13,31 @@ import { useHistory } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
+import { useOnFollowHandle } from "../../helper/follow";
 
 function Person() {
   const history = useHistory();
   const { id } = useParams() as any;
   const [person, setPerson] = useState(null) as any;
+  const [followState, SetFollowState] = useState(null) as any;
+
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
+
+  const newUser = useOnFollowHandle(followState);
+
+  useEffect(() => {
+    console.log("useEfect rerendered after newUser?");
+    console.log("2222222222222222");
+    console.log(newUser);
+    console.log(followState);
+    if (newUser) {
+      console.log("if follow state is set, user is...");
+      console.log(newUser);
+      // setCurrentUser(newUser);
+      SetFollowState(null);
+      setCurrentUser(newUser);
+    }
+  });
 
   useEffect(() => {
     fetchPerson(id, (err: Error, result: any) => {
@@ -29,6 +48,12 @@ function Person() {
       }
     });
   }, []);
+
+  const onFollowHandle = (userId: string, follow: boolean) => {
+    console.log("00000");
+
+    SetFollowState({ userId: userId, follow: follow });
+  };
 
   const onRemovePost = (postId: string) => {
     postRemove(postId, (err: Error, result: any) => {
@@ -45,30 +70,30 @@ function Person() {
     });
   };
 
-  const onFollowHandle = (userId: string, follow: boolean) => {
-    userFollow(userId, follow, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        let newFollowArr = [];
-        if (!follow) {
-          console.log("unfollow unfollow");
-          console.log(follow);
+  // const onFollowHandle = (userId: string, follow: boolean) => {
+  //   userFollow(userId, follow, (err: Error, result: any) => {
+  //     if (err) {
+  //       setCerror(err.message);
+  //     } else {
+  //       let newFollowArr = [];
+  //       if (!follow) {
+  //         console.log("unfollow unfollow");
+  //         console.log(follow);
 
-          newFollowArr = _.filter(currentUser.followed, (f) => f !== userId);
-          console.log(newFollowArr);
-        } else {
-          console.log("follow follow");
-          console.log(follow);
-          newFollowArr = [...currentUser.followed, userId];
-          console.log(newFollowArr);
-        }
+  //         newFollowArr = _.filter(currentUser.followed, (f) => f !== userId);
+  //         console.log(newFollowArr);
+  //       } else {
+  //         console.log("follow follow");
+  //         console.log(follow);
+  //         newFollowArr = [...currentUser.followed, userId];
+  //         console.log(newFollowArr);
+  //       }
 
-        const newUser = { ...currentUser, followed: newFollowArr };
-        setCurrentUser(newUser);
-      }
-    });
-  };
+  //       const newUser = { ...currentUser, followed: newFollowArr };
+  //       setCurrentUser(newUser);
+  //     }
+  //   });
+  // };
 
   if (person) {
     return (

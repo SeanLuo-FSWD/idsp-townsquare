@@ -18,10 +18,9 @@ import FeedFilterModalContent from "./FeedFilterModalContent";
 import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory } from "react-router-dom";
-import { userFollow } from "../../utils/api/people.api";
+import { useOnFollowHandle } from "../../helper/follow";
 
 const FeedPg = (props: any) => {
-  const [feed, setFeed] = useState(null) as any;
   const {
     currentUser,
     showModal,
@@ -29,6 +28,17 @@ const FeedPg = (props: any) => {
     setCerror,
     setCurrentUser,
   } = useContext(LoginContext);
+  const [feed, setFeed] = useState(null) as any;
+  const [followState, SetFollowState] = useState(null) as any;
+
+  const newUser = useOnFollowHandle(followState);
+
+  useEffect(() => {
+    if (newUser) {
+      SetFollowState(null);
+      setCurrentUser(newUser);
+    }
+  });
 
   const history = useHistory();
 
@@ -45,25 +55,8 @@ const FeedPg = (props: any) => {
   }, [props.feedPg]);
 
   const addPostProp = (result: any) => {
-    console.log("addPostProp called?");
-    console.log("3333333333333333");
-    console.log(feed);
-
     setFeed(_.concat(result, feed));
-    // fetchFeed(props.feedPg, (err: Error, result: any) => {
-    //   if (err) {
-    //     setCerror(err.message);
-    //     return;
-    //   } else {
-    //     setFeed(result);
-    //     return;
-    //   }
-    // });
   };
-
-  // const filterPostProp = (result: any) => {
-  //   setFeed(result);
-  // };
 
   function profileRedirect(userId: string) {
     history.push(`/person/${userId}`);
@@ -81,35 +74,10 @@ const FeedPg = (props: any) => {
   };
 
   const onFollowHandle = (userId: string, follow: boolean) => {
-    userFollow(userId, follow, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        let newFollowArr = [];
-        if (!follow) {
-          console.log("unfollow unfollow");
-          console.log(follow);
-
-          newFollowArr = _.filter(currentUser.followed, (f) => f !== userId);
-          console.log(newFollowArr);
-        } else {
-          console.log("follow follow");
-          console.log(follow);
-          newFollowArr = [...currentUser.followed, userId];
-          console.log(newFollowArr);
-        }
-
-        const newUser = { ...currentUser, followed: newFollowArr };
-        setCurrentUser(newUser);
-      }
-    });
+    SetFollowState({ userId: userId, follow: follow });
   };
 
   if (feed) {
-    console.log("ggggggggggggggggggggggg");
-    console.log("eeeeeeeeeeeeeeeeeeeeee");
-    console.log(currentUser);
-
     return (
       <>
         <Navbar currentPath={window.location.pathname} />
