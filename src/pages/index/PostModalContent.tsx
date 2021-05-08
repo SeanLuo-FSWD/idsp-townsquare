@@ -61,6 +61,7 @@ function PostModalContent({ addPostProp }: any) {
     setShowModal("");
     setModalProps(null);
 
+    // DO NOT DELETE
     // postCreate(bodyFormData, (err: Error, result: IPost[]) => {
     //   if (err) {
     //     setCerror(err.message);
@@ -69,8 +70,7 @@ function PostModalContent({ addPostProp }: any) {
     //     setFeed(_.concat(result, feed));
     //   }
     // });
-
-    // Faking the post here, above commented is the actual method
+    // Faking the post here, above commented is the ACTUAL method
 
     const img_urls = modalProps ? modalProps.src_arr : [];
     let fake_post = {
@@ -81,17 +81,9 @@ function PostModalContent({ addPostProp }: any) {
       message: message,
       userId: currentUser.id,
       username: currentUser.username,
-      user: {
-        img:
-          "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
-        username: "bob",
-      },
       img_urls: img_urls,
     };
-    postCreate(fake_post, (err: Error, result: IPost[]) => {
-      console.log("fake_post fake_post fake_post");
-      console.log(fake_post.img_urls);
-
+    postCreate(fake_post, currentUser, (err: Error, result: IPost[]) => {
       if (err) {
         setCerror(err.message);
       } else {
@@ -100,6 +92,7 @@ function PostModalContent({ addPostProp }: any) {
         addPostProp(result);
       }
     });
+
     setMessage("");
   };
 

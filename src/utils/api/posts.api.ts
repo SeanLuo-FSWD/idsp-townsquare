@@ -1,10 +1,10 @@
-// import { posts } from "../../FakeDb/posts";
+// import { db.posts } from "../../FakeDb/db.posts";
 
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
 // import API_URL from "../../constants/api_url";
 import { TComment } from "../../interfaces/IPost";
-import { users, posts } from "../../FakeDb/FakeDb";
+import { db } from "../../FakeDb/FakeDb";
 import { DbHelper } from "./_dbHelper";
 // const postCreate = (bodyFormData: any, cb: Function) => {
 //   axios({
@@ -27,66 +27,68 @@ import { DbHelper } from "./_dbHelper";
 //     });
 // };
 
+const postRemove = (postId: string, cb: Function) => {
+  cb(null, 200);
+};
+
 const postFilterSubmit = (filter: any, cb: Function) => {
-  cb(null, posts);
+  console.log("postFilterSubmit postFilterSubmit postFilterSubmit");
+
+  cb(null, db.posts);
 };
 
-const postCreate = (fake_post: any, cb: Function) => {
-  console.log("ggggggggggggggggggggggg");
-  console.log("ggggggggggggggggggggggg");
-  console.log(fake_post);
+const postCreate = (fake_post: any, cuser: any, cb: Function) => {
+  // db.posts.push(fake_post);
 
-  // posts.push(fake_post);
-  // posts.unshift(fake_post);
+  // db.posts.unshift(fake_post);
+  // console.log("1111111111111111111111");
 
-  cb(null, fake_post);
+  // console.log("ALL THE POSTS ALL THE POSTS ALL THE POSTS");
+  // const dbpost = [fake_post, ...db.posts];
+  // const dbpost = db.posts;
+  // console.log(dbpost);
+
+  // const newdb = { ...db, posts: dbpost };
+
+  const return_post = { ...fake_post, ["user"]: cuser };
+
+  cb(null, return_post);
 };
 
-const fetchFeed = (feedPg: any, cb: Function) => {
+const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log("fetchFeed");
+  console.log(feedPg);
+
   let filtered_posts: any = [];
   let desired_posts: any = [];
   let feed_filter_posts: any = [];
+  let db_helper = new DbHelper(feedPg, cUser);
 
   if (!feedPg.applied) {
-    desired_posts = posts;
+    desired_posts = db.posts;
 
     for (let i = 0; i < desired_posts.length; i++) {
-      for (let j = 0; j < users.length; j++) {
-        console.log("???????? look for new post");
-        console.log(desired_posts[i]);
-
-        if (users[j].id === desired_posts[i].userId) {
-          console.log("--------------------");
-          console.log("fffffffffffffffffffffff");
-          console.log(users[j]);
-          console.log("desired_posts[i].userId " + desired_posts[i].userId);
-
+      for (let j = 0; j < db.users.length; j++) {
+        if (db.users[j].id === desired_posts[i].userId) {
           desired_posts[i] = {
             ...desired_posts[i],
-            ["user"]: { username: users[j].username, img: users[j].img },
+            ["user"]: { username: db.users[j].username, img: db.users[j].img },
           };
-
-          console.log("xxxxxxxxxxxxxxxxxxxxxx");
-          console.log(desired_posts[i]);
         }
       }
     }
-    cb(null, desired_posts);
-  } else {
-    let db_helper = new DbHelper(feedPg);
 
+    cb(null, desired_posts);
+    return;
+  } else {
     feed_filter_posts = db_helper.getPostFromPost();
 
     filtered_posts = feed_filter_posts;
-    //// ==================================== all above objectified
 
     const pf = feedPg.people;
     filtered_posts = filtered_posts.filter((p: any) => {
-      // get Person
-
-      let user = users.find((u) => u.id == p.userId);
-      console.log("okay why is this even running given no filter applied?");
-      console.log(feedPg.people);
+      let user = db.users.find((u) => u.id == p.userId);
 
       if (feedPg.people) {
         if (db_helper.checkPersonFromPerson(user)) {
@@ -95,39 +97,28 @@ const fetchFeed = (feedPg: any, cb: Function) => {
       }
     });
 
-    // cb(null, filtered_posts);
     desired_posts = filtered_posts;
 
-    console.log("ddddddddddddddddddddddd");
-    console.log("ddddddddddddddddddddddd");
     for (let i = 0; i < desired_posts.length; i++) {
-      for (let j = 0; j < users.length; j++) {
-        if (users[j].id === desired_posts[i].userId) {
-          console.log("fffffffffffffffffffffff");
-          console.log("fffffffffffffffffffffff");
-          console.log("users[j].id " + users[j]);
-          console.log("desired_posts[i].userId " + desired_posts[i].userId);
-
+      for (let j = 0; j < db.users.length; j++) {
+        if (db.users[j].id === desired_posts[i].userId) {
           desired_posts[i] = {
             ...desired_posts[i],
-            ["user"]: { username: users[j].username, img: users[j].img },
+            ["user"]: { username: db.users[j].username, img: db.users[j].img },
           };
         }
       }
     }
 
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-    console.log("desired posts");
-    console.log(desired_posts);
-
     cb(null, desired_posts);
+    return;
 
     // try {
-    //   const posts = await axios.get(`${MOCK_URL}/api/post`);
+    //   const db.posts = await axios.get(`${MOCK_URL}/api/post`);
 
-    //   console.log(posts.data.reverse());
+    //   console.log(db.posts.data.reverse());
 
-    //   cb(null, posts.data);
+    //   cb(null, db.posts.data);
     // } catch (error) {
     //   cb(error);
     // }
@@ -135,6 +126,8 @@ const fetchFeed = (feedPg: any, cb: Function) => {
 };
 
 const likePost = (like_arr: any, cb: Function) => {
+  console.log("likePost likePost likePost likePost");
+
   // axios
   //   .post(`${MOCK_URL}/ts/like_post`, like_arr)
   //   .then((response) => {
@@ -179,4 +172,11 @@ const addComment = (comment_obj: TComment, cb: Function) => {
   cb(null, comment_obj);
 };
 
-export { fetchFeed, likePost, addComment, postCreate, postFilterSubmit };
+export {
+  fetchFeed,
+  likePost,
+  addComment,
+  postCreate,
+  postFilterSubmit,
+  postRemove,
+};

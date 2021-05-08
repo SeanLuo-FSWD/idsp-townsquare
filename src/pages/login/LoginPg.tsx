@@ -10,14 +10,11 @@ function Login() {
   const {
     signUpStatus,
     setSignUpStatus,
-    setUsername,
     currentUser,
     setCurrentUser,
-    setIsAuthenticated,
-    setUserId,
+    cerror,
+    setCerror,
   } = useContext(LoginContext);
-
-  const [loginError, setLoginError] = useState("");
 
   const [person, setPerson] = useState({
     email: "",
@@ -41,46 +38,19 @@ function Login() {
       login(user_obj, (err: Error, result: any) => {
         if (err) {
           console.log(err);
-          setLoginError(err.message);
+          setCerror(err.message);
         } else {
-          setLoginError("");
-
-          setIsAuthenticated(true);
+          setCerror("");
           setSignUpStatus(false);
-
-          // Can I get username back here?
-          console.log("login result message");
-          console.log(result);
-          setUsername(result.username);
-          setUserId(result.userId);
-          setCurrentUser({
-            ...currentUser,
-            // id: result.userId,
-            id: "2",
-            username: result.username,
-            img:
-              "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
-          });
-
-          // setCurrentUser({
-          //   id: "1",
-          //   username: "bob",
-          //   email: "bob@bob.com",
-          //   img:
-          //     "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
-          //   age: 5,
-          //   gender: "male",
-          //   location: "Burnaby",
-          // });
+          setCurrentUser(result);
         }
       });
     } else {
-      setLoginError("You are missing some credentials");
+      setCerror("You are missing some credentials");
     }
   };
 
   return (
-
     <div className={styles.card}>
       <div className={styles.container}>
         <div>
@@ -89,16 +59,15 @@ function Login() {
             src="https://i.imgur.com/0ldmkwI.png"
             alt="TownSquareLogo"
           ></img>
-        <h1 className="townSquareTitle">TownSquare</h1>
-        {/* <p className={styles.testInfo}>
-          For default user, login with: <br></br>
-          email: bob@bob.com <br></br>
-          password: bob@bob.com <br></br>
-        </p> */}
-        {signUpStatus && <h2>Sign up success</h2>}
-        {loginError && <Error message={loginError} />}
-        {/* <h4>bob@bob.com</h4> */}
-        <form className={styles.loginForm}>
+          <h1 className="townSquareTitle">TownSquare</h1>
+          <p className={styles.testInfo}>
+            For default user, login with: <br></br>
+            email: bob@bob.com <br></br>
+            password: bob@bob.com <br></br>
+          </p>
+          {signUpStatus && <h2>Sign up success</h2>}
+          {/* <h4>bob@bob.com</h4> */}
+          <form className={styles.loginForm}>
             <label htmlFor="uname">
               {/* <p className={styles.labelText}>Email</p> */}
             </label>
@@ -125,21 +94,24 @@ function Login() {
               onChange={handleChange}
             />
             <br></br>
-            <button className={styles.loginButton} onClick={handleLogin}>Login</button>
+            <button className={styles.loginButton} onClick={handleLogin}>
+              Login
+            </button>
           </form>
         </div>
         <div>
-            <p className={styles.noAccount}>Don't have an account?</p>
-            <div className="register">
-              <button className={styles.registerButton}>
-                <Link className={styles.link} to="/register">Register</Link>
-              </button>
-            </div>
-        </div>
+          <p className={styles.noAccount}>Don't have an account?</p>
+          <div className="register">
+            <button className={styles.registerButton}>
+              <Link className={styles.link} to="/register">
+                Register
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 
 export default Login;
-

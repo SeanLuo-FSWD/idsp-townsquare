@@ -1,11 +1,14 @@
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
-import { users, posts } from "../../FakeDb/FakeDb";
+import { db } from "../../FakeDb/FakeDb";
 import _ from "lodash";
 
 import { DbHelper } from "./_dbHelper";
 
-const fetchPeople = (peoplePg: any, cb: Function) => {
+const userFollow = (userId: string, follow: boolean, cb: Function) => {
+  cb(null, 200);
+};
+const fetchPeople = (peoplePg: any, cUser: any, cb: Function) => {
   // axios
   //   .get(`${MOCK_URL}/ts/allusers`)
   //   .then((response) => {
@@ -18,46 +21,32 @@ const fetchPeople = (peoplePg: any, cb: Function) => {
   //     console.log(error);
   //     cb(error);
   //   });
-  console.log("sssssssssssssssssssssssss");
-  console.log("sssssssssssssssssssssssss");
-  console.log(peoplePg);
 
   if (!peoplePg.applied) {
-    cb(null, users);
+    cb(null, db.users);
   }
 
-  let db_helper = new DbHelper(peoplePg);
+  let db_helper = new DbHelper(peoplePg, cUser);
 
   let feed_filter_posts = db_helper.getPostFromPost();
 
   let desired_users: any[] = [];
 
-  console.log("vvvvvvvvvvvvvvvvvvv");
-  console.log("vvvvvvvvvvvvvvvvvvv");
-  console.log(feed_filter_posts);
   if (peoplePg.feed.keywords.length != 0 || peoplePg.feed.hasImg) {
     for (let i = 0; i < feed_filter_posts.length; i++) {
-      for (let j = 0; j < users.length; j++) {
-        if (feed_filter_posts[i].userId === users[j].id) {
-          desired_users.push(users[j]);
+      for (let j = 0; j < db.users.length; j++) {
+        if (feed_filter_posts[i].userId === db.users[j].id) {
+          desired_users.push(db.users[j]);
         }
       }
     }
   } else {
-    desired_users = users;
+    desired_users = db.users;
   }
-
-  console.log("55555555555555555");
-  console.log("55555555555555555");
-  console.log(desired_users);
 
   desired_users = desired_users.filter((u) => {
     return db_helper.checkPersonFromPerson(u);
   });
-
-  console.log("3333333333333333");
-  console.log("3333333333333333");
-  console.log(desired_users);
 
   cb(null, desired_users);
 };
@@ -77,10 +66,10 @@ const fetchPerson = (id: string, cb: Function) => {
   //   });
   let profile_obj;
 
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].id == id) {
-      profile_obj = users[i] as any;
-      profile_obj["feed"] = _.filter(posts, (w) => w.userId == id);
+  for (let i = 0; i < db.users.length; i++) {
+    if (db.users[i].id == id) {
+      profile_obj = db.users[i] as any;
+      profile_obj["feed"] = _.filter(db.posts, (w) => w.userId == id);
     }
   }
 
@@ -91,4 +80,4 @@ const fetchPerson = (id: string, cb: Function) => {
   }
 };
 
-export { fetchPeople, fetchPerson };
+export { fetchPeople, fetchPerson, userFollow };

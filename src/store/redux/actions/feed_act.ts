@@ -16,26 +16,26 @@ import {
 } from "../constants/feedActionTypes";
 
 const doPostCreate = (post_obj: any) => async (dispatch: Dispatch) => {
-  postCreate(post_obj, (err: Error, result: IPost[]) => {
-    if (err) {
-      dispatch({ type: API_ERROR, error: err.message });
-    } else {
-      dispatch({ type: POST_CREATE, post_obj_res: result });
-    }
-  });
+  // postCreate(post_obj, (err: Error, result: IPost[]) => {
+  //   if (err) {
+  //     dispatch({ type: API_ERROR, error: err.message });
+  //   } else {
+  //     dispatch({ type: POST_CREATE, post_obj_res: result });
+  //   }
+  // });
 };
 
 const doFetchFeed = (f_filter_obj: Object | null) => async (
   dispatch: Dispatch
 ) => {
-  fetchFeed(f_filter_obj, (err: Error, result: IPost[]) => {
-    if (err) {
-      dispatch({ type: API_ERROR, error: err.message });
-    } else {
-      result.reverse();
-      dispatch({ type: FEED_FETCH, posts: result });
-    }
-  });
+  // fetchFeed(f_filter_obj, (err: Error, result: IPost[]) => {
+  //   if (err) {
+  //     dispatch({ type: API_ERROR, error: err.message });
+  //   } else {
+  //     result.reverse();
+  //     dispatch({ type: FEED_FETCH, posts: result });
+  //   }
+  // });
 };
 
 const doFetchFeedError = (error: string) => ({

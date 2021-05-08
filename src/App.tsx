@@ -5,9 +5,6 @@ import Routing from "./components/Routing/Routing";
 import { IUser } from "./interfaces/IUser";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [username, setUsername] = useState("");
   const [signUpStatus, setSignUpStatus] = useState(false);
   const [showModal, setShowModal] = useState("");
   const [modalProps, setModalProps] = useState(false);
@@ -17,12 +14,6 @@ function App() {
   return (
     <LoginContext.Provider
       value={{
-        userId,
-        setUserId,
-        isAuthenticated,
-        username,
-        setUsername,
-        setIsAuthenticated,
         currentUser,
         setCurrentUser,
         signUpStatus,

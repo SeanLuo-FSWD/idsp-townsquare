@@ -52,6 +52,8 @@ function filterReducer(filterState = INITIAL_STATE, action: FilterActionTypes) {
       console.log("FEED_FILTER_UPDATE");
       console.log("FEED_FILTER_UPDATE");
 
+      console.log(action.filter);
+
       console.log("FEED_FILTER_UPDATE");
       console.log("FEED_FILTER_UPDATE");
 
@@ -62,11 +64,6 @@ function filterReducer(filterState = INITIAL_STATE, action: FilterActionTypes) {
         ...filterState,
         [keyValArr[0]]: keyValArr[1],
       };
-
-      // const filterStore = { ...filterState, feedPg: action.filter.feedPg };
-
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(filterStore);
 
       return filterStore;
     }

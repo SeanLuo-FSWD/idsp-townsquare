@@ -10,17 +10,12 @@ function Verify() {
   const history = useHistory();
 
   const {
-    userId,
-    setUserId,
-    username,
-    setUsername,
     showModal,
     setShowModal,
     modalProps,
     setCurrentUser,
     setModalProps,
     setCerror,
-    setIsAuthenticated,
   } = useContext(LoginContext);
 
   useEffect(() => {
@@ -34,10 +29,7 @@ function Verify() {
         );
       } else {
         // Ask to login user on backend, AND send userId + username + email here.
-        setUserId("1");
-        setUsername("bob");
         setCurrentUser({ id: "stub", username: "stub" });
-        setIsAuthenticated(true);
 
         setStatus(true);
         setTimeout(() => {

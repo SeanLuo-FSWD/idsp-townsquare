@@ -21,14 +21,7 @@ function Profile() {
   //   const [pwRetype, setPwRetype] = useState(false);
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
-  const {
-    setUsername,
-    currentUser,
-    setCurrentUser,
-    setCerror,
-    setIsAuthenticated,
-    setUserId,
-  } = useContext(LoginContext);
+  const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
   useEffect(() => {
     fetchPerson(currentUser.id, (err: Error, result: any) => {
       if (err) {
@@ -97,10 +90,6 @@ function Profile() {
       } else {
         setCerror("");
         setCurrentUser(null);
-
-        setUsername("");
-        setUserId("");
-        setIsAuthenticated(false);
       }
     });
   }
@@ -123,7 +112,7 @@ function Profile() {
 
         <div>
           <div>
-            <div  className={styles.container}>
+            <div className={styles.container}>
               <img className={styles.profileImg} src={person.img} alt="" />
               <button data-edit="editImg" onClick={handleEditOpen}>
                 Edit

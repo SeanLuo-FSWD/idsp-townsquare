@@ -1,8 +1,7 @@
-// import { posts } from "../../FakeDb/posts";
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
 // import API_URL from "../../constants/api_url";
-import { users, posts } from "../../FakeDb/FakeDb";
+import { db } from "../../FakeDb/FakeDb";
 // axios.defaults.withCredentials = true;
 
 const verify = (query: string, cb: Function) => {
@@ -70,13 +69,16 @@ const logout = (cb: Function) => {
 };
 
 const login = (user_obj: any, cb: Function) => {
-  users.forEach((u) => {
-    if (user_obj.email == u.email && user_obj.password == u.password) {
-      cb(null, user_obj);
-    } else {
-      cb(new Error("user not found"));
+  for (let i = 0; i < db.users.length; i++) {
+    if (
+      db.users[i].email === user_obj.email &&
+      db.users[i].password === user_obj.password
+    ) {
+      cb(null, db.users[i]);
+      return;
     }
-  });
+  }
+  cb(new Error("user not found"));
 };
 
 const register = (user_obj: {}, cb: Function) => {

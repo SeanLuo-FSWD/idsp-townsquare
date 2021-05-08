@@ -4,10 +4,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
-  console.log("fffffffffffffffffffffff");
-  console.log("fffffffffffffffffffffff");
-  console.log(feedPg_Feed);
-
   const [keywords, setKeywords] = useState(feedPg_Feed.keywords) as any;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const kwArray = e.target.value.split(" ");

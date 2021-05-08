@@ -12,29 +12,18 @@ import usersIcon from "./users.svg";
 function Navbar(props: any) {
   const [currentPath, setCurrentPath] = useState("");
 
-  const {
-    setUsername,
-    currentUser,
-    setCurrentUser,
-    setCerror,
-    setIsAuthenticated,
-    setUserId,
-  } = useContext(LoginContext);
-  function handleLogout() {
-    logout((err: Error, result: any) => {
-      if (err) {
-        console.log(err);
-        setCerror(err.message);
-      } else {
-        setCerror("");
-        setCurrentUser(null);
-
-        setUsername("");
-        setUserId("");
-        setIsAuthenticated(false);
-      }
-    });
-  }
+  const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
+  // function handleLogout() {
+  //   logout((err: Error, result: any) => {
+  //     if (err) {
+  //       console.log(err);
+  //       setCerror(err.message);
+  //     } else {
+  //       setCerror("");
+  //       setCurrentUser(null);
+  //     }
+  //   });
+  // }
 
   return (
     <div className={`${styles.navBar} flex--navBar`}>
@@ -80,9 +69,9 @@ function Navbar(props: any) {
           <img src={settingsIcon}></img>
         </Link>
       </div>
-      <div className={styles.navBar__item}>
+      {/* <div className={styles.navBar__item}>
         <img src={logoutIcon} onClick={handleLogout} />
-      </div>
+      </div> */}
     </div>
   );
 }

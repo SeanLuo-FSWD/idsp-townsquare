@@ -99,11 +99,13 @@ const Post = (props: any) => {
     return liked;
   }
 
+  console.log("Post component -- props.post");
+  console.log(props.post);
+
   return (
     <div className={styles.postContainer}>
-      <div key={props.post.postId} className={styles.post}>
-        <div className="flex--space-left">
-          {/* <img className="flex-item" src={user}></img> */}
+      <div key={props.post.id} className={styles.post}>
+        {/* <div className="flex--space-left">
           <img
             src={props.post.user.img}
             alt="img"
@@ -111,7 +113,16 @@ const Post = (props: any) => {
           />
           <h4 className={styles.flexItem}>{props.post.username}</h4>
           <h4 className="flex--space-right">{props.post.createdAt}</h4>
-        </div>
+          {props.post.userId === currentUser.id && (
+            <button
+              onClick={() => {
+                removePost(props.post.id);
+              }}
+            >
+              Remove
+            </button>
+          )}
+        </div> */}
 
         <div className={styles.textContainer}>
           <h2>{props.title}</h2>

@@ -1,34 +1,27 @@
-import { users, posts } from "../../FakeDb/FakeDb";
+import { db } from "../../FakeDb/FakeDb";
 
 export class DbHelper {
   filter: any = {};
+  cUser: any = {};
 
-  constructor(filter: any) {
+  constructor(filter: any, cUser: any) {
     this.filter = filter;
+    this.cUser = cUser;
   }
 
   getPostFromPost = () => {
     let feed_filter_posts = [];
 
     if (!this.filter.applied) {
-      return posts;
+      return db.posts;
     }
     if (this.filter.feed.keywords.length != 0) {
       let kw_posts = [];
-      console.log("1111111111111111111111");
-      console.log(this.filter.feed.keywords);
-
       const kw_arr = this.filter.feed.keywords;
-      for (let i = 0; i < posts.length; i++) {
+      for (let i = 0; i < db.posts.length; i++) {
         let alive = true;
         for (let j = 0; j < kw_arr.length; j++) {
-          console.log("2222222222222222");
-          console.log(posts[i].message);
-          console.log(kw_arr[j]);
-
-          if (posts[i].message.includes(kw_arr[j])) {
-            console.log("3333333333333333");
-
+          if (db.posts[i].message.includes(kw_arr[j])) {
             continue;
           } else {
             alive = false;
@@ -37,19 +30,16 @@ export class DbHelper {
         }
 
         if (alive) {
-          console.log("444444444444444444");
-          kw_posts.push(posts[i]);
+          kw_posts.push(db.posts[i]);
         }
       }
 
       feed_filter_posts = kw_posts;
     } else {
-      feed_filter_posts = posts;
+      feed_filter_posts = db.posts;
     }
 
     if (this.filter.feed.hasImg === true) {
-      console.log("1111111111111111111111");
-      console.log("1111111111111111111111");
       feed_filter_posts = feed_filter_posts.filter((post: any) => {
         return post.img_urls.length > 0;
       });
@@ -82,7 +72,7 @@ export class DbHelper {
 
     if (ageCondition && genderCondition && locCondition) {
       if (this.filter.people.followed) {
-        if (user.id === "2" || user.id === "3") {
+        if (this.cUser.followed.includes(user.id)) {
           return user;
         }
       } else {

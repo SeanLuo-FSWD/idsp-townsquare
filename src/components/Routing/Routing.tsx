@@ -8,37 +8,37 @@ import { authenticate } from "../../utils/api/auth.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Error from "../../components/Error/Error";
 import Verify from "../../pages/verify/Verify";
+import { login } from "../../utils/api/auth.api";
 
 const Routing = () => {
-  const [currentPath, setCurrentPath] = useState("");
-
-  const {
-    signUpStatus,
-    setSignUpStatus,
-    setUsername,
-    setCurrentUser,
-    setIsAuthenticated,
-    setUserId,
-    cerror,
-  } = useContext(LoginContext);
+  const { cerror, setCurrentUser, setSignUpStatus, setCerror } = useContext(
+    LoginContext
+  );
 
   // Faking login for dev, to remove for production and uncomment Below!
-  // useEffect(() => {
-  //   setIsAuthenticated(true);
-  //   setSignUpStatus(false);
-  //   // setUsername("tester");
-  //   // setUserId("1");
-  //   setCurrentUser({
-  //     id: "1",
-  //     username: "bob",
-  //     email: "bob@bob.com",
-  //     img:
-  //       "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
-  //     age: 5,
-  //     gender: "male",
-  //     location: "Burnaby",
-  //   });
-  // }, []);
+  useEffect(() => {
+    const user_obj = {
+      email: "bob@bob.com",
+      password: "bob@bob.com",
+    };
+    login(user_obj, (err: Error, result: any) => {
+      if (err) {
+        console.log(err);
+        setCerror(err.message);
+      } else {
+        setCerror("");
+        setSignUpStatus(false);
+
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log("fffffffffffffffffffffff");
+        console.log("loginresult");
+        console.log(result);
+
+        setCurrentUser(result);
+      }
+    });
+  }, []);
+  // faking login ends
 
   return (
     <Router>

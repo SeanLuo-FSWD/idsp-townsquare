@@ -14,18 +14,16 @@ import PeopleFilterModalContent from "./PeopleFilterModalContent";
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
   const {
-    username,
     showModal,
     setShowModal,
     modalProps,
     setModalProps,
-    cerror,
     currentUser,
     setCerror,
   } = useContext(LoginContext);
 
   useEffect(() => {
-    fetchPeople(props.peoplePg, (err: Error, result: any) => {
+    fetchPeople(props.peoplePg, currentUser, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {

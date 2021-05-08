@@ -6,10 +6,6 @@ import styles from "./ImageSlider.module.scss";
 const ImageSlider = ({ slides }: any) => {
   const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    console.log("IMAGESLIDER RENDERED");
-    console.log(slides);
-  });
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
   };

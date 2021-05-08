@@ -9,10 +9,6 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 
 function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
-  console.log("vvvvvvvvvvvvvvvvvvv");
-  console.log("vvvvvvvvvvvvvvvvvvv");
-  console.log(feedPg_People);
-
   let location_as_state = {
     Burnaby: false,
     Richmond: false,

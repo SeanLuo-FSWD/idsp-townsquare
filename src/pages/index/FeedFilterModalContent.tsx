@@ -66,12 +66,6 @@ function FeedFilterModalContent(props: any) {
     //   peopleFilter: peopleFilter,
     // };
 
-    console.log("444444444444444444");
-    console.log("444444444444444444");
-
-    console.log(feedFilter);
-    console.log(peopleFilter);
-
     const feedPgSlice = {
       feedPg: {
         applied: true,

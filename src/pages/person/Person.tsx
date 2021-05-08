@@ -6,19 +6,18 @@ import { fetchPerson } from "../../utils/api/people.api";
 import Error from "../../components/Error/Error";
 import Feed from "../../components/Feed/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
-import { fetchFeed } from "../../utils/api/posts.api";
+import { postRemove } from "../../utils/api/posts.api";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
 import { useHistory } from "react-router-dom";
 import Post from "../../components/Post/Post";
+import _ from "lodash";
 
 function Person() {
   const history = useHistory();
   const { id } = useParams() as any;
   const [person, setPerson] = useState(null) as any;
   const {
-    userId,
-    username,
     showModal,
     setShowModal,
     modalProps,
@@ -36,10 +35,28 @@ function Person() {
     });
   }, []);
 
+  const onRemovePost = (postId: string) => {
+    postRemove(postId, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        const newFeed = _.filter(person.feed, (p) => p.id != postId);
+        const newPerson = {
+          ...person,
+          feed: newFeed,
+        };
+        setPerson(newPerson);
+      }
+    });
+  };
+
+  console.log("eeeeeeeeeeeeeeeeeeeeee");
+  console.log("eeeeeeeeeeeeeeeeeeeeee");
+  console.log(person);
+
   if (person) {
     return (
       <div>
-
         <Navbar currentPath={window.location.pathname} />
         {/* <Link to="/users" className="btn">
           Back
@@ -58,7 +75,17 @@ function Person() {
         {person.feed.map((post: any) => {
           return (
             <div key={post.id} className={styles.postWrapper}>
-              <h4>{post.createdAt}</h4>
+              <div className="flex">
+                <h4>{post.createdAt}</h4>
+                <button
+                  onClick={() => {
+                    onRemovePost(post.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+
               <Post post={post}></Post>
             </div>
           );
