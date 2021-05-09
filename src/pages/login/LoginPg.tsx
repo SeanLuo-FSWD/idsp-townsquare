@@ -62,8 +62,8 @@ function Login() {
           <h1 className="townSquareTitle">TownSquare</h1>
           <p className={styles.testInfo}>
             For default user, login with: <br></br>
-            email: bob@bob.com <br></br>
-            password: bob@bob.com <br></br>
+            email: <strong>bob@bob.com</strong> <br></br>
+            password: <strong>bob@bob.com</strong> <br></br>
           </p>
           {signUpStatus && <h2>Sign up success</h2>}
           {/* <h4>bob@bob.com</h4> */}

@@ -16,28 +16,28 @@ const Routing = () => {
   );
 
   // Faking login for dev, to remove for production and uncomment Below!
-  useEffect(() => {
-    const user_obj = {
-      email: "bob@bob.com",
-      password: "bob@bob.com",
-    };
-    login(user_obj, (err: Error, result: any) => {
-      if (err) {
-        console.log(err);
-        setCerror(err.message);
-      } else {
-        setCerror("");
-        setSignUpStatus(false);
+  // useEffect(() => {
+  //   const user_obj = {
+  //     email: "bob@bob.com",
+  //     password: "bob@bob.com",
+  //   };
+  //   login(user_obj, (err: Error, result: any) => {
+  //     if (err) {
+  //       console.log(err);
+  //       setCerror(err.message);
+  //     } else {
+  //       setCerror("");
+  //       setSignUpStatus(false);
 
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log("fffffffffffffffffffffff");
-        console.log("loginresult");
-        console.log(result);
+  //       console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+  //       console.log("fffffffffffffffffffffff");
+  //       console.log("loginresult");
+  //       console.log(result);
 
-        setCurrentUser(result);
-      }
-    });
-  }, []);
+  //       setCurrentUser(result);
+  //     }
+  //   });
+  // }, []);
   // faking login ends
 
   return (
