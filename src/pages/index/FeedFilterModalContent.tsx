@@ -28,13 +28,10 @@ function FeedFilterModalContent(props: any) {
 
   let feedFilterHolder = props.feedPg.feed;
   let pplFilterHolder = props.feedPg.people;
-  console.log("000000000000000000000");
 
-  useEffect(() => {
-    console.log("2222222222222222");
-    console.log("useEffect: should NOT happen");
-    // console.log(peopleFilter);
-  });
+  // useEffect(() => {
+  //   console.log("useEffect: should NOT happen");
+  // });
 
   // const [hasSync, setHasSync] = React.useState(props.feedPg.applyOtherPg);
   // const [hasSync, setHasSync] = React.useState(false);

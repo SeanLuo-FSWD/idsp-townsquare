@@ -17,6 +17,7 @@ const db = {
         { type: "commented", postId: "5", username: "beth", id: "8" },
         { type: "followed", userId: "2", username: "beth", id: "7" },
       ],
+      chats: ["1", "2"],
     },
     {
       id: "2",
@@ -29,6 +30,7 @@ const db = {
       last_login: new Date().toDateString(),
       followed: ["1", "3"],
       password: "beth@beth.com",
+      chats: ["1"],
     },
     {
       id: "3",
@@ -42,6 +44,7 @@ const db = {
       last_login: new Date().toDateString(),
       followed: [],
       password: "vince@vince.com",
+      chats: ["2"],
     },
     {
       id: "4",
@@ -55,6 +58,76 @@ const db = {
       last_login: new Date().toDateString(),
       followed: [],
       password: "Denisha",
+      chats: [],
+    },
+  ],
+  chats: [
+    {
+      id: "1",
+      chatters: [
+        {
+          userId: "1",
+          username: "bob",
+          img:
+            "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+        },
+        {
+          userId: "2",
+          username: "beth",
+          img: "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
+        },
+      ],
+      messages: [
+        {
+          id: "1",
+          userId: "2",
+          timeStamp: new Date().toString(),
+          text: "hello bob",
+        },
+        {
+          id: "2",
+          userId: "1",
+          timeStamp: new Date().toString(),
+          text: "Hey beth",
+        },
+        {
+          id: "3",
+          userId: "2",
+          timeStamp: new Date().toString(),
+          text: "how are you?",
+        },
+      ],
+    },
+    {
+      id: "2",
+      chatters: [
+        {
+          userId: "1",
+          username: "bob",
+          img:
+            "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+        },
+        {
+          userId: "3",
+          username: "vince",
+          img:
+            "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
+        },
+      ],
+      messages: [
+        {
+          id: "1",
+          userId: "1",
+          timeStamp: new Date().toString(),
+          text: "sup vince",
+        },
+        {
+          id: "2",
+          userId: "3",
+          timeStamp: new Date().toString(),
+          text: "not much, you?",
+        },
+      ],
     },
   ],
   posts: [

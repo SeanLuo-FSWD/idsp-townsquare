@@ -25,10 +25,6 @@ function Person() {
   const newUser = useOnFollowHandle(followState);
 
   useEffect(() => {
-    console.log("useEfect rerendered after newUser?");
-    console.log("2222222222222222");
-    console.log(newUser);
-    console.log(followState);
     if (newUser) {
       console.log("if follow state is set, user is...");
       console.log(newUser);

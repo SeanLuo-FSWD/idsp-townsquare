@@ -31,8 +31,6 @@ const FeedPg = (props: any) => {
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
   const { pathPostId } = useParams() as any;
-  console.log("999999999999999999999");
-  console.log(pathPostId);
 
   const newUser = useOnFollowHandle(followState);
 
@@ -48,9 +46,6 @@ const FeedPg = (props: any) => {
   useEffect(() => {
     if (pathPostId) {
       fetchPost(pathPostId, (err: Error, result: any) => {
-        console.log("88888888888888888888");
-        console.log("88888888888888888888");
-        console.log(result);
         if (err) {
           setCerror(err.message);
           return;

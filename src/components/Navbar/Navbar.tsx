@@ -8,6 +8,7 @@ import homeIcon from "./home.svg";
 import settingsIcon from "./settings.svg";
 import logoutIcon from "./logoutIcon.svg";
 import usersIcon from "./users.svg";
+import Chat from "../../pages/chatPg/ChatPg";
 
 function Navbar(props: any) {
   const [currentPath, setCurrentPath] = useState("");
@@ -56,7 +57,9 @@ function Navbar(props: any) {
             : `${styles.navBar__item}`
         }
       >
-        <Link to="/chat">Chat</Link>
+        <Link to="/chatPage">
+          <h3>Chat</h3>
+        </Link>
       </div>
       <div
         className={

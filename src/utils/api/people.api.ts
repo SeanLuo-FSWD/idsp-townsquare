@@ -2,8 +2,34 @@ import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
 import { db } from "../../FakeDb/FakeDb";
 import _ from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 import { DbHelper } from "./_dbHelper";
+
+const addChatMsg = (msgObj: any, cb: Function) => {
+  if (msgObj) {
+    const msg_res = {
+      id: uuidv4(),
+      userId: msgObj.authorId,
+      timeStamp: new Date().toString(),
+      text: msgObj.message,
+    };
+    cb(null, msg_res);
+  } else {
+    cb(new Error("msg not sent"));
+  }
+};
+const getChat = (chatId: string, cb: Function) => {
+  const chat = db.chats.filter((c) => c.id === chatId);
+  cb(null, chat);
+};
+
+const getChatList = (userId: string, cb: Function) => {
+  const cuser = db.users.filter((u) => u.id === userId);
+  const chats = db.chats.filter((c) => cuser[0].chats.includes(c.id));
+
+  cb(null, chats);
+};
 
 const userFollow = (userId: string, follow: boolean, cb: Function) => {
   cb(null, 200);
@@ -80,4 +106,11 @@ const fetchPerson = (id: string, cb: Function) => {
   }
 };
 
-export { fetchPeople, fetchPerson, userFollow };
+export {
+  fetchPeople,
+  fetchPerson,
+  userFollow,
+  getChatList,
+  getChat,
+  addChatMsg,
+};

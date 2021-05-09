@@ -4,6 +4,7 @@ import styles from "./SubNav.module.scss";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import { Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function SubNav(props: any) {
   const {
@@ -15,13 +16,13 @@ function SubNav(props: any) {
   } = useContext(LoginContext);
 
   const [showDD, setShowDD] = useState(false);
+  const history = useHistory();
 
   console.log("666666666666666666");
   console.log("000000000000000000000");
   console.log(currentUser);
 
   function createAlert(alert_obj: any) {
-    console.log("777777777777777777777");
     let text = "";
     let link = "";
     switch (alert_obj.type) {

@@ -6,6 +6,8 @@ import Person from "../../pages/person/Person";
 import PeoplePg from "../../pages/people/PeoplePg";
 
 import Profile from "../../pages/Profile/Profile";
+import ChatPg from "../../pages/chatPg/ChatPg";
+import Chat from "../../pages/chat/Chat";
 
 const ReactRouterSetup = () => {
   return (
@@ -26,8 +28,13 @@ const ReactRouterSetup = () => {
         <Profile />
       </Route>
 
+      <Route path="/chatPage">
+        <ChatPg />
+      </Route>
+
       <Route path="/person/:id" children={<Person />}></Route>
       <Route path="/post/:pathPostId" children={<Home />}></Route>
+      <Route path="/chat/:chatId" children={<Chat />}></Route>
     </>
   );
 };
