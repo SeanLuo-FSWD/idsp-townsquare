@@ -74,7 +74,8 @@ const db = {
         {
           userId: "2",
           username: "beth",
-          img: "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
+          img:
+            "https://static.wikia.nocookie.net/rickandmorty/images/5/58/Beth_Smith.png/revision/latest/scale-to-width-down/310?cb=20191122063320",
         },
       ],
       messages: [
