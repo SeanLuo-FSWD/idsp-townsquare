@@ -9,7 +9,7 @@ import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
 import user from "./user.svg";
 import comments from "./comments.svg";
@@ -32,10 +32,13 @@ const Post = (props: any) => {
   const [commentList, setCommentList] = useState([]) as any;
 
   const [commentsVisible, setCommentsVisible] = useState(false);
-
+  const { pathPostId } = useParams() as any;
   useEffect(() => {
     setLikes(props.post.likes);
     setCommentList(props.post.commentList.reverse());
+    if (pathPostId) {
+      setCommentsVisible(true);
+    }
   }, []);
 
   const commentSubmit = (e: any) => {

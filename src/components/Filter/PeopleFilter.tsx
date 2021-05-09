@@ -70,9 +70,12 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
 
     loc_obj_arr.forEach((l) => {
       if (l[1] === true) {
-        locArr.push(l[0]);
+        locArr = [...locArr, l[0]];
+        // locArr.push(l[0]);
       }
     });
+    console.log("locArr locArr locArr");
+    console.log(locArr);
     // setPeopleFilter({ ...peopleFilter, ["location"]: locArr });
     peopleFilterProps({ location: locArr });
   };

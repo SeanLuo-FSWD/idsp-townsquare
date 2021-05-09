@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import Modal from "../../UI/Modal";
 import Feed from "../../components/Feed/Feed";
-import { fetchFeed, postRemove } from "../../utils/api/posts.api";
+import { fetchFeed, fetchPost, postRemove } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import createPost from "./createPost.svg";
-import filter from "./filter.svg";
-import townSquareLogo from "./townSquareLogo.png";
+import createPost from "./assets/createPost.svg";
+import filter from "./assets/filter.svg";
+import townSquareLogo from "./assets/townSquareLogo.png";
 import _ from "lodash";
 import { Filter } from "@material-ui/icons";
 import FeedFilter from "../../components/Filter/FeedFilter";
@@ -17,7 +17,7 @@ import PostModalContent from "./PostModalContent";
 import FeedFilterModalContent from "./FeedFilterModalContent";
 import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useOnFollowHandle } from "../../helper/follow";
 
 const FeedPg = (props: any) => {
@@ -30,6 +30,9 @@ const FeedPg = (props: any) => {
   } = useContext(LoginContext);
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
+  const { pathPostId } = useParams() as any;
+  console.log("999999999999999999999");
+  console.log(pathPostId);
 
   const newUser = useOnFollowHandle(followState);
 
@@ -43,15 +46,30 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
-    fetchFeed(props.feedPg, currentUser, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-        return;
-      } else {
-        setFeed(result);
-        return;
-      }
-    });
+    if (pathPostId) {
+      fetchPost(pathPostId, (err: Error, result: any) => {
+        console.log("88888888888888888888");
+        console.log("88888888888888888888");
+        console.log(result);
+        if (err) {
+          setCerror(err.message);
+          return;
+        } else {
+          setFeed(result);
+          return;
+        }
+      });
+    } else {
+      fetchFeed(props.feedPg, currentUser, (err: Error, result: any) => {
+        if (err) {
+          setCerror(err.message);
+          return;
+        } else {
+          setFeed(result);
+          return;
+        }
+      });
+    }
   }, [props.feedPg]);
 
   const addPostProp = (result: any) => {

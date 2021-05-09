@@ -53,10 +53,7 @@ export class DbHelper {
     let genderCondition = true;
     let locCondition = true;
 
-    console.log(this.filter.people);
     const pplfilter = this.filter.people;
-    console.log("wtf wtf wtf wtf");
-    console.log(pplfilter.age);
 
     if (pplfilter.age.length > 0) {
       ageCondition =

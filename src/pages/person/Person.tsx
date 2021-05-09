@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import UserInfo from "./UserInfo";
 import { fetchPerson, userFollow } from "../../utils/api/people.api";
@@ -9,7 +9,6 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postRemove } from "../../utils/api/posts.api";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
-import { useHistory } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";

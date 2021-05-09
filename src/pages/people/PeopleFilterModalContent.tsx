@@ -22,40 +22,53 @@ function PeopleFilterModalContent(props: any) {
     LoginContext
   );
 
-  const [showFeedFilter, setShowFeedFilter] = useState(false);
-  const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
-  const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
+  // const [showFeedFilter, setShowFeedFilter] = useState(false);
+  // const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
+  // const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
 
-  const [hasSync, setHasSync] = React.useState(false);
+  let feedFilterHolder = props.peoplePg.feed;
+  let pplFilterHolder = props.peoplePg.people;
+  let applyOtherSide = false;
+
+  // const [hasSync, setHasSync] = React.useState(false);
 
   const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHasSync(event.target.checked);
-    feedFilterProps({ hasSync: event.target.checked });
+    // setHasSync(event.target.checked);
+    applyOtherSide = event.target.checked;
+    // feedFilterProps({ hasSync: event.target.checked });
   };
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
 
-    setPeopleFilter({
-      ...props.peoplePg.people,
+    // setPeopleFilter({
+    //   ...props.peoplePg.people,
+    //   [key_name_pair[0]]: key_name_pair[1],
+    // });
+    pplFilterHolder = {
+      ...pplFilterHolder,
       [key_name_pair[0]]: key_name_pair[1],
-    });
+    };
   };
 
   const feedFilterProps = (post_filter: Object) => {
     const key_name_pair = Object.entries(post_filter)[0];
-    setFeedFilter({
-      ...props.peoplePg.feed,
+    // setFeedFilter({
+    //   ...props.peoplePg.feed,
+    //   [key_name_pair[0]]: key_name_pair[1],
+    // });
+    feedFilterHolder = {
+      ...feedFilterHolder,
       [key_name_pair[0]]: key_name_pair[1],
-    });
+    };
   };
 
   const onPeopleFilterClick = () => {
     const peoplePgSlice = {
       peoplePg: {
         applied: true,
-        people: peopleFilter,
-        feed: feedFilter,
+        people: pplFilterHolder,
+        feed: feedFilterHolder,
       },
     };
 
@@ -64,14 +77,14 @@ function PeopleFilterModalContent(props: any) {
 
     console.log("ddddddddddddddddddddddd");
     console.log("ddddddddddddddddddddddd");
-    console.log(hasSync);
+    console.log(applyOtherSide);
 
-    if (hasSync) {
+    if (applyOtherSide) {
       const feedPgSlice = {
         feedPg: {
           applied: true,
-          people: peopleFilter,
-          feed: feedFilter,
+          people: pplFilterHolder,
+          feed: feedFilterHolder,
         },
       };
       props.onFeedFilterSubmit(feedPgSlice);
@@ -94,7 +107,7 @@ function PeopleFilterModalContent(props: any) {
       />
 
       <div className="flex">
-        {showFeedFilter ? (
+        {/* {showFeedFilter ? (
           <button onClick={() => setShowFeedFilter(false)}>
             Hide Feed Filter
           </button>
@@ -102,19 +115,24 @@ function PeopleFilterModalContent(props: any) {
           <button onClick={() => setShowFeedFilter(true)}>
             Show Feed Filter
           </button>
-        )}
+        )} */}
         <p>
           Apply Feed filter to users (Will only show users who created matched
           posts)
         </p>
       </div>
 
-      {showFeedFilter && (
+      {/* {showFeedFilter && (
         <FeedFilter
           feedFilterProps={feedFilterProps}
           feedPg_Feed={props.peoplePg.feed}
         />
-      )}
+      )} */}
+
+      <FeedFilter
+        feedFilterProps={feedFilterProps}
+        feedPg_Feed={props.peoplePg.feed}
+      />
 
       <div className="flex">
         <button onClick={onPeopleFilterClick}>Submit</button>
@@ -129,11 +147,7 @@ function PeopleFilterModalContent(props: any) {
         </button>
         <FormControlLabel
           control={
-            <Checkbox
-              checked={hasSync}
-              onChange={handleHasSyncFilter}
-              name="Have_image"
-            />
+            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
           }
           label="Apply to Feed page"
         />

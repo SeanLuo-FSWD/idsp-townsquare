@@ -23,72 +23,87 @@ function FeedFilterModalContent(props: any) {
   );
 
   const [showPeopleFilter, setShowPeopleFilter] = useState(false);
-  const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
-  const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
+  // const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
+  // const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
+
+  let feedFilterHolder = props.feedPg.feed;
+  let pplFilterHolder = props.feedPg.people;
+  console.log("000000000000000000000");
+
+  useEffect(() => {
+    console.log("2222222222222222");
+    console.log("useEffect: should NOT happen");
+    // console.log(peopleFilter);
+  });
 
   // const [hasSync, setHasSync] = React.useState(props.feedPg.applyOtherPg);
-  const [hasSync, setHasSync] = React.useState(false);
-
+  // const [hasSync, setHasSync] = React.useState(false);
+  let applyOtherSide = false;
   const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHasSync(event.target.checked);
+    // setHasSync(event.target.checked);
+    applyOtherSide = event.target.checked;
     // feedFilterProps({ hasSync: event.target.checked });
   };
 
   const peopleFilterProps = (ppl_filter: any) => {
-    // setPeopleFilter(ppl_filter);
     const key_name_pair = Object.entries(ppl_filter)[0];
-    // setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
+    console.log("1111111111111111111111");
+    console.log("pplFilterHolder");
+    console.log(pplFilterHolder);
 
-    setPeopleFilter({
-      ...props.feedPg.people,
+    pplFilterHolder = {
+      ...pplFilterHolder,
       [key_name_pair[0]]: key_name_pair[1],
-    });
+    };
   };
 
   const feedFilterProps = (post_filter: Object) => {
+    console.log("1111111111111111111111");
+    console.log("feedFilterHolder");
+    console.log(feedFilterHolder);
     const key_name_pair = Object.entries(post_filter)[0];
-    setFeedFilter({
-      ...props.feedPg.feed,
+    feedFilterHolder = {
+      ...feedFilterHolder,
       [key_name_pair[0]]: key_name_pair[1],
-    });
-    // setFeedFilter({
-    //   ...props.feedPg,
-    //   feed: {
-    //     ...props.feedPg.feed,
-    //     [key_name_pair[0]]: key_name_pair[1],
-    //   },
-    // });
+    };
+    // setFeedFilter(newFeedPg);
   };
 
   const onFeedFilterClick = () => {
-    // const f_filter_obj = {
-    //   feedFilter: feedFilter,
-    //   peopleFilter: peopleFilter,
-    // };
+    console.log("3333333333333333");
+    console.log("onFeedFilterClick");
 
     const feedPgSlice = {
       feedPg: {
         applied: true,
-        people: peopleFilter,
-        feed: feedFilter,
+        // people: peopleFilter,
+        people: pplFilterHolder,
+        feed: feedFilterHolder,
       },
     };
+
+    console.log("444444444444444444");
+    console.log("feedPgSlice");
 
     console.log(feedPgSlice);
     props.onFeedFilterSubmit(feedPgSlice);
 
-    if (hasSync) {
+    if (applyOtherSide) {
+      console.log("666666666666666666");
+      console.log(pplFilterHolder);
+
       const peoplePgSlice = {
         peoplePg: {
           applied: true,
-          people: peopleFilter,
-          feed: feedFilter,
+          // people: peopleFilter,
+          people: pplFilterHolder,
+          feed: feedFilterHolder,
         },
       };
       props.onPeopleFilterSubmit(peoplePgSlice);
     }
 
-    setModalProps(null);
+    // setModalProps(null);
     setShowModal("");
   };
 
@@ -101,12 +116,11 @@ function FeedFilterModalContent(props: any) {
     <div>
       <FeedFilter
         feedFilterProps={feedFilterProps}
-        // feedFilterSaved={props.feedPg ? props.feedPg.feedFilter : {}}
         feedPg_Feed={props.feedPg.feed}
       />
 
       <div className="flex">
-        {showPeopleFilter ? (
+        {/* {showPeopleFilter ? (
           <button onClick={() => setShowPeopleFilter(false)}>
             Hide User Filter
           </button>
@@ -114,24 +128,29 @@ function FeedFilterModalContent(props: any) {
           <button onClick={() => setShowPeopleFilter(true)}>
             Show User Filter
           </button>
-        )}
+        )} */}
         <p>
           Apply user filter to posts (Will show posts from matching users only)
         </p>
       </div>
 
-      {showPeopleFilter && (
+      {/* {showPeopleFilter && (
         <PeopleFilter
           peopleFilterProps={peopleFilterProps}
           feedPg_People={props.feedPg.people}
         />
-      )}
+      )} */}
+
+      <PeopleFilter
+        peopleFilterProps={peopleFilterProps}
+        feedPg_People={props.feedPg.people}
+      />
 
       <div className="flex">
         <button onClick={onFeedFilterClick}>Submit</button>
         <button
           onClick={() => {
-            setModalProps(null);
+            // setModalProps(null);
             setShowModal("");
             props.onFeedFilterRemove();
           }}
@@ -141,7 +160,7 @@ function FeedFilterModalContent(props: any) {
         <FormControlLabel
           control={
             <Checkbox
-              checked={hasSync}
+              // checked={hasSync}
               onChange={handleHasSyncFilter}
               name="Have_image"
             />

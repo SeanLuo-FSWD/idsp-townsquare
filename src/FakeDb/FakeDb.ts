@@ -12,6 +12,11 @@ const db = {
       password: "bob@bob.com",
       img:
         "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+      alert: [
+        { type: "liked", postId: "5", username: "vince", id: "9" },
+        { type: "commented", postId: "5", username: "beth", id: "8" },
+        { type: "followed", userId: "2", username: "beth", id: "7" },
+      ],
     },
     {
       id: "2",

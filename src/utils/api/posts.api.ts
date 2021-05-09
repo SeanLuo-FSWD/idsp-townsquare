@@ -6,6 +6,39 @@ import axios from "axios";
 import { TComment } from "../../interfaces/IPost";
 import { db } from "../../FakeDb/FakeDb";
 import { DbHelper } from "./_dbHelper";
+import _ from "lodash";
+
+const fetchPost = (postId: string, cb: Function) => {
+  let post;
+  for (let i = 0; i < db.posts.length; i++) {
+    if (db.posts[i].id == postId) {
+      post = db.posts[i] as any;
+
+      for (let j = 0; j < db.users.length; j++) {
+        if (post.userId === db.users[j].id) {
+          post = {
+            ...post,
+            ["user"]: { username: db.users[j].username, img: db.users[j].img },
+          };
+        }
+      }
+      break;
+    }
+  }
+
+  cb(null, [post]);
+};
+
+const postRemove = (postId: string, cb: Function) => {
+  cb(null, 200);
+};
+
+const postFilterSubmit = (filter: any, cb: Function) => {
+  console.log("postFilterSubmit postFilterSubmit postFilterSubmit");
+
+  cb(null, db.posts);
+};
+
 // const postCreate = (bodyFormData: any, cb: Function) => {
 //   axios({
 //     method: "POST",
@@ -26,16 +59,6 @@ import { DbHelper } from "./_dbHelper";
 //       cb(err);
 //     });
 // };
-
-const postRemove = (postId: string, cb: Function) => {
-  cb(null, 200);
-};
-
-const postFilterSubmit = (filter: any, cb: Function) => {
-  console.log("postFilterSubmit postFilterSubmit postFilterSubmit");
-
-  cb(null, db.posts);
-};
 
 const postCreate = (fake_post: any, cuser: any, cb: Function) => {
   // db.posts.push(fake_post);
@@ -179,4 +202,5 @@ export {
   postCreate,
   postFilterSubmit,
   postRemove,
+  fetchPost,
 };
