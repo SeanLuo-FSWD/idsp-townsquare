@@ -26,7 +26,8 @@ const db = {
       age: 35,
       gender: "female",
       location: "Burnaby",
-      img: "http://www.saltysfishandchips.ca/images/fish_chips.jpg",
+      img:
+        "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
       last_login: new Date().toDateString(),
       followed: ["1", "3"],
       password: "beth@beth.com",
@@ -75,7 +76,7 @@ const db = {
           userId: "2",
           username: "beth",
           img:
-            "https://static.wikia.nocookie.net/rickandmorty/images/5/58/Beth_Smith.png/revision/latest/scale-to-width-down/310?cb=20191122063320",
+            "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
         },
       ],
       messages: [
