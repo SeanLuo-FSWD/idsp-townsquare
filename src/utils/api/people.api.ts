@@ -99,6 +99,9 @@ const fetchPerson = (id: string, cb: Function) => {
     }
   }
 
+  // console.log("profile_obj profile_obj profile_obj profile_obj profile_obj");
+  // console.log(profile_obj);
+
   if (profile_obj) {
     cb(null, profile_obj);
   } else {

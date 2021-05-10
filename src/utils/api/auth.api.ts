@@ -33,6 +33,10 @@ const editProfile = (person: any, cb: Function) => {
   //     cb(error);
   //   });
 
+  console.log("editProfile editProfile editProfile");
+
+  console.log(person);
+
   cb(null, person);
 };
 
@@ -49,7 +53,18 @@ const authenticate = (cb: Function) => {
   //     cb(error);
   //   });
 
-  cb(null, 200);
+  for (let i = 0; i < db.users.length; i++) {
+    if (
+      db.users[i].email === "bob@bob.com" &&
+      db.users[i].password === "bob@bob.com"
+    ) {
+      cb(null, db.users[i]);
+      // cb(null, null);
+
+      return;
+    }
+  }
+  cb(new Error("user not found"));
 };
 
 const logout = (cb: Function) => {

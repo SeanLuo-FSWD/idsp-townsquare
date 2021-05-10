@@ -30,7 +30,7 @@ const FeedPg = (props: any) => {
   } = useContext(LoginContext);
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
-  const { pathPostId } = useParams() as any;
+  const { postId } = useParams() as any;
 
   const newUser = useOnFollowHandle(followState);
 
@@ -44,8 +44,8 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (pathPostId) {
-      fetchPost(pathPostId, (err: Error, result: any) => {
+    if (postId) {
+      fetchPost(postId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
           return;

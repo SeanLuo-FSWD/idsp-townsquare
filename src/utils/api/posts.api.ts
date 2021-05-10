@@ -60,20 +60,22 @@ const postFilterSubmit = (filter: any, cb: Function) => {
 //     });
 // };
 
-const postCreate = (fake_post: any, cuser: any, cb: Function) => {
-  // db.posts.push(fake_post);
+const postCreate = (postObj: any, cuser: any, cb: Function) => {
+  // db.posts.push(postObj);
 
-  // db.posts.unshift(fake_post);
+  // db.posts.unshift(postObj);
   // console.log("1111111111111111111111");
 
   // console.log("ALL THE POSTS ALL THE POSTS ALL THE POSTS");
-  // const dbpost = [fake_post, ...db.posts];
+  // const dbpost = [postObj, ...db.posts];
   // const dbpost = db.posts;
   // console.log(dbpost);
 
   // const newdb = { ...db, posts: dbpost };
+  console.log(" postCreate postCreate postCreate postCreate ");
+  console.log(postObj);
 
-  const return_post = { ...fake_post, ["user"]: cuser };
+  const return_post = { ...postObj, ["user"]: cuser };
 
   cb(null, return_post);
 };

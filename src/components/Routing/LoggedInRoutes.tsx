@@ -33,7 +33,7 @@ const ReactRouterSetup = () => {
       </Route>
 
       <Route path="/person/:id" children={<Person />}></Route>
-      <Route path="/post/:pathPostId" children={<Home />}></Route>
+      <Route path="/post/:postId" children={<Home />}></Route>
       <Route path="/chat/:chatId" children={<Chat />}></Route>
     </>
   );

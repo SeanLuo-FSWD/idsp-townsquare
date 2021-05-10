@@ -56,11 +56,6 @@ function Chat() {
 
   const getOtherUser = () => {
     let others = [];
-
-    console.log("2222222222222222");
-    console.log("2222222222222222");
-    console.log(chat);
-
     for (let i = 0; i < chat.chatters.length; i++) {
       if (chat.chatters[i].userId !== currentUser.id) {
         others.push(chat.chatters[i]);
@@ -71,10 +66,6 @@ function Chat() {
   };
 
   if (chat) {
-    console.log("777777777777777777777");
-    console.log("777777777777777777777");
-    console.log(messages);
-
     return (
       <>
         <SubNav className="flex--space-between">

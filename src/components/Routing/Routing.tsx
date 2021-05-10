@@ -9,11 +9,16 @@ import { LoginContext } from "../../store/context/LoginContext";
 import Error from "../../components/Error/Error";
 import Verify from "../../pages/verify/Verify";
 import { login } from "../../utils/api/auth.api";
+import Login from "../../pages/login/LoginPg";
 
 const Routing = () => {
-  const { cerror, setCurrentUser, setSignUpStatus, setCerror } = useContext(
-    LoginContext
-  );
+  const {
+    cerror,
+    setCurrentUser,
+    currentUser,
+    setSignUpStatus,
+    setCerror,
+  } = useContext(LoginContext);
 
   // Faking login for dev, to remove for production and uncomment Below!
   // useEffect(() => {
@@ -40,6 +45,7 @@ const Routing = () => {
   // }, []);
   // faking login ends
 
+  // if (currentUser) {
   return (
     <Router>
       <Switch>
@@ -49,16 +55,15 @@ const Routing = () => {
         <Route path="/verify">
           <Verify />
         </Route>
-        {/* <Route path="/login">
-          <Login />
-        </Route> */}
         <LoggedInRoutesKeeper>
-          {/* <Navbar /> */}
           {cerror ? <Error message={cerror} /> : <LoggedInRoutes />}
         </LoggedInRoutesKeeper>
       </Switch>
     </Router>
   );
+  // } else {
+  //   return <Login />;
+  // }
 };
 
 export default Routing;

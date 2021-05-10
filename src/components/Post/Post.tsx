@@ -32,11 +32,11 @@ const Post = (props: any) => {
   const [commentList, setCommentList] = useState([]) as any;
 
   const [commentsVisible, setCommentsVisible] = useState(false);
-  const { pathPostId } = useParams() as any;
+  const { postId } = useParams() as any;
   useEffect(() => {
     setLikes(props.post.likes);
     setCommentList(props.post.commentList.reverse());
-    if (pathPostId) {
+    if (postId) {
       setCommentsVisible(true);
     }
   }, []);

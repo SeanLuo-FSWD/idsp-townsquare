@@ -73,7 +73,7 @@ function PostModalContent({ addPostProp }: any) {
     // Faking the post here, above commented is the ACTUAL method
 
     const img_urls = modalProps ? modalProps.src_arr : [];
-    let fake_post = {
+    let postObj = {
       commentList: [],
       createdAt: new Date().toDateString(),
       id: uuidv4(),
@@ -83,7 +83,7 @@ function PostModalContent({ addPostProp }: any) {
       username: currentUser.username,
       img_urls: img_urls,
     };
-    postCreate(fake_post, currentUser, (err: Error, result: IPost[]) => {
+    postCreate(postObj, currentUser, (err: Error, result: IPost[]) => {
       if (err) {
         setCerror(err.message);
       } else {

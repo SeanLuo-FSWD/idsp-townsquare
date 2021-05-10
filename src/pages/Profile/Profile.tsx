@@ -4,39 +4,38 @@ import { fetchPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Profile.module.scss";
-import _, { String } from "lodash";
+import _, { String, stubFalse } from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import { logout } from "../../utils/api/auth.api";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
-  const [person, setPerson] = useState({
-    id: "",
-    filename: "",
-    username: "",
-    age: "",
-    gender: "",
-    location: "",
-  }) as any;
+  const [person, setPerson] = useState({}) as any;
   //   const [pwRetype, setPwRetype] = useState(false);
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
   const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
+
   useEffect(() => {
+    console.log("state refresh");
+
     fetchPerson(currentUser.id, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        setPerson(result); // Uncontrolled
-        console.log("null");
+        setInitPerson(result);
       }
     });
-  }, []);
+  });
+
   const handleChange = (e: any) => {
     const name = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
+    if (name === "age") {
+      value = parseInt(value);
+    }
 
-    setPerson({ ...person, [name]: value }); //controlled
+    setPerson({ ...person, [name]: value });
   };
 
   function handleEditOpen(e: any) {
@@ -58,15 +57,17 @@ function Profile() {
       if (err) {
         setCerror(err.message);
       } else {
-        // return the current user object
+        for (const key in result) {
+          if (key === "username" || key === "img") {
+            setCurrentUser({
+              ...currentUser,
+              [key]: result[key],
+            });
+          }
+        }
 
-        // setCurrentUser({
-        //   username: "patrick",
-        //   id: "patrick_id",
-        //   img:
-        //     "https://static.wikia.nocookie.net/characters/images/6/6b/309.png/revision/latest/top-crop/width/360/height/450?cb=20141230071329",
-        // });
-
+        // You will have to let state change refresh to grab fetch again
+        setPerson({});
         setUpdateStatus(true);
         setFieldArr([]);
       }
@@ -94,7 +95,8 @@ function Profile() {
     });
   }
 
-  if (person.id) {
+  // if (person.id) {
+  if (initPerson) {
     const ageArr = [];
     for (let i = 1; i <= 100; i++) {
       ageArr.push(i);
@@ -113,7 +115,10 @@ function Profile() {
         <div>
           <div>
             <div className={styles.container}>
-              <img className={styles.profileImg} src={person.img} alt="" />
+              <img className={styles.profileImg} src={initPerson.img} alt="" />
+              {person.img && updateStatus === false && (
+                <img className={styles.profileImg} src={person.img} alt="" />
+              )}
               <button data-edit="editImg" onClick={handleEditOpen}>
                 Edit
               </button>
@@ -135,7 +140,7 @@ function Profile() {
           </div>
           <div>
             <div className={`flex`}>
-              <h2>username: {person.username}</h2>
+              <h2>username: {initPerson.username}</h2>
               <button data-edit="editUsername" onClick={handleEditOpen}>
                 Edit
               </button>
@@ -158,7 +163,7 @@ function Profile() {
           </div>
           <div>
             <div className={`flex`}>
-              <h2>age: {person.age}</h2>
+              <h2>age: {initPerson.age}</h2>
               <button data-edit="editAge" onClick={handleEditOpen}>
                 Edit
               </button>
@@ -178,7 +183,7 @@ function Profile() {
           </div>
           <div>
             <div className={`flex`}>
-              <h2>Location: {person.location}</h2>
+              <h2>Location: {initPerson.location}</h2>
               <button data-edit="editLocation" onClick={handleEditOpen}>
                 Edit
               </button>
@@ -204,7 +209,7 @@ function Profile() {
           </div>
           <div>
             <div className={`flex`}>
-              <h2>gender: {person.gender}</h2>
+              <h2>gender: {initPerson.gender}</h2>
               <button data-edit="editGender" onClick={handleEditOpen}>
                 Edit
               </button>
