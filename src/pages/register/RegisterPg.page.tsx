@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
@@ -49,7 +49,6 @@ const Register = () => {
   };
   return (
     <>
-
       <div className={styles.card}>
         <div className={styles.backgroundSquare}>
           <br></br>
@@ -64,7 +63,8 @@ const Register = () => {
           {registerStatus ? (
             <div>
               <h1>
-                Registration success, please check your email for verification link
+                Registration success, please check your email for verification
+                link
               </h1>
             </div>
           ) : (
@@ -110,22 +110,24 @@ const Register = () => {
                   </div>
                 </div>
                 <br></br>
-                <button className={styles.registerButton} type="submit" onClick={handleRegister}>
+                <button
+                  className={styles.registerButton}
+                  type="submit"
+                  onClick={handleRegister}
+                >
                   Sign Up
                 </button>
-
               </form>
-
-
             </article>
           )}
         </div>
         <div className={styles.loginButtonContainer}>
-            <p className={styles.alreadyHaveAccount}>Already have an account?</p>
-              <button className={styles.backToSignUp}>
-                Log In
-              </button>
-          </div>
+          <p className={styles.alreadyHaveAccount}>Already have an account?</p>
+          {/* <button className={styles.backToSignUp}>Log In</button> */}
+          <Link className={styles.backToSignUp} to="/">
+            Log In
+          </Link>
+        </div>
       </div>
     </>
   );

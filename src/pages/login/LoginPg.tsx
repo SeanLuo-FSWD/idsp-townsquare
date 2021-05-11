@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
 import styles from "./LoginPg.module.scss";
 
 function Login() {
+  const history = useHistory();
+
   const {
     signUpStatus,
     setSignUpStatus,
@@ -38,13 +40,18 @@ function Login() {
       login(user_obj, (err: Error, result: any) => {
         if (err) {
           console.log(err);
-          setCerror(err.message);
+          setCerror(err);
         } else {
           console.log("user logged in / LoginPg");
-          console.log(result);
+          console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+          console.log(result.data);
           setCerror("");
-          setSignUpStatus(false);
-          setCurrentUser(result);
+          // setSignUpStatus(false);
+          setCurrentUser(result.data);
+
+          // if (result.data.firstTime) {
+          //   history.push("/");
+          // }
         }
       });
     } else {

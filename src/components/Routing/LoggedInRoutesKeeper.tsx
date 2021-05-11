@@ -3,6 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import Login from "../../pages/login/LoginPg";
 import Error from "../../components/Error/Error";
 import { authenticate } from "../../utils/api/auth.api";
+import Profile from "../../pages/Profile/Profile";
 
 const LoggedInRoutesKeeper = (props: any) => {
   const { cerror, currentUser, setCurrentUser, setCerror } = useContext(
@@ -12,19 +13,33 @@ const LoggedInRoutesKeeper = (props: any) => {
   useEffect(() => {
     authenticate((err: Error, result: any) => {
       if (err) {
-        setCerror(err.message);
+        // setCerror(err.message);
+        console.log(err);
       } else {
-        if (result) {
-          setCurrentUser(result);
-        }
+        console.log("authentication in LoggedInRoutesKeeper");
+        console.log("bbbbbbbbbbbbbbbbbb");
+        console.log(result.data);
+
+        setCurrentUser(result.data);
       }
     });
-  });
+  }, []);
 
   if (cerror) {
     return <Error message={cerror} />;
   } else {
-    return <>{currentUser ? props.children : <Login />}</>;
+    // return <>{currentUser ? props.children : <Login />}</>;
+    return (
+      <>
+        {!currentUser ? (
+          <Login />
+        ) : currentUser.firstTime ? (
+          <Profile />
+        ) : (
+          props.children
+        )}
+      </>
+    );
   }
 
   // return props.children;

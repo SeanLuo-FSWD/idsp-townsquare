@@ -9,7 +9,7 @@ import settingsIcon from "./settings.svg";
 import logoutIcon from "./logoutIcon.svg";
 import usersIcon from "./users.svg";
 import Chat from "../../pages/chatPg/ChatPg";
-
+import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
 function Navbar(props: any) {
   const [currentPath, setCurrentPath] = useState("");
 
@@ -58,7 +58,8 @@ function Navbar(props: any) {
         }
       >
         <Link to="/chatPage">
-          <h3>Chat</h3>
+          {/* <h3>Chat</h3> */}
+          <ChatBubbleOutlinedIcon className={styles.chatBubble} />
         </Link>
       </div>
       <div

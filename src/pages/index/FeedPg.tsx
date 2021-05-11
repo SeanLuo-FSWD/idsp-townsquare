@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory, useParams } from "react-router-dom";
 import { useOnFollowHandle } from "../../helper/follow";
+import { getFollowed } from "../../utils/api/people.api";
 
 const FeedPg = (props: any) => {
   const {
@@ -31,6 +32,7 @@ const FeedPg = (props: any) => {
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
   const { postId } = useParams() as any;
+  const [followed, setFollowed] = useState([]) as any;
 
   const newUser = useOnFollowHandle(followState);
 
@@ -44,6 +46,14 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
+    getFollowed((err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        setFollowed(result.data);
+      }
+    });
+
     if (postId) {
       fetchPost(postId, (err: Error, result: any) => {
         if (err) {
@@ -124,6 +134,7 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
+
                     <h4>{post.username}</h4>
                   </div>
                   <h4>{post.createdAt}</h4>
@@ -136,7 +147,7 @@ const FeedPg = (props: any) => {
                     >
                       Delete
                     </button>
-                  ) : currentUser.followed.includes(post.userId) ? (
+                  ) : followed.includes(post.userId) ? (
                     <button onClick={() => onFollowHandle(post.userId, false)}>
                       Unfollow
                     </button>

@@ -18,15 +18,27 @@ function Profile() {
 
   useEffect(() => {
     console.log("state refresh");
+    console.log(currentUser);
+    // let search = window.location.search;
+    // let firstTime = new URLSearchParams(search).get("firstTime") as string;
 
-    fetchPerson(currentUser.id, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        setInitPerson(result);
-      }
-    });
-  });
+    // fetchPerson(currentUser.id, (err: Error, result: any) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //   } else {
+    //     setInitPerson(result);
+    //   }
+    // });
+
+    setInitPerson(currentUser);
+
+    // if (firstTime === "true") {
+    //   console.log("1111111111111111111111");
+    //   console.log("1111111111111111111111");
+    //   console.log(firstTime);
+    //   setInitPerson({ ...currentUser, ["firstTime"]: true });
+    // }
+  }, []);
 
   const handleChange = (e: any) => {
     const name = e.target.name;
@@ -57,14 +69,15 @@ function Profile() {
       if (err) {
         setCerror(err.message);
       } else {
-        for (const key in result) {
-          if (key === "username" || key === "img") {
-            setCurrentUser({
-              ...currentUser,
-              [key]: result[key],
-            });
-          }
-        }
+        // for (const key in result) {
+        //   if (key === "username" || key === "img") {
+        //     setCurrentUser({
+        //       ...currentUser,
+        //       [key]: result[key],
+        //     });
+        //   }
+        // }
+        setCurrentUser(result);
 
         // You will have to let state change refresh to grab fetch again
         setPerson({});
@@ -80,7 +93,7 @@ function Profile() {
     binaryData.push(imgFile);
     const blob = new Blob(binaryData);
     const img_src = window.URL.createObjectURL(blob);
-    setPerson({ ...person, ["img"]: img_src });
+    setPerson({ ...person, ["avatar"]: img_src });
   }
 
   function handleLogout() {
@@ -102,6 +115,9 @@ function Profile() {
       ageArr.push(i);
     }
 
+    console.log("666666666666666666");
+    console.log(currentUser);
+
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
@@ -112,12 +128,19 @@ function Profile() {
           </div>
         </SubNav>
 
+        {currentUser.firstTime && (
+          <h2>Welcome {currentUser.username}, please fill your info first.</h2>
+        )}
         <div>
           <div>
             <div className={styles.container}>
-              <img className={styles.profileImg} src={initPerson.img} alt="" />
+              <img
+                className={styles.profileImg}
+                src={initPerson.avatar}
+                alt=""
+              />
               {person.img && updateStatus === false && (
-                <img className={styles.profileImg} src={person.img} alt="" />
+                <img className={styles.profileImg} src={person.avatar} alt="" />
               )}
               <button data-edit="editImg" onClick={handleEditOpen}>
                 Edit
@@ -237,46 +260,6 @@ function Profile() {
         <button onClick={handleProfileEdit} style={{ float: "right" }}>
           Submit
         </button>
-
-        {/* <form>
-          <div className="form-control">
-            <label htmlFor="username">username : </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Edit username"
-              value={person.username}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="age">age : </label>
-            <input
-              type="text"
-              id="age"
-              name="age"
-              placeholder="Edit age"
-              value={person.age}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="location">location : </label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              placeholder="Edit location"
-              value={person.location}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button type="submit" onClick={handleProfileEdit}>
-            Submit Edit
-          </button>
-        </form> */}
       </div>
     );
   }

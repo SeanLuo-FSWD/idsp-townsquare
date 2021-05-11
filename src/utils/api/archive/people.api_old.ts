@@ -1,27 +1,11 @@
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
-import { db } from "../../FakeDb/FakeDb";
+import { db } from "../../../FakeDb/FakeDb";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
-import API_URL from "../../constants/api_url";
 
-import { DbHelper } from "./_dbHelper";
+import { DbHelper } from "../_dbHelper";
 
-const getFollowed = (cb: Function) => {
-  axios
-    .get(`${API_URL}/user/followingUsers`, {
-      withCredentials: true,
-    })
-    .then((response) => {
-      console.log("getFollowed response");
-      console.log(response);
-      cb(null, response);
-    })
-    .catch((error) => {
-      console.log("getFollowed error");
-      cb(null, error.response.data.message);
-    });
-};
 const addChatMsg = (msgObj: any, cb: Function) => {
   if (msgObj) {
     const msg_res = {
@@ -94,18 +78,35 @@ const fetchPeople = (peoplePg: any, cUser: any, cb: Function) => {
 };
 
 const fetchPerson = (id: string, cb: Function) => {
-  axios
-    .get(`${API_URL}/ts/person/${id}`)
-    .then((response) => {
-      console.log("get fetchPerson response");
-      console.log(response);
-      cb(null, response);
-    })
-    .catch((error) => {
-      console.log("fetchPerson error");
-      console.log(error);
-      cb(error);
-    });
+  // axios
+  //   .get(`${MOCK_URL}/ts/person/${id}`)
+  //   .then((response) => {
+  //     console.log("get fetchPerson response");
+  //     console.log(response);
+  //     cb(null, response);
+  //   })
+  //   .catch((error) => {
+  //     console.log("fetchPerson error");
+  //     console.log(error);
+  //     cb(error);
+  //   });
+  let profile_obj;
+
+  for (let i = 0; i < db.users.length; i++) {
+    if (db.users[i].id == id) {
+      profile_obj = db.users[i] as any;
+      profile_obj["feed"] = _.filter(db.posts, (w) => w.userId == id);
+    }
+  }
+
+  // console.log("profile_obj profile_obj profile_obj profile_obj profile_obj");
+  // console.log(profile_obj);
+
+  if (profile_obj) {
+    cb(null, profile_obj);
+  } else {
+    cb(new Error("no user exist"));
+  }
 };
 
 export {
@@ -115,5 +116,4 @@ export {
   getChatList,
   getChat,
   addChatMsg,
-  getFollowed,
 };

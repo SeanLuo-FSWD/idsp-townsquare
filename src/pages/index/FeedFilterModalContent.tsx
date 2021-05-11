@@ -44,9 +44,6 @@ function FeedFilterModalContent(props: any) {
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
-    console.log("1111111111111111111111");
-    console.log("pplFilterHolder");
-    console.log(pplFilterHolder);
 
     pplFilterHolder = {
       ...pplFilterHolder,
@@ -55,9 +52,6 @@ function FeedFilterModalContent(props: any) {
   };
 
   const feedFilterProps = (post_filter: Object) => {
-    console.log("1111111111111111111111");
-    console.log("feedFilterHolder");
-    console.log(feedFilterHolder);
     const key_name_pair = Object.entries(post_filter)[0];
     feedFilterHolder = {
       ...feedFilterHolder,
@@ -67,8 +61,8 @@ function FeedFilterModalContent(props: any) {
   };
 
   const onFeedFilterClick = () => {
-    console.log("3333333333333333");
-    console.log("onFeedFilterClick");
+    // console.log("3333333333333333");
+    // console.log("onFeedFilterClick");
 
     const feedPgSlice = {
       feedPg: {

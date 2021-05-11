@@ -20,7 +20,10 @@ function Verify() {
 
   useEffect(() => {
     let search = window.location.search;
-    let query = new URLSearchParams(search).get("query") as string;
+    let query = new URLSearchParams(search).get("id") as string;
+
+    console.log("2222222222222222");
+    console.log(query);
 
     verify(query, (err: Error, result: {}) => {
       if (err) {
@@ -28,12 +31,9 @@ function Verify() {
           "Your email could not be verified, please try register again"
         );
       } else {
-        // Ask to login user on backend, AND send userId + username + email here.
-        setCurrentUser({ id: "stub", username: "stub" });
-
         setStatus(true);
         setTimeout(() => {
-          history.push("/profile");
+          history.push("/");
         }, 2000);
       }
     });
@@ -46,8 +46,7 @@ function Verify() {
   ) : (
     <div>
       <h2>
-        Authentication success! You will be redirected to Edit profile page
-        shortly
+        Authentication success! You will be redirected to Login page shortly
       </h2>
     </div>
   );

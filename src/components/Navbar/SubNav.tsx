@@ -5,6 +5,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import { Link } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
+import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
 
 function SubNav(props: any) {
   const {
@@ -56,13 +57,13 @@ function SubNav(props: any) {
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
       <div>
-        <Badge badgeContent={currentUser.alert.length} color="primary">
+        {/* <Badge badgeContent={currentUser.alert.length} color="primary">
           <NotificationsIcon
             onClick={() => {
               setShowDD(!showDD);
             }}
           />
-        </Badge>
+        </Badge> */}
         {showDD && (
           <div className={styles.alert}>
             <ul>

@@ -52,7 +52,7 @@ const Routing = () => {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/verify">
+        <Route path="/api/user/verify">
           <Verify />
         </Route>
         <LoggedInRoutesKeeper>

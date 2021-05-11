@@ -62,36 +62,43 @@ function PostModalContent({ addPostProp }: any) {
     setModalProps(null);
 
     // DO NOT DELETE
-    // postCreate(bodyFormData, (err: Error, result: IPost[]) => {
-    //   if (err) {
-    //     setCerror(err.message);
-    //   } else {
-    //     setCerror("");
-    //     setFeed(_.concat(result, feed));
-    //   }
-    // });
-    // Faking the post here, above commented is the ACTUAL method
+    console.log("000000000000000000000");
+    console.log(bodyFormData);
 
-    const img_urls = modalProps ? modalProps.src_arr : [];
-    let postObj = {
-      commentList: [],
-      createdAt: new Date().toDateString(),
-      id: uuidv4(),
-      likes: [],
-      message: message,
-      userId: currentUser.id,
-      username: currentUser.username,
-      img_urls: img_urls,
-    };
-    postCreate(postObj, currentUser, (err: Error, result: IPost[]) => {
+    postCreate(bodyFormData, (err: Error, result: IPost[]) => {
       if (err) {
         setCerror(err.message);
       } else {
         setCerror("");
+        console.log("postCreate postCreate postCreate postCreate");
+        console.log(result);
 
         addPostProp(result);
       }
     });
+    // Faking the post here, above commented is the ACTUAL method
+
+    // const img_urls = modalProps ? modalProps.src_arr : [];
+    // let postObj = {
+    //   commentList: [],
+    //   createdAt: new Date().toDateString(),
+    //   id: uuidv4(),
+    //   likes: [],
+    //   message: message,
+    //   userId: currentUser.id,
+    //   username: currentUser.username,
+    //   img_urls: img_urls,
+    // };
+
+    // postCreate(postObj, (err: Error, result: IPost[]) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //   } else {
+    //     setCerror("");
+
+    //     addPostProp(result);
+    //   }
+    // });
 
     setMessage("");
   };
