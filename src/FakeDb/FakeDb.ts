@@ -11,7 +11,7 @@ const db = {
       followed: ["2", "3"],
       password: "bob@bob.com",
       img:
-        "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+        "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
       alert: [
         { type: "liked", postId: "5", username: "vince", id: "9" },
         { type: "commented", postId: "5", username: "beth", id: "8" },
@@ -27,7 +27,7 @@ const db = {
       gender: "female",
       location: "Burnaby",
       img:
-        "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
+        "https://d2k0ddhflgrk1i.cloudfront.net/_processed_/f/0/csm_nicholas_smeele_profile_square_3e56eadec7.jpg",
       last_login: new Date().toDateString(),
       followed: ["1", "3"],
       password: "beth@beth.com",
@@ -41,7 +41,7 @@ const db = {
       gender: "male",
       location: "Vancouver",
       img:
-        "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
+        "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
       last_login: new Date().toDateString(),
       followed: [],
       password: "vince@vince.com",
@@ -55,7 +55,7 @@ const db = {
       gender: "other",
       location: "Richmond",
       img:
-        "https://kids.kiddle.co/images/thumb/b/b4/Cow_eating_some_grass.jpg/500px-Cow_eating_some_grass.jpg",
+        "https://64.media.tumblr.com/e2a530423601b12e1bf0bcbedb74384b/tumblr_pad0bae3lq1wsv7oso4_400.png",
       last_login: new Date().toDateString(),
       followed: [],
       password: "Denisha",
