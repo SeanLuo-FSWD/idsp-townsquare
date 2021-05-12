@@ -2,7 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import Modal from "../../UI/Modal";
 import Feed from "../../components/Feed/Feed";
-import { fetchFeed, fetchPost, postRemove } from "../../utils/api/posts.api";
+import {
+  fetchFeed,
+  getFullPostByPostId,
+  postRemove,
+} from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
@@ -37,6 +41,8 @@ const FeedPg = (props: any) => {
   const newUser = useOnFollowHandle(followState);
 
   useEffect(() => {
+    console.log("666666666666666666");
+    console.log("666666666666666666");
     if (newUser) {
       SetFollowState(null);
       setCurrentUser(newUser);
@@ -55,7 +61,10 @@ const FeedPg = (props: any) => {
     });
 
     if (postId) {
-      fetchPost(postId, (err: Error, result: any) => {
+      console.log("777777777777777777777");
+      console.log(postId);
+
+      getFullPostByPostId(postId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
           return;
@@ -123,14 +132,14 @@ const FeedPg = (props: any) => {
 
           {feed.map((post: any) => {
             return (
-              <div key={post.id} className={styles.postWrapper}>
+              <div key={post._id} className={styles.postWrapper}>
                 <div className="flex--space-between">
                   <div
                     className="flex"
                     onClick={() => profileRedirect(post.userId)}
                   >
                     <img
-                      src={post.user.img}
+                      src={post.avatar}
                       alt=""
                       className={styles.postWrapper__img}
                     />
@@ -142,7 +151,7 @@ const FeedPg = (props: any) => {
                   {post.userId === currentUser.id ? (
                     <button
                       onClick={() => {
-                        onRemovePost(post.id);
+                        onRemovePost(post.postId);
                       }}
                     >
                       Delete

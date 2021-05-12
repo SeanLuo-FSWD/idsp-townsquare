@@ -98,8 +98,8 @@ const login = (user_obj: any, cb: Function) => {
     })
     .catch((error) => {
       console.log("user login error");
-      console.log(error.response.data.message);
-      cb(error.response.data.message);
+      console.log(error);
+      cb(error);
     });
   // cb(new Error("login user not found"));
 };

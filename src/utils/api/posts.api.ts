@@ -8,25 +8,52 @@ import { db } from "../../FakeDb/FakeDb";
 import { DbHelper } from "./_dbHelper";
 import _ from "lodash";
 
-const fetchPost = (postId: string, cb: Function) => {
-  let post;
-  for (let i = 0; i < db.posts.length; i++) {
-    if (db.posts[i].id == postId) {
-      post = db.posts[i] as any;
+const getLikesByPostId = (postId: string, cb: Function) => {
+  axios
+    .get(`${API_URL}/post/like/${postId}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getLikesByPostId response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("getLikesByPostId error");
+      cb(null, error);
+    });
+};
 
-      for (let j = 0; j < db.users.length; j++) {
-        if (post.userId === db.users[j].id) {
-          post = {
-            ...post,
-            ["user"]: { username: db.users[j].username, img: db.users[j].img },
-          };
-        }
-      }
-      break;
-    }
-  }
+const getAllCommentsByPostId = (postId: string, cb: Function) => {
+  axios
+    .get(`${API_URL}/comment/${postId}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getFullPostByPostId response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("getFullPostByPostId error");
+      cb(null, error);
+    });
+};
 
-  cb(null, [post]);
+const getFullPostByPostId = (postId: string, cb: Function) => {
+  axios
+    .get(`${API_URL}/post/${postId}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getFullPostByPostId response");
+      console.log(response);
+      cb(null, response);
+    })
+    .catch((error) => {
+      console.log("getFullPostByPostId error");
+      cb(null, error.response.data.message);
+    });
 };
 
 const postRemove = (postId: string, cb: Function) => {
@@ -59,99 +86,71 @@ const postCreate = (bodyFormData: any, cb: Function) => {
     });
 };
 
-// const postCreate = (postObj: any, cuser: any, cb: Function) => {
-//   db.posts.push(postObj);
-
-//   db.posts.unshift(postObj);
-//   console.log("1111111111111111111111");
-
-//   console.log("ALL THE POSTS ALL THE POSTS ALL THE POSTS");
-//   const dbpost = [postObj, ...db.posts];
-//   const dbpost = db.posts;
-//   console.log(dbpost);
-
-//   const newdb = { ...db, posts: dbpost };
-//   console.log(" postCreate postCreate postCreate postCreate ");
-//   console.log(postObj);
-
-//   const return_post = { ...postObj, ["user"]: cuser };
-
-//   cb(null, return_post);
-// };
-
 const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
   console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
   console.log("fetchFeed");
-  console.log(feedPg);
-
   axios
     .get(`${API_URL}/post`, {
       withCredentials: true,
     })
     .then((response) => {
-      console.log("verify response");
+      console.log("fetchFeed response");
       console.log(response.data);
       cb(null, response.data);
     })
     .catch((error) => {
-      console.log("verify error");
+      console.log("fetchFeed error");
       cb(null, error);
     });
 };
 
-const likePost = (like_arr: any, cb: Function) => {
-  console.log("likePost likePost likePost likePost");
+const toggleLikePost = (postId: any, cb: Function) => {
+  console.log("1111111111111111111111");
+  console.log(postId);
 
-  // axios
-  //   .post(`${MOCK_URL}/ts/like_post`, like_arr)
-  //   .then((response) => {
-  //     console.log("likePost response");
-  //     console.log(response);
-  //     cb(null, response.data);
-  //   })
-  //   .catch((err) => {
-  //     console.log("likePost error");
-  //     console.log(err);
-  //     cb(err);
-  //   });
-  cb(null, like_arr);
+  axios
+    .post(`${API_URL}/post/like`, { postId: postId }, { withCredentials: true })
+    .then((response) => {
+      console.log("toggleLikePost response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((err) => {
+      console.log("toggleLikePost error");
+      console.log(err);
+      cb(err);
+    });
+  // cb(null, like_arr);
 };
 
-const addComment = (comment_obj: TComment, cb: Function) => {
+const createComment = (comment_obj: TComment, cb: Function) => {
   console.log("comment_objcomment_objcomment_objcomment_obj");
+  console.log(comment_obj);
 
-  // console.log(comment_obj);
+  axios
+    .post(`${API_URL}/comment/`, comment_obj, { withCredentials: true })
+    .then((response) => {
+      console.log("add_comment response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((err) => {
+      console.log("add_comment error");
+      console.log(err);
+      cb(err);
+    });
+
   // cb(null, comment_obj);
-
-  // axios
-  //   .post(`${MOCK_URL}/ts/add_comment`, {
-  //     userId: comment_obj.userId,
-  //     id: comment_obj.id,
-  //     username: comment_obj.username,
-  //     createdAt: comment_obj.createdAt,
-  //     message: comment_obj.message,
-  //     postId: comment_obj.postId,
-  //   })
-  //   .then((response) => {
-  //     console.log("add_comment response");
-  //     console.log(response);
-  //     cb(null, response.data);
-  //   })
-  //   .catch((err) => {
-  //     console.log("add_comment error");
-  //     console.log(err);
-  //     cb(err);
-  //   });
-
-  cb(null, comment_obj);
 };
 
 export {
   fetchFeed,
-  likePost,
-  addComment,
+  toggleLikePost,
+  createComment,
   postCreate,
   postFilterSubmit,
   postRemove,
-  fetchPost,
+  getFullPostByPostId,
+  getAllCommentsByPostId,
+  getLikesByPostId,
 };

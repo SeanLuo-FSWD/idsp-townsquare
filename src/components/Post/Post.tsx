@@ -5,7 +5,7 @@ import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import PostLike from "./PostLike";
 import PostComment from "./PostComment";
 import { LoginContext } from "../../store/context/LoginContext";
-import _ from "lodash";
+import _, { countBy } from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
@@ -16,180 +16,137 @@ import comments from "./comments.svg";
 import ImageSlider from "../../UI/ImageSlider";
 import {
   fetchFeed,
-  addComment,
-  likePost,
+  createComment,
+  toggleLikePost,
   postCreate,
 } from "../../utils/api/posts.api";
 
 import { IPost, TLikes } from "../../interfaces/IPost";
+import PostCommentList from "./PostCommentList";
 
 const Post = (props: any) => {
   const history = useHistory();
   const { setCerror, currentUser } = useContext(LoginContext);
-  const [likes, setLikes] = useState([]) as any;
+  const [likesCount, setLikesCount] = useState("") as any;
 
-  const [comment, setComment] = useState("");
-  const [commentList, setCommentList] = useState([]) as any;
-
+  // const [comment, setComment] = useState("");
+  // const [commentList, setCommentList] = useState([]) as any;
+  const [commentsCount, setCommentsCount] = useState(0);
   const [commentsVisible, setCommentsVisible] = useState(false);
   const { postId } = useParams() as any;
   useEffect(() => {
-    setLikes(props.post.likes);
-    setCommentList(props.post.commentList.reverse());
+    setLikesCount(props.post.likesCount);
+    setCommentsCount(props.post.commentsCount);
+    // setCommentList(props.post.commentList.reverse());
     if (postId) {
       setCommentsVisible(true);
     }
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log(props.post);
   }, []);
 
-  const commentSubmit = (e: any) => {
-    e.preventDefault();
+  useEffect(() => {
+    console.log("999999999999999999999");
+    console.log("suposely createcomment after cb");
+  });
+
+  const handleLikeProp = () => {
+    toggleLikePost(props.post._id, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        console.log("toggleLikePost toggleLikePost toggleLikePost");
+        console.log(result);
+        result.message === "liked"
+          ? setLikesCount(likesCount + 1)
+          : setLikesCount(likesCount - 1);
+      }
+    });
+    // props.post.onLikeComment(like_obj);
+  };
+
+  const commentSubmitProp = (comment: string, cb: Function) => {
+    console.log("vvvvvvvvvvvvvvvvvvv");
+    console.log("vvvvvvvvvvvvvvvvvvv");
+    console.log(comment);
 
     const comment_obj: any = {
-      userId: currentUser.id,
-      username: currentUser.username,
-      createdAt: new Date().toDateString(),
-      message: comment,
-      id: uuidv4(),
-      postId: props.post.id,
+      text: comment,
+      postId: props.post._id,
     };
 
-    addComment(comment_obj, (err: Error, result: IPost[]) => {
+    createComment(comment_obj, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
         // setCommentList([...commentList, result]);
-        setCommentList(_.concat(result, commentList));
+        // setCommentList(_.concat(result, commentList));
 
-        setComment("");
+        // setComment("");
+        setCommentsCount(commentsCount + 1);
+        cb(result);
       }
     });
 
     // props.post.onPostComment(comment_obj);
   };
 
-  const handleLike = (toLike: boolean) => {
-    const like_obj = {
-      id: uuidv4(),
-      userId: currentUser.id,
-      username: currentUser.username,
-      postId: props.post.id,
-    };
-
-    const new_likes = toLike
-      ? [...likes, like_obj]
-      : _.filter(likes, (o) => o.userId != currentUser.id);
-
-    likePost(new_likes, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        // const new_likes = toLike
-        //   ? _.filter(likes, (o) => o.userId == userId)
-        //   : [...likes, result];
-
-        setLikes(new_likes);
-      }
-    });
-
-    // props.post.onLikeComment(like_obj);
-  };
-
-  function checkLiked(): boolean {
-    // return TRUE if liked
-    const liked =
-      _.filter(likes, (o) => o.userId == currentUser.id).length != 0;
-
-    return liked;
-  }
-
   return (
     <div className={styles.postContainer}>
-      <div key={props.post.id} className={styles.post}>
-        {/* <div className="flex--space-left">
-          <img
-            src={props.post.user.img}
-            alt="img"
-            className={styles.postWrapper__img}
-          />
-          <h4 className={styles.flexItem}>{props.post.username}</h4>
-          <h4 className="flex--space-right">{props.post.createdAt}</h4>
-          {props.post.userId === currentUser.id && (
-            <button
-              onClick={() => {
-                removePost(props.post.id);
-              }}
-            >
-              Remove
-            </button>
-          )}
-        </div> */}
-
+      <div key={props.post._id} className={styles.post}>
         <div className={styles.textContainer}>
           <h2>{props.title}</h2>
-          <h5>{props.post.message}</h5>
+          <h5>{props.post.text}</h5>
         </div>
 
-        <ImageSlider slides={props.post.img_urls} />
+        <ImageSlider slides={props.post.images} />
 
         <div className={styles.textContainer}>
           <div className="flex--space-between">
             <div className="flex">
-              {checkLiked() ? (
+              {/* {checkLiked() ? (
                 <ThumbUpIcon
                   onClick={() => {
-                    handleLike(false);
+                    handleLike();
                   }}
                 />
               ) : (
                 <ThumbUpAltOutlinedIcon
                   onClick={() => {
-                    handleLike(true);
+                    handleLike();
                   }}
                 />
-              )}
-              <PostLike like_arr={likes} />
+              )} */}
+              <div>
+                <PostLike
+                  postId={props.post._id}
+                  likesCount={likesCount}
+                  handleLikeProp={handleLikeProp}
+                />
+              </div>
             </div>
 
-            <img
-              src={comments}
-              onClick={() => setCommentsVisible(!commentsVisible)}
-            />
+            <div className="flex">
+              <img
+                src={comments}
+                onClick={() => setCommentsVisible(!commentsVisible)}
+              />
+              <h4>{commentsCount}</h4>
+            </div>
           </div>
 
           {commentsVisible && (
-            <div>
-              <form onSubmit={commentSubmit}>
-                <input
-                  type="text"
-                  id="comment"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-                <button type="submit">add Comment</button>
-              </form>
-              <div>
-                {commentList.map((c: TComment) => {
-                  return <PostComment key={c.id} {...c} />;
-                })}
-              </div>
-            </div>
+            <PostCommentList
+              postId={props.post._id}
+              commentSubmitProp={commentSubmitProp}
+              commentsCount={commentsCount}
+            />
           )}
         </div>
       </div>
     </div>
   );
 };
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     onPostComment: (comment_obj: TComment) =>
-//       dispatch(doPostComment(comment_obj)),
-//     onLikeComment: (like_obj: any) => dispatch(doLikePost(like_obj)),
-//   };
-// };
-
-// export default Post;
-// export default connect(null, mapDispatchToProps)(Post);
 
 export default Post;

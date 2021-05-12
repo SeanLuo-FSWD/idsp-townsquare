@@ -8,7 +8,7 @@ import { db } from "../../../FakeDb/FakeDb";
 import { DbHelper } from "../_dbHelper";
 import _ from "lodash";
 
-const fetchPost = (postId: string, cb: Function) => {
+const getFullPostByPostId = (postId: string, cb: Function) => {
   let post;
   for (let i = 0; i < db.posts.length; i++) {
     if (db.posts[i].id == postId) {
@@ -150,25 +150,25 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
   }
 };
 
-const likePost = (like_arr: any, cb: Function) => {
-  console.log("likePost likePost likePost likePost");
+const toggleLikePost = (like_arr: any, cb: Function) => {
+  console.log("toggleLikePost toggleLikePost toggleLikePost toggleLikePost");
 
   // axios
   //   .post(`${MOCK_URL}/ts/like_post`, like_arr)
   //   .then((response) => {
-  //     console.log("likePost response");
+  //     console.log("toggleLikePost response");
   //     console.log(response);
   //     cb(null, response.data);
   //   })
   //   .catch((err) => {
-  //     console.log("likePost error");
+  //     console.log("toggleLikePost error");
   //     console.log(err);
   //     cb(err);
   //   });
   cb(null, like_arr);
 };
 
-const addComment = (comment_obj: TComment, cb: Function) => {
+const createComment = (comment_obj: TComment, cb: Function) => {
   console.log("comment_objcomment_objcomment_objcomment_obj");
 
   // console.log(comment_obj);
@@ -199,10 +199,10 @@ const addComment = (comment_obj: TComment, cb: Function) => {
 
 export {
   fetchFeed,
-  likePost,
-  addComment,
+  toggleLikePost,
+  createComment,
   postCreate,
   postFilterSubmit,
   postRemove,
-  fetchPost,
+  getFullPostByPostId,
 };
