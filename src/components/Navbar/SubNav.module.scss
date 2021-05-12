@@ -3,13 +3,21 @@
   position: fixed;
   top: 0;
   z-index: 20;
-  padding: 5px 25px 5px 25px;
+  width: 100%;
+  max-width: 600px;
   border-bottom-left-radius: 0.1rem;
   border-bottom-right-radius: 0.1rem;
   color: white;
   text-align: center;
+  font-size: 120%;
+  flex-shrink: 1;
+  justify-content: space-between;
+  grid-gap: 20px;
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+  padding: .4rem 1.7rem;
   
-  grid-gap: 2rem;
 }
 
 .alert {
@@ -17,4 +25,8 @@
   right: 0;
   background-color: white;
   width: 300px;
+}
+
+.peopleNav {
+  margin: 10px 20px 10px 20px;
 }

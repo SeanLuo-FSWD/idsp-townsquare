@@ -55,7 +55,7 @@ function SubNav(props: any) {
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
-      <div>
+      <div className={styles.subNavItems}>
         <Badge badgeContent={currentUser.alert.length} color="primary">
           <NotificationsIcon
             onClick={() => {
