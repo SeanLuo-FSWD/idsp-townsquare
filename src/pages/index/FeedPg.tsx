@@ -108,7 +108,7 @@ const FeedPg = (props: any) => {
             <img src={filter} onClick={() => setShowModal("filter")} />
           </div>
         </SubNav>
-        <div>
+        <div className={styles.feedContainer}>
           {/* <Feed feed={feed} /> */}
 
           {feed.map((post: any) => {
