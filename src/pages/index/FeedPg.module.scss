@@ -3,6 +3,14 @@
   h2 {
     margin: 1rem 0rem;
   }
+  display: flex;
+  margin: 0;
+  align-items: center;
+  flex-basis: 100%;
+  .SubNavWrap>*:first-child {
+    width: 200px;
+  }
+  
   
 }
 
@@ -13,7 +21,10 @@
   margin-right: auto;
   width: 10px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 50%;
+  border: solid;
+  border-width: 3px;
+
 
 }
 
@@ -26,6 +37,7 @@ body {
 .navContainer {
   display: flex;
   align-items: center;
+  
   
 }
 

@@ -8,6 +8,7 @@ import homeIcon from "./home.svg";
 import settingsIcon from "./settings.svg";
 import logoutIcon from "./logoutIcon.svg";
 import usersIcon from "./users.svg";
+import chatIcon from "./chat.svg";
 import Chat from "../../pages/chatPg/ChatPg";
 
 function Navbar(props: any) {
@@ -58,7 +59,7 @@ function Navbar(props: any) {
         }
       >
         <Link to="/chatPage">
-          <h3>Chat</h3>
+          <img src={chatIcon}></img>
         </Link>
       </div>
       <div

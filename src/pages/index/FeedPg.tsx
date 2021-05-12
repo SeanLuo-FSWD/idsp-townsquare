@@ -95,7 +95,7 @@ const FeedPg = (props: any) => {
       <>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <div className={`flex--space-subNav ${styles.SubNavWrap}`}>
+          <div className={`flex--space-between ${styles.SubNavWrap}`}>
             <div className={styles.username}>
               <img className={styles.logo} src={townSquareLogo} />
             </div>
