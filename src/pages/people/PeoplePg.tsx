@@ -52,8 +52,8 @@ const PeoplePg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.peopleNav}>
         {/* <div className={styles.header}> */}
-        <p>Explore users near you!</p>
         <p>Welcome: {currentUser.username} </p>
+        <p>Explore your town</p>
         <img src={filter} onClick={() => setShowModal("filter")} />
         {/* </div> */}
       </SubNav>
