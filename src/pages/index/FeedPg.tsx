@@ -114,9 +114,9 @@ const FeedPg = (props: any) => {
           {feed.map((post: any) => {
             return (
               <div key={post.id} className={styles.postWrapper}>
-                <div className="flex--space-between">
+                <div className="flex--space-postNav">
                   <div
-                    className="flex"
+                    className={styles.flexpostNav}
                     onClick={() => profileRedirect(post.userId)}
                   >
                     <img
@@ -124,9 +124,9 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
-                    <h4>{post.username}</h4>
+                  <h4 className={styles.flexpostNav}>{post.username}</h4>
                   </div>
-                  <h4>{post.createdAt}</h4>
+                  <h4 className={styles.flexpostNavCreatedTime}>{post.createdAt}</h4>
 
                   {post.userId === currentUser.id ? (
                     <button

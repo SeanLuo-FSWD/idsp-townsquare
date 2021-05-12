@@ -234,7 +234,7 @@ const db = {
     {
       id: "2",
       userId: "4",
-      username: "richard",
+      username: "Natasha",
       createdAt: new Date().toDateString(),
       img_urls: [
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bbyoda-1575303784.jpeg?resize=480:*",
@@ -273,7 +273,7 @@ const db = {
     {
       id: "5",
       userId: "1",
-      username: "bob",
+      username: "Bob",
       createdAt: new Date().toDateString(),
       img_urls: [],
       message:
@@ -317,7 +317,7 @@ const db = {
     {
       id: "4",
       userId: "2",
-      username: "beth",
+      username: "Kevin",
       createdAt: new Date().toDateString(),
       img_urls: [
         "https://i.pinimg.com/originals/b8/fe/0d/b8fe0da10ed33f5a31a44ae9d03cd40e.jpg",
@@ -348,7 +348,7 @@ const db = {
     {
       id: "3",
       userId: "3",
-      username: "vince",
+      username: "Vince",
       createdAt: new Date().toDateString(),
       img_urls: [],
       message:

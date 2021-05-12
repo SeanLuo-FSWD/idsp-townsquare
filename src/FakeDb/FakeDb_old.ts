@@ -3,7 +3,7 @@ const users = [
   {
     id: "1",
     email: "bob@bob.com",
-    username: "bob",
+    username: "Bob",
     age: 5,
     gender: "male",
     location: "Burnaby",
@@ -28,7 +28,7 @@ const users = [
   {
     id: "3",
     email: "vince@vince.com",
-    username: "vince",
+    username: "Vince",
     age: 25,
     gender: "male",
     location: "Vancouver",
@@ -41,7 +41,7 @@ const users = [
   {
     id: "4",
     email: "gates@gmail.com",
-    username: "richard",
+    username: "Richard",
     age: 15,
     gender: "other",
     location: "Richmond",
@@ -58,7 +58,7 @@ const posts = [
   {
     id: "2",
     userId: "4",
-    username: "richard",
+    username: "Richard",
     createdAt: new Date().toDateString(),
     img_urls: [
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bbyoda-1575303784.jpeg?resize=480:*",
@@ -97,7 +97,7 @@ const posts = [
   {
     id: "5",
     userId: "1",
-    username: "bob",
+    username: "Bob",
     createdAt: new Date().toDateString(),
     img_urls: [],
     message:
