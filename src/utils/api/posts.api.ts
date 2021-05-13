@@ -14,8 +14,6 @@ const getLikesByPostId = (postId: string, cb: Function) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log("getLikesByPostId response");
-      console.log(response);
       cb(null, response);
     })
     .catch((error) => {
@@ -56,8 +54,25 @@ const getFullPostByPostId = (postId: string, cb: Function) => {
     });
 };
 
-const postRemove = (postId: string, cb: Function) => {
-  cb(null, 200);
+const deletePost = (postId: string, cb: Function) => {
+  console.log("deletePost called");
+
+  axios
+    .post(
+      `${API_URL}/post/delete`,
+      { postId: postId },
+      { withCredentials: true }
+    )
+    .then((response) => {
+      console.log("deletePost response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((err) => {
+      console.log("deletePost error");
+      console.log(err);
+      cb(err);
+    });
 };
 
 const postFilterSubmit = (filter: any, cb: Function) => {
@@ -105,9 +120,6 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
 };
 
 const toggleLikePost = (postId: any, cb: Function) => {
-  console.log("1111111111111111111111");
-  console.log(postId);
-
   axios
     .post(`${API_URL}/post/like`, { postId: postId }, { withCredentials: true })
     .then((response) => {
@@ -149,7 +161,7 @@ export {
   createComment,
   postCreate,
   postFilterSubmit,
-  postRemove,
+  deletePost,
   getFullPostByPostId,
   getAllCommentsByPostId,
   getLikesByPostId,

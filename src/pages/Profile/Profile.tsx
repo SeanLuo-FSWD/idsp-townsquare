@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { editProfile } from "../../utils/api/auth.api";
-import { fetchPerson } from "../../utils/api/people.api";
+import { getPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
+import { useHistory } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Profile.module.scss";
-import _, { String, stubFalse } from "lodash";
+import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import { logout } from "../../utils/api/auth.api";
 
@@ -15,14 +16,14 @@ function Profile() {
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
   const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
-
+  const history = useHistory();
   useEffect(() => {
     console.log("state refresh");
     console.log(currentUser);
     // let search = window.location.search;
     // let firstTime = new URLSearchParams(search).get("firstTime") as string;
 
-    // fetchPerson(currentUser.id, (err: Error, result: any) => {
+    // getPerson(currentUser.id, (err: Error, result: any) => {
     //   if (err) {
     //     setCerror(err.message);
     //   } else {
@@ -104,6 +105,7 @@ function Profile() {
       } else {
         setCerror("");
         setCurrentUser(null);
+        history.push("/");
       }
     });
   }
@@ -114,10 +116,6 @@ function Profile() {
     for (let i = 1; i <= 100; i++) {
       ageArr.push(i);
     }
-
-    console.log("666666666666666666");
-    console.log(currentUser);
-
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />

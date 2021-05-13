@@ -42,9 +42,6 @@ function Login() {
           console.log(err);
           setCerror(err);
         } else {
-          console.log("user logged in / LoginPg");
-          console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-          console.log(result.data);
           setCerror("");
           // setSignUpStatus(false);
           setCurrentUser(result.data);

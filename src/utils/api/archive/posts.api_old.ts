@@ -29,7 +29,7 @@ const getFullPostByPostId = (postId: string, cb: Function) => {
   cb(null, [post]);
 };
 
-const postRemove = (postId: string, cb: Function) => {
+const deletePost = (postId: string, cb: Function) => {
   cb(null, 200);
 };
 
@@ -203,6 +203,6 @@ export {
   createComment,
   postCreate,
   postFilterSubmit,
-  postRemove,
+  deletePost,
   getFullPostByPostId,
 };

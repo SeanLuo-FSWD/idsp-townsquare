@@ -5,7 +5,7 @@ import Feed from "../../components/Feed/Feed";
 import {
   fetchFeed,
   getFullPostByPostId,
-  postRemove,
+  deletePost,
 } from "../../utils/api/posts.api";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./FeedPg.module.scss";
@@ -23,7 +23,7 @@ import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory, useParams } from "react-router-dom";
 import { useOnFollowHandle } from "../../helper/follow";
-import { getFollowed } from "../../utils/api/people.api";
+import { getFollowingUsers, toggleFollowing } from "../../utils/api/people.api";
 
 const FeedPg = (props: any) => {
   const {
@@ -38,21 +38,19 @@ const FeedPg = (props: any) => {
   const { postId } = useParams() as any;
   const [followed, setFollowed] = useState([]) as any;
 
-  const newUser = useOnFollowHandle(followState);
+  // const newUser = useOnFollowHandle(followState);
 
-  useEffect(() => {
-    console.log("666666666666666666");
-    console.log("666666666666666666");
-    if (newUser) {
-      SetFollowState(null);
-      setCurrentUser(newUser);
-    }
-  });
+  // useEffect(() => {
+  //   if (newUser) {
+  //     SetFollowState(null);
+  //     setCurrentUser(newUser);
+  //   }
+  // });
 
   const history = useHistory();
 
   useEffect(() => {
-    getFollowed((err: Error, result: any) => {
+    getFollowingUsers((err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
@@ -61,9 +59,6 @@ const FeedPg = (props: any) => {
     });
 
     if (postId) {
-      console.log("777777777777777777777");
-      console.log(postId);
-
       getFullPostByPostId(postId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
@@ -95,21 +90,69 @@ const FeedPg = (props: any) => {
   }
 
   const onRemovePost = (postId: string) => {
-    postRemove(postId, (err: Error, result: any) => {
+    deletePost(postId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        const newFeed = _.filter(feed, (p) => p.id != postId);
+        const newFeed = _.filter(feed, (p) => p._id !== postId);
+        console.log("444444444444444444");
+        console.log("444444444444444444");
+        console.log(newFeed);
+
         setFeed(newFeed);
       }
     });
   };
 
-  const onFollowHandle = (userId: string, follow: boolean) => {
-    SetFollowState({ userId: userId, follow: follow });
+  const onFollowHandle = (followUserId: string) => {
+    // SetFollowState({ userId: userId, follow: follow });
+    toggleFollowing(followUserId, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        console.log("88888888888888888888");
+        console.log("88888888888888888888");
+        console.log(result);
+
+        // followingUserId: "609ac3c7c8442904d4cf818b";
+        // userId: "6099dff94ed44209b8b49fb5";
+        // _id: "609c64dc439f85859d80c8b5";
+
+        if (result === "followed") {
+          setFollowed([
+            ...followed,
+            { followingUserId: followUserId, userId: currentUser.userId },
+          ]);
+        } else {
+          const new_follow_arr = _.filter(
+            followed,
+            (f: any) => f.followingUserId !== followUserId
+          );
+
+          setFollowed(new_follow_arr);
+        }
+      }
+    });
   };
 
+  function checkFollowed(postUserId: string) {
+    const match_follow = _.filter(
+      followed,
+      (f: any) => f.followingUserId === postUserId
+    );
+    if (match_follow[0]) {
+      return true;
+    }
+
+    return false;
+  }
+
   if (feed) {
+    console.log("777777777777777777777");
+    console.log("777777777777777777777");
+    console.log(feed);
+    console.log(currentUser);
+
     return (
       <>
         <Navbar currentPath={window.location.pathname} />
@@ -148,20 +191,21 @@ const FeedPg = (props: any) => {
                   </div>
                   <h4>{post.createdAt}</h4>
 
-                  {post.userId === currentUser.id ? (
+                  {post.userId === currentUser.userId ? (
                     <button
                       onClick={() => {
-                        onRemovePost(post.postId);
+                        onRemovePost(post._id);
                       }}
                     >
                       Delete
                     </button>
-                  ) : followed.includes(post.userId) ? (
-                    <button onClick={() => onFollowHandle(post.userId, false)}>
+                  ) : // followed.includes(post.userId)
+                  checkFollowed(post.userId) ? (
+                    <button onClick={() => onFollowHandle(post.userId)}>
                       Unfollow
                     </button>
                   ) : (
-                    <button onClick={() => onFollowHandle(post.userId, true)}>
+                    <button onClick={() => onFollowHandle(post.userId)}>
                       Follow
                     </button>
                   )}

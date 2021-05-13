@@ -9,14 +9,15 @@ function UserGrid(props: any) {
   return (
     <div className={styles.grid}>
       {props.people.map((user: any) => {
-        const profile_pic = user.img
-          ? user.img
-          : "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png";
+        const profile_pic = user.avatar;
 
         return (
-          <div key={user.id} className={`${styles.userTile} flex--center`}>
+          <div key={user._id} className={`${styles.userTile} flex--center`}>
             <img src={profile_pic}></img>
-            <Link to={`/person/${user.id}`} />
+            <h4 style={{ position: "absolute", bottom: "0" }}>
+              {user.username}
+            </h4>
+            <Link to={`/person/${user._id}`} />
           </div>
         );
       })}

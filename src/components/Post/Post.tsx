@@ -41,9 +41,6 @@ const Post = (props: any) => {
     if (postId) {
       setCommentsVisible(true);
     }
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-    console.log(props.post);
   }, []);
 
   useEffect(() => {

@@ -73,16 +73,9 @@ function FeedFilterModalContent(props: any) {
       },
     };
 
-    console.log("444444444444444444");
-    console.log("feedPgSlice");
-
-    console.log(feedPgSlice);
     props.onFeedFilterSubmit(feedPgSlice);
 
     if (applyOtherSide) {
-      console.log("666666666666666666");
-      console.log(pplFilterHolder);
-
       const peoplePgSlice = {
         peoplePg: {
           applied: true,

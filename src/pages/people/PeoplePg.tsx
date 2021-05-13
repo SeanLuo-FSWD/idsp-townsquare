@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
-import { fetchPeople } from "../../utils/api/people.api";
+import { getPeople } from "../../utils/api/people.api";
 import styles from "./peoplePg.module.scss";
 import UserGrid from "../../components/Users/UserGrid";
 import Error from "../../components/Error/Error";
@@ -23,7 +23,7 @@ const PeoplePg = (props: any) => {
   } = useContext(LoginContext);
 
   useEffect(() => {
-    fetchPeople(props.peoplePg, currentUser, (err: Error, result: any) => {
+    getPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {

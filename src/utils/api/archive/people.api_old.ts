@@ -34,16 +34,16 @@ const getChatList = (userId: string, cb: Function) => {
 const userFollow = (userId: string, follow: boolean, cb: Function) => {
   cb(null, 200);
 };
-const fetchPeople = (peoplePg: any, cUser: any, cb: Function) => {
+const getPeople = (peoplePg: any, cUser: any, cb: Function) => {
   // axios
   //   .get(`${MOCK_URL}/ts/allusers`)
   //   .then((response) => {
-  //     console.log("get fetchPeople response");
+  //     console.log("get getPeople response");
   //     console.log(response);
   //     cb(null, response);
   //   })
   //   .catch((error) => {
-  //     console.log("fetchPeople error");
+  //     console.log("getPeople error");
   //     console.log(error);
   //     cb(error);
   //   });
@@ -77,16 +77,16 @@ const fetchPeople = (peoplePg: any, cUser: any, cb: Function) => {
   cb(null, desired_users);
 };
 
-const fetchPerson = (id: string, cb: Function) => {
+const getPerson = (id: string, cb: Function) => {
   // axios
   //   .get(`${MOCK_URL}/ts/person/${id}`)
   //   .then((response) => {
-  //     console.log("get fetchPerson response");
+  //     console.log("get getPerson response");
   //     console.log(response);
   //     cb(null, response);
   //   })
   //   .catch((error) => {
-  //     console.log("fetchPerson error");
+  //     console.log("getPerson error");
   //     console.log(error);
   //     cb(error);
   //   });
@@ -109,11 +109,4 @@ const fetchPerson = (id: string, cb: Function) => {
   }
 };
 
-export {
-  fetchPeople,
-  fetchPerson,
-  userFollow,
-  getChatList,
-  getChat,
-  addChatMsg,
-};
+export { getPeople, getPerson, userFollow, getChatList, getChat, addChatMsg };

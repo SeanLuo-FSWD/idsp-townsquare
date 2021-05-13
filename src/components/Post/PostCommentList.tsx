@@ -34,6 +34,7 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
       console.log(commentList);
       console.log("result");
       console.log(result);
+      setComment("");
 
       setCommentList(_.concat(result, commentList));
     });

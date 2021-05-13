@@ -35,8 +35,6 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
       (o: any) => o.userId === currentUser.userId
     );
 
-    console.log(liked_arr);
-
     if (liked_arr.length > 0) {
       return true;
     }
