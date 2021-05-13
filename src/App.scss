@@ -30,12 +30,12 @@
   
 }
 
-// .flex--postNav {
-//   @extend .flex;
-//   :nth-child(2) {
-//     padding-right: 10px;
-//   }
-// }
+.flex--postNav {
+  @extend .flex;
+  :nth-child(2) {
+    padding-right: 15px;
+  }
+}
 
 .flex--space-around {
   @extend .flex;
@@ -52,6 +52,10 @@
   @extend .flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #d3d8d8;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 5px 0px;
   :last-child {
     margin-right: 10px;
   }

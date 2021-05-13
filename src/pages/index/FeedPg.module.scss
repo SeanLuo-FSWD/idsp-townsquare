@@ -1,8 +1,6 @@
 .SubNavWrap {
   height: 100%;
-  h2 {
-    margin: 1rem 0rem;
-  }
+
   display: flex;
   margin: 0;
   align-items: center;
@@ -21,8 +19,8 @@
   margin-right: auto;
   width: 10px;
   height: auto;
-  border-radius: 50%;
-  border: solid;
+  border-radius: 25%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-width: 3px;
 
 
@@ -53,13 +51,15 @@ body {
   background-color: #f6efe8;
   border-width: thin;
   border-radius: 4px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .postWrapper__img {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  padding: 10px;
+  padding: 0px 10px;
 }
 
 .feedContainer {
@@ -71,7 +71,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   :first-child {
     margin-left: 10px;
   }
@@ -79,5 +79,9 @@ body {
 
 .flexpostNavCreatedTime {
   @extend .flexpostNav;
-  font-size:14px;
+  font-size:16px;
+}
+
+.followUnfollowDelete {
+  padding-right: 10px;
 }

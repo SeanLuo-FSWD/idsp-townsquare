@@ -19,6 +19,9 @@ import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory, useParams } from "react-router-dom";
 import { useOnFollowHandle } from "../../helper/follow";
+import follow from "./follow.svg"
+import deletePost from "./delete.svg"
+import unfollow from "./unfollow.svg"
 
 const FeedPg = (props: any) => {
   const {
@@ -124,26 +127,23 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
-                  <h4 className={styles.flexpostNav}>{post.username}</h4>
+                  <p className={styles.flexpostNav}>{post.username}</p>
                   </div>
-                  <h4 className={styles.flexpostNavCreatedTime}>{post.createdAt}</h4>
+                  <p className={styles.flexpostNavCreatedTime}>{post.createdAt}</p>
 
                   {post.userId === currentUser.id ? (
-                    <button
+                    <img src={deletePost}
+                      className={styles.followUnfollowDelete}
                       onClick={() => {
                         onRemovePost(post.id);
                       }}
-                    >
-                      Delete
-                    </button>
+                    />                      
+
                   ) : currentUser.followed.includes(post.userId) ? (
-                    <button onClick={() => onFollowHandle(post.userId, false)}>
-                      Unfollow
-                    </button>
+                    <img className={styles.followUnfollowDelete} src={unfollow} onClick={() => onFollowHandle(post.userId, false)}/>
+
                   ) : (
-                    <button onClick={() => onFollowHandle(post.userId, true)}>
-                      Follow
-                    </button>
+                    <img className={styles.followUnfollowDelete} src={follow} onClick={() => onFollowHandle(post.userId, true)}/>
                   )}
                 </div>
 

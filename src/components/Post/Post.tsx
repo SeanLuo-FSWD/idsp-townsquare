@@ -131,7 +131,7 @@ const Post = (props: any) => {
 
         <ImageSlider slides={props.post.img_urls} />
 
-        <div className={styles.textContainer}>
+        <div className={styles.likeCommentContainer}>
           <div className="flex--space-between">
             <div className="flex">
               {checkLiked() ? (

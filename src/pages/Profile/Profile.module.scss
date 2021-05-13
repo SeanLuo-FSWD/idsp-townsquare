@@ -10,8 +10,20 @@ body {
 
 .container {
   width: 100%;
+  text-align: center;
   position: relative;
-  margin: 10px 0px;
+  align-items: center;
+  margin-top: 120px;
+  display: block;
+  justify-content: center;
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-gap: 10px;
 }
 
 .profileImg {
@@ -19,3 +31,28 @@ body {
   border: solid 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.saveChanges {
+  font-size: 28px;
+  position: relative;
+  top: 20px;
+  bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 100px;
+  padding-left: 100px;
+  border-color: white;
+  border-style: none;
+  border-radius: 50px; /* 5px rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-width: 10px;
+  max-height: 20px;
+  margin: auto;
+}
+
+// .saveChanges {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+// }
