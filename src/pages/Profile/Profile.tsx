@@ -230,7 +230,7 @@ function Profile() {
               )}
             </div>
             <div className={styles.submitButton}>
-              <button className={styles.saveChanges}>Save</button>
+              <button className={styles.saveChanges} onClick={handleProfileEdit}>Save</button>
             </div>
           </div>
 
