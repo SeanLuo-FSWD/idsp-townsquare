@@ -116,9 +116,9 @@ function Profile() {
           </div>
         </SubNav>
 
-        <div>
-          <div>
-            <div className={styles.container}>
+        <div className={styles.container}>
+          <div >
+            <div >
               <img className={styles.profileImg} src={initPerson.img} alt="" />
               {person.img && updateStatus === false && (
                 <img className={styles.profileImg} src={person.img} alt="" />
@@ -229,12 +229,16 @@ function Profile() {
                 </div>
               )}
             </div>
-          </div>
-          <div className={styles.saveChanges}>
-          <img src={saveChanges} onClick={handleProfileEdit}/>
+            <div className={styles.submitButton}>
+              <button className={styles.saveChanges}>Save</button>
+            </div>
           </div>
 
+
         </div>
+
+
+
         {updateStatus && <h3>Profile updated!</h3>}
 
 
