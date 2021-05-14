@@ -39,7 +39,7 @@ body {
     }
 
     .inputForm {
-        text-align: left;
+        text-align: center;
         width: 75%;
         padding: 7px;
         margin: 0px;
@@ -54,11 +54,9 @@ body {
         max-width: 295px;
         margin: 7px 0px;
 
+
     }
 
-    .form-control {
-        background-color: blue;
-    }
     
     .form {
         text-align: left;
@@ -74,6 +72,7 @@ body {
         border-width: 2px;
         background-color: #92002F;
         font-family: 'Poppins', sans-serif;
+
     }
 
     ::placeholder {
