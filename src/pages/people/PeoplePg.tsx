@@ -53,7 +53,7 @@ const PeoplePg = (props: any) => {
   return (
     <>
       <Navbar currentPath={window.location.pathname} />
-      <SubNav className={styles.peopleNav}>
+      <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
         <p>Explore users near you!</p>
         <p>Welcome: {currentUser.username} </p>
@@ -65,7 +65,9 @@ const PeoplePg = (props: any) => {
         >
           {detailView ? <span>Grid view</span> : <span>Detail view</span>}
         </button>
-        <img src={filter} onClick={() => setShowModal("filter")} />
+        <div className={styles.filterIcon}>
+          <img src={filter} onClick={() => setShowModal("filter")} />
+        </div>
         {/* </div> */}
       </SubNav>
 

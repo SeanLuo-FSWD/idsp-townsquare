@@ -11,7 +11,7 @@ const db = {
       followed: ["2", "3"],
       password: "bob@bob.com",
       img:
-        "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png",
+        "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
       alert: [
         { type: "liked", postId: "5", username: "vince", id: "9" },
         { type: "commented", postId: "5", username: "beth", id: "8" },
@@ -27,7 +27,7 @@ const db = {
       gender: "female",
       location: "Burnaby",
       img:
-        "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
+        "https://d2k0ddhflgrk1i.cloudfront.net/_processed_/f/0/csm_nicholas_smeele_profile_square_3e56eadec7.jpg",
       last_login: new Date().toDateString(),
       followed: ["1", "3"],
       password: "beth@beth.com",
@@ -41,7 +41,7 @@ const db = {
       gender: "male",
       location: "Vancouver",
       img:
-        "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
+        "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
       last_login: new Date().toDateString(),
       followed: [],
       password: "vince@vince.com",
@@ -55,7 +55,105 @@ const db = {
       gender: "other",
       location: "Richmond",
       img:
-        "https://kids.kiddle.co/images/thumb/b/b4/Cow_eating_some_grass.jpg/500px-Cow_eating_some_grass.jpg",
+        "https://64.media.tumblr.com/e2a530423601b12e1bf0bcbedb74384b/tumblr_pad0bae3lq1wsv7oso4_400.png",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "5",
+      email: "bates@gmail.com",
+      username: "richard",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLsHOfu_zeYIfOSdvTNTPRQKWsC7Yug2NHcEHbVpaZj2KW8bDENpgIdf2TTqJ-2K1uh94&usqp=CAU",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "6",
+      email: "aates@gmail.com",
+      username: "Jim",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://res-1.cloudinary.com/crunchbase-production/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco/v1443584492/vosgqpvicpjgknz2rn2l.png",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "7",
+      email: "hates@gmail.com",
+      username: "Joe",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://miro.medium.com/max/640/0*J9rnGfydbw0hf-oU.png",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "8",
+      email: "qates@gmail.com",
+      username: "Joe",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://media.istockphoto.com/photos/beautiful-woman-posing-against-dark-background-picture-id638756792?k=6&m=638756792&s=612x612&w=0&h=4OBakrSLCzjRrgvAe1ZV0jkReI_88u3bUM7FV_UA5dc=",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "9",
+      email: "lates@gmail.com",
+      username: "Joe",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://media.istockphoto.com/photos/beautiful-woman-posing-against-dark-background-picture-id638756792?k=6&m=638756792&s=612x612&w=0&h=4OBakrSLCzjRrgvAe1ZV0jkReI_88u3bUM7FV_UA5dc=",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "10",
+      email: "tates@gmail.com",
+      username: "Joe",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://ctwbdc.org/wp-content/uploads/2019/05/Shivonne-Mathison-Cura-Square-Shot.jpg",
+      last_login: new Date().toDateString(),
+      followed: [],
+      password: "Denisha",
+      chats: [],
+    },
+    {
+      id: "11",
+      email: "lllkates@gmail.com",
+      username: "Joe",
+      age: 15,
+      gender: "other",
+      location: "Richmond",
+      img:
+        "https://i.imgur.com/eW4axvK.png",
       last_login: new Date().toDateString(),
       followed: [],
       password: "Denisha",
@@ -76,7 +174,7 @@ const db = {
           userId: "2",
           username: "beth",
           img:
-            "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
+            "https://media.istockphoto.com/photos/beautiful-woman-posing-against-dark-background-picture-id638756792?k=6&m=638756792&s=612x612&w=0&h=4OBakrSLCzjRrgvAe1ZV0jkReI_88u3bUM7FV_UA5dc=",
         },
       ],
       messages: [
@@ -113,7 +211,7 @@ const db = {
           userId: "3",
           username: "vince",
           img:
-            "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
+            "https://miro.medium.com/max/640/0*J9rnGfydbw0hf-oU.png",
         },
       ],
       messages: [
@@ -136,7 +234,7 @@ const db = {
     {
       id: "2",
       userId: "4",
-      username: "richard",
+      username: "Natasha",
       createdAt: new Date().toDateString(),
       img_urls: [
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bbyoda-1575303784.jpeg?resize=480:*",
@@ -157,25 +255,25 @@ const db = {
         {
           id: "c21",
           userId: "98",
-          username: "aaa",
+          username: "Jessica",
           postId: "5",
           createdAt: new Date().toDateString(),
-          message: "aaa comment",
+          message: "Awesome shot!",
         },
         {
           id: "c21",
           userId: "97",
-          username: "bbb",
+          username: "Jacob",
           postId: "2",
           createdAt: new Date().toDateString(),
-          message: "bbb comment",
+          message: "Great picture.",
         },
       ],
     },
     {
       id: "5",
       userId: "1",
-      username: "bob",
+      username: "Bob",
       createdAt: new Date().toDateString(),
       img_urls: [],
       message:
@@ -219,7 +317,7 @@ const db = {
     {
       id: "4",
       userId: "2",
-      username: "beth",
+      username: "Kevin",
       createdAt: new Date().toDateString(),
       img_urls: [
         "https://i.pinimg.com/originals/b8/fe/0d/b8fe0da10ed33f5a31a44ae9d03cd40e.jpg",
@@ -250,7 +348,7 @@ const db = {
     {
       id: "3",
       userId: "3",
-      username: "vince",
+      username: "Vince",
       createdAt: new Date().toDateString(),
       img_urls: [],
       message:

@@ -24,6 +24,9 @@ import Post from "../../components/Post/Post";
 import { useHistory, useParams } from "react-router-dom";
 import { useOnFollowHandle } from "../../helper/follow";
 import { getFollowingUsers, toggleFollowing } from "../../utils/api/people.api";
+import follow from "./follow.svg";
+import deletePostIcon from "./delete.svg";
+import unfollow from "./unfollow.svg";
 
 const FeedPg = (props: any) => {
   const {
@@ -156,7 +159,7 @@ const FeedPg = (props: any) => {
       <>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <div className={`flex--space-subNav ${styles.SubNavWrap}`}>
+          <div className={`flex--space-between ${styles.SubNavWrap}`}>
             <div className={styles.username}>
               <img className={styles.logo} src={townSquareLogo} />
             </div>
@@ -169,15 +172,15 @@ const FeedPg = (props: any) => {
             <img src={filter} onClick={() => setShowModal("filter")} />
           </div>
         </SubNav>
-        <div>
+        <div className={styles.feedContainer}>
           {/* <Feed feed={feed} /> */}
 
           {feed.map((post: any) => {
             return (
               <div key={post._id} className={styles.postWrapper}>
-                <div className="flex--space-between">
+                <div className="flex--space-postNav">
                   <div
-                    className="flex"
+                    className={styles.flexpostNav}
                     onClick={() => profileRedirect(post.userId)}
                   >
                     <img
@@ -185,28 +188,32 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
-
-                    <h4>{post.username}</h4>
+                    <p className={styles.flexpostNav}>{post.username}</p>
                   </div>
-                  <h4>{post.createdAt}</h4>
+                  <p className={styles.flexpostNavCreatedTime}>
+                    {post.createdAt}
+                  </p>
 
                   {post.userId === currentUser.userId ? (
-                    <button
+                    <img
+                      src={deletePostIcon}
+                      className={styles.followUnfollowDelete}
                       onClick={() => {
                         onRemovePost(post._id);
                       }}
-                    >
-                      Delete
-                    </button>
-                  ) : // followed.includes(post.userId)
-                  checkFollowed(post.userId) ? (
-                    <button onClick={() => onFollowHandle(post.userId)}>
-                      Unfollow
-                    </button>
+                    />
+                  ) : checkFollowed(post.userId) ? (
+                    <img
+                      className={styles.followUnfollowDelete}
+                      src={unfollow}
+                      onClick={() => onFollowHandle(post.userId)}
+                    />
                   ) : (
-                    <button onClick={() => onFollowHandle(post.userId)}>
-                      Follow
-                    </button>
+                    <img
+                      className={styles.followUnfollowDelete}
+                      src={follow}
+                      onClick={() => onFollowHandle(post.userId)}
+                    />
                   )}
                 </div>
 

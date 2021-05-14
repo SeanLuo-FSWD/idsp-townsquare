@@ -6,6 +6,7 @@ import _ from "lodash";
 import MsgItem from "./MsgItem";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
+import backButton from "./assets/back.svg";
 
 function Chat() {
   const { chatId } = useParams() as any;
@@ -69,8 +70,8 @@ function Chat() {
     return (
       <>
         <SubNav className="flex--space-between">
-          <button onClick={history.goBack}>Back</button>
-          <h2>Chatting with: {getOtherUser()}</h2>
+          <img src={backButton} onClick={history.goBack}/>
+          <p>Chatting with: {getOtherUser()}</p>
         </SubNav>
 
         <div style={{ position: "relative" }}>
@@ -90,7 +91,7 @@ function Chat() {
                 style={{ flex: "1" }}
                 onChange={(e) => setInputTxt(e.target.value)}
               />
-              <button type="submit">add Comment</button>
+              <button type="submit">Send</button>
             </form>
             <Navbar currentPath={window.location.pathname} />
           </div>

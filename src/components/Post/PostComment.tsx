@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { TComment } from "../../interfaces/IPost";
+import styles from "./PostComments.module.scss";
 
 const PostComment: React.FC<any> = (props) => {
   return (
     <>
-      <div>
-        <div className="flex--space-between">
+      <div className={styles.allComments}>
+        <div className={styles.commentContainer}>
           <img src={props.avatar} style={{ width: "50px", height: "50px" }} />
-          <h3>{props.username}</h3>
-          <h4>{props.createdAt}</h4>
+          <p className={styles.comment}>
+            {props.username} {props.createdAt}
+            <br></br>
+            {props.text}
+          </p>
         </div>
-        <h4 style={{ paddingLeft: "20px" }}>{props.text}</h4>
       </div>
     </>
   );

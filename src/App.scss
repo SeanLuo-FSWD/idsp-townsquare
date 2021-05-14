@@ -13,6 +13,8 @@
 .flex {
   display: flex;
   align-items: center;
+  margin: 0;
+
 }
 
 .flex--center {
@@ -28,6 +30,13 @@
   
 }
 
+.flex--postNav {
+  @extend .flex;
+  :nth-child(2) {
+    padding-right: 15px;
+  }
+}
+
 .flex--space-around {
   @extend .flex;
   justify-content: space-around;
@@ -36,6 +45,23 @@
 .flex--space-between {
   @extend .flex;
   justify-content: space-between;
+  
+}
+
+.flex--space-postNav {
+  @extend .flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3d8d8;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 5px 0px;
+  :last-child {
+    margin-right: 10px;
+  }
+
+
+  
 }
 
 .flex--space-left {

@@ -5,6 +5,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
+import styles from "./PostLike.module.scss";
 
 const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
   const [likes, setLikes] = useState([]);

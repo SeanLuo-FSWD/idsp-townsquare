@@ -13,6 +13,7 @@ import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
 import user from "./user.svg";
 import comments from "./comments.svg";
+import sendIcon from "./assets/send.svg";
 import ImageSlider from "../../UI/ImageSlider";
 import {
   fetchFeed,
@@ -93,13 +94,13 @@ const Post = (props: any) => {
     <div className={styles.postContainer}>
       <div key={props.post._id} className={styles.post}>
         <div className={styles.textContainer}>
-          <h2>{props.title}</h2>
-          <h5>{props.post.text}</h5>
+          <p>{props.title}</p>
+          <p>{props.post.text}</p>
         </div>
 
         <ImageSlider slides={props.post.images} />
 
-        <div className={styles.textContainer}>
+        <div className={styles.likeCommentContainer}>
           <div className="flex--space-between">
             <div className="flex">
               {/* {checkLiked() ? (

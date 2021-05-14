@@ -1,16 +1,42 @@
 .subNav {
   background-color: #92002f;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 20;
-  padding: 10px;
-  border-bottom-left-radius: 0.1rem;
-  border-bottom-right-radius: 0.1rem;
+  width: 100%;
+  max-width: 600px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: white;
+  justify-content: space-between;
+
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+  padding: 15px 30px;
+  text-decoration: none;
+
+  
+  a:link { text-decoration: none; }
+  a:visited { text-decoration: none; }
+  a:hover { text-decoration: none; }
+  a:active { text-decoration: none; }
+
+  
 }
 
 .alert {
   position: absolute;
+  margin-top: 31px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   right: 0;
   background-color: white;
-  width: 300px;
+  width: 100%;
+  border-radius: 4px;
+
+
+}
+
+.peopleNav {
+  margin: 10px 20px 10px 20px;
 }

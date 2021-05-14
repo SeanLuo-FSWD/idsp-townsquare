@@ -12,7 +12,7 @@
 }
 
 .peopleNav {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 20;
@@ -22,8 +22,26 @@
   border-bottom-right-radius: 0.1rem;
   /* padding: 0px 10px; */
   display: flex;
+  grid-gap: 10px;
+  // padding: .7rem 1.7rem;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-around;
+  
+
+}
+
+.filterIcon {
+  justify-content: end;
+
+}
+
+.nav {
+  padding: 0;
+  
 }
 
 .userContainer {
-  margin-top: 150px;
+  padding-top: 150px;
+  padding-bottom: 150px;
 }

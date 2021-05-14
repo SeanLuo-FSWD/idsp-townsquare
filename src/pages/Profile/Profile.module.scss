@@ -1,4 +1,4 @@
-body {
+.body {
   font-family: "Poppins", sans-serif;
 }
 
@@ -7,21 +7,99 @@ body {
   width: 150px;
 }
 
-.SubNavWrap {
-  height: 100%;
 
-  h2 {
-    margin: 0;
-  }
-}
 .container {
-  width: 100%;
+  margin-right: auto;
+  margin-bottom: 100px;
+  margin-left: auto;
   position: relative;
-  margin: 10px 0px;
+  width: 70%;
+  text-align: center;
+
+  align-items: center;
+  margin-top: 100px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  justify-content: center;
+  display: block;
+  top: 10%;
+  bottom: 60%;
+  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  // border-radius: 5px; /* 5px rounded corners */
 }
+
+.uploadImage {
+  padding: 10px 10px 0px 10px;
+}
+
+.profileUserName {
+  padding-right: 7px;
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0px 5px;
+  grid-gap: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px; /* 5px rounded corners */
+  margin: 10px 3px;
+  background-color: #f6efe8;
+  flex-wrap: wrap;
+
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-gap: 10px;
+  padding-bottom: 50px;
+  border-radius: 5px; /* 5px rounded corners */
+  margin: .5em 5em;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-gap: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px; /* 5px rounded corners */
+  margin: .5em 5em;
+}
+
 
 .profileImg {
   border-radius: 100%;
-  border: solid 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.saveChanges {
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-color: white;
+  border-style: none;
+  border-radius: 50px; /* 5px rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-width: 300px;
+  align-items: center;
+  text-align: center;
+  background-color: #f6efe8;
+}
+
+// .saveChanges {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+// }

@@ -11,6 +11,8 @@ function UserGrid(props: any) {
       {props.people.map((user: any) => {
         const profile_pic = user.avatar;
 
+        console.log(user);
+        console.log(user);
         return (
           <div key={user._id} className={`${styles.userTile} flex--center`}>
             <img src={profile_pic}></img>
@@ -18,6 +20,15 @@ function UserGrid(props: any) {
               {user.username}
             </h4>
             <Link to={`/person/${user._id}`} />
+            <div className={styles.tileUsername}>
+              {user.username}
+              <br></br>
+              {user.age}
+              <br></br>
+              {user.gender}
+              <br></br>
+              {user.location}
+            </div>
           </div>
         );
       })}

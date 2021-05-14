@@ -17,6 +17,10 @@ import Post from "../../components/Post/Post";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import { useOnFollowHandle } from "../../helper/follow";
+import deleteIcon from "./assets/delete.svg";
+import backIcon from "./assets/back.svg";
+import followIcon from "./assets/follow.svg";
+import unfollowIcon from "./assets/unfollow.svg";
 
 function Person() {
   const history = useHistory();
@@ -189,9 +193,7 @@ function Person() {
                 Unfollow
               </button>
             ) : (
-              <button onClick={() => onFollowHandle(person.id, true)}>
-                Follow
-              </button>
+              <img src={followIcon} onClick={() => onFollowHandle(person.id, true)}/>
             )
           ) : null} */}
           {person.user.userId !== currentUser.userId ? (
@@ -209,31 +211,31 @@ function Person() {
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
-        <div className="flex">
+        <div className={styles.personContainer}>
           <img className={styles.profileImg} src={person.user.avatar} alt="" />
           <div>
-            <h2>username: {person.user.username}</h2>
-            <h2>age: {person.user.age}</h2>
-            <h2>gender: {person.user.gender}</h2>
-            <h2>location: {person.user.location}</h2>
+            <p>Username: {person.user.username}</p>
+            <p>Age: {person.user.age}</p>
+            <p>Gender: {person.user.gender}</p>
+            <p>Location: {person.user.location}</p>
           </div>
         </div>
 
         {person.posts.map((post: any) => {
           return (
-            <div key={post._id} className={styles.postWrapper}>
-              <div className="flex">
-                <h4>{post.createdAt}</h4>
-
-                {post.userId === currentUser.userId && (
-                  <button
-                    onClick={() => {
-                      onRemovePost(post._id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                )}
+            <div key={post.id} className={styles.postWrapper}>
+              <div>
+                <p className={styles.createdAt}>
+                  {post.createdAt}
+                  {post.userId === currentUser.userId && (
+                    <img
+                      src={deleteIcon}
+                      onClick={() => {
+                        onRemovePost(post._id);
+                      }}
+                    />
+                  )}
+                </p>
               </div>
 
               <Post post={post}></Post>

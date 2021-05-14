@@ -8,6 +8,10 @@ import styles from "./Profile.module.scss";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import { logout } from "../../utils/api/auth.api";
+import changeProfileImg from "./assets/image.svg";
+import logoutImage from "./assets/logout.svg";
+import editImage from "./assets/edit.svg";
+import saveChanges from "./assets/save.svg";
 
 function Profile() {
   const [initPerson, setInitPerson] = useState(null) as any;
@@ -159,8 +163,8 @@ function Profile() {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <h2>{currentUser.username}</h2>
-            <button onClick={handleLogout}>Logout</button>
+            <p className={styles.profileUserName}>{currentUser.username}</p>
+            <img src={logoutImage} onClick={handleLogout} />
           </div>
         </SubNav>
 
@@ -182,12 +186,16 @@ function Profile() {
                   alt=""
                 />
               )}
-              <button data-edit="editImg" onClick={handleEditOpen}>
-                Edit
-              </button>
+              <img
+                src={changeProfileImg}
+                data-edit="editImg"
+                onClick={handleEditOpen}
+              />
+
               {fieldArr.find((ele: string) => ele === "editImg") && (
-                <div className={`flex`}>
+                <div className={styles.items}>
                   <input
+                    className={styles.uploadImage}
                     type="file"
                     id="myFile"
                     name="avatar"
@@ -202,11 +210,14 @@ function Profile() {
             </div>
           </div>
           <div>
-            <div className={`flex`}>
-              <h2>username: {initPerson.username}</h2>
-              <button data-edit="editUsername" onClick={handleEditOpen}>
-                Edit
-              </button>
+            <div className={styles.items}>
+              <p>username: {initPerson.username}</p>
+              <img
+                src={editImage}
+                data-edit="editUsername"
+                onClick={handleEditOpen}
+              />
+
               {fieldArr.find((ele: string) => ele === "editUsername") && (
                 <div className={`flex`}>
                   <input
@@ -225,11 +236,14 @@ function Profile() {
             </div>
           </div>
           <div>
-            <div className={`flex`}>
-              <h2>age: {initPerson.age}</h2>
-              <button data-edit="editAge" onClick={handleEditOpen}>
-                Edit
-              </button>
+            <div className={styles.items}>
+              <p>age: {initPerson.age}</p>
+              <img
+                src={editImage}
+                data-edit="editAge"
+                onClick={handleEditOpen}
+              />
+
               {fieldArr.find((ele: string) => ele === "editAge") && (
                 <div className={`flex`}>
                   <select name="age" onChange={handleChange} value={person.age}>
@@ -245,13 +259,16 @@ function Profile() {
             </div>
           </div>
           <div>
-            <div className={`flex`}>
-              <h2>Location: {initPerson.location}</h2>
-              <button data-edit="editLocation" onClick={handleEditOpen}>
-                Edit
-              </button>
+            <div className={styles.items}>
+              <p>Location: {initPerson.location}</p>
+              <img
+                src={editImage}
+                data-edit="editLocation"
+                onClick={handleEditOpen}
+              />
+
               {fieldArr.find((ele: string) => ele === "editLocation") && (
-                <div className={`flex`}>
+                <div className={styles.items}>
                   <select
                     name="location"
                     onChange={handleChange}
@@ -271,13 +288,16 @@ function Profile() {
             </div>
           </div>
           <div>
-            <div className={`flex`}>
-              <h2>gender: {initPerson.gender}</h2>
-              <button data-edit="editGender" onClick={handleEditOpen}>
-                Edit
-              </button>
+            <div className={styles.items}>
+              <p>gender: {initPerson.gender}</p>
+              <img
+                src={editImage}
+                data-edit="editGender"
+                onClick={handleEditOpen}
+              />
+
               {fieldArr.find((ele: string) => ele === "editGender") && (
-                <div className={`flex`}>
+                <div className={styles.items}>
                   <select
                     name="gender"
                     onChange={handleChange}
@@ -293,13 +313,57 @@ function Profile() {
                 </div>
               )}
             </div>
+            <div className={styles.submitButton}>
+              <button
+                className={styles.saveChanges}
+                onClick={handleProfileEdit}
+              >
+                Save
+              </button>
+            </div>
           </div>
+          {updateStatus && <p>Profile updated!</p>}
         </div>
-        {updateStatus && <h3>Profile updated!</h3>}
 
-        <button onClick={handleProfileEdit} style={{ float: "right" }}>
-          Submit
-        </button>
+        {/* <form>
+          <div className="form-control">
+            <label htmlFor="username">username : </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Edit username"
+              value={person.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="age">age : </label>
+            <input
+              type="text"
+              id="age"
+              name="age"
+              placeholder="Edit age"
+              value={person.age}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="location">location : </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Edit location"
+              value={person.location}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" onClick={handleProfileEdit}>
+            Submit Edit
+          </button>
+        </form> */}
       </div>
     );
   }
