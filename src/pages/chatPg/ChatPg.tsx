@@ -10,10 +10,12 @@ function Chat() {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <h3>chat page</h3>
+          <p>Chat</p>
         </SubNav>
       </div>
-      <ChatList />
+      <div className={styles.chatContainer}>
+        <ChatList />
+      </div>
     </>
   );
 }

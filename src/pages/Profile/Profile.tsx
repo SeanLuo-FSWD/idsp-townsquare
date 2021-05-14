@@ -111,7 +111,7 @@ function Profile() {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <p>{currentUser.username}</p>
+            <p className={styles.profileUserName}>{currentUser.username}</p>
             <img src={logoutImage} onClick={handleLogout}/>
           </div>
         </SubNav>
@@ -128,6 +128,7 @@ function Profile() {
               {fieldArr.find((ele: string) => ele === "editImg") && (
                 <div className={styles.items}>
                   <input
+                    className={styles.uploadImage}
                     type="file"
                     id="myFile"
                     name="filename"
@@ -233,13 +234,13 @@ function Profile() {
               <button className={styles.saveChanges} onClick={handleProfileEdit}>Save</button>
             </div>
           </div>
-
+          {updateStatus && <p>Profile updated!</p>}
 
         </div>
 
 
 
-        {updateStatus && <h3>Profile updated!</h3>}
+
 
 
 

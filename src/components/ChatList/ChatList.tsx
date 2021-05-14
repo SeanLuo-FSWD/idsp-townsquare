@@ -3,6 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { getChatList } from "../../utils/api/people.api";
 import _ from "lodash";
 import { Link } from "react-router-dom";
+import styles from "./ChatList.module.scss"
 
 function ChatList() {
   const [chatList, setChatList] = useState(null) as any;
@@ -37,15 +38,16 @@ function ChatList() {
 
     return (
       <div
+        className={styles.chatBubbles}
         style={{
           display: "flex",
           height: "100px",
-          backgroundColor: "lightcoral",
           marginTop: "20px",
           position: "relative",
         }}
       >
         <img
+          className={styles.displayPicture}
           src={othersImgArr[0].img}
           style={{ width: "100px", height: "100%" }}
         />

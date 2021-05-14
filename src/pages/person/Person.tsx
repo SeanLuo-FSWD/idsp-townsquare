@@ -13,6 +13,10 @@ import Post from "../../components/Post/Post";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import { useOnFollowHandle } from "../../helper/follow";
+import deleteIcon from "./assets/delete.svg"
+import backIcon from "./assets/back.svg"
+import followIcon from "./assets/follow.svg"
+import unfollowIcon from "./assets/unfollow.svg"
 
 function Person() {
   const history = useHistory();
@@ -95,47 +99,44 @@ function Person() {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav className="flex--space-between">
-          <button onClick={history.goBack}>Back</button>
+          <img src={backIcon} onClick={history.goBack}/>
           {person.id !== currentUser.id ? (
             currentUser.followed.includes(person.id) ? (
-              <button onClick={() => onFollowHandle(person.id, false)}>
-                Unfollow
-              </button>
+              <img src={unfollowIcon} onClick={() => onFollowHandle(person.id, false)}/>
             ) : (
-              <button onClick={() => onFollowHandle(person.id, true)}>
-                Follow
-              </button>
+              <img src={followIcon} onClick={() => onFollowHandle(person.id, true)}/>
             )
           ) : null}
         </SubNav>
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
-        <div className="flex">
+        <div className={styles.personContainer}>
           <img className={styles.profileImg} src={person.img} alt="" />
           <div>
-            <h2>username: {person.username}</h2>
-            <h2>age: {person.age}</h2>
-            <h2>gender: {person.gender}</h2>
-            <h2>location: {person.location}</h2>
+            <p>Username: {person.username}</p>
+            <p>Age: {person.age}</p>
+            <p>Gender: {person.gender}</p>
+            <p>Location: {person.location}</p>
           </div>
         </div>
 
         {person.feed.map((post: any) => {
           return (
             <div key={post.id} className={styles.postWrapper}>
-              <div className="flex">
-                <h4>{post.createdAt}</h4>
-
+              <div>
+                <p className={styles.createdAt}>{post.createdAt}
                 {post.userId === currentUser.id && (
-                  <button
+                  <img
+                    src={deleteIcon}
                     onClick={() => {
                       onRemovePost(post.id);
                     }}
-                  >
-                    Delete
-                  </button>
+                  />
                 )}
+                </p>
+
+                
               </div>
 
               <Post post={post}></Post>

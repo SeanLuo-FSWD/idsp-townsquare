@@ -54,7 +54,10 @@ const PeoplePg = (props: any) => {
         {/* <div className={styles.header}> */}
         <p>Hi {currentUser.username}! </p>
         <p>Explore your town</p>
-        <img src={filter} onClick={() => setShowModal("filter")} />
+        <div className={styles.filterIcon}>
+        <img  src={filter} onClick={() => setShowModal("filter")} />
+        </div>
+        
         {/* </div> */}
       </SubNav>
 

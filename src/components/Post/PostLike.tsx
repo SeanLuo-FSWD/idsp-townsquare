@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TLikes } from "../../interfaces/IPost";
+import styles from "./PostLike.module.scss"
 
 const PostLike = (props: any) => {
   const [show, setShow] = useState(false);
@@ -17,9 +18,9 @@ const PostLike = (props: any) => {
   }
 
   return (
-    <div>
-      {show && <ul>{likeList()}</ul>}
-      <h4 onClick={() => setShow(!show)}>{props.like_arr.length}</h4>
+    <div className={styles.likes}>
+      {show && <ul className={styles.likes} >{likeList()}</ul>}
+      <p onClick={() => setShow(!show)}>{props.like_arr.length}</p>
     </div>
   );
 };

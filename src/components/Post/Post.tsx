@@ -125,8 +125,8 @@ const Post = (props: any) => {
         </div> */}
 
         <div className={styles.textContainer}>
-          <h2>{props.title}</h2>
-          <h5>{props.post.message}</h5>
+          <p>{props.title}</p>
+          <p>{props.post.message}</p>
         </div>
 
         <ImageSlider slides={props.post.img_urls} />
@@ -158,6 +158,12 @@ const Post = (props: any) => {
 
           {commentsVisible && (
             <div>
+              
+              <div>
+                {commentList.map((c: TComment) => {
+                  return <PostComment key={c.id} {...c} />;
+                })}
+              </div>
               <form onSubmit={commentSubmit}>
                 <input
                   type="text"
@@ -168,11 +174,6 @@ const Post = (props: any) => {
                 />
                 <button type="submit">add Comment</button>
               </form>
-              <div>
-                {commentList.map((c: TComment) => {
-                  return <PostComment key={c.id} {...c} />;
-                })}
-              </div>
             </div>
           )}
         </div>

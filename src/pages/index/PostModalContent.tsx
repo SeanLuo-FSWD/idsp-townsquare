@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
 import _ from "lodash";
-import styles from "./PostModal.module.scss";
+import styles from "./PostModalContent.module.scss";
 
 function PostModalContent({ addPostProp }: any) {
   const [message, setMessage] = useState("");
@@ -108,6 +108,7 @@ function PostModalContent({ addPostProp }: any) {
         />
         <div>
           <input
+
             type="file"
             id="myFile"
             name="filename"

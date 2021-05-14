@@ -1,4 +1,42 @@
 .profileImg {
   height: 150px;
   width: 150px;
+  border-radius: 50%;
+}
+
+.personContainer {
+  background-color: #f6efe8;
+  text-align: center;
+  position: relative;
+  margin: 80px 7px 0px 7px;
+  padding: 19px 0px 1px 0px;
+  top: 20%;
+  font-size: 16px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-width: 4px;
+  border-radius: 6px;
+}
+
+.postWrapper {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin: 0px 7px 100px 7px;
+  border-radius: 6px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.createdAt {
+  margin: 25px 0px 0px 30px;
+  padding: 15px 0px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  grid-gap: 10px;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  grid-gap: 5px;
+  background-color: blue;
 }

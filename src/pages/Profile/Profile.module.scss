@@ -9,18 +9,31 @@
 
 
 .container {
+  margin-right: auto;
+  margin-bottom: 100px;
+  margin-left: auto;
   position: relative;
-  width: 100%;
+  width: 70%;
   text-align: center;
 
   align-items: center;
   margin-top: 100px;
   padding-top: 15px;
-  padding-bottom: 20px;
-  display: block;
+  padding-bottom: 30px;
   justify-content: center;
+  display: block;
+  top: 10%;
+  bottom: 60%;
   // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   // border-radius: 5px; /* 5px rounded corners */
+}
+
+.uploadImage {
+  padding: 10px 10px 0px 10px;
+}
+
+.profileUserName {
+  padding-right: 7px;
 }
 
 .items {
@@ -28,12 +41,14 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0px 10px;
+  padding: 0px 5px;
   grid-gap: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 5px; /* 5px rounded corners */
-  margin: .7em 1em;
+  margin: 10px 3px;
   background-color: #f6efe8;
+  flex-wrap: wrap;
+
 }
 
 .submitButton {
@@ -42,7 +57,7 @@
   align-items: center;
   text-align: center;
   grid-gap: 10px;
-
+  padding-bottom: 50px;
   border-radius: 5px; /* 5px rounded corners */
   margin: .5em 5em;
 }
@@ -61,7 +76,6 @@
 
 .profileImg {
   border-radius: 100%;
-  border: solid 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 

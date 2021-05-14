@@ -174,7 +174,7 @@ const db = {
           userId: "2",
           username: "beth",
           img:
-            "https://i.pinimg.com/originals/10/5e/93/105e932d48a7ba4fb7e1ba7993055c6b.jpg",
+            "https://media.istockphoto.com/photos/beautiful-woman-posing-against-dark-background-picture-id638756792?k=6&m=638756792&s=612x612&w=0&h=4OBakrSLCzjRrgvAe1ZV0jkReI_88u3bUM7FV_UA5dc=",
         },
       ],
       messages: [
@@ -211,7 +211,7 @@ const db = {
           userId: "3",
           username: "vince",
           img:
-            "https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://www.saltys.com/wp-content/uploads/2020/01/good-for-you-crab-1170x781.jpg",
+            "https://miro.medium.com/max/640/0*J9rnGfydbw0hf-oU.png",
         },
       ],
       messages: [
@@ -255,18 +255,18 @@ const db = {
         {
           id: "c21",
           userId: "98",
-          username: "aaa",
+          username: "Jessica",
           postId: "5",
           createdAt: new Date().toDateString(),
-          message: "aaa comment",
+          message: "Awesome shot!",
         },
         {
           id: "c21",
           userId: "97",
-          username: "bbb",
+          username: "Jacob",
           postId: "2",
           createdAt: new Date().toDateString(),
-          message: "bbb comment",
+          message: "Great picture.",
         },
       ],
     },
