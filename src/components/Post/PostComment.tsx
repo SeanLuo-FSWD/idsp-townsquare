@@ -9,7 +9,8 @@ const PostComment: React.FC<any> = (props) => {
         <div className={styles.commentContainer}>
           <img src={props.avatar} style={{ width: "50px", height: "50px" }} />
           <p className={styles.comment}>
-            {props.username} {props.createdAt}
+            {props.username}
+            {new Date(props.createdAt).toDateString()}
             <br></br>
             {props.text}
           </p>

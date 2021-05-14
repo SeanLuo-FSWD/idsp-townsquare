@@ -8,13 +8,8 @@ import { useHistory, useParams } from "react-router-dom";
 import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
 
 function SubNav(props: any) {
-  const {
-    currentUser,
-    showModal,
-    setShowModal,
-    setCerror,
-    setCurrentUser,
-  } = useContext(LoginContext);
+  const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
+    useContext(LoginContext);
 
   const [showDD, setShowDD] = useState(false);
 
@@ -56,14 +51,14 @@ function SubNav(props: any) {
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
-      <div>
-        {/* <Badge badgeContent={currentUser.alert.length} color="primary">
+      {/* <div>
+        <Badge badgeContent={currentUser.alert.length} color="primary">
           <NotificationsIcon
             onClick={() => {
               setShowDD(!showDD);
             }}
           />
-        </Badge> */}
+        </Badge>
         {showDD && (
           <div className={styles.alert}>
             <ul>
@@ -77,7 +72,7 @@ function SubNav(props: any) {
             </ul>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

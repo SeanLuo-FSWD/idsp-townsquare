@@ -61,6 +61,11 @@ function Profile(props: any) {
       value = parseInt(value);
     }
 
+    console.log("fffffffffffffffffffffff");
+    console.log("88888888888888888888");
+
+    console.log({ ...person, [name]: value });
+
     setPerson({ ...person, [name]: value });
   };
 
@@ -124,6 +129,12 @@ function Profile(props: any) {
         for (const key in person) {
           newCurrrentUser = { ...currentUser, [key]: person[key] };
         }
+
+        console.log(
+          "setCurrentUser setCurrentUser setCurrentUser result.data : "
+        );
+        console.log(result.data);
+
         setCurrentUser(result.data);
       }
     });

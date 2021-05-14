@@ -54,7 +54,6 @@ const PeoplePg = (props: any) => {
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
-        {/* <div className={styles.header}> */}
         <p>Explore users near you!</p>
         <p>Welcome: {currentUser.username} </p>
 
@@ -68,7 +67,6 @@ const PeoplePg = (props: any) => {
         <div className={styles.filterIcon}>
           <img src={filter} onClick={() => setShowModal("filter")} />
         </div>
-        {/* </div> */}
       </SubNav>
 
       {detailView ? (
