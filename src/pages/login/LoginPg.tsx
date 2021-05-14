@@ -99,11 +99,11 @@ function Login() {
               value={person.password}
               onChange={handleChange}
             />
-            <br></br>
-            <button className={styles.loginButton} onClick={handleLogin}>
+            
+          </form>
+          <button className={styles.loginButton} onClick={handleLogin}>
               Login
             </button>
-          </form>
         </div>
         <div>
           <p className={styles.noAccount}>Don't have an account?</p>
