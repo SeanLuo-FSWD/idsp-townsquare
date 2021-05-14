@@ -1,0 +1,12 @@
+.detailedViewContainer {
+    padding-top: 150px;
+    padding-bottom: 150px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    grid-gap: 10px;
+}
+
+.img {
+    border-radius: 50%;
+}

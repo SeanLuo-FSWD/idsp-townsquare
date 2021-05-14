@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { getPeople } from "../../utils/api/people.api";
 import styles from "./peoplePg.module.scss";
+import styles2 from "./detailedView.module.scss";
 import UserGrid from "../../components/Users/UserGrid";
 import UserDetail from "../../components/Users/UserDetail";
 import Error from "../../components/Error/Error";
@@ -74,9 +75,9 @@ const PeoplePg = (props: any) => {
         </div>
 
       </SubNav>
-
+      
       {detailView ? (
-        <div className={styles.userContainer}>
+        <div className={styles2.detailedViewContainer}>
           <UserDetail people={people} />
         </div>
       ) : (
