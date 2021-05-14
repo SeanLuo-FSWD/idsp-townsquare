@@ -24,7 +24,7 @@ const toggleFollowing = (followUserId: string, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
 };
 
@@ -85,7 +85,7 @@ const getPeople = (peoplePg: any, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
 };
 
@@ -100,7 +100,7 @@ const getPerson = (id: string, cb: Function) => {
     .catch((error) => {
       console.log("getPerson error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
 };
 

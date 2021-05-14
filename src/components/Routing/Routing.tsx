@@ -12,13 +12,8 @@ import { login } from "../../utils/api/auth.api";
 import Login from "../../pages/login/LoginPg";
 
 const Routing = () => {
-  const {
-    cerror,
-    setCurrentUser,
-    currentUser,
-    setSignUpStatus,
-    setCerror,
-  } = useContext(LoginContext);
+  const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
+    useContext(LoginContext);
 
   // Faking login for dev, to remove for production and uncomment Below!
   // useEffect(() => {
@@ -50,9 +45,11 @@ const Routing = () => {
     <Router>
       <Switch>
         <Route path="/register">
+          {cerror && <Error message={cerror} />}
           <Register />
         </Route>
         <Route path="/api/user/verify">
+          {cerror && <Error message={cerror} />}
           <Verify />
         </Route>
         <LoggedInRoutesKeeper>

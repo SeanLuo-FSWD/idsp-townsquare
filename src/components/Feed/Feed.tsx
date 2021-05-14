@@ -33,7 +33,7 @@ const Feed = (props: any) => {
   //           />
   //           <h4>{post.username}</h4>
   //         </div>
-  //         <h4>{post.createdAt}</h4>
+  //         <h4>{new Date(post.createdAt).toDateString()}</h4>
   //       </div>
   //       <Post post={post}></Post>
   //     </div>

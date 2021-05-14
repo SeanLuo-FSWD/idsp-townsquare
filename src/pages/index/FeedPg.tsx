@@ -29,13 +29,8 @@ import deletePostIcon from "./delete.svg";
 import unfollow from "./unfollow.svg";
 
 const FeedPg = (props: any) => {
-  const {
-    currentUser,
-    showModal,
-    setShowModal,
-    setCerror,
-    setCurrentUser,
-  } = useContext(LoginContext);
+  const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
+    useContext(LoginContext);
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
   const { postId } = useParams() as any;
@@ -191,7 +186,7 @@ const FeedPg = (props: any) => {
                     <p className={styles.flexpostNav}>{post.username}</p>
                   </div>
                   <p className={styles.flexpostNavCreatedTime}>
-                    {post.createdAt}
+                    {new Date(post.createdAt).toDateString()}
                   </p>
 
                   {post.userId === currentUser.userId ? (

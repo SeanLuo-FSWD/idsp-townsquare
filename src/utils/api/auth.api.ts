@@ -16,7 +16,7 @@ const verify = (query: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("verify error");
-      cb(null, error);
+      cb(error.response.data.message);
     });
 };
 
@@ -37,7 +37,7 @@ const updateProfile = (bodyFormData: any, cb: Function) => {
     })
     .catch((error) => {
       console.log("updateProfile error");
-      cb(error);
+      cb(error.response.data.message);
     });
 };
 
@@ -53,7 +53,7 @@ const authenticate = (cb: Function) => {
     })
     .catch((error) => {
       console.log("authenticate error");
-      cb(error);
+      cb(error.response.data.message);
     });
 
   // for (let i = 0; i < db.users.length; i++) {
@@ -83,7 +83,7 @@ const logout = (cb: Function) => {
     .catch((error) => {
       console.log("user logout error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
 };
 
@@ -103,7 +103,7 @@ const login = (user_obj: any, cb: Function) => {
     .catch((error) => {
       console.log("user login error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
   // cb(new Error("login user not found"));
 };
@@ -119,7 +119,7 @@ const register = (user_obj: {}, cb: Function) => {
     .catch((error) => {
       console.log("post register error");
       console.log(error);
-      cb(error);
+      cb(error.response.data.message);
     });
 
   // cb(null, user_obj);

@@ -226,7 +226,7 @@ function Person() {
             <div key={post.id} className={styles.postWrapper}>
               <div>
                 <p className={styles.createdAt}>
-                  {post.createdAt}
+                  {new Date(post.createdAt).toDateString()}
                   {post.userId === currentUser.userId && (
                     <img
                       src={deleteIcon}

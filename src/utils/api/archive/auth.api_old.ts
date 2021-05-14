@@ -16,7 +16,7 @@ const verify = (query: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("verify error");
-      cb(null, error);
+      cb(error.response.data.message);
     });
 };
 
@@ -30,7 +30,7 @@ const updateProfile = (person: any, cb: Function) => {
   //   })
   //   .catch((error) => {
   //     console.log("updateProfile error");
-  //     cb(error);
+  //     cb(error.response.data.message);
   //   });
 
   console.log("updateProfile updateProfile updateProfile");
@@ -50,7 +50,7 @@ const authenticate = (cb: Function) => {
   //   })
   //   .catch((error) => {
   //     console.log("authenticate error");
-  //     cb(error);
+  //     cb(error.response.data.message);
   //   });
 
   for (let i = 0; i < db.users.length; i++) {
@@ -78,7 +78,7 @@ const logout = (cb: Function) => {
   //   .catch((error) => {
   //     console.log("post logout error");
   //     console.log(error);
-  //     cb(error);
+  //     cb(error.response.data.message);
   //   });
   cb(null, 200);
 };
@@ -107,7 +107,7 @@ const register = (user_obj: {}, cb: Function) => {
   //   .catch((error) => {
   //     console.log("post register error");
   //     console.log(error);
-  //     cb(error);
+  //     cb(error.response.data.message);
   //   });
 
   cb(null, user_obj);

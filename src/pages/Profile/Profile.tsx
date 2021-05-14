@@ -12,8 +12,15 @@ import changeProfileImg from "./assets/image.svg";
 import logoutImage from "./assets/logout.svg";
 import editImage from "./assets/edit.svg";
 import saveChanges from "./assets/save.svg";
+import { connect } from "react-redux";
+import {
+  doFeedFilterUpdate,
+  doFeedFilterRemove,
+  doPeopleFilterUpdate,
+  doPeopleFilterRemove,
+} from "../../store/redux/actions/filter_act";
 
-function Profile() {
+function Profile(props: any) {
   const [initPerson, setInitPerson] = useState(null) as any;
   const [person, setPerson] = useState({}) as any;
   //   const [pwRetype, setPwRetype] = useState(false);
@@ -147,6 +154,8 @@ function Profile() {
       } else {
         setCerror("");
         setCurrentUser(null);
+        props.onFeedFilterRemove();
+        props.onPeopleFilterRemove();
         history.push("/");
       }
     });
@@ -274,7 +283,7 @@ function Profile() {
                     onChange={handleChange}
                     value={person.location}
                   >
-                    <option value="Abbotsford">Abbotsford</option>
+                    <option value="Surrey">Surrey</option>
                     <option value="Burnaby">Burnaby</option>
                     <option value="Coquitlam">Coquitlam</option>
                     <option value="Richmond">Richmond</option>
@@ -370,4 +379,12 @@ function Profile() {
   return <h2>Loading</h2>;
 }
 
-export default Profile;
+// export default Profile;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onFeedFilterRemove: () => dispatch(doFeedFilterRemove()),
+    onPeopleFilterRemove: () => dispatch(doPeopleFilterRemove()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Profile);

@@ -7,12 +7,13 @@ import styles from "./RegisterPg.module.scss";
 
 const Register = () => {
   const history = useHistory();
+
   const [person, setPerson] = useState({
     username: "",
     email: "",
     password: "",
   });
-  const { setSignUpStatus } = useContext(LoginContext);
+  const { setSignUpStatus, setCerror } = useContext(LoginContext);
   const [signUpError, setSignUpError] = useState("");
   const [registerStatus, setRegisterStatus] = useState(false);
 
@@ -29,12 +30,11 @@ const Register = () => {
         email: person.email,
         password: person.password,
       };
-      register(user_obj, (err: Error, result: any) => {
+      register(user_obj, (err: any, result: any) => {
         if (err) {
           console.log(err);
-          setSignUpError(err.message);
+          setCerror(err);
         } else {
-          setSignUpError("");
           setSignUpStatus(true);
           console.log("registration result message");
           console.log(result.data.message);
@@ -44,7 +44,7 @@ const Register = () => {
         }
       });
     } else {
-      setSignUpError("You are missing some credentials");
+      setCerror("You are missing some credentials");
     }
   };
   return (
