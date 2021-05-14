@@ -10,6 +10,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { logout } from "../../utils/api/auth.api";
 import changeProfileImg from "./assets/image.svg";
 import logoutImage from "./assets/logout.svg";
+import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
 import saveChanges from "./assets/save.svg";
 import { connect } from "react-redux";
@@ -211,9 +212,7 @@ function Profile(props: any) {
                     accept="image"
                     onChange={(e) => getImg(e)}
                   />
-                  <p data-edit="editImg" onClick={handleEditClose}>
-                    x
-                  </p>
+                  <img src={closeIcon} data-edit="editImg" onClick={handleEditClose}/>
                 </div>
               )}
             </div>
@@ -237,9 +236,7 @@ function Profile(props: any) {
                     // value={person.username}
                     onChange={handleChange}
                   />
-                  <p data-edit="editUsername" onClick={handleEditClose}>
-                    x
-                  </p>
+                  <img src={closeIcon} data-edit="editUsername" onClick={handleEditClose}/>
                 </div>
               )}
             </div>
@@ -260,9 +257,7 @@ function Profile(props: any) {
                       return <option key={year}>{year}</option>;
                     })}
                   </select>
-                  <p data-edit="editAge" onClick={handleEditClose}>
-                    x
-                  </p>
+                  <img src={closeIcon} data-edit="editAge" onClick={handleEditClose}/>
                 </div>
               )}
             </div>
@@ -289,9 +284,7 @@ function Profile(props: any) {
                     <option value="Richmond">Richmond</option>
                     <option value="Vancouver">Vancouver</option>
                   </select>
-                  <p data-edit="editLocation" onClick={handleEditClose}>
-                    x
-                  </p>
+                  <img src={closeIcon} data-edit="editLocation" onClick={handleEditClose}/>
                 </div>
               )}
             </div>
@@ -308,6 +301,7 @@ function Profile(props: any) {
               {fieldArr.find((ele: string) => ele === "editGender") && (
                 <div className={styles.items}>
                   <select
+                    className={styles.selectItem}
                     name="gender"
                     onChange={handleChange}
                     value={person.gender}
@@ -316,9 +310,7 @@ function Profile(props: any) {
                     <option value="male">male</option>
                     <option value="other">other</option>
                   </select>
-                  <p data-edit="editGender" onClick={handleEditClose}>
-                    x
-                  </p>
+                  <img src={closeIcon} data-edit="editGender" onClick={handleEditClose}/>
                 </div>
               )}
             </div>
@@ -330,8 +322,11 @@ function Profile(props: any) {
                 Save
               </button>
             </div>
+            <div className={styles.updateMessage}>
+            {updateStatus && <p>Profile updated!</p>}
           </div>
-          {updateStatus && <p>Profile updated!</p>}
+          </div>
+
         </div>
 
         {/* <form>
