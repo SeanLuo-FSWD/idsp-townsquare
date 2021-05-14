@@ -11,7 +11,7 @@
 .postContainer {
   background-color: #f6efe8;
   margin: 0px 0px 10px 0px;
-  border-radius: 3px;
+  border-radius: 7px;
 }
 
 .textContainer {
@@ -20,10 +20,43 @@
 
 .likeCommentContainer {
   padding: 0px 25px 10px 25px;
+  margin-top: 15px;
+  border-radius: 4px;
 }
 
 
 .postWrapper__img {
   height: 50px;
   width: 50px;
+}
+
+
+.submitComment {
+  font-size: 16px;
+  position: relative;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 25px;
+  padding-left: 25px;
+  border-color: white;
+  border-style: none;
+  border-radius: 50px; /* 5px rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-width: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  
+}
+
+.addComment {
+  padding: 1px;
 }

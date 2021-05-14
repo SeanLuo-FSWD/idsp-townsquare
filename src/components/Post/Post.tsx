@@ -13,6 +13,7 @@ import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
 import user from "./user.svg";
 import comments from "./comments.svg";
+import sendIcon from "./assets/send.svg";
 import ImageSlider from "../../UI/ImageSlider";
 import {
   fetchFeed,
@@ -164,16 +165,20 @@ const Post = (props: any) => {
                   return <PostComment key={c.id} {...c} />;
                 })}
               </div>
-              <form onSubmit={commentSubmit}>
-                <input
-                  type="text"
-                  id="comment"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-                <button type="submit">add Comment</button>
-              </form>
+              <div className={styles.addComment}>
+                <form onSubmit={commentSubmit}>
+                  <input
+                    type="text"
+                    id="comment"
+                    name="comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <button className={styles.submitComment} type="submit">
+                    <img src={sendIcon}/>
+                  </button>
+                </form>
+              </div>
             </div>
           )}
         </div>
