@@ -148,8 +148,7 @@ const FeedPg = (props: any) => {
   }
 
   if (feed) {
-    console.log("777777777777777777777");
-    console.log("777777777777777777777");
+    console.log("FeedPg FeedPg FeedPg: feed, currentUser");
     console.log(feed);
     console.log(currentUser);
 

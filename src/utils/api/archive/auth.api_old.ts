@@ -20,20 +20,20 @@ const verify = (query: string, cb: Function) => {
     });
 };
 
-const editProfile = (person: any, cb: Function) => {
+const updateProfile = (person: any, cb: Function) => {
   // axios
   //   .put(`${MOCK_URL}/ts/user/edit`, person)
   //   .then((response) => {
-  //     console.log("editProfile response");
+  //     console.log("updateProfile response");
   //     console.log(response);
   //     cb(null, response);
   //   })
   //   .catch((error) => {
-  //     console.log("editProfile error");
+  //     console.log("updateProfile error");
   //     cb(error);
   //   });
 
-  console.log("editProfile editProfile editProfile");
+  console.log("updateProfile updateProfile updateProfile");
 
   console.log(person);
 
@@ -113,4 +113,4 @@ const register = (user_obj: {}, cb: Function) => {
   cb(null, user_obj);
 };
 
-export { register, login, logout, authenticate, editProfile, verify };
+export { register, login, logout, authenticate, updateProfile, verify };

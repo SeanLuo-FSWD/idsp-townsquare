@@ -84,7 +84,7 @@ const postFilterSubmit = (filter: any, cb: Function) => {
 const postCreate = (bodyFormData: any, cb: Function) => {
   axios({
     method: "POST",
-    url: `${API_URL}/post`,
+    url: `${API_URL}/post/create`,
     data: bodyFormData,
     headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
@@ -105,9 +105,13 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
   console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
   console.log("fetchFeed");
   axios
-    .get(`${API_URL}/post`, {
-      withCredentials: true,
-    })
+    .post(
+      `${API_URL}/post`,
+      { feedPg: feedPg },
+      {
+        withCredentials: true,
+      }
+    )
     .then((response) => {
       console.log("fetchFeed response");
       console.log(response.data);

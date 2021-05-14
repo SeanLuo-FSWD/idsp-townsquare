@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { editProfile } from "../../utils/api/auth.api";
+import { updateProfile } from "../../utils/api/auth.api";
 import { getPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import { useHistory } from "react-router-dom";
@@ -17,6 +17,8 @@ function Profile() {
   const [updateStatus, setUpdateStatus] = useState(false);
   const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
   const history = useHistory();
+
+  let imgFile: any = null;
   useEffect(() => {
     console.log("state refresh");
     console.log(currentUser);
@@ -39,7 +41,7 @@ function Profile() {
     //   console.log(firstTime);
     //   setInitPerson({ ...currentUser, ["firstTime"]: true });
     // }
-  }, []);
+  }, [currentUser]);
 
   const handleChange = (e: any) => {
     const name = e.target.name;
@@ -66,7 +68,25 @@ function Profile() {
 
   function handleProfileEdit(e: any) {
     e.preventDefault();
-    editProfile(person, (err: Error, result: any) => {
+
+    console.log("handleProfileEdit handleProfileEdit handleProfileEdit person");
+    console.log(person);
+
+    let bodyFormData = new FormData();
+
+    for (const key in person) {
+      if (key !== "avatarlink") {
+        console.log("imgFile imgFile imgFile imgFile");
+        console.log(person[key]);
+
+        bodyFormData.append(key, person[key]);
+      }
+    }
+
+    console.log("000000000000000000000");
+    console.log(bodyFormData);
+
+    updateProfile(bodyFormData, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
@@ -78,23 +98,41 @@ function Profile() {
         //     });
         //   }
         // }
-        setCurrentUser(result);
+        // setCurrentUser(result);
 
         // You will have to let state change refresh to grab fetch again
+        console.log("greeeeeat successs!! person");
+        console.log(person);
+        console.log("currentUser below");
+        console.log(currentUser);
+
         setPerson({});
         setUpdateStatus(true);
         setFieldArr([]);
+        let newCurrrentUser;
+        for (const key in person) {
+          newCurrrentUser = { ...currentUser, [key]: person[key] };
+        }
+        setCurrentUser(result.data);
       }
     });
   }
 
   function getImg(e: any) {
-    const imgFile = e.target.files[0];
+    let imgFile = e.target.files[0];
     let binaryData = [];
     binaryData.push(imgFile);
     const blob = new Blob(binaryData);
     const img_src = window.URL.createObjectURL(blob);
-    setPerson({ ...person, ["avatar"]: img_src });
+
+    console.log("777777777777777777777");
+    console.log("getImg");
+    console.log(img_src);
+
+    let newPerson = { ...person, ["avatar"]: imgFile };
+    newPerson = { ...newPerson, ["avatarlink"]: img_src };
+
+    setPerson(newPerson);
   }
 
   function handleLogout() {
@@ -137,8 +175,12 @@ function Profile() {
                 src={initPerson.avatar}
                 alt=""
               />
-              {person.img && updateStatus === false && (
-                <img className={styles.profileImg} src={person.avatar} alt="" />
+              {person.avatar && updateStatus === false && (
+                <img
+                  className={styles.profileImg}
+                  src={person.avatarlink}
+                  alt=""
+                />
               )}
               <button data-edit="editImg" onClick={handleEditOpen}>
                 Edit
@@ -148,7 +190,7 @@ function Profile() {
                   <input
                     type="file"
                     id="myFile"
-                    name="filename"
+                    name="avatar"
                     accept="image/png"
                     onChange={(e) => getImg(e)}
                   />

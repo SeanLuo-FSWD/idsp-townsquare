@@ -20,19 +20,23 @@ const verify = (query: string, cb: Function) => {
     });
 };
 
-const editProfile = (person: any, cb: Function) => {
-  console.log("editProfile editProfile editProfile");
-  console.log(person);
-
-  axios
-    .put(`${API_URL}/user/profile`, person)
+const updateProfile = (bodyFormData: any, cb: Function) => {
+  console.log("updateProfile updateProfile updateProfile");
+  // console.log(bodyFormData);
+  axios({
+    method: "POST",
+    url: `${API_URL}/user/profile`,
+    data: bodyFormData,
+    headers: { "Content-Type": "multipart/form-data" },
+    withCredentials: true,
+  })
     .then((response) => {
-      console.log("editProfile response");
+      console.log("updateProfile response");
       console.log(response);
       cb(null, response);
     })
     .catch((error) => {
-      console.log("editProfile error");
+      console.log("updateProfile error");
       cb(error);
     });
 };
@@ -121,4 +125,4 @@ const register = (user_obj: {}, cb: Function) => {
   // cb(null, user_obj);
 };
 
-export { register, login, logout, authenticate, editProfile, verify };
+export { register, login, logout, authenticate, updateProfile, verify };
