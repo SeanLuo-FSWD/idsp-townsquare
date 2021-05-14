@@ -71,8 +71,7 @@ const Register = () => {
             <article className="form">
               {signUpError && <Error message={signUpError} />}
               <form>
-                <div className="form-control">
-                  <div className="inputForm">
+                <div className={"form-control"}>
                     {/* <label  className={styles.labelText} htmlFor="username">username : </label> */}
                     <input
                       className={styles.inputForm}
@@ -83,7 +82,6 @@ const Register = () => {
                       value={person.username}
                       onChange={handleChange}
                     />
-                  </div>
                   <div className="form-control">
                     {/* <label className={styles.labelText} htmlFor="email">Email : </label> */}
                     <input
@@ -109,15 +107,14 @@ const Register = () => {
                     />
                   </div>
                 </div>
-                <br></br>
-                <button
+              </form>
+              <button
                   className={styles.registerButton}
                   type="submit"
                   onClick={handleRegister}
                 >
                   Sign Up
                 </button>
-              </form>
             </article>
           )}
         </div>
