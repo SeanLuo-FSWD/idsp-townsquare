@@ -10,6 +10,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { connect } from "react-redux";
 import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
+import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
 const PeoplePg = (props: any) => {
@@ -55,20 +56,23 @@ const PeoplePg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
+        <p>Hi {currentUser.username}! </p>
         <p>Explore users near you!</p>
-        <p>Welcome: {currentUser.username} </p>
+
 
         <button
+          className={styles.detailedViewToggle}
           onClick={() => {
             setDetailView(!detailView);
           }}
         >
-          {detailView ? <span>Grid view</span> : <span>Detail view</span>}
+          <img src={detailedViewIcon}></img>
+          {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
         </button>
         <div className={styles.filterIcon}>
           <img src={filter} onClick={() => setShowModal("filter")} />
         </div>
-        {/* </div> */}
+
       </SubNav>
 
       {detailView ? (

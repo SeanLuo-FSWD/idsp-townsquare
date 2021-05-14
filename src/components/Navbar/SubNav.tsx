@@ -56,7 +56,7 @@ function SubNav(props: any) {
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
-      <div>
+      {/* <div> */}
         {/* <Badge badgeContent={currentUser.alert.length} color="primary">
           <NotificationsIcon
             onClick={() => {
@@ -64,7 +64,7 @@ function SubNav(props: any) {
             }}
           />
         </Badge> */}
-        {showDD && (
+        {/* {showDD && (
           <div className={styles.alert}>
             <ul>
               {currentUser.alert.map((a: any) => {
@@ -77,7 +77,7 @@ function SubNav(props: any) {
             </ul>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

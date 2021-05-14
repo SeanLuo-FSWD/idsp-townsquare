@@ -10,14 +10,13 @@
 
 .container {
   margin-right: auto;
-  margin-bottom: 100px;
   margin-left: auto;
   position: relative;
   width: 70%;
   text-align: center;
 
   align-items: center;
-  margin-top: 100px;
+  margin-top: 85px;
   padding-top: 15px;
   padding-bottom: 30px;
   justify-content: center;
@@ -45,9 +44,10 @@
   grid-gap: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 5px; /* 5px rounded corners */
-  margin: 10px 3px;
+  margin: 10px 10px;
   background-color: #f6efe8;
   flex-wrap: wrap;
+  
 
 }
 
