@@ -191,7 +191,7 @@ function Profile() {
                     type="file"
                     id="myFile"
                     name="avatar"
-                    accept="image/png"
+                    accept="image"
                     onChange={(e) => getImg(e)}
                   />
                   <p data-edit="editImg" onClick={handleEditClose}>

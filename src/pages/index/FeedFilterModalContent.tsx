@@ -23,8 +23,8 @@ function FeedFilterModalContent(props: any) {
   );
 
   const [showPeopleFilter, setShowPeopleFilter] = useState(false);
-  // const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
-  // const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
+  const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
+  const [peopleFilter, setPeopleFilter] = useState(props.feedPg.people);
 
   let feedFilterHolder = props.feedPg.feed;
   let pplFilterHolder = props.feedPg.people;
@@ -44,7 +44,7 @@ function FeedFilterModalContent(props: any) {
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
-
+    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
     pplFilterHolder = {
       ...pplFilterHolder,
       [key_name_pair[0]]: key_name_pair[1],
@@ -53,11 +53,14 @@ function FeedFilterModalContent(props: any) {
 
   const feedFilterProps = (post_filter: Object) => {
     const key_name_pair = Object.entries(post_filter)[0];
-    feedFilterHolder = {
-      ...feedFilterHolder,
+    // feedFilterHolder = {
+    //   ...feedFilterHolder,
+    //   [key_name_pair[0]]: key_name_pair[1],
+    // };
+    setFeedFilter({
+      ...feedFilter,
       [key_name_pair[0]]: key_name_pair[1],
-    };
-    // setFeedFilter(newFeedPg);
+    });
   };
 
   const onFeedFilterClick = () => {
@@ -67,9 +70,10 @@ function FeedFilterModalContent(props: any) {
     const feedPgSlice = {
       feedPg: {
         applied: true,
-        // people: peopleFilter,
-        people: pplFilterHolder,
-        feed: feedFilterHolder,
+        people: peopleFilter,
+        // people: pplFilterHolder,
+        feed: feedFilter,
+        // feed: feedFilterHolder,
       },
     };
 
@@ -79,9 +83,10 @@ function FeedFilterModalContent(props: any) {
       const peoplePgSlice = {
         peoplePg: {
           applied: true,
-          // people: peopleFilter,
-          people: pplFilterHolder,
-          feed: feedFilterHolder,
+          people: peopleFilter,
+          // people: pplFilterHolder,
+          feed: feedFilter,
+          // feed: feedFilterHolder,
         },
       };
       props.onPeopleFilterSubmit(peoplePgSlice);

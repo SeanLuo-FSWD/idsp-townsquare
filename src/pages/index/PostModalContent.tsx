@@ -118,7 +118,8 @@ function PostModalContent({ addPostProp }: any) {
             type="file"
             id="myFile"
             name="filename"
-            accept="image/png"
+            // accept="image/png"
+            accept="image"
             multiple
             onChange={(e) => getImg(e)}
           />

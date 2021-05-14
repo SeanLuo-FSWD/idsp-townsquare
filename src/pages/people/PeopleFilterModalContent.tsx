@@ -23,8 +23,8 @@ function PeopleFilterModalContent(props: any) {
   );
 
   // const [showFeedFilter, setShowFeedFilter] = useState(false);
-  // const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
-  // const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
+  const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
+  const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
 
   let feedFilterHolder = props.peoplePg.feed;
   let pplFilterHolder = props.peoplePg.people;
@@ -41,34 +41,31 @@ function PeopleFilterModalContent(props: any) {
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
 
-    // setPeopleFilter({
-    //   ...props.peoplePg.people,
+    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
+    // pplFilterHolder = {
+    //   ...pplFilterHolder,
     //   [key_name_pair[0]]: key_name_pair[1],
-    // });
-    pplFilterHolder = {
-      ...pplFilterHolder,
-      [key_name_pair[0]]: key_name_pair[1],
-    };
+    // };
   };
 
   const feedFilterProps = (post_filter: Object) => {
     const key_name_pair = Object.entries(post_filter)[0];
-    // setFeedFilter({
-    //   ...props.peoplePg.feed,
-    //   [key_name_pair[0]]: key_name_pair[1],
-    // });
-    feedFilterHolder = {
-      ...feedFilterHolder,
+    setFeedFilter({
+      ...feedFilter,
       [key_name_pair[0]]: key_name_pair[1],
-    };
+    });
+    // feedFilterHolder = {
+    //   ...feedFilterHolder,
+    //   [key_name_pair[0]]: key_name_pair[1],
+    // };
   };
 
   const onPeopleFilterClick = () => {
     const peoplePgSlice = {
       peoplePg: {
         applied: true,
-        people: pplFilterHolder,
-        feed: feedFilterHolder,
+        people: peopleFilter,
+        feed: feedFilter,
       },
     };
 
@@ -83,8 +80,8 @@ function PeopleFilterModalContent(props: any) {
       const feedPgSlice = {
         feedPg: {
           applied: true,
-          people: pplFilterHolder,
-          feed: feedFilterHolder,
+          people: peopleFilter,
+          feed: feedFilter,
         },
       };
       props.onFeedFilterSubmit(feedPgSlice);

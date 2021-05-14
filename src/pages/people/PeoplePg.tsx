@@ -3,6 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { getPeople } from "../../utils/api/people.api";
 import styles from "./peoplePg.module.scss";
 import UserGrid from "../../components/Users/UserGrid";
+import UserDetail from "../../components/Users/UserDetail";
 import Error from "../../components/Error/Error";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
@@ -13,6 +14,8 @@ import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
+  const [detailView, setDetailView] = useState(false);
+
   const {
     showModal,
     setShowModal,
@@ -54,13 +57,28 @@ const PeoplePg = (props: any) => {
         {/* <div className={styles.header}> */}
         <p>Explore users near you!</p>
         <p>Welcome: {currentUser.username} </p>
+
+        <button
+          onClick={() => {
+            setDetailView(!detailView);
+          }}
+        >
+          {detailView ? <span>Grid view</span> : <span>Detail view</span>}
+        </button>
         <img src={filter} onClick={() => setShowModal("filter")} />
         {/* </div> */}
       </SubNav>
 
-      <div className={styles.userContainer}>
-        <UserGrid people={people} />
-      </div>
+      {detailView ? (
+        <div className={styles.userContainer}>
+          <UserDetail people={people} />
+        </div>
+      ) : (
+        <div className={styles.userContainer}>
+          <UserGrid people={people} />
+        </div>
+      )}
+
       {showModal
         ? showModal === "filter" && (
             <Modal>
