@@ -13,11 +13,21 @@ function UserGrid(props: any) {
           ? user.img
           : "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png";
 
+          console.log(user);
+          console.log(user);
         return (
           <div key={user.id} className={`${styles.userTile} flex--center`}>
             <img src={profile_pic}></img>
             <Link to={`/person/${user.id}`} />
+              <div className={styles.tileUsername}>
+              {user.username}<br></br>
+              {user.age}<br></br>
+              {user.gender}<br></br>
+              {user.location}
+
+              </div>
           </div>
+          
         );
       })}
     </div>
