@@ -7,19 +7,21 @@
   width: 150px;
 }
 
+.updateMessage {
+  text-align: center;
+}
 
 .container {
   margin-right: auto;
-  margin-bottom: 100px;
   margin-left: auto;
   position: relative;
   width: 70%;
   text-align: center;
 
   align-items: center;
-  margin-top: 100px;
+  margin-top: 85px;
   padding-top: 15px;
-  padding-bottom: 30px;
+
   justify-content: center;
   display: block;
   top: 10%;
@@ -42,13 +44,35 @@
   align-items: center;
   text-align: center;
   padding: 0px 5px;
-  grid-gap: 10px;
+
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 5px; /* 5px rounded corners */
-  margin: 10px 3px;
+  margin: 10px 10px;
   background-color: #f6efe8;
-  flex-wrap: wrap;
+  :nth-child(3) {
+    box-shadow: none;
 
+    padding: 10px;
+  }
+  :nth-child(1) {
+    box-shadow: none;
+
+    padding: 10px;
+
+  }
+  :nth-child(2) {
+    box-shadow: none;
+    padding: 5px;
+
+  }
+}
+
+
+
+select {
+  box-shadow: none;
+  border: none;
+  border-radius: 5px;
 }
 
 .submitButton {
@@ -57,7 +81,7 @@
   align-items: center;
   text-align: center;
   grid-gap: 10px;
-  padding-bottom: 50px;
+
   border-radius: 5px; /* 5px rounded corners */
   margin: .5em 5em;
 }

@@ -27,13 +27,16 @@
   box-sizing: border-box;
   align-items: center;
   justify-content: space-around;
-  
+}
 
+.detailedViewToggle {
+  background: none;
+  border: none;
 }
 
 .filterIcon {
   justify-content: end;
-
+  padding: 0;
 }
 
 .nav {

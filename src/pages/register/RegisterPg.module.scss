@@ -39,10 +39,10 @@ body {
     }
 
     .inputForm {
-        text-align: left;
+        text-align: center;
         width: 75%;
         padding: 7px;
-        margin: .75em 3em .75em 3em;
+        margin: 0px;
         height: 1.5em;
         border-radius: 10px;
         color: white;
@@ -51,14 +51,13 @@ body {
         border-width: 2px;
         background-color: #92002F;
         font-family: 'Poppins', sans-serif;
-        
+        max-width: 295px;
+        margin: 7px 0px;
+
 
     }
 
-    .inputForm {
-        max-width: 225px;
-    }
-
+    
     .form {
         text-align: left;
         
@@ -73,6 +72,7 @@ body {
         border-width: 2px;
         background-color: #92002F;
         font-family: 'Poppins', sans-serif;
+
     }
 
     ::placeholder {
@@ -134,6 +134,7 @@ body {
 
       .registerButton {
         font-size: 18px;
+        margin-top: 15px;
         padding-top: 1em;
         padding-bottom: 1em;
         padding-right: 5em;

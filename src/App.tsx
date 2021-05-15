@@ -11,6 +11,11 @@ function App() {
   const [cerror, setCerror] = useState("");
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
+  window.onbeforeunload = (event: any) => {
+    const e = event || window.event;
+    setCerror("");
+  };
+
   return (
     <LoginContext.Provider
       value={{

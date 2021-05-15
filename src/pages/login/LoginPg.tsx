@@ -38,11 +38,18 @@ function Login() {
         password: person.password,
       };
       login(user_obj, (err: Error, result: any) => {
+        console.log("55555555555555555");
+        console.log("fffffffffffffffffffffff");
         if (err) {
+          console.log("err err err err err");
+
           console.log(err);
           setCerror(err);
         } else {
           setCerror("");
+          console.log("result.data result.data result.data result.data");
+          console.log(result.data);
+
           // setSignUpStatus(false);
           setCurrentUser(result.data);
 
@@ -66,11 +73,7 @@ function Login() {
             alt="TownSquareLogo"
           ></img>
           <h1 className="townSquareTitle">TownSquare</h1>
-          <p className={styles.testInfo}>
-            For default user, login with: <br></br>
-            email: <strong>bob@bob.com</strong> <br></br>
-            password: <strong>bob@bob.com</strong> <br></br>
-          </p>
+
           {signUpStatus && <h2>Sign up success</h2>}
           {/* <h4>bob@bob.com</h4> */}
           <form className={styles.loginForm}>
@@ -99,11 +102,10 @@ function Login() {
               value={person.password}
               onChange={handleChange}
             />
-            <br></br>
-            <button className={styles.loginButton} onClick={handleLogin}>
-              Login
-            </button>
           </form>
+          <button className={styles.loginButton} onClick={handleLogin}>
+            Login
+          </button>
         </div>
         <div>
           <p className={styles.noAccount}>Don't have an account?</p>

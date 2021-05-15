@@ -186,7 +186,7 @@ function Person() {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav className="flex--space-between">
-          <button onClick={history.goBack}>Back</button>
+          <img src={backIcon} onClick={history.goBack}/>
           {/* {person.user.userId !== currentUser.id ? (
             currentUser.followed.includes(person.user.id) ? (
               <button onClick={() => onFollowHandle(person.id, false)}>

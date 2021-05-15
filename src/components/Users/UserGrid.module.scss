@@ -12,8 +12,9 @@
     width: 195px;
     position: relative;
     flex-wrap: wrap;
-    padding: 20px 20px 120px 20px;
+    padding: 20px 20px 60px 20px;
     background-color: #f6efe8;
+    flex-wrap: wrap;
 
     .tileUsername {
       font-size: 18px;
@@ -31,8 +32,6 @@
       border: solid;
       border-width: 0px;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-
-
     }
 
     a {

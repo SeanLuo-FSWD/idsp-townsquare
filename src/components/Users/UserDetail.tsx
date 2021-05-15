@@ -3,6 +3,7 @@ import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { IUser } from "../../interfaces/IUser";
 import styles from "./UserGrid.module.scss";
+import styles2 from "./userDetail.module.scss";
 import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
@@ -87,6 +88,7 @@ function UserDetail(props: any) {
           >
             <Link to={`/person/${user._id}`}>
               <img
+                className={styles2.profileImage}
                 style={{ height: "100px", width: "100px" }}
                 src={profile_pic}
               ></img>

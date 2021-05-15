@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { getPeople } from "../../utils/api/people.api";
 import styles from "./peoplePg.module.scss";
+import styles2 from "./detailedView.module.scss";
 import UserGrid from "../../components/Users/UserGrid";
 import UserDetail from "../../components/Users/UserDetail";
 import Error from "../../components/Error/Error";
@@ -10,6 +11,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { connect } from "react-redux";
 import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
+import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
 const PeoplePg = (props: any) => {
@@ -54,15 +56,18 @@ const PeoplePg = (props: any) => {
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
+        {/* <div className={styles.header}> */}
+        <p>Hi {currentUser.username}! </p>
         <p>Explore users near you!</p>
-        <p>Welcome: {currentUser.username} </p>
 
         <button
+          className={styles.detailedViewToggle}
           onClick={() => {
             setDetailView(!detailView);
           }}
         >
-          {detailView ? <span>Grid view</span> : <span>Detail view</span>}
+          <img src={detailedViewIcon}></img>
+          {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
         </button>
         <div className={styles.filterIcon}>
           <img src={filter} onClick={() => setShowModal("filter")} />
@@ -70,7 +75,7 @@ const PeoplePg = (props: any) => {
       </SubNav>
 
       {detailView ? (
-        <div className={styles.userContainer}>
+        <div className={styles2.detailedViewContainer}>
           <UserDetail people={people} />
         </div>
       ) : (
