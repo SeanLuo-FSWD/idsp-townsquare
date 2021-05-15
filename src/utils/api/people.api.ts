@@ -62,7 +62,13 @@ const getChat = (chatId: string, cb: Function) => {
 };
 
 const getChatList = (userId: string, cb: Function) => {
-  const cuser = db.users.filter((u) => u.id === userId);
+  console.log("666666666666666666");
+  console.log("666666666666666666");
+  console.log(db);
+
+  const cuser = db.users.filter((u) => u.id === "1");
+  console.log(cuser);
+
   const chats = db.chats.filter((c) => cuser[0].chats.includes(c.id));
 
   cb(null, chats);
@@ -72,14 +78,9 @@ const userFollow = (userId: string, follow: boolean, cb: Function) => {
   cb(null, 200);
 };
 const getPeople = (peoplePg: any, cb: Function) => {
-  console.log("getPeople no peoplePg peoplePg peoplePg");
-  console.log(peoplePg);
-
   axios
     .post(`${API_URL}/people`, peoplePg, { withCredentials: true })
     .then((response) => {
-      console.log("getPeople response");
-      console.log(response.data);
       cb(null, response.data);
     })
     .catch((error) => {

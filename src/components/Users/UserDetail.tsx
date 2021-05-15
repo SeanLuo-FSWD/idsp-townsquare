@@ -12,11 +12,27 @@ import {
   getFollowingUsers,
   toggleFollowing,
 } from "../../utils/api/people.api";
+import PortalModal from "../../UI/PortalModal";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Detail from "./Detail";
 
 function UserDetail(props: any) {
   console.log("UserDetail UserDetail UserDetail: user");
   console.log(props.people);
-  const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
+  const { currentUser, setCerror, showModal, setShowModal } =
+    useContext(LoginContext);
+
+  const [groupDd, setGroupDd] = useState(false) as any;
+  const [group, setGroup] = useState([]) as any;
 
   const [followed, setFollowed] = useState([]) as any;
 
@@ -25,27 +41,16 @@ function UserDetail(props: any) {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("3333333333333333");
-        console.log("setFollowed");
-        console.log(result.data);
         setFollowed(result.data);
       }
     });
   }, []);
-  const onFollowHandle = (followUserId: string) => {
-    // SetFollowState({ userId: userId, follow: follow });
+
+  const onFollowHandleProp = (followUserId: string) => {
     toggleFollowing(followUserId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("88888888888888888888");
-        console.log("88888888888888888888");
-        console.log(result);
-
-        // followingUserId: "609ac3c7c8442904d4cf818b";
-        // userId: "6099dff94ed44209b8b49fb5";
-        // _id: "609c64dc439f85859d80c8b5";
-
         if (result === "followed") {
           setFollowed([
             ...followed,
@@ -63,69 +68,17 @@ function UserDetail(props: any) {
     });
   };
 
-  function checkFollowed(personUserId: string) {
-    const match_follow = _.filter(
-      followed,
-      (f: any) => f.followingUserId === personUserId
-    );
-    if (match_follow[0]) {
-      return true;
-    }
-
-    return false;
-  }
+  // const initGroups = ["Oliver Hansen", "Van Henry", "April Tucker", "Ralph Hubbard"];
 
   return (
     <div>
       {props.people.map((user: any) => {
-        const profile_pic = user.avatar;
-
         return (
-          <div
-            key={user._id}
-            className="flex"
-            style={{ justifyContent: "center" }}
-          >
-            <Link to={`/person/${user._id}`}>
-              <img
-                className={styles2.profileImage}
-                style={{ height: "100px", width: "100px" }}
-                src={profile_pic}
-              ></img>
-            </Link>
-
-            <div>
-              <div>
-                <h4>{user.username}</h4>
-                {user._id !== currentUser.userId ? (
-                  checkFollowed(user._id) ? (
-                    <button onClick={() => onFollowHandle(user._id)}>
-                      Unfollow
-                    </button>
-                  ) : (
-                    <button onClick={() => onFollowHandle(user._id)}>
-                      Follow
-                    </button>
-                  )
-                ) : null}
-              </div>
-
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>Location</span>
-                <span>{user.location}</span>
-              </div>
-
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>age</span>
-                <span>{user.age}</span>
-              </div>
-
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>gender</span>
-                <span>{user.gender}</span>
-              </div>
-            </div>
-          </div>
+          <Detail
+            user={user}
+            followed={followed}
+            onFollowHandleProp={onFollowHandleProp}
+          />
         );
       })}
     </div>

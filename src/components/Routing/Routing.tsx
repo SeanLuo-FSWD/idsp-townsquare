@@ -41,6 +41,7 @@ const Routing = () => {
   // faking login ends
 
   // if (currentUser) {
+
   return (
     <Router>
       <Switch>

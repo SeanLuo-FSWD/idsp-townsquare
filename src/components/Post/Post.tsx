@@ -44,11 +44,6 @@ const Post = (props: any) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("999999999999999999999");
-    console.log("suposely createcomment after cb");
-  });
-
   const handleLikeProp = () => {
     toggleLikePost(props.post._id, (err: Error, result: any) => {
       if (err) {

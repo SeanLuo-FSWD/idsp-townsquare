@@ -174,19 +174,11 @@ function Person() {
   }
 
   if (person) {
-    console.log("777777777777777777777");
-    console.log("should be rendered?");
-    console.log(followed);
-    console.log("88888888888888888888");
-    console.log(currentUser);
-    console.log("999999999999999999999");
-    console.log(person);
-
     return (
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav className="flex--space-between">
-          <img src={backIcon} onClick={history.goBack}/>
+          <img src={backIcon} onClick={history.goBack} />
           {/* {person.user.userId !== currentUser.id ? (
             currentUser.followed.includes(person.user.id) ? (
               <button onClick={() => onFollowHandle(person.id, false)}>

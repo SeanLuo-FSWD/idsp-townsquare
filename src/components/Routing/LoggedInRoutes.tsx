@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import { Route } from "react-router-dom";
 import Home from "../../pages/index/FeedPg";
 import Person from "../../pages/person/Person";
@@ -8,8 +9,12 @@ import PeoplePg from "../../pages/people/PeoplePg";
 import Profile from "../../pages/Profile/Profile";
 import ChatPg from "../../pages/chatPg/ChatPg";
 import Chat from "../../pages/chat/Chat";
+import { LoginContext } from "../../store/context/LoginContext";
 
 const ReactRouterSetup = () => {
+  const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
+    useContext(LoginContext);
+
   return (
     <>
       <Route exact path="/">

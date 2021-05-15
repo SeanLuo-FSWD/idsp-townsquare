@@ -6,18 +6,18 @@ import { authenticate } from "../../utils/api/auth.api";
 import Profile from "../../pages/Profile/Profile";
 
 const LoggedInRoutesKeeper = (props: any) => {
-  const { cerror, currentUser, setCurrentUser, setCerror } = useContext(
-    LoginContext
-  );
+  const { cerror, currentUser, setCurrentUser, setCerror } =
+    useContext(LoginContext);
 
   useEffect(() => {
     authenticate((err: Error, result: any) => {
       if (err) {
         // setCerror(err.message);
-        console.log(err);
-      } else {
         console.log("authentication in LoggedInRoutesKeeper");
         console.log("bbbbbbbbbbbbbbbbbb");
+        console.log(err);
+        setCurrentUser(null);
+      } else {
         console.log(result.data);
 
         setCurrentUser(result.data);

@@ -12,6 +12,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   window.onbeforeunload = (event: any) => {
+    console.log("000000000000000000000");
+    console.log("window.onbeforeunload");
+
     const e = event || window.event;
     setCerror("");
   };
