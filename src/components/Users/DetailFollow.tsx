@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import styles2 from "./userDetail.module.scss";
 import { LoginContext } from "../../store/context/LoginContext";
 
+// function DetailFollow({ person, onFollowHandleProp, followed }: any) {
+
 function DetailFollow({ person, onFollowHandleProp, followed }: any) {
   const { currentUser, setCerror, showModal, setShowModal } =
     useContext(LoginContext);

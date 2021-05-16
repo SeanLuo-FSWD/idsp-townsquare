@@ -75,8 +75,8 @@ function UserDetail(props: any) {
       {props.people.map((person: any) => {
         const propObj = {
           person: person,
-          onFollowHandleProp: onFollowHandleProp,
-          followed: followed,
+          onFollowHandleProp: "onFollowHandleProp",
+          followed: "followed",
         };
 
         return (
@@ -87,7 +87,6 @@ function UserDetail(props: any) {
           // ></DetailFollow>
           <div key={person._id}>
             {props.children(person, onFollowHandleProp, followed)}
-            {/* {props.children({ propObj })} */}
 
             <div style={{ display: "flex" }}>
               <span style={{ marginRight: "20px" }}>Location</span>
