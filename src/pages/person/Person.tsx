@@ -30,19 +30,6 @@ function Person() {
 
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
-  // const newUser = useOnFollowHandle(followed);
-
-  useEffect(() => {
-    // if (newUser) {
-    //   console.log("if follow state is set, user is...");
-    //   console.log(newUser);
-    //   // setCurrentUser(newUser);
-    //   setFollowed(null);
-    //   setCurrentUser(newUser);
-    // }
-    console.log("Person Person Person Person");
-  });
-
   useEffect(() => {
     getPerson(id, (err: Error, result: any) => {
       if (err) {
@@ -56,9 +43,6 @@ function Person() {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("3333333333333333");
-        console.log("setFollowed");
-        console.log(result.data);
         setFollowed(result.data); //all the users CURRENT guy follow.
       }
     });
@@ -70,14 +54,6 @@ function Person() {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("88888888888888888888");
-        console.log("88888888888888888888");
-        console.log(result);
-
-        // followingUserId: "609ac3c7c8442904d4cf818b";
-        // userId: "6099dff94ed44209b8b49fb5";
-        // _id: "609c64dc439f85859d80c8b5";
-
         if (result === "followed") {
           setFollowed([
             ...followed,
@@ -118,15 +94,10 @@ function Person() {
 
   const onRemovePost = (postId: string) => {
     deletePost(postId, (err: Error, result: any) => {
-      console.log("callback yet received in Person");
-
       if (err) {
         setCerror(err.message);
       } else {
         const newFeed = _.filter(person.feed, (p) => p._id !== postId);
-        console.log("444444444444444444");
-        console.log("444444444444444444");
-        console.log(newFeed);
 
         setPerson({
           ...person,

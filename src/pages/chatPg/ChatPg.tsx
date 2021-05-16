@@ -3,6 +3,7 @@ import ChatList from "../../components/ChatList/ChatList";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
+import { Link } from "react-router-dom";
 
 function Chat() {
   return (
@@ -11,7 +12,9 @@ function Chat() {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <p>Chat</p>
-          <button>Start group Chat</button>
+          <button>
+            <Link to="/groupchat">Start group Chat</Link>
+          </button>
         </SubNav>
       </div>
       <div className={styles.chatContainer}>

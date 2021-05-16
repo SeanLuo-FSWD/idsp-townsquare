@@ -19,16 +19,17 @@ import { connect } from "react-redux";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
 import UserDetail from "../Users/UserDetail";
+import FilterUserDetail from "./FilterUserDetail";
+import Navbar from "../../components/Navbar/Navbar";
+import SubNav from "../../components/Navbar/SubNav";
+import { useHistory, useParams } from "react-router-dom";
 
-function GroupChatFilter(props: any) {
+function GroupChatFilter() {
+  const history = useHistory();
   const { showModal, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
-  const [people, setPeople] = useState(null);
+  const [people, setPeople] = useState([]);
   const [showUsers, setShowUsers] = useState(false);
-
-  useEffect(() => {
-    setShowUsers(true);
-  }, [people]);
 
   // const [showFeedFilter, setShowFeedFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState(
@@ -72,69 +73,64 @@ function GroupChatFilter(props: any) {
         setCerror(err.message);
       } else {
         setPeople(result);
+        setShowUsers(true);
       }
     });
   };
 
-  // if (showUsers) {
-  //     return (
-  //       <UserDetail people={people}>
-  //         {(person: any, onAddHandleProp: any) => {
-  //           return (
-  //             <DetailGroupChat
-  //               person={person}
-  //               onAddHandleProp={onAddHandleProp}
-  //             />
-  //           );
-  //         }}
-  //         </UserDetail>
-
-  //     );
-  // }
   return (
     <div>
-      <PeopleFilter
-        peopleFilterProps={peopleFilterProps}
-        feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
-      />
+      {showUsers ? (
+        <>
+          <Navbar currentPath={window.location.pathname} />
+          <SubNav>
+            <button
+              onClick={() => {
+                setShowUsers(false);
+              }}
+            >
+              Back to filter
+            </button>
+            <button onClick={history.goBack}>Cancel</button>
+          </SubNav>
+          <FilterUserDetail people={people} />
+        </>
+      ) : (
+        <>
+          <Navbar currentPath={window.location.pathname} />
+          <SubNav>
+            <button onClick={history.goBack}>Back</button>
+          </SubNav>
+          <div style={{ marginTop: "50px" }}>
+            <PeopleFilter
+              peopleFilterProps={peopleFilterProps}
+              feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
+            />
 
-      <div className="flex">
-        {/* {showFeedFilter ? (
-          <button onClick={() => setShowFeedFilter(false)}>
-            Hide Feed Filter
-          </button>
-        ) : (
-          <button onClick={() => setShowFeedFilter(true)}>
-            Show Feed Filter
-          </button>
-        )} */}
-        <p>
-          Apply Feed filter to users (Will only show users who created matched
-          posts)
-        </p>
-      </div>
-      {/* {showFeedFilter && (
-        <FeedFilter
-          feedFilterProps={feedFilterProps}
-          feedPg_Feed={props.peoplePg.feed}
-        />
-      )} */}
-      <FeedFilter
-        feedFilterProps={feedFilterProps}
-        feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
-      />
-      <div className="flex">
-        <button onClick={onGroupFilterSubmit}>Submit</button>
-        <button
-          onClick={() => {
-            setModalProps(null);
-            setShowModal("");
-            props.onGroupFilterRemove();
-          }}
-        >
-          Cancel
-        </button>
-      </div>
+            <div className="flex">
+              <p>
+                Apply Feed filter to users (Will only show users who created
+                matched posts)
+              </p>
+            </div>
+            <FeedFilter
+              feedFilterProps={feedFilterProps}
+              feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
+            />
+            <div className="flex">
+              <button onClick={onGroupFilterSubmit}>Submit</button>
+              <button
+                onClick={() => {
+                  setModalProps(null);
+                  setShowModal("");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
