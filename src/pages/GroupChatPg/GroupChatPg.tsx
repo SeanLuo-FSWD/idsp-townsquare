@@ -11,18 +11,19 @@ import {
 } from "../../store/redux/actions/filter_act";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
-import FilterUserDetail from "./FilterUserDetail";
+import FilterUserList from "./FilterUserList";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
-import NewChat from "../../pages/chat/NewChat";
+import GroupChat from "./GroupChat";
 
-function GroupChatFilter() {
+// function GroupChatPg({ startPage, chatId }: any) {
+function GroupChatPg() {
   const history = useHistory();
   const { showModal, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
   const [people, setPeople] = useState([]);
-  const [toggleView, setToggleView] = useState("");
+  const [toggleView, setToggleView] = useState("chat");
   const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
   const [addedGroupIds, setAddedGroupIds] = useState([]) as any;
 
@@ -34,20 +35,29 @@ function GroupChatFilter() {
     FILTER_INITIAL_STATE.peoplePg.people
   );
 
+  const { chatId } = useParams() as any;
+
   useEffect(() => {
-    console.log("2222222222222222");
-    console.log("2222222222222222");
-    console.log(addedGroup);
-  });
+    if (!chatId) {
+      setToggleView("");
+    }
+  }, []);
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
 
-    setPeopleFilter({ ...peopleFilter, [key_name_pair[0]]: key_name_pair[1] });
+    setPeopleFilter({
+      ...peopleFilter,
+      [key_name_pair[0]]: key_name_pair[1],
+    });
     // pplFilterHolder = {
     //   ...pplFilterHolder,
     //   [key_name_pair[0]]: key_name_pair[1],
     // };
+  };
+
+  const setToggleViewProp = (view: string) => {
+    setToggleView(view);
   };
 
   const setAddedGroupProp = (addedGroupState: string[]) => {
@@ -100,7 +110,7 @@ function GroupChatFilter() {
       {toggleView === "users" ? (
         <>
           <div className="flex">
-            <FilterUserDetail
+            <FilterUserList
               people={people}
               toggleFilterProp={toggleFilterProp}
               addedGroup={addedGroup}
@@ -127,7 +137,12 @@ function GroupChatFilter() {
           </div>
         </>
       ) : toggleView === "chat" ? (
-        <NewChat addedGroupIds={addedGroupIds} addedGroup={addedGroup} />
+        <GroupChat
+          addedGroupIds={addedGroupIds}
+          addedGroup={addedGroup}
+          initChatId={chatId}
+          setToggleViewProp={setToggleViewProp}
+        />
       ) : (
         <>
           <Navbar currentPath={window.location.pathname} />
@@ -186,6 +201,6 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-// export default connect(null, mapDispatchToProps)(GroupChatFilter);
+// export default connect(null, mapDispatchToProps)(GroupChatPg);
 
-export default GroupChatFilter;
+export default GroupChatPg;

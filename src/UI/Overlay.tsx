@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import styles from "./Overlay.module.scss";
 import { LoginContext } from "../store/context/LoginContext";
 
-function Overlay() {
+function Overlay({ togglePortalProp }: any) {
   const { showModal, setShowModal, setModalProps } = useContext(LoginContext);
   return (
     <div
@@ -10,6 +10,7 @@ function Overlay() {
       onClick={() => {
         setModalProps(null);
         setShowModal("");
+        togglePortalProp();
       }}
     ></div>
   );

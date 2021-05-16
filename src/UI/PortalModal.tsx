@@ -19,19 +19,24 @@ import { createPortal } from "react-dom";
 
 const PortalModal = ({ message, isOpen, onClose, children }: any) => {
   const portalRoot: any = document.getElementById("modal_portal");
-  if (!isOpen) return null;
 
-  return createPortal(
-    <>
-      <div className={styles.portalModal}>
-        <span>{message}</span>
-        <button onClick={onClose}>Close</button>
-      </div>
-      <Overlay />
-    </>,
+  if (!isOpen) {
+    document.body.classList.remove("disable_scroll");
+    return null;
+  } else {
+    document.body.classList.add("disable_scroll");
+    return createPortal(
+      <>
+        <div className={styles.portalModal}>
+          <span>{message}</span>
+          {children}
+          <button onClick={onClose}>Close</button>
+        </div>
+      </>,
 
-    portalRoot
-  );
+      portalRoot
+    );
+  }
 };
 
 export default PortalModal;

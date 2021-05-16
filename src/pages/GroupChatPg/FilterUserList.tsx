@@ -8,11 +8,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
 
+import FilterUser from "./FilterUser";
+
 // the entire state lies here!  Go back and lose it all. Go forward and start the chat page.
 // how pass state to chat page?
 
 // on start chatting, has to save users to server with an id, pass back and redirect there.
-function FilterUserDetail({
+function FilterUserList({
   people,
   toggleFilterProp,
   addedGroup,
@@ -22,7 +24,8 @@ function FilterUserDetail({
   addedGroupIds,
 }: any) {
   //   const [addedGroupIds, setAddedGroupIds] = useState([]) as any; // array of ids
-  const { setGroupChat } = useContext(LoginContext);
+  const { showModal, setModalProps, setShowModal, setCerror } =
+    useContext(LoginContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -79,8 +82,13 @@ function FilterUserDetail({
         {people.map((person: any) => {
           return (
             <div key={person._id}>
-              <div>
-                <img src={person.avatar} height="50px" width="50px" />
+              {/* <div>
+                <img
+                  onClick={() => setOpenPortal(true)}
+                  src={person.avatar}
+                  height="50px"
+                  width="50px"
+                />
               </div>
               <div style={{ display: "flex" }}>
                 <span style={{ marginRight: "20px" }}>Location</span>
@@ -93,7 +101,8 @@ function FilterUserDetail({
               <div style={{ display: "flex" }}>
                 <span style={{ marginRight: "20px" }}>gender</span>
                 <span>{person.gender}</span>
-              </div>
+              </div> */}
+              <FilterUser person={person} />
 
               <FormGroup style={{ flexDirection: "row" }}>
                 <FormControlLabel
@@ -116,4 +125,4 @@ function FilterUserDetail({
   );
 }
 
-export default FilterUserDetail;
+export default FilterUserList;

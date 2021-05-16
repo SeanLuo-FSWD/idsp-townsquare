@@ -10,7 +10,7 @@ import Profile from "../../pages/Profile/Profile";
 import ChatPg from "../../pages/chatPg/ChatPg";
 import Chat from "../../pages/chat/Chat";
 import { LoginContext } from "../../store/context/LoginContext";
-import GroupChatFilter from "../GroupChatFilter/GroupChatFilter";
+import GroupChatPg from "../../pages/GroupChatPg/GroupChatPg";
 
 const ReactRouterSetup = () => {
   const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
@@ -39,7 +39,7 @@ const ReactRouterSetup = () => {
       </Route>
 
       <Route path="/groupchat">
-        <GroupChatFilter />
+        <GroupChatPg />
       </Route>
 
       <Route path="/person/:id" children={<Person />}></Route>

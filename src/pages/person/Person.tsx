@@ -22,9 +22,13 @@ import backIcon from "./assets/back.svg";
 import followIcon from "./assets/follow.svg";
 import unfollowIcon from "./assets/unfollow.svg";
 
-function Person() {
+function Person({ personId }: any) {
   const history = useHistory();
-  const { id } = useParams() as any;
+  let { id } = useParams() as any;
+  if (!id) {
+    id = personId; // Use passed in prop id, if no param.
+  }
+
   const [person, setPerson] = useState(null) as any;
   const [followed, setFollowed] = useState([]) as any;
 
@@ -147,10 +151,12 @@ function Person() {
   if (person) {
     return (
       <div>
-        <Navbar currentPath={window.location.pathname} />
-        <SubNav className="flex--space-between">
-          <img src={backIcon} onClick={history.goBack} />
-          {/* {person.user.userId !== currentUser.id ? (
+        {!personId && (
+          <div>
+            <Navbar currentPath={window.location.pathname} />
+            <SubNav className="flex--space-between">
+              <img src={backIcon} onClick={history.goBack} />
+              {/* {person.user.userId !== currentUser.id ? (
             currentUser.followed.includes(person.user.id) ? (
               <button onClick={() => onFollowHandle(person.id, false)}>
                 Unfollow
@@ -159,18 +165,21 @@ function Person() {
               <img src={followIcon} onClick={() => onFollowHandle(person.id, true)}/>
             )
           ) : null} */}
-          {person.user.userId !== currentUser.userId ? (
-            checkFollowed() ? (
-              <button onClick={() => onFollowHandle(person.user.userId)}>
-                Unfollow
-              </button>
-            ) : (
-              <button onClick={() => onFollowHandle(person.user.userId)}>
-                Follow
-              </button>
-            )
-          ) : null}
-        </SubNav>
+              {person.user.userId !== currentUser.userId ? (
+                checkFollowed() ? (
+                  <button onClick={() => onFollowHandle(person.user.userId)}>
+                    Unfollow
+                  </button>
+                ) : (
+                  <button onClick={() => onFollowHandle(person.user.userId)}>
+                    Follow
+                  </button>
+                )
+              ) : null}
+            </SubNav>
+          </div>
+        )}
+
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
