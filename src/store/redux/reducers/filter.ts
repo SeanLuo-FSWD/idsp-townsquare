@@ -7,41 +7,44 @@ import {
   PEOPLE_FILTER_REMOVE,
 } from "../constants/filterActionTypes";
 
+import FILTER_INITIAL_STATE from "../../../constants/filter_initial_state";
 import _ from "lodash";
 
 import IFilter from "../../../interfaces/redux";
 
 // const INITIAL_STATE: IFilter | null = null;
-const INITIAL_STATE: any = {
-  feedPg: {
-    applied: false,
-    people: {
-      age: [0, 100],
-      gender: ["female", "male", "other"],
-      location: ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"],
-      followed: false,
-    },
-    feed: {
-      keywords: [],
-      hasImg: false,
-    },
-  },
-  peoplePg: {
-    applied: false,
-    people: {
-      age: [0, 100],
-      gender: ["female", "male", "other"],
-      location: ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"],
-      followed: false,
-    },
-    feed: {
-      keywords: [],
-      hasImg: false,
-    },
-  },
+// const INITIAL_STATE: any = {
+//   feedPg: {
+//     applied: false,
+//     people: {
+//       age: [0, 100],
+//       gender: ["female", "male", "other"],
+//       location: ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"],
+//       followed: false,
+//     },
+//     feed: {
+//       keywords: [],
+//       hasImg: false,
+//     },
+//   },
+//   peoplePg: {
+//     applied: false,
+//     people: {
+//       age: [0, 100],
+//       gender: ["female", "male", "other"],
+//       location: ["Burnaby", "Richmond", "Coquitlam", "Vancouver", "Surrey"],
+//       followed: false,
+//     },
+//     feed: {
+//       keywords: [],
+//       hasImg: false,
+//     },
+//   },
 
-  error: null,
-};
+//   error: null,
+// };
+
+const INITIAL_STATE: any = FILTER_INITIAL_STATE;
 
 function filterReducer(filterState = INITIAL_STATE, action: FilterActionTypes) {
   switch (action.type) {

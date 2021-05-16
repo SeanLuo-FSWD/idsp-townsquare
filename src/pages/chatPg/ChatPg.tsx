@@ -11,6 +11,7 @@ function Chat() {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <p>Chat</p>
+          <button>Start group Chat</button>
         </SubNav>
       </div>
       <div className={styles.chatContainer}>

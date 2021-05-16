@@ -16,26 +16,27 @@ import {
   doFeedFilterRemove,
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
+import { getPeople } from "../../utils/api/people.api";
+import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
+import UserDetail from "../Users/UserDetail";
 
-function PeopleFilterModalContent(props: any) {
+function GroupChatFilter(props: any) {
   const { showModal, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
+  const [people, setPeople] = useState(null);
+  const [showUsers, setShowUsers] = useState(false);
+
+  useEffect(() => {
+    setShowUsers(true);
+  }, [people]);
 
   // const [showFeedFilter, setShowFeedFilter] = useState(false);
-  const [feedFilter, setFeedFilter] = useState(props.peoplePg.feed);
-  const [peopleFilter, setPeopleFilter] = useState(props.peoplePg.people);
-
-  let feedFilterHolder = props.peoplePg.feed;
-  let pplFilterHolder = props.peoplePg.people;
-  let applyOtherSide = false;
-
-  // const [hasSync, setHasSync] = React.useState(false);
-
-  const handleHasSyncFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // setHasSync(event.target.checked);
-    applyOtherSide = event.target.checked;
-    // feedFilterProps({ hasSync: event.target.checked });
-  };
+  const [feedFilter, setFeedFilter] = useState(
+    FILTER_INITIAL_STATE.peoplePg.feed
+  );
+  const [peopleFilter, setPeopleFilter] = useState(
+    FILTER_INITIAL_STATE.peoplePg.people
+  );
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
@@ -59,42 +60,42 @@ function PeopleFilterModalContent(props: any) {
     // };
   };
 
-  const onPeopleFilterClick = () => {
+  const onGroupFilterSubmit = () => {
     const peoplePgSlice = {
-      peoplePg: {
-        applied: true,
-        people: peopleFilter,
-        feed: feedFilter,
-      },
+      applied: true,
+      people: peopleFilter,
+      feed: feedFilter,
     };
 
-    props.onPeopleFilterSubmit(peoplePgSlice);
-
-    if (applyOtherSide) {
-      const feedPgSlice = {
-        feedPg: {
-          applied: true,
-          people: peopleFilter,
-          feed: feedFilter,
-        },
-      };
-      props.onFeedFilterSubmit(feedPgSlice);
-    }
-
-    setModalProps(null);
-    setShowModal("");
+    getPeople(peoplePgSlice, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        setPeople(result);
+      }
+    });
   };
 
-  if (props.error) {
-    setCerror(props.error.message);
-    return <></>;
-  }
+  // if (showUsers) {
+  //     return (
+  //       <UserDetail people={people}>
+  //         {(person: any, onAddHandleProp: any) => {
+  //           return (
+  //             <DetailGroupChat
+  //               person={person}
+  //               onAddHandleProp={onAddHandleProp}
+  //             />
+  //           );
+  //         }}
+  //         </UserDetail>
 
+  //     );
+  // }
   return (
     <div>
       <PeopleFilter
         peopleFilterProps={peopleFilterProps}
-        feedPg_People={props.peoplePg.people}
+        feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
       />
 
       <div className="flex">
@@ -112,36 +113,27 @@ function PeopleFilterModalContent(props: any) {
           posts)
         </p>
       </div>
-
       {/* {showFeedFilter && (
         <FeedFilter
           feedFilterProps={feedFilterProps}
           feedPg_Feed={props.peoplePg.feed}
         />
       )} */}
-
       <FeedFilter
         feedFilterProps={feedFilterProps}
-        feedPg_Feed={props.peoplePg.feed}
+        feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
       />
-
       <div className="flex">
-        <button onClick={onPeopleFilterClick}>Submit</button>
+        <button onClick={onGroupFilterSubmit}>Submit</button>
         <button
           onClick={() => {
             setModalProps(null);
             setShowModal("");
-            props.onPeopleFilterRemove();
+            props.onGroupFilterRemove();
           }}
         >
           Cancel
         </button>
-        <FormControlLabel
-          control={
-            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
-          }
-          label="Apply to Feed page"
-        />
       </div>
     </div>
   );
@@ -157,15 +149,14 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onPeopleFilterSubmit: (peoplePgSlice: any) =>
+    onGroupFilterSubmit: (peoplePgSlice: any) =>
       dispatch(doPeopleFilterUpdate(peoplePgSlice)),
     onFeedFilterSubmit: (feedPgSlice: any) =>
       dispatch(doFeedFilterUpdate(feedPgSlice)),
-    onPeopleFilterRemove: () => dispatch(doPeopleFilterRemove()),
+    onGroupFilterRemove: () => dispatch(doPeopleFilterRemove()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PeopleFilterModalContent);
+// export default connect(null, mapDispatchToProps)(GroupChatFilter);
+
+export default GroupChatFilter;

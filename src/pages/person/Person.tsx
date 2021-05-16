@@ -215,7 +215,7 @@ function Person() {
 
         {person.posts.map((post: any) => {
           return (
-            <div key={post.id} className={styles.postWrapper}>
+            <div key={post._id} className={styles.postWrapper}>
               <div>
                 <p className={styles.createdAt}>
                   {new Date(post.createdAt).toDateString()}

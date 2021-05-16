@@ -13,6 +13,7 @@ import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
 import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
+import DetailFollow from "../../components/Users/DetailFollow";
 
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
@@ -28,6 +29,11 @@ const PeoplePg = (props: any) => {
   } = useContext(LoginContext);
 
   useEffect(() => {
+    console.log("sssssssssssssssssssssssss");
+    console.log("sssssssssssssssssssssssss");
+    console.log("sssssssssssssssssssssssss");
+    console.log(props.peoplePg);
+
     getPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
@@ -76,7 +82,22 @@ const PeoplePg = (props: any) => {
 
       {detailView ? (
         <div className={styles2.detailedViewContainer}>
-          <UserDetail people={people} />
+          <UserDetail people={people}>
+            {/* <UserDetail>
+            {() => {
+              return <DetailFollow people={people} />;
+            }} */}
+
+            {(person: any, onFollowHandleProp: any, followed: any) => {
+              return (
+                <DetailFollow
+                  person={person}
+                  onFollowHandleProp={onFollowHandleProp}
+                  followed={followed}
+                />
+              );
+            }}
+          </UserDetail>
         </div>
       ) : (
         <div className={styles.userContainer}>

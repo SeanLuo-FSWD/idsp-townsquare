@@ -23,7 +23,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Detail from "./Detail";
+import DetailFollow from "./DetailFollow";
 
 function UserDetail(props: any) {
   console.log("UserDetail UserDetail UserDetail: user");
@@ -73,12 +73,35 @@ function UserDetail(props: any) {
   return (
     <div>
       {props.people.map((person: any) => {
+        const propObj = {
+          person: person,
+          onFollowHandleProp: onFollowHandleProp,
+          followed: followed,
+        };
+
         return (
-          <Detail
-            person={person}
-            followed={followed}
-            onFollowHandleProp={onFollowHandleProp}
-          />
+          // <DetailFollow
+          //   person={person}
+          //   followed={followed}
+          //   onFollowHandleProp={onFollowHandleProp}
+          // ></DetailFollow>
+          <div key={person._id}>
+            {props.children(person, onFollowHandleProp, followed)}
+            {/* {props.children({ propObj })} */}
+
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "20px" }}>Location</span>
+              <span>{person.location}</span>
+            </div>
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "20px" }}>age</span>
+              <span>{person.age}</span>
+            </div>
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "20px" }}>gender</span>
+              <span>{person.gender}</span>
+            </div>
+          </div>
         );
       })}
     </div>
