@@ -1,10 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Slider from "@material-ui/core/Slider";
 import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
@@ -15,10 +9,8 @@ import {
   doFeedFilterUpdate,
   doFeedFilterRemove,
 } from "../../store/redux/actions/filter_act";
-import { connect } from "react-redux";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
-import UserDetail from "../Users/UserDetail";
 import FilterUserDetail from "./FilterUserDetail";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
@@ -78,11 +70,15 @@ function GroupChatFilter() {
     });
   };
 
+  function toggleFilterProp() {
+    setShowUsers(false);
+  }
+
   return (
     <div>
       {showUsers ? (
         <>
-          <Navbar currentPath={window.location.pathname} />
+          {/* <Navbar currentPath={window.location.pathname} />
           <SubNav>
             <button
               onClick={() => {
@@ -91,9 +87,13 @@ function GroupChatFilter() {
             >
               Back to filter
             </button>
+            <button>start Chatting</button>
             <button onClick={history.goBack}>Cancel</button>
-          </SubNav>
-          <FilterUserDetail people={people} />
+          </SubNav> */}
+          <FilterUserDetail
+            people={people}
+            toggleFilterProp={toggleFilterProp}
+          />
         </>
       ) : (
         <>

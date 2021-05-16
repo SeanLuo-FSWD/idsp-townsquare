@@ -12,6 +12,8 @@ export interface ILoginContext {
   setModalProps: Dispatch<SetStateAction<any>>;
   cerror: any;
   setCerror: Dispatch<SetStateAction<any>>;
+  groupChat: string[];
+  setGroupChat: Dispatch<SetStateAction<string[]>>;
 }
 
 export const LoginContext = createContext({} as ILoginContext);

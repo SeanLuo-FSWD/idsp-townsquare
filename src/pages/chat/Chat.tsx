@@ -10,13 +10,17 @@ import backButton from "./assets/back.svg";
 
 function Chat() {
   const { chatId } = useParams() as any;
-  const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
+  const { currentUser, setCerror, groupChat } = useContext(LoginContext);
   const [chat, setChat] = useState(null) as any;
   const [inputTxt, setInputTxt] = useState("");
   const [messages, setMessages] = useState([]) as any;
   const history = useHistory();
 
   useEffect(() => {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log(groupChat);
+
     getChat(chatId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
@@ -43,10 +47,6 @@ function Chat() {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("88888888888888888888");
-        console.log("88888888888888888888");
-        console.log(result);
-
         setMessages(_.concat(messages, result));
 
         setInputTxt("");
@@ -70,7 +70,7 @@ function Chat() {
     return (
       <>
         <SubNav className="flex--space-between">
-          <img src={backButton} onClick={history.goBack}/>
+          <img src={backButton} onClick={history.goBack} />
           <p>Chatting with: {getOtherUser()}</p>
         </SubNav>
 

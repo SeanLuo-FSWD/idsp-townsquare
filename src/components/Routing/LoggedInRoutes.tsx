@@ -45,6 +45,7 @@ const ReactRouterSetup = () => {
       <Route path="/person/:id" children={<Person />}></Route>
       <Route path="/post/:postId" children={<Home />}></Route>
       <Route path="/chat/:chatId" children={<Chat />}></Route>
+      <Route path="/chat" children={<Chat />}></Route>
     </>
   );
 };

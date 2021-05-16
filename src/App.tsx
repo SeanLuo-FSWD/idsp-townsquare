@@ -10,6 +10,7 @@ function App() {
   const [modalProps, setModalProps] = useState(false);
   const [cerror, setCerror] = useState("");
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [groupChat, setGroupChat] = useState([]) as any;
 
   window.onbeforeunload = (event: any) => {
     console.log("000000000000000000000");
@@ -32,6 +33,8 @@ function App() {
         setModalProps,
         cerror,
         setCerror,
+        groupChat,
+        setGroupChat,
       }}
     >
       <Routing />
