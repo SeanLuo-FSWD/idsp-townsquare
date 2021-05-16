@@ -7,29 +7,30 @@ import {
   getPerson,
   getFollowingUsers,
   toggleFollowing,
+  addPersonGroup,
 } from "../../utils/api/people.api";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItemText from "@material-ui/core/ListItemText";
 
-function Detail({ user, onFollowHandleProp, followed }: any) {
+function Detail({ person, onFollowHandleProp, followed }: any) {
   const [groupDd, setAddedGroupDd] = useState(false) as any;
   const { currentUser, setCerror, showModal, setShowModal } =
     useContext(LoginContext);
   const [availableGroup, setAvailableGroup] = useState([]) as any;
   const [newGroupName, setNewGroupName] = useState(null) as any;
 
-  const [addedGroup, setAddedGroup] = useState([]) as any;
+  const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
   const [groupObjArr, setGroupObjArr] = useState([]) as any;
 
-  useEffect(() => {
-    console.log("2222222222222222");
-    console.log("2222222222222222");
-    console.log(addedGroup);
-    console.log("availableGroup");
-    console.log(availableGroup);
-  });
+  //   useEffect(() => {
+  //     console.log("2222222222222222");
+  //     console.log("2222222222222222");
+  //     console.log(addedGroup);
+  //     console.log("availableGroup");
+  //     console.log(availableGroup);
+  //   });
 
   function fetchAvailableGroups(ddStatus: boolean) {
     if (ddStatus) {
@@ -83,54 +84,65 @@ function Detail({ user, onFollowHandleProp, followed }: any) {
     return false;
   }
 
-  function onAddGroupSubmit(e: any) {
+  function onGroupSubmit(e: any) {
     e.preventDefault();
+    const submitObj: any = {};
+    submitObj["personId"] = person._id;
+    submitObj["addedGroup"] = addedGroup;
+
+    console.log("submitObj submitObj submitObj submitObj");
+    console.log(submitObj);
+
+    addPersonGroup(submitObj, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        setAddedGroupDd(false);
+      }
+    });
   }
 
-  const handleGroupCheck = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleGroupCheck = (event: any) => {
     console.log("fffffffffffffffffffffff");
+    console.log("fffffffffffffffffffffff");
+
     console.log(event.target.value);
+    console.log(event.target.checked);
 
-    setAddedGroup([...addedGroup, event.target.value]);
-    console.log("777777777777777777777");
-    const group_name = event.target.value;
-    console.log({
-      ...groupObjArr,
-      group_name: [...(group_name as any), user._id],
-    });
-
-    // let newGroupObjArr = groupObjArr.map((g: any) => {
-    //   const key = Object.keys(g)[0];
-    //   if (key === event.target.value) {
-    //     // add to it.
-    //   }
-    // });
-
-    // need to find a way to toggle it off.
-
-    setGroupObjArr({ ...groupObjArr, [event.target.value as any]: user._id });
+    if (event.target.checked) {
+      console.log("addedGroup: checked");
+      console.log([...addedGroup, event.target.value]);
+      setAddedGroup([...addedGroup, event.target.value]);
+    } else {
+      const removedGroup = addedGroup.filter((gn: string) => {
+        return gn !== event.target.value;
+      });
+      console.log("addedGroup: unchecked");
+      console.log(removedGroup);
+      setAddedGroup(removedGroup);
+    }
   };
 
   return (
-    <div key={user._id} className="flex" style={{ justifyContent: "center" }}>
-      <Link to={`/person/${user._id}`}>
+    <div key={person._id} className="flex" style={{ justifyContent: "center" }}>
+      <Link to={`/person/${person._id}`}>
         <img
           className={styles2.profileImage}
           style={{ height: "100px", width: "100px" }}
-          src={user.avatar}
+          src={person.avatar}
         ></img>
       </Link>
 
       <div>
         <div>
-          <h4>{user.username}</h4>
-          {user._id !== currentUser.userId ? (
-            checkFollowed(user._id) ? (
-              <button onClick={() => onFollowHandleProp(user._id)}>
+          <h4>{person.username}</h4>
+          {person._id !== currentUser.userId ? (
+            checkFollowed(person._id) ? (
+              <button onClick={() => onFollowHandleProp(person._id)}>
                 Unfollow
               </button>
             ) : (
-              <button onClick={() => onFollowHandleProp(user._id)}>
+              <button onClick={() => onFollowHandleProp(person._id)}>
                 Follow
               </button>
             )
@@ -161,7 +173,7 @@ function Detail({ user, onFollowHandleProp, followed }: any) {
                 </button>
               </form>
 
-              <button type="submit" onClick={onAddGroupSubmit}>
+              <button type="submit" onClick={onGroupSubmit}>
                 Add
               </button>
             </FormGroup>
@@ -170,17 +182,17 @@ function Detail({ user, onFollowHandleProp, followed }: any) {
 
         <div style={{ display: "flex" }}>
           <span style={{ marginRight: "20px" }}>Location</span>
-          <span>{user.location}</span>
+          <span>{person.location}</span>
         </div>
 
         <div style={{ display: "flex" }}>
           <span style={{ marginRight: "20px" }}>age</span>
-          <span>{user.age}</span>
+          <span>{person.age}</span>
         </div>
 
         <div style={{ display: "flex" }}>
           <span style={{ marginRight: "20px" }}>gender</span>
-          <span>{user.gender}</span>
+          <span>{person.gender}</span>
         </div>
       </div>
     </div>

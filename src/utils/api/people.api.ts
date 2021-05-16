@@ -7,6 +7,27 @@ import API_URL from "../../constants/api_url";
 
 import { DbHelper } from "./_dbHelper";
 
+const addPersonGroup = (submitObj: string[], cb: Function) => {
+  axios
+    .post(
+      `${API_URL}/user/addGroup`,
+      { personGroupsObj: submitObj },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      console.log("addPersonGroup addPersonGroup response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("addPersonGroup error");
+      console.log(error);
+      cb(error.response.data.message);
+    });
+};
+
 const toggleFollowing = (followUserId: string, cb: Function) => {
   axios
     .post(
@@ -114,4 +135,5 @@ export {
   addChatMsg,
   getFollowingUsers,
   toggleFollowing,
+  addPersonGroup,
 };

@@ -72,10 +72,10 @@ function UserDetail(props: any) {
 
   return (
     <div>
-      {props.people.map((user: any) => {
+      {props.people.map((person: any) => {
         return (
           <Detail
-            user={user}
+            person={person}
             followed={followed}
             onFollowHandleProp={onFollowHandleProp}
           />
