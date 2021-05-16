@@ -12,47 +12,67 @@ import { useHistory, useParams } from "react-router-dom";
 // how pass state to chat page?
 
 // on start chatting, has to save users to server with an id, pass back and redirect there.
-function FilterUserDetail({ people, toggleFilterProp }: any) {
-  const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
+function FilterUserDetail({
+  people,
+  toggleFilterProp,
+  addedGroup,
+  setAddedGroupProp,
+  onStartChatProp,
+  setAddedGroupIds,
+  addedGroupIds,
+}: any) {
+  //   const [addedGroupIds, setAddedGroupIds] = useState([]) as any; // array of ids
   const { setGroupChat } = useContext(LoginContext);
   const history = useHistory();
 
   useEffect(() => {
     console.log("1111111111111111111111");
-    console.log(addedGroup);
+    console.log(addedGroupIds);
   });
   const handleCheck = (event: any) => {
     console.log("88888888888888888888");
+
     console.log(event.target.value);
     console.log(event.target.checked);
-
+    function mapIdToUser(id: string) {
+      for (let i = 0; i < people.length; i++) {
+        if (people[i]._id === id) {
+          return {
+            _id: id,
+            avatar: people[i].avatar,
+            username: people[i].username,
+          };
+        }
+      }
+    }
     if (event.target.checked) {
-      setAddedGroup([...addedGroup, event.target.value]);
+      // setAddedGroupProp([...addedGroup, event.target.value]);
+      setAddedGroupIds([...addedGroupIds, event.target.value]);
+      const mappedUser = mapIdToUser(event.target.value);
+      setAddedGroupProp([...addedGroup, mappedUser]);
     } else {
-      const removedGroup = addedGroup.filter((gn: string) => {
+      const removedGroup = addedGroupIds.filter((gn: string) => {
         return gn !== event.target.value;
       });
       console.log("addedGroup: unchecked");
       console.log(removedGroup);
-      setAddedGroup(removedGroup);
+      let mappedGroup = [];
+
+      mappedGroup = removedGroup.map((id: string) => {
+        return mapIdToUser(id);
+      });
+
+      setAddedGroupIds(removedGroup);
+      setAddedGroupProp(mappedGroup);
     }
   };
-
-  function submitSelection() {
-    if (addedGroup.length === 0) {
-      window.alert("You must select at least one user!");
-    } else {
-      setGroupChat(addedGroup);
-      history.push(`/chat`);
-    }
-  }
 
   return (
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav>
         <button onClick={toggleFilterProp}>Back to filter</button>
-        <button onClick={submitSelection}>Start Chatting</button>
+        <button onClick={onStartChatProp}>Start Chatting</button>
         <button onClick={history.goBack}>Cancel</button>
       </SubNav>
       <div style={{ marginTop: "50px" }}>
@@ -79,9 +99,10 @@ function FilterUserDetail({ people, toggleFilterProp }: any) {
                 <FormControlLabel
                   control={
                     <Checkbox
+                      //   value={person._id}
                       value={person._id}
                       onChange={handleCheck}
-                      checked={addedGroup.indexOf(person._id) > -1}
+                      checked={addedGroupIds.indexOf(person._id) > -1}
                     />
                   }
                   label="add"
