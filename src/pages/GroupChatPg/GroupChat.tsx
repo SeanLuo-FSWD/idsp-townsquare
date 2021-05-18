@@ -22,10 +22,6 @@ function GroupChat({
   let params = new URLSearchParams(search);
   let person_id = params.get("id");
 
-  console.log("999999999999999999999");
-  console.log("000000000000000000000");
-  console.log(addedGroup);
-
   function togglePortalProp() {
     setOpenPortal(false);
   }

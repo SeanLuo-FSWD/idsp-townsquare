@@ -19,11 +19,11 @@ import MsgObj from "./MsgObj";
 
 function Chat(props: any) {
   const history = useHistory();
-  const [chatId, setChatId] = useState("") as any;
+  // const [chatId, setChatId] = useState("") as any;
   const [openPortal, setOpenPortal] = useState(false);
   const [addedPeople, setAddedPeople] = useState([]);
   const [inputTxt, setInputTxt] = useState("");
-  const [socketObj, setSocketObj] = useState(null) as any;
+  const [chatId, setChatId] = useState("") as any;
 
   const [messages, setMessages] = useState([]) as any;
   const { currentUser, setModalProps, setShowModal, setCerror } =
@@ -31,7 +31,6 @@ function Chat(props: any) {
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let person_id = params.get("id");
 
   useEffect(() => {
     if (props.chatId) {
@@ -39,10 +38,9 @@ function Chat(props: any) {
         if (err) {
           setCerror(err.message);
         } else {
-          console.log("vvvvvvvvvvvvvvvvvvv");
-          console.log("vvvvvvvvvvvvvvvvvvv");
-          console.log(result);
-          setMessages(buildMessages(result.messages));
+          setMessages(buildMessages(result.messages, props.addedGroup));
+          socket.emit("enter chatroom", { conversationId: props.chatId });
+          setChatId(props.chatId);
           setAddedPeople(props.addedGroup);
         }
       });
@@ -52,7 +50,6 @@ function Chat(props: any) {
       let addedGroupIds: string[] = [];
 
       props.addedGroup.forEach((p: any) => {
-        console.log(p);
         addedGroupIds.push(p._id);
       });
 
@@ -60,10 +57,9 @@ function Chat(props: any) {
         if (err) {
           setCerror(err.message);
         } else {
-          console.log("88888888888888888888");
-          console.log(result);
-          setChatId(result);
+          socket.emit("enter chatroom", { conversationId: result });
           setAddedPeople(props.addedGroup);
+          setChatId(result);
         }
       });
     }
@@ -75,29 +71,21 @@ function Chat(props: any) {
     };
   }, []);
 
-  useEffect(() => {
-    if (chatId) {
-      socket.emit("enter chatroom", { conversationId: chatId });
-    }
-  }, [chatId]);
+  socket.on("received", (data: any) => {
+    setMessages([...messages, ...buildMessages(data.newMsg, addedPeople)]);
+  });
 
   function togglePortalProp() {
     setOpenPortal(false);
   }
 
-  function buildMessages(msgArr: any) {
+  function buildMessages(msgArr: any, people: any) {
     let msgObjArr: any = [];
-
     msgArr.forEach((m: any) => {
-      for (let i = 0; i < props.addedGroup.length; i++) {
-        console.log(m);
-        console.log("eeeeeeeeeeeeeeeeeeeeee");
-        console.log("eeeeeeeeeeeeeeeeeeeeee");
-        console.log(props.addedGroup[i]);
-
-        if (m.userId === props.addedGroup[i]._id) {
-          m["avatar"] = props.addedGroup[i].avatar;
-          m["username"] = props.addedGroup[i].username;
+      for (let i = 0; i < people.length; i++) {
+        if (m.userId === people[i]._id) {
+          m["avatar"] = people[i].avatar;
+          m["username"] = people[i].username;
           msgObjArr.push(m);
           break;
         }
@@ -109,10 +97,6 @@ function Chat(props: any) {
         }
       }
     });
-
-    console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-    console.log("zzzzzzzzzzzzzzzzzzzzzzz");
-    console.log(msgObjArr);
 
     return msgObjArr;
   }
@@ -135,28 +119,18 @@ function Chat(props: any) {
   const submitMessage = (e: any) => {
     e.preventDefault();
 
-    console.log("3333333333333333");
     if (!inputTxt) return;
-
-    console.log("444444444444444444");
-    console.log(inputTxt);
 
     socket.emit(
       "chat message",
       {
         userId: currentUser.userId,
-        conversationId: props.chatId,
+        conversationId: chatId,
         text: inputTxt,
       },
       (err: any, response: any) => {
         if (err) {
-          console.log("fffffffffffffffffffffff");
-          console.log(err.errMsg);
-
           setCerror(err.errMsg);
-        } else {
-          console.log("eeeeeeeeeeeeeeeeeeeeee");
-          console.log(response);
         }
       }
     );
@@ -165,11 +139,6 @@ function Chat(props: any) {
 
     setInputTxt("");
   };
-
-  socketObj.on("received", (data: any) => {
-    console.log("received data", data.messages);
-    setMessages(data.messages);
-  });
 
   return (
     <>
@@ -204,12 +173,11 @@ function Chat(props: any) {
 
         <Navbar currentPath={window.location.pathname} />
         <div style={{ position: "relative" }}>
-          {/* <div>
+          <div>
             {messages.map((m: any) => {
-              return <MsgItem key={m.id} chat={chat} msg={m} />;
+              return <MsgItem key={m._id} msg={m} />;
             })}
-          </div> */}
-
+          </div>
           <form
             onSubmit={submitMessage}
             style={{ display: "flex", bottom: "0" }}
@@ -225,12 +193,6 @@ function Chat(props: any) {
             <button type="submit">Send</button>
           </form>
         </div>
-      </div>
-
-      <div>
-        {messages.map((m: any) => {
-          return <MsgItem key={m._id} msg={m} />;
-        })}
       </div>
 
       <PortalModal
