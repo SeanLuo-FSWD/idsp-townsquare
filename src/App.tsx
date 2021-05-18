@@ -52,7 +52,6 @@ function App() {
       }}
     >
       <Routing />
-      <h2>test socket</h2>
     </LoginContext.Provider>
   );
 }

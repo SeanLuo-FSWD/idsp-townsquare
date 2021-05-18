@@ -82,17 +82,20 @@ const getChat = (chatId: string, cb: Function) => {
   cb(null, chat);
 };
 
-const getChatList = (userId: string, cb: Function) => {
-  console.log("666666666666666666");
-  console.log("666666666666666666");
-  console.log(db);
-
-  const cuser = db.users.filter((u) => u.id === "1");
-  console.log(cuser);
-
-  const chats = db.chats.filter((c) => cuser[0].chats.includes(c.id));
-
-  cb(null, chats);
+const getAllConversationsByUserId = (cb: Function) => {
+  axios
+    .get(`${API_URL}/conversation`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getAllConversationsByUserId response");
+      console.log(response.data);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("getAllConversationsByUserId error");
+      cb(null, error.response.data.message);
+    });
 };
 
 const userFollow = (userId: string, follow: boolean, cb: Function) => {
@@ -130,7 +133,7 @@ export {
   getPeople,
   getPerson,
   userFollow,
-  getChatList,
+  getAllConversationsByUserId,
   getChat,
   addChatMsg,
   getFollowingUsers,

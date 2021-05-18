@@ -19,21 +19,19 @@ import SubNav from "../../components/Navbar/SubNav";
 import { useOnFollowHandle } from "../../helper/follow";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
-import followIcon from "./assets/follow.svg";
-import unfollowIcon from "./assets/unfollow.svg";
-import Chat from "../chat/Chat_old";
 import GroupChat from "../GroupChatPg/GroupChat";
+import { doChatUpdate } from "../../store/redux/actions/chat_act";
 
-function Person({ personId }: any) {
+function Person(props: any) {
   const history = useHistory();
   let { id } = useParams() as any;
   if (!id) {
-    id = personId; // Use passed in prop id, if no param.
+    id = props.personId; // Use passed in prop id, if no param.
   }
 
   const [person, setPerson] = useState(null) as any;
   const [followed, setFollowed] = useState([]) as any;
-  const [toggleChat, setToggleChat] = useState(false) as any;
+  const [addedGroup, setAddedGroup] = useState([]) as any;
 
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
@@ -54,6 +52,17 @@ function Person({ personId }: any) {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (person) {
+      const personObj = {
+        avatar: person.user.avatar,
+        _id: person.user.userId,
+        username: person.user.username,
+      };
+      setAddedGroup([personObj]);
+    }
+  }, [person]);
 
   const onFollowHandle = (followUserId: string) => {
     // SetFollowState({ userId: userId, follow: follow });
@@ -105,17 +114,19 @@ function Person({ personId }: any) {
     return false;
   }
 
-  if (toggleChat) {
-    const p: any = {
-      avatar: person.user.avatar,
-      username: person.user.username,
-      _id: person.user.userId,
-    };
-    return <GroupChat addedGroup={[p]} />;
-  } else if (person) {
+  //  if (toggleChat) {
+  //    const p: any = {
+  //      avatar: person.user.avatar,
+  //      username: person.user.username,
+  //      _id: person.user.userId,
+  //    };
+  //    return <GroupChat addedGroup={[p]} />;
+  //  } else
+
+  if (person) {
     return (
       <div>
-        {!personId && (
+        {!props.personId && (
           <div>
             <Navbar currentPath={window.location.pathname} />
             <SubNav className="flex--space-between">
@@ -136,7 +147,8 @@ function Person({ personId }: any) {
 
               <button
                 onClick={() => {
-                  history.push(`/groupchat?id=${person.user.userId}`);
+                  props.onPropStartChatProp(addedGroup);
+                  history.push(`/chat`);
                 }}
               >
                 Chat
@@ -186,4 +198,20 @@ function Person({ personId }: any) {
   return <div>Loading</div>;
 }
 
-export default Person;
+// export default Person;
+const mapStateToProps = (state: any) => {
+  return {
+    chatId: state.chatState.chatId,
+    addedGroup: state.chatState.addedGroup,
+    error: state.chatState.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onPropStartChatProp: (addedGroup: any) =>
+      dispatch(doChatUpdate(addedGroup, "private")),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Person);

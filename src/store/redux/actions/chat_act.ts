@@ -1,11 +1,25 @@
 import { Dispatch } from "redux";
 
-import { CHAT_STATE_UPDATE, API_ERROR } from "../constants/chatActionTypes";
+import {
+  CHAT_STATE_UPDATE,
+  API_ERROR,
+  CHAT_STATE_REMOVE,
+  CHAT_ID_ADD,
+} from "../constants/chatActionTypes";
 
 // import { fetchFeed } from "../../../utils/api/posts.api";
 
-const doChatUpdate = (chatProp: Object) => async (dispatch: Dispatch) => {
-  dispatch({ type: CHAT_STATE_UPDATE, chatPayload: chatProp });
+const doChatUpdate =
+  (chatProp: Object, chatType: string) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: CHAT_STATE_UPDATE,
+      chatPayload: chatProp,
+      chatType: chatType,
+    });
+  };
+
+const doChatRemove = () => async (dispatch: Dispatch) => {
+  dispatch({ type: CHAT_STATE_REMOVE });
 };
 
 const doChatError = (error: string) => ({
@@ -13,4 +27,11 @@ const doChatError = (error: string) => ({
   error,
 });
 
-export { doChatUpdate, doChatError };
+const doChatIdAdd = (chatId: string) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: CHAT_ID_ADD,
+    chatId: chatId,
+  });
+};
+
+export { doChatUpdate, doChatError, doChatRemove, doChatIdAdd };

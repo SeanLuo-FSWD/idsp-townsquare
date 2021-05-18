@@ -30,21 +30,13 @@ function GroupChatPg(props: any) {
   const [peopleFilter, setPeopleFilter] = useState(
     FILTER_INITIAL_STATE.peoplePg.people
   );
-
-  const { chatId } = useParams() as any;
-
-  // useEffect(() => {
-  //   if (!chatId) {
-  //     setToggleView("");
-  //   }
-  // }, []);
+  console.log("1111111111111111111111");
+  console.log("1111111111111111111111");
 
   useEffect(() => {
-    if (typeof props.chat === "string") {
-      //fetch here, before setAddedGroup
-    } else {
-      setAddedGroup(props.addedGroup);
-    }
+    console.log("cccccccccccccccccccc");
+    console.log("cccccccccccccccccccc");
+    setAddedGroup(props.addedGroup);
   }, []);
 
   const peopleFilterProps = (ppl_filter: any) => {
@@ -54,10 +46,6 @@ function GroupChatPg(props: any) {
       ...peopleFilter,
       [key_name_pair[0]]: key_name_pair[1],
     });
-    // pplFilterHolder = {
-    //   ...pplFilterHolder,
-    //   [key_name_pair[0]]: key_name_pair[1],
-    // };
   };
 
   const setToggleViewProp = (view: string) => {
@@ -106,7 +94,7 @@ function GroupChatPg(props: any) {
       window.alert("You must select at least one user!");
     } else {
       // setToggleView("chat");
-      props.onPropStartChatProp(addedGroup);
+      props.onPropStartChatProp(addedGroup, "group");
       history.push("/chat");
     }
   }
@@ -193,8 +181,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onPropStartChatProp: (addedGroup: any) =>
-      dispatch(doChatUpdate(addedGroup)),
+    onPropStartChatProp: (addedGroup: any, chatType: string) =>
+      dispatch(doChatUpdate(addedGroup, chatType)),
   };
 };
 

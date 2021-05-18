@@ -5,14 +5,6 @@ import { Link } from "react-router-dom";
 function MsgItem(props: any) {
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
-  let chatterInfo: any;
-
-  props.chat.chatters.forEach((c: any) => {
-    if (c.userId === props.msg.userId) {
-      chatterInfo = c;
-    }
-  });
-
   if (props.msg.userId === currentUser.userId) {
     console.log("999999999999999999999");
     console.log("999999999999999999999");
@@ -20,15 +12,15 @@ function MsgItem(props: any) {
 
     return (
       <div style={{ display: "flex", justifySelf: "flex-start" }}>
-        <Link to={`/person/${chatterInfo.userId}`}>
+        <Link to={`/person/${props.msg.userId}`}>
           <img
-            src={chatterInfo.img}
+            src={props.msg.avatar}
             style={{ width: "60px", height: "60px" }}
           />
         </Link>
 
         <div>
-          <p>{props.msg.timeStamp}</p>
+          <p>{props.msg.createdAt}</p>
           <h4>{props.msg.text}</h4>
         </div>
       </div>
@@ -36,16 +28,17 @@ function MsgItem(props: any) {
   } else {
     return (
       <div style={{ display: "flex", justifySelf: "flex-end" }}>
-        <div>
-          <p>{props.msg.timeStamp}</p>
-          <h4>{props.msg.text}</h4>
-        </div>
-        <Link to={`/person/${chatterInfo.userId}`}>
+        <Link to={`/person/${props.msg.userId}`}>
           <img
-            src={chatterInfo.img}
+            src={props.msg.avatar}
             style={{ width: "60px", height: "60px" }}
           />
         </Link>
+
+        <div>
+          <p>{props.msg.createdAt}</p>
+          <h4>{props.msg.text}</h4>
+        </div>
       </div>
     );
   }

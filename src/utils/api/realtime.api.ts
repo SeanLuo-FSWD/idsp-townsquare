@@ -25,4 +25,22 @@ const createConversation = (addedGroupIds: string[], cb: Function) => {
     });
 };
 
-export { createConversation };
+const getMessagesInConversation = (chatId: string, cb: Function) => {
+  axios
+    .get(`${API_URL}/conversation/${chatId}/message`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getMessagesInConversation response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("getMessagesInConversation error");
+      console.log(error);
+
+      cb(null, error.response.data.message);
+    });
+};
+
+export { createConversation, getMessagesInConversation };
