@@ -53,6 +53,8 @@ const authenticate = (cb: Function) => {
     })
     .catch((error) => {
       console.log("authenticate error");
+      console.log(error);
+      console.log(error.response.data);
       cb(error.response.data.message);
     });
 

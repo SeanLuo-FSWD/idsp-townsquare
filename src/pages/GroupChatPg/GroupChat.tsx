@@ -14,19 +14,28 @@ function GroupChat({
   const history = useHistory();
   const [chatId, setChatId] = useState(initChatId) as any;
   const [openPortal, setOpenPortal] = useState(false);
+  const [addedPeople, setAddedPeople] = useState(addedGroup);
 
   const [messages, setMessages] = useState([]) as any;
+
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let person_id = params.get("id");
+
+  console.log("999999999999999999999");
+  console.log("000000000000000000000");
+  console.log(addedGroup);
 
   function togglePortalProp() {
     setOpenPortal(false);
   }
 
   function getAvatars() {
-    const length = addedGroup.length > 4 ? 4 : addedGroup.length;
+    const length = addedPeople.length > 4 ? 4 : addedPeople.length;
 
     let selectGroup = [];
     for (let i = 0; i < length; i++) {
-      selectGroup.push(addedGroup[i]);
+      selectGroup.push(addedPeople[i]);
     }
 
     const arr_img = selectGroup.map((g: any) => {
@@ -41,10 +50,16 @@ function GroupChat({
       <div>
         <SubNav className="flex--space-between">
           {!chatId ? (
-            <button onClick={() => setOpenPortal(true)}>To Chat List</button>
+            <button onClick={() => setOpenPortal(true)}>Back</button>
           ) : (
-            <button onClick={() => history.push("/chatPage")}>
-              To Chat List
+            <button
+              onClick={() => {
+                document.body.classList.remove("disable_scroll");
+                history.goBack();
+              }}
+            >
+              {/* <button onClick={() => history.push("/chatPage")}> */}
+              Back
             </button>
           )}
 
@@ -52,7 +67,7 @@ function GroupChat({
 
           <p>
             Chatting with: {getAvatars()}
-            {addedGroup.length > 4 && <span>...</span>}
+            {addedPeople.length > 4 && <span>...</span>}
           </p>
         </SubNav>
 
@@ -64,7 +79,14 @@ function GroupChat({
         isOpen={openPortal}
         onClose={() => setOpenPortal(false)}
       >
-        <button onClick={history.goBack}>Leave</button>
+        <button
+          onClick={() => {
+            document.body.classList.remove("disable_scroll");
+            history.goBack();
+          }}
+        >
+          Leave
+        </button>
       </PortalModal>
       {openPortal && <Overlay togglePortalProp={togglePortalProp} />}
     </>

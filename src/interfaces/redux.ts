@@ -23,3 +23,9 @@ export default interface IFilter {
   };
   error: string | null;
 }
+
+export default interface IAddedGroup {
+  avatar: string;
+  username: string;
+  _id: string;
+}

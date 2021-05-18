@@ -10,7 +10,9 @@ function Overlay({ togglePortalProp }: any) {
       onClick={() => {
         setModalProps(null);
         setShowModal("");
-        togglePortalProp();
+        if (togglePortalProp) {
+          togglePortalProp();
+        }
       }}
     ></div>
   );

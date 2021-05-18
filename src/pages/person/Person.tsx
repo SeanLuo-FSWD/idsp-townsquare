@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import UserInfo from "./UserInfo";
 import {
@@ -21,6 +21,8 @@ import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
 import followIcon from "./assets/follow.svg";
 import unfollowIcon from "./assets/unfollow.svg";
+import Chat from "../chat/Chat_old";
+import GroupChat from "../GroupChatPg/GroupChat";
 
 function Person({ personId }: any) {
   const history = useHistory();
@@ -31,6 +33,7 @@ function Person({ personId }: any) {
 
   const [person, setPerson] = useState(null) as any;
   const [followed, setFollowed] = useState([]) as any;
+  const [toggleChat, setToggleChat] = useState(false) as any;
 
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
@@ -75,27 +78,6 @@ function Person({ personId }: any) {
     });
   };
 
-  // const onRemovePost = (postId: string) => {
-  //   deletePost(postId, (err: Error, result: any) => {
-  //     if (err) {
-  //       setCerror(err.message);
-  //     } else {
-  //       console.log("why not called on callback?????");
-
-  //       const newFeed = _.filter(person.feed, (p) => p._id != postId);
-  //       const newPerson = {
-  //         ...person,
-  //         feed: newFeed,
-  //       };
-  //       console.log("1111111111111111111111");
-  //       setPerson({
-  //         ...person,
-  //         feed: newFeed,
-  //       });
-  //     }
-  //   });
-  // };
-
   const onRemovePost = (postId: string) => {
     deletePost(postId, (err: Error, result: any) => {
       if (err) {
@@ -111,31 +93,6 @@ function Person({ personId }: any) {
     });
   };
 
-  // const onFollowHandle = (userId: string, follow: boolean) => {
-  //   userFollow(userId, follow, (err: Error, result: any) => {
-  //     if (err) {
-  //       setCerror(err.message);
-  //     } else {
-  //       let newFollowArr = [];
-  //       if (!follow) {
-  //         console.log("unfollow unfollow");
-  //         console.log(follow);
-
-  //         newFollowArr = _.filter(currentUser.followed, (f) => f !== userId);
-  //         console.log(newFollowArr);
-  //       } else {
-  //         console.log("follow follow");
-  //         console.log(follow);
-  //         newFollowArr = [...currentUser.followed, userId];
-  //         console.log(newFollowArr);
-  //       }
-
-  //       const newUser = { ...currentUser, followed: newFollowArr };
-  //       setCurrentUser(newUser);
-  //     }
-  //   });
-  // };
-
   function checkFollowed() {
     const match_follow = _.filter(
       followed,
@@ -148,7 +105,14 @@ function Person({ personId }: any) {
     return false;
   }
 
-  if (person) {
+  if (toggleChat) {
+    const p: any = {
+      avatar: person.user.avatar,
+      username: person.user.username,
+      _id: person.user.userId,
+    };
+    return <GroupChat addedGroup={[p]} />;
+  } else if (person) {
     return (
       <div>
         {!personId && (
@@ -156,15 +120,6 @@ function Person({ personId }: any) {
             <Navbar currentPath={window.location.pathname} />
             <SubNav className="flex--space-between">
               <img src={backIcon} onClick={history.goBack} />
-              {/* {person.user.userId !== currentUser.id ? (
-            currentUser.followed.includes(person.user.id) ? (
-              <button onClick={() => onFollowHandle(person.id, false)}>
-                Unfollow
-              </button>
-            ) : (
-              <img src={followIcon} onClick={() => onFollowHandle(person.id, true)}/>
-            )
-          ) : null} */}
               {person.user.userId !== currentUser.userId ? (
                 checkFollowed() ? (
                   <button onClick={() => onFollowHandle(person.user.userId)}>
@@ -176,6 +131,16 @@ function Person({ personId }: any) {
                   </button>
                 )
               ) : null}
+
+              {/* <button onClick={() => setToggleChat(true)}>Chat</button> */}
+
+              <button
+                onClick={() => {
+                  history.push(`/groupchat?id=${person.user.userId}`);
+                }}
+              >
+                Chat
+              </button>
             </SubNav>
           </div>
         )}
@@ -220,22 +185,5 @@ function Person({ personId }: any) {
   }
   return <div>Loading</div>;
 }
-
-// const mapStateToProps = (state: any) => {
-//   console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-//   return {
-//     user: getUser(state.usersState, userId),
-//     userFeed: getUserFeed(state.usersState),
-//     error: state.usersState.error,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     onPersonFeed: (id: string) => dispatch(doPersonFeed(id)),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(Person);
 
 export default Person;

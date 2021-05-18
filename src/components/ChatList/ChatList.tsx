@@ -3,21 +3,16 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { getChatList } from "../../utils/api/people.api";
 import _ from "lodash";
 import { Link } from "react-router-dom";
-import styles from "./ChatList.module.scss"
+import styles from "./ChatList.module.scss";
 
 function ChatList() {
   const [chatList, setChatList] = useState(null) as any;
 
-  const {
-    currentUser,
-    showModal,
-    setShowModal,
-    setCerror,
-    setCurrentUser,
-  } = useContext(LoginContext);
+  const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
+    useContext(LoginContext);
 
   useEffect(() => {
-    getChatList(currentUser.id, (err: Error, result: any) => {
+    getChatList(currentUser.userId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
@@ -29,7 +24,7 @@ function ChatList() {
   function createListItem(li: any) {
     let othersImgArr = [];
     for (let i = 0; i < li.chatters.length; i++) {
-      if (li.chatters[i].userId !== currentUser.id) {
+      if (li.chatters[i].userId !== currentUser.userId) {
         othersImgArr.push(li.chatters[i]);
       }
     }

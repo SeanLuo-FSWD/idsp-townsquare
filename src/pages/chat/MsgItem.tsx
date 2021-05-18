@@ -13,7 +13,7 @@ function MsgItem(props: any) {
     }
   });
 
-  if (props.msg.userId === currentUser.id) {
+  if (props.msg.userId === currentUser.userId) {
     console.log("999999999999999999999");
     console.log("999999999999999999999");
     console.log(props.msg);

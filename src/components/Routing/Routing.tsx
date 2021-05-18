@@ -10,37 +10,11 @@ import Error from "../../components/Error/Error";
 import Verify from "../../pages/verify/Verify";
 import { login } from "../../utils/api/auth.api";
 import Login from "../../pages/login/LoginPg";
+import socket from "../../utils/socketIO.util";
 
 const Routing = () => {
   const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
     useContext(LoginContext);
-
-  // Faking login for dev, to remove for production and uncomment Below!
-  // useEffect(() => {
-  //   const user_obj = {
-  //     email: "bob@bob.com",
-  //     password: "bob@bob.com",
-  //   };
-  //   login(user_obj, (err: Error, result: any) => {
-  //     if (err) {
-  //       console.log(err);
-  //       setCerror(err.message);
-  //     } else {
-  //       setCerror("");
-  //       setSignUpStatus(false);
-
-  //       console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  //       console.log("fffffffffffffffffffffff");
-  //       console.log("loginresult");
-  //       console.log(result);
-
-  //       setCurrentUser(result);
-  //     }
-  //   });
-  // }, []);
-  // faking login ends
-
-  // if (currentUser) {
 
   return (
     <Router>

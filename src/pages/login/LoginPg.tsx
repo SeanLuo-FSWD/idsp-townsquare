@@ -38,17 +38,10 @@ function Login() {
         password: person.password,
       };
       login(user_obj, (err: Error, result: any) => {
-        console.log("55555555555555555");
-        console.log("fffffffffffffffffffffff");
         if (err) {
-          console.log("err err err err err");
-
-          console.log(err);
           setCerror(err);
         } else {
           setCerror("");
-          console.log("result.data result.data result.data result.data");
-          console.log(result.data);
 
           // setSignUpStatus(false);
           setCurrentUser(result.data);

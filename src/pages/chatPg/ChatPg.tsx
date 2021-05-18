@@ -4,14 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
 import { Link } from "react-router-dom";
-import GroupChatPg from "../GroupChatPg/GroupChatPg";
 
 function Chat() {
-  // const [newGroupChat, setNewGroupChat] = useState(false) as any; // array of ids
-
-  // if (newGroupChat) {
-  //   return <GroupChatPg startPage={""} chatId={null} />;
-  // }
   return (
     <>
       <div>

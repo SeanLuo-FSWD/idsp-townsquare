@@ -3,12 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
-import {
-  doPeopleFilterUpdate,
-  doPeopleFilterRemove,
-  doFeedFilterUpdate,
-  doFeedFilterRemove,
-} from "../../store/redux/actions/filter_act";
+import { doChatUpdate } from "../../store/redux/actions/chat_act";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
 import FilterUserList from "./FilterUserList";
@@ -16,9 +11,10 @@ import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
 import GroupChat from "./GroupChat";
+import { connect } from "react-redux";
 
 // function GroupChatPg({ startPage, chatId }: any) {
-function GroupChatPg() {
+function GroupChatPg(props: any) {
   const history = useHistory();
   const { showModal, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
@@ -37,9 +33,17 @@ function GroupChatPg() {
 
   const { chatId } = useParams() as any;
 
+  // useEffect(() => {
+  //   if (!chatId) {
+  //     setToggleView("");
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (!chatId) {
-      setToggleView("");
+    if (typeof props.chat === "string") {
+      //fetch here, before setAddedGroup
+    } else {
+      setAddedGroup(props.addedGroup);
     }
   }, []);
 
@@ -101,7 +105,9 @@ function GroupChatPg() {
     if (addedGroup.length === 0) {
       window.alert("You must select at least one user!");
     } else {
-      setToggleView("chat");
+      // setToggleView("chat");
+      props.onPropStartChatProp(addedGroup);
+      history.push("/chat");
     }
   }
 
@@ -136,13 +142,6 @@ function GroupChatPg() {
             </div>
           </div>
         </>
-      ) : toggleView === "chat" ? (
-        <GroupChat
-          addedGroupIds={addedGroupIds}
-          addedGroup={addedGroup}
-          initChatId={chatId}
-          setToggleViewProp={setToggleViewProp}
-        />
       ) : (
         <>
           <Navbar currentPath={window.location.pathname} />
@@ -186,21 +185,19 @@ function GroupChatPg() {
 // export default FeedFilterModalContent;
 const mapStateToProps = (state: any) => {
   return {
-    peoplePg: state.filterState.peoplePg,
-    error: state.filterState.error,
+    chatId: state.chatState.chatId,
+    addedGroup: state.chatState.addedGroup,
+    error: state.chatState.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onGroupFilterSubmit: (peoplePgSlice: any) =>
-      dispatch(doPeopleFilterUpdate(peoplePgSlice)),
-    onFeedFilterSubmit: (feedPgSlice: any) =>
-      dispatch(doFeedFilterUpdate(feedPgSlice)),
-    onGroupFilterRemove: () => dispatch(doPeopleFilterRemove()),
+    onPropStartChatProp: (addedGroup: any) =>
+      dispatch(doChatUpdate(addedGroup)),
   };
 };
 
-// export default connect(null, mapDispatchToProps)(GroupChatPg);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupChatPg);
 
-export default GroupChatPg;
+// export default GroupChatPg;

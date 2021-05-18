@@ -37,7 +37,7 @@ function Profile(props: any) {
     // let search = window.location.search;
     // let firstTime = new URLSearchParams(search).get("firstTime") as string;
 
-    // getPerson(currentUser.id, (err: Error, result: any) => {
+    // getPerson(currentUser.userId, (err: Error, result: any) => {
     //   if (err) {
     //     setCerror(err.message);
     //   } else {
@@ -223,7 +223,11 @@ function Profile(props: any) {
                     accept="image"
                     onChange={(e) => getImg(e)}
                   />
-                  <img src={closeIcon} data-edit="editImg" onClick={handleEditClose}/>
+                  <img
+                    src={closeIcon}
+                    data-edit="editImg"
+                    onClick={handleEditClose}
+                  />
                 </div>
               )}
             </div>
@@ -247,7 +251,11 @@ function Profile(props: any) {
                     // value={person.username}
                     onChange={handleChange}
                   />
-                  <img src={closeIcon} data-edit="editUsername" onClick={handleEditClose}/>
+                  <img
+                    src={closeIcon}
+                    data-edit="editUsername"
+                    onClick={handleEditClose}
+                  />
                 </div>
               )}
             </div>
@@ -268,7 +276,11 @@ function Profile(props: any) {
                       return <option key={year}>{year}</option>;
                     })}
                   </select>
-                  <img src={closeIcon} data-edit="editAge" onClick={handleEditClose}/>
+                  <img
+                    src={closeIcon}
+                    data-edit="editAge"
+                    onClick={handleEditClose}
+                  />
                 </div>
               )}
             </div>
@@ -295,7 +307,11 @@ function Profile(props: any) {
                     <option value="Richmond">Richmond</option>
                     <option value="Vancouver">Vancouver</option>
                   </select>
-                  <img src={closeIcon} data-edit="editLocation" onClick={handleEditClose}/>
+                  <img
+                    src={closeIcon}
+                    data-edit="editLocation"
+                    onClick={handleEditClose}
+                  />
                 </div>
               )}
             </div>
@@ -321,7 +337,11 @@ function Profile(props: any) {
                     <option value="male">male</option>
                     <option value="other">other</option>
                   </select>
-                  <img src={closeIcon} data-edit="editGender" onClick={handleEditClose}/>
+                  <img
+                    src={closeIcon}
+                    data-edit="editGender"
+                    onClick={handleEditClose}
+                  />
                 </div>
               )}
             </div>
@@ -334,10 +354,9 @@ function Profile(props: any) {
               </button>
             </div>
             <div className={styles.updateMessage}>
-            {updateStatus && <p>Profile updated!</p>}
+              {updateStatus && <p>Profile updated!</p>}
+            </div>
           </div>
-          </div>
-
         </div>
 
         {/* <form>

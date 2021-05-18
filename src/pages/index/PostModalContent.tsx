@@ -85,7 +85,7 @@ function PostModalContent({ addPostProp }: any) {
     //   id: uuidv4(),
     //   likes: [],
     //   message: message,
-    //   userId: currentUser.id,
+    //   userId: currentUser.userId,
     //   username: currentUser.username,
     //   img_urls: img_urls,
     // };
@@ -115,7 +115,6 @@ function PostModalContent({ addPostProp }: any) {
         />
         <div>
           <input
-
             type="file"
             id="myFile"
             name="filename"

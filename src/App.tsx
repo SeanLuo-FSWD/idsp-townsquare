@@ -3,6 +3,9 @@ import "./App.scss";
 import { LoginContext } from "./store/context/LoginContext";
 import Routing from "./components/Routing/Routing";
 import { IUser } from "./interfaces/IUser";
+import socket from "./utils/socketIO.util";
+
+import io from "socket.io-client";
 
 function App() {
   const [signUpStatus, setSignUpStatus] = useState(false);
@@ -13,12 +16,23 @@ function App() {
   const [groupChat, setGroupChat] = useState([]) as any;
 
   window.onbeforeunload = (event: any) => {
-    console.log("000000000000000000000");
-    console.log("window.onbeforeunload");
-
     const e = event || window.event;
     setCerror("");
   };
+
+  useEffect(() => {
+    console.log(" ----- useEffect in App.tsx ------- ");
+    console.log(currentUser);
+    if (currentUser) {
+      socket.connect();
+    }
+    console.log(socket);
+
+    return () => {
+      console.log("--- socket disconnected");
+      socket.disconnect();
+    };
+  }, [currentUser]);
 
   return (
     <LoginContext.Provider
@@ -38,6 +52,7 @@ function App() {
       }}
     >
       <Routing />
+      <h2>test socket</h2>
     </LoginContext.Provider>
   );
 }
