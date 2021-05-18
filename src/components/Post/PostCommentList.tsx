@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import PostComment from "./PostComment";
+import styles from "./postCommentList.module.scss"
 import {
   createComment,
   getAllCommentsByPostId,
@@ -46,17 +47,7 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
 
   return (
     <div>
-      <form onSubmit={onCommentSubmit}>
-        <input
-          type="text"
-          id="comment"
-          name="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button type="submit">add Comment</button>
-      </form>
-      {/* <h4>{commentsCount}</h4> */}
+
       {commentList.length > 0 && (
         <div>
           {commentList.map((c: any) => {
@@ -68,6 +59,18 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
           })}
         </div>
       )}
+      <form className={styles.commentSubmitForm} onSubmit={onCommentSubmit}>
+        <input
+          type="text"
+          id="comment"
+          name="comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button className={styles.addCommentButton} type="submit">add Comment</button>
+      </form>
+      {/* <h4>{commentsCount}</h4> */}
+      
     </div>
   );
 }

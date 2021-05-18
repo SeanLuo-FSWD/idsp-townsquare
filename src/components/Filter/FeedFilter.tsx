@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SubNav.module.scss";
+import styles from "./FeedFilter.module.scss";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
@@ -17,10 +17,11 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
   };
 
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <div>
         <label htmlFor="site-search">Filter posts by keyword</label>
         <input
+          className={styles.keywordSearch}
           type="search"
           id="site-search"
           name="keyword"

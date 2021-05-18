@@ -1,0 +1,43 @@
+.peopleFilterContainer {
+
+    border-radius: 7px;
+    text-align: center;
+    display: flex;
+    padding: 10px 20px;
+
+    justify-content: space-around;
+    font-size: 14px;
+    grid-gap: 15px;
+    flex-wrap: wrap;
+
+}
+
+.filterStyling {
+
+    flex-direction: row;
+    width: 70%;
+
+    
+}
+
+.filterTitles {
+    color: white;
+    background: #92002f;
+    border-radius: 7px;
+}
+
+.locationFilter {
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+
+.gender {
+
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-around;
+}

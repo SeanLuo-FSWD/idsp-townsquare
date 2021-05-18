@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
+import styles from "./PeopleFilter.module.scss"
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
@@ -87,11 +88,11 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
   };
 
   return (
-    <div>
-      <div className="flex">
-        <h3>age</h3>
-        <h4>Min age: {age[0]}</h4>
-        <h4>Max age: {age[1]}</h4>
+    <div className={styles.peopleFilterContainer}>
+      <div className={styles.filterStyling}>
+        <div className={styles.filterTitles}>age</div>
+        <div>Min age: {age[0]}</div>
+        <div>Max age: {age[1]}</div>
         <Slider
           value={age}
           onChange={handleAgeFilter}
@@ -99,9 +100,9 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
           aria-labelledby="range-slider"
         />
       </div>
-      <div className="flex">
-        <h3>gender</h3>
-        <FormGroup style={{ flexDirection: "row" }}>
+      <div className={styles.filterStyling}>
+        <div  className={styles.filterTitles}>gender</div>
+        <FormGroup className={styles.gender}>
           <FormControlLabel
             control={
               <Checkbox
@@ -134,9 +135,9 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
           />
         </FormGroup>
       </div>
-      <div className="flex">
-        <h3>location</h3>
-        <FormGroup style={{ flexDirection: "row" }}>
+      <div className={styles.filterStyling}>
+        <div className={styles.filterTitles}>location</div>
+        <FormGroup className={styles.locationFilter}>
           <FormControlLabel
             control={
               <Checkbox
@@ -189,8 +190,8 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
           />
         </FormGroup>
       </div>
-      <div className="flex">
-        <h3>Followed</h3>
+      <div className={styles.filterStyling}>
+        <div className={styles.filterTitles}>Followed</div>
         <FormGroup style={{ flexDirection: "row" }}>
           <FormControlLabel
             control={

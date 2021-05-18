@@ -7,13 +7,18 @@ const PostComment: React.FC<any> = (props) => {
     <>
       <div className={styles.allComments}>
         <div className={styles.commentContainer}>
-          <img src={props.avatar} style={{ width: "50px", height: "50px" }} />
-          <p className={styles.comment}>
-            {props.username}
-            {new Date(props.createdAt).toDateString()}
-            <br></br>
-            {props.text}
-          </p>
+          <img className={styles.commentAvatar} src={props.avatar} style={{ width: "50px", height: "50px" }} />
+          <div className={styles.comment}>
+            <div>
+              {props.username}
+            </div>
+            <div className={styles.commentDate}>
+              {new Date(props.createdAt).toDateString()}
+            </div>
+            <div className={styles.commentText}>
+              {props.text}
+            </div>
+          </div>
         </div>
       </div>
     </>

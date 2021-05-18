@@ -3,6 +3,8 @@
   position: fixed;
   top: 0;
   z-index: 20;
+  display: flex;
+  flex: 0 80% 30%;
   width: 100%;
   max-width: 600px;
   border-bottom-left-radius: 2px;
@@ -11,9 +13,9 @@
   justify-content: space-between;
 
   margin: 0;
-  display: flex;
+
   box-sizing: border-box;
-  padding: 15px 30px;
+  padding: 10px 20px;
   text-decoration: none;
 
   

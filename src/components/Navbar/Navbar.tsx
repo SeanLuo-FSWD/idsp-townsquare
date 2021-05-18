@@ -51,6 +51,9 @@ function Navbar(props: any) {
           <img src={usersIcon}></img>
         </Link>
       </div>
+
+
+      
       <div
         className={
           props.currentPath == "/chat"

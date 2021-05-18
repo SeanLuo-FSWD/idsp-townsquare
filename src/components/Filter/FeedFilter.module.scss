@@ -1,0 +1,14 @@
+.filterContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.keywordSearch {
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(148, 148, 148);
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px 0px;
+    margin: 3px 0px;
+}

@@ -57,8 +57,8 @@ const PeoplePg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
-        <p>Hi {currentUser.username}! </p>
-        <p>Explore users near you!</p>
+        <div>Hi {currentUser.username}! </div>
+        <div>Explore users near you!</div>
 
         <button
           className={styles.detailedViewToggle}
