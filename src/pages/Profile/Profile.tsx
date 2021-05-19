@@ -193,6 +193,7 @@ function Profile(props: any) {
           <div>Welcome {currentUser.username}, please fill your info first.</div>
         )}
         <div className={styles.profileContainer}>
+          <div className={styles.containerCard}>
           <div>
             <div className={styles.container}>
               <img
@@ -343,7 +344,7 @@ function Profile(props: any) {
 
           </div>
 
-          <div className={`flex`}>
+
             <div className={styles.submitButton}>
               <button
                 className={styles.saveChanges}
@@ -354,11 +355,13 @@ function Profile(props: any) {
 
               
             </div>
-          </div>
+
             <div className={styles.updateMessage}>
               {updateStatus && <div>Profile updated!</div>}
             </div>
         </div>
+        </div>
+          
 
         {/* <form>
           <div className="form-control">

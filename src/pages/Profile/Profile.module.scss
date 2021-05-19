@@ -13,6 +13,7 @@
   text-align: center;
   min-height: 100vh;
   padding: 0px 10px;
+  background-color: #f6efe8;
 }
 
 .profileImg {
@@ -37,6 +38,15 @@
 
 .inputField {
   width: 60px;
+}
+
+.containerCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 20px 7px;
+  border-radius: 10px;
+  background-color: #92002F ;
+  // background-color: #2E4057;
+  // background-color: #5C5D8D;
 }
 
 .container {
@@ -69,10 +79,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 18rem;
-  height: 42px;
+  width: 300px;
+  height: 3rem;
   border-radius: 5px; /* 5px rounded corners */
-  margin: 5px 10px;
+  margin: 15px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background-color: #f6efe8;
   :nth-child(3) {
     box-shadow: none;
@@ -134,13 +145,14 @@ select {
   padding-right: 50px;
   padding-left: 50px;
   border-color: white;
+
   border-style: none;
   border-radius: 50px; /* 5px rounded corners */
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   max-width: 300px;
   align-items: center;
   text-align: center;
-  background-color: #f6efe8;
+  background-color: white;
 }
 
 // .saveChanges {
