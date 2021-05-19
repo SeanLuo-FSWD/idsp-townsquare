@@ -37,7 +37,7 @@ function Navbar(props: any) {
         }
       >
         <Link to="/">
-          <img src={homeIcon}></img>
+          <img className={styles.navIcon} src={homeIcon}></img>
         </Link>
       </div>
       <div
@@ -48,9 +48,12 @@ function Navbar(props: any) {
         }
       >
         <Link to="/users">
-          <img src={usersIcon}></img>
+          <img className={styles.navIcon} src={usersIcon}></img>
         </Link>
       </div>
+
+
+      
       <div
         className={
           props.currentPath == "/chat"
@@ -59,7 +62,7 @@ function Navbar(props: any) {
         }
       >
         <Link to="/chatPage">
-          <img src={chatIcon}></img>
+          <img className={styles.navIcon} src={chatIcon}></img>
         </Link>
       </div>
       <div
@@ -70,7 +73,7 @@ function Navbar(props: any) {
         }
       >
         <Link to="/profile">
-          <img src={settingsIcon}></img>
+          <img className={styles.navIcon} src={settingsIcon}></img>
         </Link>
       </div>
       {/* <div className={styles.navBar__item}>

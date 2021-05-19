@@ -24,7 +24,7 @@
 
 .flex--navBar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   align-items: center;
   
@@ -44,18 +44,19 @@
 
 .flex--space-between {
   @extend .flex;
-  justify-content: space-between;
+  justify-content: space-around;
   
 }
 
 .flex--space-postNav {
   @extend .flex;
+  margin: 0px 5px;
   justify-content: space-between;
   align-items: center;
-  background-color: #d3d8d8;
+  background-color: #f6efe8;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  padding: 5px 0px;
+  padding: 10px 0px 5px 0px;
   :last-child {
     margin-right: 10px;
   }

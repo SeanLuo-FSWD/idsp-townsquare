@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
+import styles from "./FeedFilterModalContent.module.scss"
 import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
@@ -102,13 +103,13 @@ function FeedFilterModalContent(props: any) {
   }
 
   return (
-    <div>
+    <div className={styles.mainFilterCard}>
       <FeedFilter
         feedFilterProps={feedFilterProps}
         feedPg_Feed={props.feedPg.feed}
       />
 
-      <div className="flex">
+      <div className={styles.filterInfo}>
         {/* {showPeopleFilter ? (
           <button onClick={() => setShowPeopleFilter(false)}>
             Hide User Filter
@@ -118,9 +119,9 @@ function FeedFilterModalContent(props: any) {
             Show User Filter
           </button>
         )} */}
-        <p>
+        <div className={styles.filterInfo}>
           Apply user filter to posts (Will show posts from matching users only)
-        </p>
+        </div>
       </div>
 
       {/* {showPeopleFilter && (
@@ -135,8 +136,9 @@ function FeedFilterModalContent(props: any) {
         feedPg_People={props.feedPg.people}
       />
 
-      <div className="flex">
-        <button onClick={onFeedFilterClick}>Submit</button>
+
+
+        <button className={styles.submitButton} onClick={onFeedFilterClick}>Submit</button>
         <button
           onClick={() => {
             // setModalProps(null);
@@ -156,8 +158,7 @@ function FeedFilterModalContent(props: any) {
           }
           label="Apply to User page"
         />
-      </div>
-    </div>
+        </div>
   );
 }
 

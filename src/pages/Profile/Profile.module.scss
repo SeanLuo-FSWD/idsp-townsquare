@@ -1,5 +1,18 @@
 .body {
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.profileContainer {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 0px 10px;
 }
 
 .profileImg {
@@ -12,26 +25,24 @@
 }
 
 .container {
-  margin-right: auto;
-  margin-left: auto;
+
   position: relative;
   width: 70%;
   text-align: center;
 
   align-items: center;
-  margin-top: 85px;
-  padding-top: 15px;
+
+
 
   justify-content: center;
   display: block;
-  top: 10%;
-  bottom: 60%;
+
   // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   // border-radius: 5px; /* 5px rounded corners */
 }
 
 .uploadImage {
-  padding: 10px 10px 0px 10px;
+  padding: 10px 10px 10px 10px;
 }
 
 .profileUserName {
@@ -40,29 +51,26 @@
 
 .items {
   display: flex;
+  padding: 0px 4px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0px 5px;
-
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 300px;
+  height: 50px;
   border-radius: 5px; /* 5px rounded corners */
   margin: 10px 10px;
   background-color: #f6efe8;
   :nth-child(3) {
     box-shadow: none;
 
-    padding: 10px;
   }
   :nth-child(1) {
     box-shadow: none;
 
-    padding: 10px;
-
   }
   :nth-child(2) {
     box-shadow: none;
-    padding: 5px;
+    
 
   }
 }

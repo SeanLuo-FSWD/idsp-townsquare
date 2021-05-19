@@ -58,8 +58,8 @@ const PeoplePg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
-        <p>Hi {currentUser.username}! </p>
-        <p>Explore users near you!</p>
+        <div>Hi {currentUser.username}! </div>
+        <div>Users</div>
 
         <button
           className={styles.detailedViewToggle}
@@ -67,11 +67,11 @@ const PeoplePg = (props: any) => {
             setDetailView(!detailView);
           }}
         >
-          <img src={detailedViewIcon}></img>
+          <img className={styles.userIcons} src={detailedViewIcon}></img>
           {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
         </button>
         <div className={styles.filterIcon}>
-          <img src={filter} onClick={() => setShowModal("filter")} />
+          <img className={styles.userIcons} src={filter} onClick={() => setShowModal("filter")} />
         </div>
       </SubNav>
 

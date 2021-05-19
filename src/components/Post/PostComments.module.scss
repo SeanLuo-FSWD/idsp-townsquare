@@ -2,19 +2,35 @@
 
     padding: 0px 5px 0px 5px;
     border-radius: 10px;
+    display: flex;
+    padding-bottom: 10px;
+    align-items: center;
 
     
 }
 
 .comment {
-
-    border-radius: 4px;
-    margin: 5px 0px;
     
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.commentDate {
+    font-size: 12px;
+    color: rgb(156, 156, 156);
+}
+
+.commentText {
+    font-size: 12px;
 }
 
 input {
     width: 100%;
+}
+
+.commentNumber {
+    background-color: blue;
 }
 
 .nameTime {
@@ -24,6 +40,7 @@ input {
     margin: 0;
 }
 
-.allComments {
-
+.commentAvatar {
+    border-radius: 50%;
 }
+

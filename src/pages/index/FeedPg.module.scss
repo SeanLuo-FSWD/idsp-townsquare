@@ -1,30 +1,37 @@
 .SubNavWrap {
   height: 100%;
-
   display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
   margin: 0;
   align-items: center;
-  flex-basis: 100%;
-  .SubNavWrap>*:first-child {
-    width: 200px;
-  }
+  grid-gap: 10px;
   
+
   
 }
 
+
+
+.townSquareTitle {
+  flex-basis: 100%;
+}
+
 .logo {
-  min-width: 40px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 30px;
+  display: inline-block;
   width: 10px;
   height: auto;
   border-radius: 50%;
   border: solid;
   border-color: black;
+  align-items: center;
+  text-align: center;
 
+}
 
-
+.title {
+  align-items: left;
 }
 
 body {
@@ -42,7 +49,11 @@ body {
 
 .createPost {
   color: white;
+  width: 1.3rem;
+}
 
+.filter {
+  width: 1.3rem;
 }
 
 .applied {
@@ -61,7 +72,8 @@ body {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  padding: 0px 10px;
+  padding: 0px 5px;
+  background-size: cover;
 }
 
 .feedContainer {
@@ -69,21 +81,40 @@ body {
   padding-bottom: 50px;
 }
 
+
+
+.dateInfo {
+  font-size: 14px;
+}
+
 .flexpostNav {
   display: flex;
   align-items: center;
-  justify-content: center;
   font-size: 16px;
+  flex: 1px 10px 40%;
   :first-child {
     margin-left: 10px;
   }
 }
 
+.flexpostNavDetails {
+  display: flex;
+  align-items: left;
+  text-align: left;
+  flex: 0 0px 79%;
+  flex-direction: column;
+  font-size: 16px;
+  margin: 0;
+
+}
+
 .flexpostNavCreatedTime {
   @extend .flexpostNav;
   font-size:16px;
+
 }
 
 .followUnfollowDelete {
-  padding-right: 10px;
+  padding-right: 5px;
+  width: 1.3rem;
 }

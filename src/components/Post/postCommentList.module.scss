@@ -1,0 +1,31 @@
+.commentSubmitForm {
+    display: flex;
+    grid-gap: 10px;
+    align-items: center;
+    margin: 0px 0px 10px 0px;
+
+
+    .addCommentButton {
+        padding: 2px 7px;
+        font-family: 'Poppins', sans-serif;
+        background-color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 7px;
+        height: 25px;
+        font-size: 13px;
+        box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .replyArrow {
+        width: .8rem;
+        margin: 0px 0px 0px 1px;
+    }
+
+    .commentInput {
+        box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
+    }
+
+}

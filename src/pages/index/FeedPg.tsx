@@ -150,17 +150,20 @@ const FeedPg = (props: any) => {
       <>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <div className={`flex--space-between ${styles.SubNavWrap}`}>
-            <div className={styles.username}>
-              <img className={styles.logo} src={townSquareLogo} />
-            </div>
+          <div className={styles.SubNavWrap}>
 
+            <img className={styles.logo} src={townSquareLogo} />
+            {/* <div className={styles.filterAndCreate}> */}
+
+            <div className={styles.townSquareTitle}>TownSquare</div>
             <img
               className={styles.createPost}
               src={createPost}
               onClick={() => setShowModal("postUpload")}
             />
-            <img src={filter} onClick={() => setShowModal("filter")} />
+            <img className={styles.filter} src={filter} onClick={() => setShowModal("filter")} />
+            {/* </div> */}
+            
           </div>
         </SubNav>
         <div className={styles.feedContainer}>
@@ -179,11 +182,19 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
-                    <p className={styles.flexpostNav}>{post.username}</p>
+
                   </div>
-                  <p className={styles.flexpostNavCreatedTime}>
-                    {new Date(post.createdAt).toDateString()}
-                  </p>
+
+                  <div className={styles.flexpostNavDetails}>
+                    <div className={styles.uName}>
+                      {post.username}
+                    </div>
+                    <div className={styles.dateInfo}>
+                      {new Date(post.createdAt).toDateString()}
+                    </div>
+                  </div>
+                   
+
 
                   {post.userId === currentUser.userId ? (
                     <img

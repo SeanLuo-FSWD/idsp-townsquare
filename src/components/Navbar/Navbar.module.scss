@@ -1,7 +1,7 @@
 .navBar {
   background-color: #92002f;
-  // position: fixed;
-  position: relative;
+  position: fixed;
+  // position: relative;
   bottom: 0;
   width: 100%;
   z-index: 20;
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 0.7rem 1.7rem;
+  padding: 11px 0px;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 
@@ -25,11 +25,13 @@
     align-items: center;
   }
 
+  .navIcon {
+    width: 1.3rem;
+  }
+
   .active {
-    background-color: rgba(187, 96, 96, 0.39);
     position: relative;
     border-radius: 5px;
-    padding: 0.2rem;
   }
 }
 

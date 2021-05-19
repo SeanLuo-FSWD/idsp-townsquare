@@ -89,15 +89,15 @@ const Post = (props: any) => {
     <div className={styles.postContainer}>
       <div key={props.post._id} className={styles.post}>
         <div className={styles.textContainer}>
-          <p>{props.title}</p>
-          <p>{props.post.text}</p>
+          {/* <div>{props.title}</div> */}
+          <div>{props.post.text}</div>
         </div>
 
         <ImageSlider slides={props.post.images} />
 
         <div className={styles.likeCommentContainer}>
-          <div className="flex--space-between">
-            <div className="flex">
+          <div className={styles.likeCommentNav}>
+            <div className={styles.likesNames}>
               {/* {checkLiked() ? (
                 <ThumbUpIcon
                   onClick={() => {
@@ -120,12 +120,13 @@ const Post = (props: any) => {
               </div>
             </div>
 
-            <div className="flex">
+            <div className={styles.likesNames}>
               <img
                 src={comments}
                 onClick={() => setCommentsVisible(!commentsVisible)}
               />
-              <h4>{commentsCount}</h4>
+
+              <div className={styles.commentCounter}>{commentsCount}</div>
             </div>
           </div>
 

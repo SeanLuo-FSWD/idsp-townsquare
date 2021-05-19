@@ -105,28 +105,33 @@ function PostModalContent({ addPostProp }: any) {
 
   return (
     <>
-      <form onSubmit={postSubmit}>
-        <textarea
-          rows={4}
-          cols={50}
-          name="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <div>
-          <input
-            type="file"
-            id="myFile"
-            name="filename"
-            // accept="image/png"
-            accept="image"
-            multiple
-            onChange={(e) => getImg(e)}
+      <div className={styles.postModal}>
+        <form className={styles.createPostForm} onSubmit={postSubmit}>
+          <textarea
+            rows={4}
+            cols={50}
+            name="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
+          <div>
+            <input
+              className={styles.chooseFiles}
+              type="file"
+              id="myFile"
+              name="filename"
+              // accept="image/png"
+              accept="image"
+              multiple
+              onChange={(e) => getImg(e)}
+            />
+          </div>
+          <input className={styles.createPostSubmit} type="submit" />
+        </form>
+        <div className={styles.postPreview}>
+          {modalProps && <ImageSlider slides={modalProps.src_arr} />}
         </div>
-        <input type="submit" />
-      </form>
-      <div>{modalProps && <ImageSlider slides={modalProps.src_arr} />}</div>
+      </div>
     </>
   );
 }

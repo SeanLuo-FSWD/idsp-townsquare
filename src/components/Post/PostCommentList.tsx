@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import PostComment from "./PostComment";
+import styles from "./postCommentList.module.scss"
 import {
   createComment,
   getAllCommentsByPostId,
 } from "../../utils/api/posts.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
+import replyArrow from "./assets/replyArrow.svg"
 
 function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
   const [comment, setComment] = useState("");
@@ -45,18 +47,8 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
   console.log(commentList);
 
   return (
-    <div>
-      <form onSubmit={onCommentSubmit}>
-        <input
-          type="text"
-          id="comment"
-          name="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button type="submit">add Comment</button>
-      </form>
-      {/* <h4>{commentsCount}</h4> */}
+    <div className={styles.commentNumber}>
+
       {commentList.length > 0 && (
         <div>
           {commentList.map((c: any) => {
@@ -68,6 +60,19 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
           })}
         </div>
       )}
+      <form className={styles.commentSubmitForm} onSubmit={onCommentSubmit}>
+        <input
+          className={styles.commentInput}
+          type="text"
+          id="comment"
+          name="comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button className={styles.addCommentButton} type="submit">Comment<img className={styles.replyArrow} src={replyArrow}/></button>
+      </form>
+      {/* <h4>{commentsCount}</h4> */}
+      
     </div>
   );
 }

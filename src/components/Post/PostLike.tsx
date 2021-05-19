@@ -45,10 +45,10 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
 
   return (
     <>
-      <div className="flex">
+      <div className={"flex"}>
         {checkLiked() ? (
           <ThumbUpIcon
-            onClick={() => {
+              onClick={() => {
               handleLikeProp();
             }}
           />
@@ -59,11 +59,11 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
             }}
           />
         )}
-        <h4 onClick={() => setShowLikes(!showLikes)}>{likesCount}</h4>
+        <div  className={styles.showLikesButton} onClick={() => setShowLikes(!showLikes)}>{likesCount}</div>
         {showLikes && (
           <div>
             {likes.map((like: any) => {
-              return <p key={like._id}>{like.username}</p>;
+              return <div className={styles.likesNames} key={like._id}>{like.username}</div>;
             })}
           </div>
         )}
