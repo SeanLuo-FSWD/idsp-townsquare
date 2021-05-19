@@ -192,7 +192,7 @@ function Profile(props: any) {
         {currentUser.firstTime && (
           <div>Welcome {currentUser.username}, please fill your info first.</div>
         )}
-        <div>
+        <div className={styles.profileContainer}>
           <div>
             <div className={styles.container}>
               <img
@@ -207,14 +207,18 @@ function Profile(props: any) {
                   alt=""
                 />
               )}
-              <img
+
+            
+            </div>
+          </div>
+          <div className={styles.items}>
+          <img
                 src={changeProfileImg}
                 data-edit="editImg"
                 onClick={handleEditOpen}
               />
-
-              {fieldArr.find((ele: string) => ele === "editImg") && (
-                <div className={styles.items}>
+            {fieldArr.find((ele: string) => ele === "editImg") && (
+                <div className={`flex`}>
                   <input
                     className={styles.uploadImage}
                     type="file"
@@ -227,10 +231,11 @@ function Profile(props: any) {
                 </div>
               )}
             </div>
-          </div>
           <div>
+          
+
             <div className={styles.items}>
-              <p>username: {initPerson.username}</p>
+              <div>username: {initPerson.username}</div>
               <img
                 src={editImage}
                 data-edit="editUsername"
@@ -254,7 +259,7 @@ function Profile(props: any) {
           </div>
           <div>
             <div className={styles.items}>
-              <p>age: {initPerson.age}</p>
+              <div>age: {initPerson.age}</div>
               <img
                 src={editImage}
                 data-edit="editAge"
@@ -275,7 +280,7 @@ function Profile(props: any) {
           </div>
           <div>
             <div className={styles.items}>
-              <p>Location: {initPerson.location}</p>
+              <div>Location: {initPerson.location}</div>
               <img
                 src={editImage}
                 data-edit="editLocation"
@@ -283,7 +288,7 @@ function Profile(props: any) {
               />
 
               {fieldArr.find((ele: string) => ele === "editLocation") && (
-                <div className={styles.items}>
+                <div className={`flex`}>
                   <select
                     name="location"
                     onChange={handleChange}
@@ -302,7 +307,7 @@ function Profile(props: any) {
           </div>
           <div>
             <div className={styles.items}>
-              <p>gender: {initPerson.gender}</p>
+              <div>gender: {initPerson.gender}</div>
               <img
                 src={editImage}
                 data-edit="editGender"
@@ -310,9 +315,9 @@ function Profile(props: any) {
               />
 
               {fieldArr.find((ele: string) => ele === "editGender") && (
-                <div className={styles.items}>
+                <div className={`flex`}>
                   <select
-                    className={styles.selectItem}
+
                     name="gender"
                     onChange={handleChange}
                     value={person.gender}

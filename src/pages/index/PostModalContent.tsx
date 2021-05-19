@@ -126,10 +126,10 @@ function PostModalContent({ addPostProp }: any) {
               onChange={(e) => getImg(e)}
             />
           </div>
-
+          <input className={styles.createPostSubmit} type="submit" />
         </form>
         <div  className={styles.postPreview} >{modalProps && <ImageSlider slides={modalProps.src_arr} />}</div>
-        <input className={styles.createPostSubmit} type="submit" />
+
       </div>
       
     </>

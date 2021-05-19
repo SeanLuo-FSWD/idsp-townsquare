@@ -44,12 +44,13 @@
 
 .flex--space-between {
   @extend .flex;
-  justify-content: space-between;
+  justify-content: space-around;
   
 }
 
 .flex--space-postNav {
   @extend .flex;
+  margin: 0px 5px;
   justify-content: space-between;
   align-items: center;
   background-color: #f6efe8;
