@@ -7,7 +7,7 @@
 
     justify-content: space-around;
     font-size: 14px;
-    grid-gap: 15px;
+    grid-gap: 0px 10px;
     flex-wrap: wrap;
 
 }
@@ -15,7 +15,8 @@
 .filterStyling {
 
     flex-direction: row;
-    width: 70%;
+    width: 80%;
+
 
     
 }
@@ -24,6 +25,7 @@
     color: white;
     background: #92002f;
     border-radius: 7px;
+    width: 100%;
 }
 
 .locationFilter {
@@ -40,4 +42,9 @@
     flex-direction: row;
     text-align: center;
     justify-content: space-around;
+    
+}
+
+.submitButton {
+    color: blue;
 }

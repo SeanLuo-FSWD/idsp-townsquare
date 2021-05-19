@@ -1,3 +1,37 @@
-.profileModal {
+.postModal {
 
+    align-items: center;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.createPostSubmit {
+    color: #92002f;
+    border: solid 2px;
+    border-color: #92002f;
+    height: 1.5rem;
+    max-width: 25%;
+    margin: 7px 0px;
+}
+
+.createPostForm {
+    padding: 10px;
+}
+
+.postPreview {
+    margin: 5px 0px;
+}
+
+.chooseFiles {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    padding: 5px 0px;
+    
 }

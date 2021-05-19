@@ -89,8 +89,8 @@ const Post = (props: any) => {
     <div className={styles.postContainer}>
       <div key={props.post._id} className={styles.post}>
         <div className={styles.textContainer}>
-          <p>{props.title}</p>
-          <p>{props.post.text}</p>
+          {/* <div>{props.title}</div> */}
+          <div>{props.post.text}</div>
         </div>
 
         <ImageSlider slides={props.post.images} />

@@ -184,13 +184,13 @@ function Profile(props: any) {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <p className={styles.profileUserName}>{currentUser.username}</p>
+            <div className={styles.profileUserName}>{currentUser.username}</div>
             <img src={logoutImage} onClick={handleLogout} />
           </div>
         </SubNav>
 
         {currentUser.firstTime && (
-          <h2>Welcome {currentUser.username}, please fill your info first.</h2>
+          <div>Welcome {currentUser.username}, please fill your info first.</div>
         )}
         <div>
           <div>

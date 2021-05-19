@@ -2,10 +2,12 @@
     display: flex;
     grid-gap: 10px;
     align-items: center;
+    margin: 0px 0px 10px 0px;
 
 
     .addCommentButton {
-
+        padding: 2px 7px;
+        font-family: 'Poppins', sans-serif;
         background-color: white;
         border: none;
         display: flex;
@@ -19,7 +21,7 @@
 
     .replyArrow {
         width: .8rem;
-        margin: 2px;
+        margin: 0px 0px 0px 1px;
     }
 
     .commentInput {

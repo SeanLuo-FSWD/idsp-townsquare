@@ -136,8 +136,9 @@ function FeedFilterModalContent(props: any) {
         feedPg_People={props.feedPg.people}
       />
 
-      <div className="flex">
-        <button onClick={onFeedFilterClick}>Submit</button>
+
+
+        <button className={styles.submitButton} onClick={onFeedFilterClick}>Submit</button>
         <button
           onClick={() => {
             // setModalProps(null);
@@ -157,8 +158,7 @@ function FeedFilterModalContent(props: any) {
           }
           label="Apply to User page"
         />
-      </div>
-    </div>
+        </div>
   );
 }
 

@@ -69,7 +69,7 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button className={styles.addCommentButton} type="submit">Reply<img className={styles.replyArrow} src={replyArrow}/></button>
+        <button className={styles.addCommentButton} type="submit">Comment<img className={styles.replyArrow} src={replyArrow}/></button>
       </form>
       {/* <h4>{commentsCount}</h4> */}
       
