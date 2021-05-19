@@ -1,36 +1,37 @@
 .SubNavWrap {
   height: 100%;
-  flex: 0 0 70%;
   display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
   margin: 0;
   align-items: center;
-  flex-basis: 100%;
-  .SubNavWrap>*:first-child {
-    width: 200px;
-  }
+  grid-gap: 10px;
   
 
   
 }
 
-.filter {
-  background-color: blue;
-  padding-left: 0px 5px;
+
+
+.townSquareTitle {
+  flex-basis: 100%;
 }
 
 .logo {
-  min-width: 40px;
-  display: block;
-  margin-right: auto;
+  min-width: 30px;
+  display: inline-block;
   width: 10px;
   height: auto;
   border-radius: 50%;
   border: solid;
   border-color: black;
   align-items: center;
+  text-align: center;
 
+}
 
-
+.title {
+  align-items: left;
 }
 
 body {
@@ -48,8 +49,11 @@ body {
 
 .createPost {
   color: white;
-  padding-right: 15px;
+  width: 1.3rem;
+}
 
+.filter {
+  width: 1.3rem;
 }
 
 .applied {
@@ -112,4 +116,5 @@ body {
 
 .followUnfollowDelete {
   padding-right: 10px;
+  width: 1.3rem;
 }

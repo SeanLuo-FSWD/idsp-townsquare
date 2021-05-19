@@ -157,14 +157,16 @@ const FeedPg = (props: any) => {
           <div className={styles.SubNavWrap}>
 
             <img className={styles.logo} src={townSquareLogo} />
-            <div className={styles.filterAndCreate}>
+            {/* <div className={styles.filterAndCreate}> */}
+
+            <div className={styles.townSquareTitle}>TownSquare</div>
             <img
               className={styles.createPost}
               src={createPost}
               onClick={() => setShowModal("postUpload")}
             />
-            <img src={filter} onClick={() => setShowModal("filter")} />
-            </div>
+            <img className={styles.filter} src={filter} onClick={() => setShowModal("filter")} />
+            {/* </div> */}
             
           </div>
         </SubNav>

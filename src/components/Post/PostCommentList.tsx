@@ -7,6 +7,7 @@ import {
 } from "../../utils/api/posts.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
+import replyArrow from "./assets/replyArrow.svg"
 
 function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
   const [comment, setComment] = useState("");
@@ -46,7 +47,7 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
   console.log(commentList);
 
   return (
-    <div>
+    <div className={styles.commentNumber}>
 
       {commentList.length > 0 && (
         <div>
@@ -61,13 +62,14 @@ function PostCommentList({ postId, commentSubmitProp, commentsCount }: any) {
       )}
       <form className={styles.commentSubmitForm} onSubmit={onCommentSubmit}>
         <input
+          className={styles.commentInput}
           type="text"
           id="comment"
           name="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button className={styles.addCommentButton} type="submit">add Comment</button>
+        <button className={styles.addCommentButton} type="submit">Reply<img className={styles.replyArrow} src={replyArrow}/></button>
       </form>
       {/* <h4>{commentsCount}</h4> */}
       

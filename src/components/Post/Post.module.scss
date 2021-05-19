@@ -19,8 +19,34 @@
 }
 
 .likeCommentContainer {
-  padding: 0px 25px 10px 25px;
+  padding: 10px 25px 10px 25px;
   border-radius: 4px;
+
+}
+
+.likesNames {
+
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  margin: 2px 0px;
+
+}
+
+.commentCounter {
+    padding: 0px 0px 0px 7px;
+    margin: 0px 0px 0px 3px;
+}
+
+.test {
+  display: flex;
+  background-color: gold;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 10px;
 }
 
 
@@ -58,4 +84,10 @@ input {
 
 .addComment {
   padding: 1px;
+}
+
+.likeCommentNav {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0px;
 }
