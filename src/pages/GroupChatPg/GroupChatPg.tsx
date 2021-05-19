@@ -3,7 +3,10 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
-import { doChatUpdate } from "../../store/redux/actions/chat_act";
+import {
+  doChatUpdate,
+  doChatInitialIdGroup,
+} from "../../store/redux/actions/chat_act";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
 import FilterUserList from "./FilterUserList";
@@ -20,8 +23,17 @@ function GroupChatPg(props: any) {
     useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const [toggleView, setToggleView] = useState("chat");
-  const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
-  const [addedGroupIds, setAddedGroupIds] = useState([]) as any;
+  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any; // array of ids
+
+  const initialIdGroup = props.addedGroup.map((p: any) => {
+    return p.userId;
+  });
+
+  const [addedGroupIds, setAddedGroupIds] = useState(
+    props.addedGroup.map((p: any) => {
+      return p.userId;
+    })
+  ) as any;
 
   // const [showFeedFilter, setShowFeedFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState(
@@ -30,14 +42,8 @@ function GroupChatPg(props: any) {
   const [peopleFilter, setPeopleFilter] = useState(
     FILTER_INITIAL_STATE.peoplePg.people
   );
-  console.log("1111111111111111111111");
-  console.log("1111111111111111111111");
 
-  useEffect(() => {
-    console.log("cccccccccccccccccccc");
-    console.log("cccccccccccccccccccc");
-    setAddedGroup(props.addedGroup);
-  }, []);
+  useEffect(() => {}, []);
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
@@ -79,6 +85,10 @@ function GroupChatPg(props: any) {
       if (err) {
         setCerror(err.message);
       } else {
+        console.log("999999999999999999999");
+        console.log("999999999999999999999");
+        console.log(result);
+
         setPeople(result);
         setToggleView("users");
       }
@@ -94,7 +104,12 @@ function GroupChatPg(props: any) {
       window.alert("You must select at least one user!");
     } else {
       // setToggleView("chat");
-      props.onPropStartChatProp(addedGroup, "group");
+      console.log("ggggggggggggggggggggggg");
+      console.log("must be all existing and added users");
+      console.log(addedGroup);
+
+      props.onPropStartChatProp(addedGroup, props.chatType);
+      props.onSetInitialIdGroup(initialIdGroup);
       history.push("/chat");
     }
   }
@@ -112,12 +127,17 @@ function GroupChatPg(props: any) {
               onStartChatProp={onStartChatProp}
               addedGroupIds={addedGroupIds}
               setAddedGroupIds={setAddedGroupIds}
+              chatType={props.chatType}
+              initialIdGroup={initialIdGroup}
             />
             <div style={{ alignSelf: "flex-start", marginTop: "50px" }}>
               <h2>Added users</h2>
               {addedGroup.map((person: any) => {
+                console.log("55555555555555555");
+                console.log(person);
+
                 return (
-                  <div key={person._id}>
+                  <div key={person.userId}>
                     <div>
                       <img src={person.avatar} height="50px" width="50px" />
                     </div>
@@ -176,6 +196,7 @@ const mapStateToProps = (state: any) => {
     chatId: state.chatState.chatId,
     addedGroup: state.chatState.addedGroup,
     error: state.chatState.error,
+    chatType: state.chatState.chatType,
   };
 };
 
@@ -183,6 +204,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onPropStartChatProp: (addedGroup: any, chatType: string) =>
       dispatch(doChatUpdate(addedGroup, chatType)),
+    onSetInitialIdGroup: (initialIdGroup: string[]) =>
+      dispatch(doChatInitialIdGroup(initialIdGroup)),
   };
 };
 

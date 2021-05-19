@@ -21,15 +21,19 @@ function ChatListItem(props: any) {
     }
 
     const arr_img = selectGroup.map((g: any) => {
-      return <img key={g._id} src={g.avatar} height="50px" width="50px" />;
+      return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
     });
 
     return arr_img;
   }
 
   function mapThenRedirect() {
-    console.log("3333333333333333");
-    const chatType = props.convo.members.length > 2 ? "group" : "private";
+    const chatType = "existing";
+    console.log("ChatlistItem: mapThenRedirect mapThenRedirect ");
+    console.log(props.convo.members);
+    console.log("props.convo.conversationId");
+
+    console.log(props.convo.conversationId);
 
     props.onPropStartChatProp(props.convo.members, chatType);
     props.onAddChatIdProp(props.convo.conversationId);

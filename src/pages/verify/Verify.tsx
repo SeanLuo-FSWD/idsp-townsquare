@@ -22,9 +22,6 @@ function Verify() {
     let search = window.location.search;
     let query = new URLSearchParams(search).get("id") as string;
 
-    console.log("2222222222222222");
-    console.log(query);
-
     verify(query, (err: Error, result: {}) => {
       if (err) {
         setCerror(

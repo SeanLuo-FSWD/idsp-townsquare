@@ -27,5 +27,5 @@ export default interface IFilter {
 export default interface IAddedGroup {
   avatar: string;
   username: string;
-  _id: string;
+  userId: string;
 }

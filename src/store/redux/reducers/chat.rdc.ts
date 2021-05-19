@@ -4,6 +4,7 @@ import {
   ChatActionTypes,
   CHAT_STATE_REMOVE,
   CHAT_ID_ADD,
+  CHAT_INITIAL_ID_UPDATE,
 } from "../constants/chatActionTypes";
 
 import _ from "lodash";
@@ -14,12 +15,14 @@ const INITIAL_STATE: {
   error: null | string;
   chatId: string;
   addedGroup: IAddedGroup[];
+  initialIdGroup: string[];
   chatType: string;
 } = {
   error: null,
   chatId: "",
   addedGroup: [],
   chatType: "",
+  initialIdGroup: [],
 };
 
 function chatReducer(chatState = INITIAL_STATE, action: ChatActionTypes) {
@@ -31,17 +34,21 @@ function chatReducer(chatState = INITIAL_STATE, action: ChatActionTypes) {
       console.log("CHAT_STATE_UPDATE");
       const newChatState = {
         ...chatState,
-        addedGroup: action.chatPayload,
+        addedGroup: action.addedGroup,
         chatType: action.chatType,
       };
       // change state here
       return newChatState;
     }
-    case CHAT_STATE_REMOVE: {
-      console.log("CHAT_STATE_REMOVE");
-      return INITIAL_STATE;
+    case CHAT_INITIAL_ID_UPDATE: {
+      console.log("CHAT_INITIAL_ID_UPDATE");
+      const newChatState = {
+        ...chatState,
+        initialIdGroup: action.initialIdGroup,
+      };
+      // change state here
+      return newChatState;
     }
-
     case CHAT_STATE_REMOVE: {
       console.log("CHAT_STATE_REMOVE");
       return INITIAL_STATE;

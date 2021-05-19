@@ -22,16 +22,20 @@ function FilterUserList({
   onStartChatProp,
   setAddedGroupIds,
   addedGroupIds,
+  chatType,
+  initialIdGroup,
 }: any) {
-  //   const [addedGroupIds, setAddedGroupIds] = useState([]) as any; // array of ids
-  const { showModal, setModalProps, setShowModal, setCerror } =
+  const { showModal, setModalProps, setShowModal, setCerror, currentUser } =
     useContext(LoginContext);
-  const history = useHistory();
 
+  // const [initialIdGroup, setInitialGroup] = useState(addedGroupIds);
+  const history = useHistory();
+  // let initialIdGroup: any = [];
   useEffect(() => {
     console.log("1111111111111111111111");
     console.log(addedGroupIds);
-  });
+    // initialIdGroup = addedGroupIds;
+  }, []);
   const handleCheck = (event: any) => {
     console.log("88888888888888888888");
 
@@ -41,7 +45,7 @@ function FilterUserList({
       for (let i = 0; i < people.length; i++) {
         if (people[i]._id === id) {
           return {
-            _id: id,
+            userId: id,
             avatar: people[i].avatar,
             username: people[i].username,
           };
@@ -52,6 +56,7 @@ function FilterUserList({
       // setAddedGroupProp([...addedGroup, event.target.value]);
       setAddedGroupIds([...addedGroupIds, event.target.value]);
       const mappedUser = mapIdToUser(event.target.value);
+
       setAddedGroupProp([...addedGroup, mappedUser]);
     } else {
       const removedGroup = addedGroupIds.filter((gn: string) => {
@@ -80,45 +85,32 @@ function FilterUserList({
       </SubNav>
       <div style={{ marginTop: "50px" }}>
         {people.map((person: any) => {
-          return (
-            <div key={person._id}>
-              {/* <div>
-                <img
-                  onClick={() => setOpenPortal(true)}
-                  src={person.avatar}
-                  height="50px"
-                  width="50px"
-                />
-              </div>
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>Location</span>
-                <span>{person.location}</span>
-              </div>
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>age</span>
-                <span>{person.age}</span>
-              </div>
-              <div style={{ display: "flex" }}>
-                <span style={{ marginRight: "20px" }}>gender</span>
-                <span>{person.gender}</span>
-              </div> */}
-              <FilterUser person={person} />
+          if (person._id === currentUser.userId) {
+            return;
+          }
+          if (initialIdGroup.includes(person._id)) {
+            return;
+          } else {
+            return (
+              <div key={person._id}>
+                <FilterUser person={person} />
 
-              <FormGroup style={{ flexDirection: "row" }}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      //   value={person._id}
-                      value={person._id}
-                      onChange={handleCheck}
-                      checked={addedGroupIds.indexOf(person._id) > -1}
-                    />
-                  }
-                  label="add"
-                />
-              </FormGroup>
-            </div>
-          );
+                <FormGroup style={{ flexDirection: "row" }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        //   value={person._id}
+                        value={person._id}
+                        onChange={handleCheck}
+                        checked={addedGroupIds.indexOf(person._id) > -1}
+                      />
+                    }
+                    label="add"
+                  />
+                </FormGroup>
+              </div>
+            );
+          }
         })}
       </div>
     </>

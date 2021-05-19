@@ -29,11 +29,6 @@ const PeoplePg = (props: any) => {
   } = useContext(LoginContext);
 
   useEffect(() => {
-    console.log("sssssssssssssssssssssssss");
-    console.log("sssssssssssssssssssssssss");
-    console.log("sssssssssssssssssssssssss");
-    console.log(props.peoplePg);
-
     getPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
