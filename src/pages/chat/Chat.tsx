@@ -71,9 +71,9 @@ function Chat(props: any) {
         });
 
         // 2. Emit that array along with conversation Id
-        socket.emit("add more users", {
+        socket.emit("addNewMemberToGroup", {
           conversationId: props.chatId,
-          addedUsersIds: addedUsersIds,
+          newMembers: addedUsersIds,
         });
       }
     } else {
