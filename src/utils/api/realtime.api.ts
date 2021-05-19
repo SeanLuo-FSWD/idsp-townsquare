@@ -6,7 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import API_URL from "../../constants/api_url";
 
 const createConversation = (addedGroupIds: string[], cb: Function) => {
-  console.log("createConversation called");
+  console.log(
+    "createConversation createConversation createConversation called"
+  );
+  console.log(addedGroupIds);
+
   axios
     .post(
       `${API_URL}/conversation`,

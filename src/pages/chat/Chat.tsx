@@ -19,17 +19,16 @@ import {
   doChatUpdate,
   doChatInitialIdGroup,
 } from "../../store/redux/actions/chat_act";
+import _ from "lodash";
 
 function Chat(props: any) {
   const history = useHistory();
-  // const [chatId, setChatId] = useState("") as any;
-  const [openPortal, setOpenPortal] = useState(false);
-  // const [addedPeople, setAddedPeople] = useState(props.addedGroup) as any;
+  // const [openPortal, setOpenPortal] = useState(false);
   const [inputTxt, setInputTxt] = useState("");
   const [chatId, setChatId] = useState("") as any;
 
   const [messages, setMessages] = useState([]) as any;
-  const [ifChatRoom, setIfChatRoom] = useState(false) as any;
+  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
 
   const { currentUser, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
@@ -40,29 +39,47 @@ function Chat(props: any) {
   console.log("cccccccccccccccccccc");
   console.log("cccccccccccccccccccc");
   console.log(props.initialIdGroup);
-  console.log(props.addedGroup);
+  console.log(addedGroup);
 
   useEffect(() => {
-    console.log("bbbbbbbbbbbbbbbbbb");
-    console.log(props.chatId);
     if (props.chatId) {
-      socket.emit("enter chatroom", { conversationId: props.chatId });
       setChatId(props.chatId);
+
+      socket.emit("enter chatroom", { conversationId: props.chatId });
 
       getMessagesInConversation(props.chatId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
           setMessages(buildMessages(result.messages).reverse());
-          // socket.emit("enter chatroom", { conversationId: props.chatId });
-          // setChatId(props.chatId);
         }
       });
-    } else {
-      let addedGroupIds: string[] = [currentUser.userId];
 
-      props.addedGroup.forEach((p: any) => {
-        addedGroupIds.push(p._id);
+      if (
+        // Detect if new users are added
+        props.initialIdGroup &&
+        props.initialIdGroup.length !== addedGroup.length
+      ) {
+        // 1. Extract the added users Ids into an array
+        const addedUsersIds: any = [];
+        props.initialIdGroup.forEach((id: string) => {
+          for (let i = 0; i < addedGroup.length; i++) {
+            if (addedGroup[i].userId === id) {
+              addedUsersIds.push(id);
+            }
+          }
+        });
+
+        // 2. Emit that array along with conversation Id
+        socket.emit("add more users", {
+          conversationId: props.chatId,
+          addedUsersIds: addedUsersIds,
+        });
+      }
+    } else {
+      let addedGroupIds: string[] = [];
+      addedGroup.forEach((p: any) => {
+        addedGroupIds.push(p.userId);
       });
 
       createConversation(addedGroupIds, (err: Error, result: any) => {
@@ -70,25 +87,28 @@ function Chat(props: any) {
           setCerror(err.message);
         } else {
           socket.emit("enter chatroom", { conversationId: result });
-          setIfChatRoom();
           setChatId(result);
         }
       });
     }
 
-    socket.on("received", (data: any) => {
-      console.log("received received received");
+    // 3. add new users to addedGroup to trigger rerender update
+    socket.on("new users", (data: any) => {
+      // Johnny, can I get the "data.addedUsers" in an ARRAY of the following objects?
+      // {
+      //   avatar: string;
+      //   username: string;
+      //   userId: string;
+      // }
+      setAddedGroup([...addedGroup, ...data.addedUsers]);
+    });
 
-      console.log("data.newMsg");
+    socket.on("received", (data: any) => {
+      console.log("444444444444444444");
+      console.log("88888888888888888888");
       console.log(data.newMsg);
 
-      console.log("props.addedGroup");
-      console.log(props.addedGroup);
-
       setMessages((messages: any) => {
-        console.log("messages");
-        console.log(messages);
-
         return [...messages.slice(-4), ...buildMessages(data.newMsg)];
       });
 
@@ -96,44 +116,36 @@ function Chat(props: any) {
     });
 
     return () => {
-      // props.onRemoveChatProp();
       socket.off("received");
     };
   }, []);
 
-  useEffect(() => {
-    return () => {
-      console.log("chatIdddddddd");
-      console.log(chatId);
-      socket.emit("leaveChatroom", {
-        conversationId: chatId,
-      });
-    };
-  }, [chatId]);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("chatIdddddddd");
+  //     console.log(chatId);
+  //     socket.emit("leaveChatroom", {
+  //       conversationId: chatId,
+  //     });
+  //   };
+  // }, [chatId]);
 
-  const returnChatId = () => {
-    console.log("chatIdddddddd");
-    console.log(chatId);
-
-    return chatId;
-  };
-  function togglePortalProp() {
-    setOpenPortal(false);
-  }
+  // function togglePortalProp() {
+  //   setOpenPortal(false);
+  // }
 
   function buildMessages(msgArr: any) {
     let msgObjArr: any = [];
-    console.log(
-      "props.addedGroup props.addedGroup props.addedGroup props.addedGroup"
-    );
 
-    console.log(props.addedGroup);
+    console.log("addedGroup addedGroup addedGroup");
+
+    console.log(addedGroup);
     const slicedMsgArr = msgArr.slice(0, 5);
     msgArr.forEach((m: any) => {
-      for (let i = 0; i < props.addedGroup.length; i++) {
-        if (m.userId === props.addedGroup[i]._id) {
-          m["avatar"] = props.addedGroup[i].avatar;
-          m["username"] = props.addedGroup[i].username;
+      for (let i = 0; i < addedGroup.length; i++) {
+        if (m.userId === addedGroup[i].userId) {
+          m["avatar"] = addedGroup[i].avatar;
+          m["username"] = addedGroup[i].username;
           msgObjArr.push(m);
           break;
         }
@@ -150,11 +162,11 @@ function Chat(props: any) {
   }
 
   function getAvatars() {
-    const length = props.addedGroup.length > 4 ? 4 : props.addedGroup.length;
+    const length = addedGroup.length > 4 ? 4 : addedGroup.length;
 
     let selectGroup: any = [];
     for (let i = 0; i < length; i++) {
-      selectGroup.push(props.addedGroup[i]);
+      selectGroup.push(addedGroup[i]);
     }
 
     const arr_img = selectGroup.map((g: any) => {
@@ -175,13 +187,10 @@ function Chat(props: any) {
       text: inputTxt,
     });
 
-    // props.onRemoveChatProp();
-
     setInputTxt("");
   };
 
   function addUserFilter() {
-    // props.onPropStartChatProp(props.addedGroup, "group");
     history.push("/groupchat");
   }
 
@@ -189,7 +198,7 @@ function Chat(props: any) {
     <>
       <div>
         <SubNav className="flex--space-between">
-          {props.addedGroup.length > 1 ? (
+          {addedGroup.length > 1 ? (
             <div>
               <Link to="/chatPage">
                 <button>Go back</button>
@@ -210,7 +219,7 @@ function Chat(props: any) {
 
           <p>
             Chatting with: {getAvatars()}
-            {props.addedGroup.length > 4 && <span>...</span>}
+            {addedGroup.length > 4 && <span>...</span>}
           </p>
         </SubNav>
 
@@ -218,9 +227,6 @@ function Chat(props: any) {
         <div style={{ position: "relative" }}>
           <div>
             {messages.map((m: any) => {
-              console.log("444444444444444444");
-              console.log(m);
-
               return <MsgItem key={m._id} msg={m} />;
             })}
           </div>
@@ -241,7 +247,7 @@ function Chat(props: any) {
         </div>
       </div>
 
-      <PortalModal
+      {/* <PortalModal
         message="Are you sure to leave? This empty chat won't be saved."
         isOpen={openPortal}
         onClose={() => setOpenPortal(false)}
@@ -255,7 +261,7 @@ function Chat(props: any) {
           Leave
         </button>
       </PortalModal>
-      {openPortal && <Overlay togglePortalProp={togglePortalProp} />}
+      {openPortal && <Overlay togglePortalProp={togglePortalProp} />} */}
     </>
   );
 }
