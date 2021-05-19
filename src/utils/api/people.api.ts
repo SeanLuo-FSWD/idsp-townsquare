@@ -88,8 +88,6 @@ const getAllConversationsByUserId = (cb: Function) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log("getAllConversationsByUserId response");
-      console.log(response.data);
       cb(null, response.data);
     })
     .catch((error) => {

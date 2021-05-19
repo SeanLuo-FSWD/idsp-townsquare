@@ -113,8 +113,6 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
       }
     )
     .then((response) => {
-      console.log("fetchFeed response");
-      console.log(response.data);
       cb(null, response.data);
     })
     .catch((error) => {

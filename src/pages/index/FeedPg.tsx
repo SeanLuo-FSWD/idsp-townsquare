@@ -146,10 +146,6 @@ const FeedPg = (props: any) => {
   }
 
   if (feed) {
-    console.log("FeedPg FeedPg FeedPg: feed, currentUser");
-    console.log(feed);
-    console.log(currentUser);
-
     return (
       <>
         <Navbar currentPath={window.location.pathname} />

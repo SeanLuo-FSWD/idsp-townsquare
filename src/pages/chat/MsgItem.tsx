@@ -16,7 +16,11 @@ function MsgItem(props: any) {
         </Link>
 
         <div>
-          <p>{props.msg.createdAt}</p>
+          <p>
+            {new Date(props.msg.createdAt).toLocaleString("en-US", {
+              timeZone: "America/Los_Angeles",
+            })}
+          </p>
           <h4>{props.msg.text}</h4>
         </div>
       </div>
@@ -31,7 +35,9 @@ function MsgItem(props: any) {
           />
         </Link>
         <div>
-          <p>{props.msg.createdAt}</p>
+          {new Date(props.msg.createdAt).toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles",
+          })}
           <h4>{props.msg.text}</h4>
         </div>
       </div>

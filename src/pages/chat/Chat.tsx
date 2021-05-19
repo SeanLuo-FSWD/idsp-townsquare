@@ -21,11 +21,13 @@ function Chat(props: any) {
   const history = useHistory();
   // const [chatId, setChatId] = useState("") as any;
   const [openPortal, setOpenPortal] = useState(false);
-  const [addedPeople, setAddedPeople] = useState([]);
+  const [addedPeople, setAddedPeople] = useState(props.addedGroup) as any;
   const [inputTxt, setInputTxt] = useState("");
   const [chatId, setChatId] = useState("") as any;
 
   const [messages, setMessages] = useState([]) as any;
+  const [ifChatRoom, setIfChatRoom] = useState(false) as any;
+
   const { currentUser, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
 
@@ -33,20 +35,22 @@ function Chat(props: any) {
   let params = new URLSearchParams(search);
 
   useEffect(() => {
+    console.log("joining a sockeeeeet");
+
     if (props.chatId) {
+      socket.emit("enter chatroom", { conversationId: props.chatId });
+      setChatId(props.chatId);
+
       getMessagesInConversation(props.chatId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
-          setMessages(buildMessages(result.messages, props.addedGroup));
-          socket.emit("enter chatroom", { conversationId: props.chatId });
-          setChatId(props.chatId);
-          setAddedPeople(props.addedGroup);
+          setMessages(buildMessages(result.messages).reverse());
+          // socket.emit("enter chatroom", { conversationId: props.chatId });
+          // setChatId(props.chatId);
         }
       });
     } else {
-      // new chat
-      // api save the chat, then fetch and set the chat ID.
       let addedGroupIds: string[] = [];
 
       props.addedGroup.forEach((p: any) => {
@@ -58,34 +62,67 @@ function Chat(props: any) {
           setCerror(err.message);
         } else {
           socket.emit("enter chatroom", { conversationId: result });
-          setAddedPeople(props.addedGroup);
+          setIfChatRoom();
           setChatId(result);
         }
       });
     }
-  }, []);
 
-  useEffect(() => {
+    socket.on("received", (data: any) => {
+      console.log("received received received");
+
+      console.log("data.newMsg");
+      console.log(data.newMsg);
+
+      console.log("addedPeople");
+      console.log(addedPeople);
+
+      setMessages((messages: any) => {
+        console.log("messages");
+        console.log(messages);
+
+        return [...messages.slice(-4), ...buildMessages(data.newMsg)];
+      });
+
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
     return () => {
       props.onRemoveChatProp();
     };
   }, []);
 
-  socket.on("received", (data: any) => {
-    setMessages([...messages, ...buildMessages(data.newMsg, addedPeople)]);
-  });
+  useEffect(() => {
+    return () => {
+      console.log("chatIdddddddd");
+      console.log(chatId);
+      socket.emit("leaveChatroom", {
+        conversationId: chatId,
+      });
+    };
+  }, [chatId]);
 
+  const returnChatId = () => {
+    console.log("chatIdddddddd");
+    console.log(chatId);
+
+    return chatId;
+  };
   function togglePortalProp() {
     setOpenPortal(false);
   }
 
-  function buildMessages(msgArr: any, people: any) {
+  function buildMessages(msgArr: any) {
     let msgObjArr: any = [];
+    console.log("addedPeople addedPeople addedPeople addedPeople");
+
+    console.log(addedPeople);
+    const slicedMsgArr = msgArr.slice(0, 5);
     msgArr.forEach((m: any) => {
-      for (let i = 0; i < people.length; i++) {
-        if (m.userId === people[i]._id) {
-          m["avatar"] = people[i].avatar;
-          m["username"] = people[i].username;
+      for (let i = 0; i < addedPeople.length; i++) {
+        if (m.userId === addedPeople[i]._id) {
+          m["avatar"] = addedPeople[i].avatar;
+          m["username"] = addedPeople[i].username;
           msgObjArr.push(m);
           break;
         }
@@ -121,19 +158,11 @@ function Chat(props: any) {
 
     if (!inputTxt) return;
 
-    socket.emit(
-      "chat message",
-      {
-        userId: currentUser.userId,
-        conversationId: chatId,
-        text: inputTxt,
-      },
-      (err: any, response: any) => {
-        if (err) {
-          setCerror(err.errMsg);
-        }
-      }
-    );
+    socket.emit("chat message", {
+      userId: currentUser.userId,
+      conversationId: chatId,
+      text: inputTxt,
+    });
 
     props.onRemoveChatProp();
 
