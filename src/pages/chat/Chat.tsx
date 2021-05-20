@@ -29,16 +29,15 @@ function Chat(props: any) {
 
   const [messages, setMessages] = useState([]) as any;
   const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
+  // const [addedGroup, setAddedGroup] = useState([]) as any;
 
   const { currentUser, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
 
-  let search = window.location.search;
-
   useEffect(() => {
     console.log("3333333333333333");
     console.log(props.initialIdGroup);
-    console.log(addedGroup);
+    console.log(props.addedGroup);
 
     console.log("3333333333333333");
     if (
@@ -46,9 +45,10 @@ function Chat(props: any) {
       (props.initialIdGroup.length === addedGroup.length ||
         props.initialIdGroup.length === 0)
     ) {
-      console.log("Existing ");
+      console.log("Existing chat: either private, or group member unchanged");
 
       setChatId(props.chatId);
+      setAddedGroup(props.addedGroup);
 
       socket.emit("enter chatroom", { conversationId: props.chatId });
 
@@ -61,12 +61,11 @@ function Chat(props: any) {
       });
     } else if (
       // Detect if new users are added
+      props.chatId &&
       props.initialIdGroup.length !== 0 &&
       props.initialIdGroup.length !== addedGroup.length
     ) {
-      console.log(
-        "addNewMemberToGroup addNewMemberToGroup addNewMemberToGroup addNewMemberToGroup"
-      );
+      console.log("Existing group chat with new members");
 
       // 1. Extract the added users Ids into an array
       let addedGroupIds = addedGroup.map((g: any) => {
@@ -94,11 +93,13 @@ function Chat(props: any) {
         newMembers: addedUsersIds,
       });
     } else {
+      console.log("new chat here, either private or group");
+      setAddedGroup(props.addedGroup);
       let addedUsersIds: string[] = [];
       for (let i = 0; i < addedGroup.length; i++) {
         addedUsersIds.push(addedGroup[i].userId);
       }
-
+      // setAddedGroup(props.initialIdGroup);
       createConversation(addedUsersIds, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
@@ -110,17 +111,11 @@ function Chat(props: any) {
     }
 
     // 3. add new users to addedGroup to trigger rerender update
-    // socket.on("addNewMemberToGroup", (data: any) => {
-    // Johnny, can I get the "data.addedUsers" in an ARRAY of the following objects?
-    // {
-    //   avatar: string;
-    //   username: string;
-    //   userId: string;
-    // }
-    //   console.log("data data data data");
-    //   console.log(data);
-    //   setAddedGroup([...addedGroup, ...data]);
-    // });
+    socket.on("addNewMemberToGroup", (data: any) => {
+      console.log("data data data data");
+      console.log(data);
+      setAddedGroup([...addedGroup, ...data]);
+    });
 
     socket.on("received", (data: any) => {
       setMessages((messages: any) => {

@@ -11,12 +11,13 @@ function UserGrid(props: any) {
       {props.people.map((user: any) => {
         const profile_pic = user.avatar;
 
-        console.log(user);
-        console.log(user);
         return (
           <div key={user._id} className={`${styles.userTile} flex--center`}>
             <img src={profile_pic}></img>
-            <p className={styles.tileUsername} style={{ position: "absolute", bottom: "0" }}>
+            <p
+              className={styles.tileUsername}
+              style={{ position: "absolute", bottom: "0" }}
+            >
               {user.username}
             </p>
             <Link to={`/person/${user._id}`} />
