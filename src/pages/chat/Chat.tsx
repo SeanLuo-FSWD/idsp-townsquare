@@ -41,7 +41,7 @@ function Chat(props: any) {
     console.log(addedGroup);
 
     console.log("3333333333333333");
-    if (props.chatId && props.initialIdGroup.length === 0) {
+    if (props.chatId && props.initialIdGroup.length === addedGroup.length) {
       console.log("same member same member samemember");
 
       setChatId(props.chatId);
