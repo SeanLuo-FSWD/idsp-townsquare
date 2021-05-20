@@ -2,7 +2,7 @@
     display: flex;
     grid-gap: 10px;
     align-items: center;
-    margin: 0px 0px 10px 0px;
+    margin: 0px 5px 10px 5px;
 
 
     .addCommentButton {
@@ -21,7 +21,8 @@
 
     .replyArrow {
         width: .8rem;
-        margin: 0px 0px 0px 1px;
+        height: .7rem;
+        margin: 0px 0px 0px 0px;
     }
 
     .commentInput {

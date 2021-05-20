@@ -16,12 +16,13 @@
 
 .textContainer {
   margin: 5px 25px 10px 25px;
+  padding: 2px 0px;
   font-size: 15px;
   text-align: left;
 }
 
 .likeCommentContainer {
-  padding: 10px 15px 10px 15px;
+  padding: 0px 15px 10px 15px;
   border-radius: 4px;
 
 }
@@ -38,7 +39,7 @@
 
 .commentCounter {
     padding: 0px 0px 0px 7px;
-    margin: 0px 0px 0px 3px;
+
 }
 
 .test {

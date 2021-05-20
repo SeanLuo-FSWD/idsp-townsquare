@@ -58,7 +58,7 @@ const PeoplePg = (props: any) => {
       <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
         <div>Hi {currentUser.username}! </div>
-        <div>Users</div>
+
 
         <button
           className={styles.detailedViewToggle}
