@@ -184,6 +184,10 @@ function Chat(props: any) {
       props.onRemoveChatProp();
       // }
 
+      socket.emit("leaveChatroom", {
+        conversationId: props.chatId,
+      });
+
       socket.off("received");
       socket.off("addNewMemberToGroup");
     };

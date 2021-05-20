@@ -1,10 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
-import { IUser } from "../../interfaces/IUser";
-import styles from "./UserGrid.module.scss";
-import styles2 from "./userDetail.module.scss";
-import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
 import _ from "lodash";
 import {
@@ -12,18 +6,6 @@ import {
   getFollowingUsers,
   toggleFollowing,
 } from "../../utils/api/people.api";
-import PortalModal from "../../UI/PortalModal";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DetailFollow from "./DetailFollow";
 
 function UserDetail(props: any) {
   console.log("UserDetail UserDetail UserDetail: user");
