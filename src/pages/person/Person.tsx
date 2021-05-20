@@ -57,7 +57,7 @@ function Person(props: any) {
     if (person) {
       const personObj = {
         avatar: person.user.avatar,
-        _id: person.user.userId,
+        userId: person.user.userId,
         username: person.user.username,
       };
       setAddedGroup([personObj]);

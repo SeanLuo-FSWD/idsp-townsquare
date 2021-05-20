@@ -4,6 +4,7 @@ import { getAllConversationsByUserId } from "../../utils/api/people.api";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import styles from "./ChatList.module.scss";
+import socket from "../../utils/socketIO.util";
 import ChatListItem from "./ChatListItem";
 
 function ChatList() {
@@ -18,12 +19,21 @@ function ChatList() {
         setCerror(err.message);
       } else {
         console.log("1111111111111111111111");
-        console.log("1111111111111111111111");
+        console.log("2222222222222222");
         console.log(result);
 
         setChatList(result);
       }
     });
+    socket.on("updateChats", (latestConversations) => {
+      console.log("updateChats updateChats updateChats updateChats");
+      console.log(latestConversations);
+      setChatList(latestConversations);
+    });
+
+    return () => {
+      socket.off("updateChats");
+    };
   }, []);
 
   if (chatList) {

@@ -47,6 +47,14 @@ function ChatListItem(props: any) {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>{getAvatars()}</div>
           <div>
+            <span>
+              {new Date(props.convo.messages[0].createdAt).toLocaleString(
+                "en-US",
+                {
+                  timeZone: "America/Los_Angeles",
+                }
+              )}
+            </span>
             <p>{props.convo.messages[0].text}</p>
           </div>
         </div>

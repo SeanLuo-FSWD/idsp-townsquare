@@ -75,6 +75,10 @@ function FilterUserList({
     }
   };
 
+  console.log("999999999999999999999");
+  console.log("444444444444444444");
+  console.log(people);
+
   return (
     <>
       <Navbar currentPath={window.location.pathname} />

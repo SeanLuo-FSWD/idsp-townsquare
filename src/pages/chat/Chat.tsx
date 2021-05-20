@@ -34,15 +34,16 @@ function Chat(props: any) {
     useContext(LoginContext);
 
   let search = window.location.search;
-  let params = new URLSearchParams(search);
-
-  console.log("cccccccccccccccccccc");
-  console.log("cccccccccccccccccccc");
-  console.log(props.initialIdGroup);
-  console.log(addedGroup);
 
   useEffect(() => {
-    if (props.chatId) {
+    console.log("3333333333333333");
+    console.log(props.initialIdGroup);
+    console.log(addedGroup);
+
+    console.log("3333333333333333");
+    if (props.chatId && props.initialIdGroup.length === 0) {
+      console.log("same member same member samemember");
+
       setChatId(props.chatId);
 
       socket.emit("enter chatroom", { conversationId: props.chatId });
@@ -54,35 +55,47 @@ function Chat(props: any) {
           setMessages(buildMessages(result.messages).reverse());
         }
       });
+    } else if (
+      // Detect if new users are added
+      props.initialIdGroup.length !== 0 &&
+      props.initialIdGroup.length !== addedGroup.length
+    ) {
+      console.log(
+        "addNewMemberToGroup addNewMemberToGroup addNewMemberToGroup addNewMemberToGroup"
+      );
 
-      if (
-        // Detect if new users are added
-        props.initialIdGroup &&
-        props.initialIdGroup.length !== addedGroup.length
-      ) {
-        // 1. Extract the added users Ids into an array
-        const addedUsersIds: any = [];
-        props.initialIdGroup.forEach((id: string) => {
-          for (let i = 0; i < addedGroup.length; i++) {
-            if (addedGroup[i].userId === id) {
-              addedUsersIds.push(id);
-            }
-          }
-        });
-
-        // 2. Emit that array along with conversation Id
-        socket.emit("addNewMemberToGroup", {
-          conversationId: props.chatId,
-          newMembers: addedUsersIds,
-        });
-      }
-    } else {
-      let addedGroupIds: string[] = [];
-      addedGroup.forEach((p: any) => {
-        addedGroupIds.push(p.userId);
+      // 1. Extract the added users Ids into an array
+      let addedGroupIds = addedGroup.map((g: any) => {
+        return g.userId;
       });
+      let addedUsersIds: string[] = [];
+      // props.initialIdGroup.forEach((id: string) => {
+      //   for (let i = 0; i < addedGroup.length; i++) {
+      //     if (addedGroup[i].userId !== id) {
+      //       addedUsersIds.push(id);
+      //     }
+      //   }
+      // });
+      addedUsersIds = addedGroupIds.filter(
+        (id: string) => !props.initialIdGroup.includes(id)
+      );
 
-      createConversation(addedGroupIds, (err: Error, result: any) => {
+      console.log("2. Emit that array along with conversation Id");
+      console.log(addedUsersIds);
+      console.log("2. Emit that array along with conversation Id");
+
+      // 2. Emit that array along with conversation Id
+      socket.emit("addNewMemberToGroup", {
+        conversationId: props.chatId,
+        newMembers: addedUsersIds,
+      });
+    } else {
+      let addedUsersIds: string[] = [];
+      for (let i = 0; i < addedGroup.length; i++) {
+        addedUsersIds.push(addedGroup[i].userId);
+      }
+
+      createConversation(addedUsersIds, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
@@ -93,21 +106,19 @@ function Chat(props: any) {
     }
 
     // 3. add new users to addedGroup to trigger rerender update
-    socket.on("new users", (data: any) => {
-      // Johnny, can I get the "data.addedUsers" in an ARRAY of the following objects?
-      // {
-      //   avatar: string;
-      //   username: string;
-      //   userId: string;
-      // }
-      setAddedGroup([...addedGroup, ...data.addedUsers]);
-    });
+    // socket.on("addNewMemberToGroup", (data: any) => {
+    // Johnny, can I get the "data.addedUsers" in an ARRAY of the following objects?
+    // {
+    //   avatar: string;
+    //   username: string;
+    //   userId: string;
+    // }
+    //   console.log("data data data data");
+    //   console.log(data);
+    //   setAddedGroup([...addedGroup, ...data]);
+    // });
 
     socket.on("received", (data: any) => {
-      console.log("444444444444444444");
-      console.log("88888888888888888888");
-      console.log(data.newMsg);
-
       setMessages((messages: any) => {
         return [...messages.slice(-4), ...buildMessages(data.newMsg)];
       });
@@ -117,6 +128,7 @@ function Chat(props: any) {
 
     return () => {
       socket.off("received");
+      // socket.off("addNewMemberToGroup");
     };
   }, []);
 
@@ -170,6 +182,10 @@ function Chat(props: any) {
     }
 
     const arr_img = selectGroup.map((g: any) => {
+      console.log("selectGroup.map selectGroup.map selectGroup.map");
+      console.log(g);
+
+      // return <img key={g._id} src={g.avatar} height="50px" width="50px" />;
       return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
     });
 
@@ -227,6 +243,9 @@ function Chat(props: any) {
         <div style={{ position: "relative" }}>
           <div>
             {messages.map((m: any) => {
+              console.log("messages.map messages.map messages.map");
+              console.log(m);
+
               return <MsgItem key={m._id} msg={m} />;
             })}
           </div>

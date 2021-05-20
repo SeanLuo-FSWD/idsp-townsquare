@@ -148,10 +148,8 @@ const FeedPg = (props: any) => {
   if (feed) {
     return (
       <>
-        <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={styles.SubNavWrap}>
-
             <img className={styles.logo} src={townSquareLogo} />
             {/* <div className={styles.filterAndCreate}> */}
 
@@ -161,9 +159,12 @@ const FeedPg = (props: any) => {
               src={createPost}
               onClick={() => setShowModal("postUpload")}
             />
-            <img className={styles.filter} src={filter} onClick={() => setShowModal("filter")} />
+            <img
+              className={styles.filter}
+              src={filter}
+              onClick={() => setShowModal("filter")}
+            />
             {/* </div> */}
-            
           </div>
         </SubNav>
         <div className={styles.feedContainer}>
@@ -182,19 +183,14 @@ const FeedPg = (props: any) => {
                       alt=""
                       className={styles.postWrapper__img}
                     />
-
                   </div>
 
                   <div className={styles.flexpostNavDetails}>
-                    <div className={styles.uName}>
-                      {post.username}
-                    </div>
+                    <div className={styles.uName}>{post.username}</div>
                     <div className={styles.dateInfo}>
                       {new Date(post.createdAt).toDateString()}
                     </div>
                   </div>
-                   
-
 
                   {post.userId === currentUser.userId ? (
                     <img
@@ -235,6 +231,8 @@ const FeedPg = (props: any) => {
             </Modal>
           )
         ) : null}
+
+        <Navbar currentPath={window.location.pathname} />
       </>
     );
   } else {

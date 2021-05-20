@@ -84,10 +84,16 @@ const getChat = (chatId: string, cb: Function) => {
 
 const getAllConversationsByUserId = (cb: Function) => {
   axios
-    .get(`${API_URL}/conversation`, {
+    .get(`${API_URL}/conversation/`, {
       withCredentials: true,
     })
     .then((response) => {
+      console.log(
+        "getAllConversationsByUserId getAllConversationsByUserId getAllConversationsByUserId"
+      );
+
+      console.log(response);
+
       cb(null, response.data);
     })
     .catch((error) => {
