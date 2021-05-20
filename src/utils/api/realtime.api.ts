@@ -5,9 +5,12 @@ import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import API_URL from "../../constants/api_url";
 
-const createConversation = (addedGroupIds: string[], cb: Function) => {
+const getConversationByConversationId = (
+  addedGroupIds: string[],
+  cb: Function
+) => {
   console.log(
-    "createConversation createConversation createConversation called"
+    "getConversationByConversationId getConversationByConversationId getConversationByConversationId called"
   );
   console.log(addedGroupIds);
 
@@ -18,12 +21,12 @@ const createConversation = (addedGroupIds: string[], cb: Function) => {
       { withCredentials: true }
     )
     .then((response) => {
-      console.log("createConversation response");
+      console.log("getConversationByConversationId response");
       console.log(response);
       cb(null, response.data);
     })
     .catch((err) => {
-      console.log("createConversation error");
+      console.log("getConversationByConversationId error");
       console.log(err);
       cb(err);
     });
@@ -47,22 +50,26 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
     });
 };
 
-const getConversationByMembers = (personId: string, cb: Function) => {
+const getConversationByMembers = (personIds: string[], cb: Function) => {
+  console.log(
+    "getConversationByMembers getConversationByMembers getConversationByMembers"
+  );
+
   axios
     .post(
       `${API_URL}/conversation/person`,
-      { target: personId },
+      { target: personIds },
       {
         withCredentials: true,
       }
     )
     .then((response) => {
-      console.log("getMessagesInConversation response");
+      console.log("getConversationByMembers response");
       console.log(response);
       cb(null, response.data);
     })
     .catch((error) => {
-      console.log("getMessagesInConversation error");
+      console.log("getConversationByMembers error");
       console.log(error);
 
       cb(null, error.response.data.message);
@@ -70,7 +77,7 @@ const getConversationByMembers = (personId: string, cb: Function) => {
 };
 
 export {
-  createConversation,
+  getConversationByConversationId,
   getMessagesInConversation,
   getConversationByMembers,
 };

@@ -5,27 +5,30 @@ import {
   API_ERROR,
   CHAT_STATE_REMOVE,
   CHAT_ID_ADD,
-  CHAT_INITIAL_ID_UPDATE,
+  CHAT_INITIAL_CHAT_UPDATE,
+  CHAT_TYPE_UPDATE,
 } from "../constants/chatActionTypes";
 
 // import { fetchFeed } from "../../../utils/api/posts.api";
 
-const doChatUpdate =
-  (addedGroup: Object, chatType: string) => async (dispatch: Dispatch) => {
-    console.log("2222222222222222");
-    console.log("chatProp");
-    console.log(addedGroup);
-    dispatch({
-      type: CHAT_STATE_UPDATE,
-      addedGroup: addedGroup,
-      chatType: chatType,
-    });
-  };
+const doChatUpdate = (addedGroup: Object) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: CHAT_STATE_UPDATE,
+    addedGroup: addedGroup,
+  });
+};
+
+const doChatTypeUpdate = (chatType: Object) => async (dispatch: Dispatch) => {
+  dispatch({
+    type: CHAT_TYPE_UPDATE,
+    chatType: chatType,
+  });
+};
 
 const doChatInitialChatGroup =
   (initialChatGroup: string[]) => async (dispatch: Dispatch) => {
     dispatch({
-      type: CHAT_INITIAL_ID_UPDATE,
+      type: CHAT_INITIAL_CHAT_UPDATE,
       initialChatGroup: initialChatGroup,
     });
   };
@@ -40,10 +43,6 @@ const doChatError = (error: string) => ({
 });
 
 const doChatIdAdd = (chatId: string) => async (dispatch: Dispatch) => {
-  console.log("2222222222222222");
-  console.log("chatId");
-  console.log(chatId);
-
   dispatch({
     type: CHAT_ID_ADD,
     chatId: chatId,
@@ -56,4 +55,5 @@ export {
   doChatRemove,
   doChatIdAdd,
   doChatInitialChatGroup,
+  doChatTypeUpdate,
 };

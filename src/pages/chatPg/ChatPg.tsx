@@ -5,14 +5,21 @@ import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { doChatRemove, doChatUpdate } from "../../store/redux/actions/chat_act";
+import {
+  doChatRemove,
+  doChatTypeUpdate,
+} from "../../store/redux/actions/chat_act";
 import { useHistory, useParams } from "react-router-dom";
 
 function Chat(props: any) {
   const history = useHistory();
 
-  function mapThenRedirect() {
+  useEffect(() => {
     props.onRemoveChatProp();
+  }, []);
+
+  function mapThenRedirect() {
+    props.doChatTypeUpdateProp({ new: true, group: true });
     history.push("/groupchat");
   }
   return (
@@ -38,6 +45,8 @@ function Chat(props: any) {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onRemoveChatProp: () => dispatch(doChatRemove()),
+    doChatTypeUpdateProp: (chatType: any) =>
+      dispatch(doChatTypeUpdate(chatType)),
   };
 };
 export default connect(null, mapDispatchToProps)(Chat);

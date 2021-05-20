@@ -26,6 +26,7 @@ import {
   doChatUpdate,
   doChatInitialChatGroup,
   doChatIdAdd,
+  doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
 
 function Person(props: any) {
@@ -41,7 +42,12 @@ function Person(props: any) {
 
   const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
 
+  console.log("------- person id -------");
+  console.log(id);
+
   useEffect(() => {
+    console.log("person [] person [] person [] person [] person");
+
     getPerson(id, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
@@ -50,18 +56,23 @@ function Person(props: any) {
       }
     });
 
-    getConversationByMembers(id, (err: Error, result: any) => {
+    getConversationByMembers([id], (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
         if (result) {
-          console.log("1111111111111111111111");
-          console.log("000000000000000000000");
-          console.log("666666666666666666");
-          console.log(result);
-
+          console.log(
+            "---------- getConversationByMembers: existing chat with ChatId ---------"
+          );
           props.onSetChatIdGroup(result);
+          props.doChatTypeUpdateProp({ new: false, group: false });
+        } else {
+          console.log(
+            "---------- getConversationByMembers: NEW chat ---------"
+          );
+          props.doChatTypeUpdateProp({ new: true, group: false });
         }
+        // props.onSetInitialChatGroup(addedGroup);
       }
     });
 
@@ -75,13 +86,20 @@ function Person(props: any) {
   }, []);
 
   useEffect(() => {
+    console.log("[person] [person] [person] [person] [person]");
+
     if (person) {
       const personObj = {
         avatar: person.user.avatar,
         userId: person.user.userId,
         username: person.user.username,
       };
-      setAddedGroup([personObj]);
+      // setAddedGroup([personObj]);
+      console.log("personObj");
+
+      console.log(personObj);
+
+      props.onSetInitialChatGroup([personObj]);
     }
   }, [person]);
 
@@ -168,7 +186,6 @@ function Person(props: any) {
 
               <button
                 onClick={() => {
-                  props.onSetInitialChatGroup(addedGroup);
                   history.push(`/chat`);
                 }}
               >
@@ -231,10 +248,12 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onPropStartChatProp: (addedGroup: any) =>
-      dispatch(doChatUpdate(addedGroup, "private")),
+      dispatch(doChatUpdate(addedGroup)),
     onSetInitialChatGroup: (initialChatGroup: any) =>
       dispatch(doChatInitialChatGroup(initialChatGroup)),
     onSetChatIdGroup: (chatId: any) => dispatch(doChatIdAdd(chatId)),
+    doChatTypeUpdateProp: (chatType: any) =>
+      dispatch(doChatTypeUpdate(chatType)),
   };
 };
 

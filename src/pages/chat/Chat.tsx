@@ -7,7 +7,7 @@ import Overlay from "../../UI/Overlay";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  createConversation,
+  getConversationByConversationId,
   getMessagesInConversation,
 } from "../../utils/api/realtime.api";
 import { LoginContext } from "../../store/context/LoginContext";
@@ -18,6 +18,7 @@ import {
   doChatRemove,
   doChatUpdate,
   doChatInitialChatGroup,
+  doChatIdAdd,
 } from "../../store/redux/actions/chat_act";
 import _ from "lodash";
 
@@ -25,14 +26,18 @@ function Chat(props: any) {
   const history = useHistory();
   // const [openPortal, setOpenPortal] = useState(false);
   const [inputTxt, setInputTxt] = useState("");
-  const [chatId, setChatId] = useState("") as any;
+  // const [chatId, setChatId] = useState("") as any;
 
   const [messages, setMessages] = useState([]) as any;
   const [addedGroup, setAddedGroup] = useState(props.initialChatGroup) as any;
-  // const [addedGroup, setAddedGroup] = useState([]) as any;
 
+  // let goingToFilter = false;
   const { currentUser, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
+
+  console.log("top chat id --------------------");
+
+  console.log(props.chatId);
 
   useEffect(() => {
     console.log("3333333333333333");
@@ -40,28 +45,24 @@ function Chat(props: any) {
     console.log(props.initialChatGroup);
     console.log(props.addedGroup);
     console.log(props.chatId);
+    console.log(props.chatType);
+
     console.log("3333333333333333");
     console.log("3333333333333333");
 
     if (props.chatId) {
-      if (
-        props.initialChatGroup.length === props.addedGroup.length ||
-        props.initialChatGroup.length === 0
-      ) {
+      if (props.initialChatGroup.length === props.addedGroup.length) {
         console.log("==========================================");
         console.log("Existing chat: either private, or group member unchanged");
         console.log("==========================================");
-        setChatId(props.chatId);
-        // setAddedGroup(props.addedGroup);
+        props.onAddChatIdProp(props.chatId);
 
         socket.emit("enter chatroom", { conversationId: props.chatId });
       } else if (
         // Detect if new users are added
-        props.initialChatGroup.length !== 0 &&
         props.initialChatGroup.length !== props.addedGroup.length
       ) {
         console.log("==========================================");
-
         console.log("Existing group chat with new members");
         console.log("==========================================");
 
@@ -108,39 +109,63 @@ function Chat(props: any) {
       console.log("new chat here, either private or group");
 
       let addedUsersIds: string[] = [];
-      for (let i = 0; i < props.addedGroup.length; i++) {
-        addedUsersIds.push(props.addedGroup[i].userId);
+      if (!props.chatType.group) {
+        console.log("private chat");
+        console.log(addedGroup);
+
+        for (let i = 0; i < addedGroup.length; i++) {
+          addedUsersIds.push(addedGroup[i].userId);
+        }
+      } else {
+        console.log("group chat");
+        console.log(props.addedGroup);
+        for (let i = 0; i < props.addedGroup.length; i++) {
+          addedUsersIds.push(props.addedGroup[i].userId);
+        }
       }
+
       console.log(addedUsersIds);
 
       console.log("==========================================");
-      // setAddedGroup(props.initialChatGroup);
-      createConversation(addedUsersIds, (err: Error, result: any) => {
-        if (err) {
-          setCerror(err.message);
-        } else {
-          socket.emit("enter chatroom", { conversationId: result });
-          console.log("2222222222222222");
-          console.log(result);
-          console.log(addedGroup);
+      getConversationByConversationId(
+        addedUsersIds,
+        (err: Error, result: any) => {
+          if (err) {
+            setCerror(err.message);
+          } else {
+            socket.emit("enter chatroom", { conversationId: result });
+            console.log("2222222222222222");
+            console.log(result);
 
-          setChatId(result);
-          // setAddedGroup((addedGroup: any) => {
-          //   return addedGroup;
-          // });
-          setAddedGroup(props.addedGroup);
+            props.onAddChatIdProp(result);
+            // setAddedGroup((addedGroup: any) => {
+            //   return addedGroup;
+            // });
+
+            console.log("Initial AddedGroupSet AddedGroupSet AddedGroupSet");
+            // commented below out to allow private chat group to be set.
+            // setAddedGroup(props.addedGroup);
+          }
         }
-      });
+      );
     }
 
     // 3. add new users to addedGroup to trigger rerender update
     socket.on("addNewMemberToGroup", (data: any) => {
       console.log("data data data data");
       console.log(data);
+
+      console.log(
+        "addNewMemberToGroup AddedGroupSet AddedGroupSet AddedGroupSet"
+      );
+
       setAddedGroup([...addedGroup, ...data]);
     });
 
     socket.on("received", (data: any) => {
+      console.log("msg received received received ");
+      console.log(data.newMsg);
+
       setMessages((messages: any) => {
         return [...messages.slice(-4), ...buildMessages(data.newMsg)];
       });
@@ -149,6 +174,16 @@ function Chat(props: any) {
     });
 
     return () => {
+      console.log("cleanup cleanup cleanup cleanup");
+      console.log(!props.chatType.new);
+
+      // if (props.chatType === "private") {
+      // if (!props.chatType.new) {
+      //   console.log("onRemoveChatProp");
+
+      props.onRemoveChatProp();
+      // }
+
       socket.off("received");
       socket.off("addNewMemberToGroup");
     };
@@ -174,28 +209,51 @@ function Chat(props: any) {
     console.log("addedGroup addedGroup addedGroup");
 
     console.log(addedGroup);
-    const slicedMsgArr = msgArr.slice(0, 5);
-    msgArr.forEach((m: any) => {
-      for (let i = 0; i < addedGroup.length; i++) {
-        if (m.userId === addedGroup[i].userId) {
-          m["avatar"] = addedGroup[i].avatar;
-          m["username"] = addedGroup[i].username;
-          msgObjArr.push(m);
-          break;
+
+    if (props.chatType.new && props.chatType.group) {
+      msgArr.forEach((m: any) => {
+        for (let i = 0; i < props.addedGroup.length; i++) {
+          if (m.userId === props.addedGroup[i].userId) {
+            m["avatar"] = props.addedGroup[i].avatar;
+            m["username"] = props.addedGroup[i].username;
+            msgObjArr.push(m);
+            break;
+          }
+          if (m.userId === currentUser.userId) {
+            m["avatar"] = currentUser.avatar;
+            m["username"] = currentUser.username;
+            msgObjArr.push(m);
+            break;
+          }
         }
-        if (m.userId === currentUser.userId) {
-          m["avatar"] = currentUser.avatar;
-          m["username"] = currentUser.username;
-          msgObjArr.push(m);
-          break;
+      });
+    } else {
+      // changed from addedGroup to props.addedGroup so messages for new group chat can be received
+      msgArr.forEach((m: any) => {
+        for (let i = 0; i < addedGroup.length; i++) {
+          if (m.userId === addedGroup[i].userId) {
+            m["avatar"] = addedGroup[i].avatar;
+            m["username"] = addedGroup[i].username;
+            msgObjArr.push(m);
+            break;
+          }
+          if (m.userId === currentUser.userId) {
+            m["avatar"] = currentUser.avatar;
+            m["username"] = currentUser.username;
+            msgObjArr.push(m);
+            break;
+          }
         }
-      }
-    });
+      });
+    }
 
     return msgObjArr;
   }
 
-  function getAvatars() {
+  function getAvatars(addedGroup: any) {
+    console.log("getAvatars getAvatars getAvatars");
+    console.log(addedGroup);
+
     const length = addedGroup.length > 4 ? 4 : addedGroup.length;
 
     let selectGroup: any = [];
@@ -204,9 +262,6 @@ function Chat(props: any) {
     }
 
     const arr_img = selectGroup.map((g: any) => {
-      console.log("selectGroup.map selectGroup.map selectGroup.map");
-      console.log(g);
-
       // return <img key={g._id} src={g.avatar} height="50px" width="50px" />;
       return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
     });
@@ -214,14 +269,21 @@ function Chat(props: any) {
     return arr_img;
   }
 
+  // const updateTextInput = (e: any) => {
+  //   e.preventDefault();
+  //   setInputTxt(e.target.value);
+  // }
+
   const submitMessage = (e: any) => {
     e.preventDefault();
 
     if (!inputTxt) return;
+    console.log("submit message chatId ====");
+    console.log(props.chatId);
 
     socket.emit("chat message", {
       userId: currentUser.userId,
-      conversationId: chatId,
+      conversationId: props.chatId,
       text: inputTxt,
     });
 
@@ -232,16 +294,24 @@ function Chat(props: any) {
     history.push("/groupchat");
   }
 
+  function toChatPage() {
+    history.push("/chatPage");
+  }
+
+  console.log("before return return return");
+  console.log(props.initialChatGroup);
+
+  console.log(addedGroup);
+
   return (
     <>
       <div>
         <SubNav className="flex--space-between">
-          {addedGroup.length > 1 ? (
+          {/* Changed from addedGroup to props.addedGroup as that's what Groupchat uses. */}
+          {props.addedGroup.length > 1 ? (
             <div>
-              <Link to="/chatPage">
-                <button>Go back</button>
-              </Link>
-              <button onClick={addUserFilter}>Add user</button>
+              <button onClick={toChatPage}>Go back</button>
+              {/* <button onClick={addUserFilter}>Add user</button> */}
             </div>
           ) : (
             <div>
@@ -256,7 +326,12 @@ function Chat(props: any) {
           )}
 
           <p>
-            Chatting with: {getAvatars()}
+            {/* Chatting with: {getAvatars(addedGroup)} */}
+            Chatting with:
+            {props.chatType.new && props.chatType.group
+              ? getAvatars(props.addedGroup)
+              : getAvatars(addedGroup)}
+            {/* {getAvatars(props.initialChatGroup)} */}
             {addedGroup.length > 4 && <span>...</span>}
           </p>
         </SubNav>
@@ -264,9 +339,6 @@ function Chat(props: any) {
         <div style={{ position: "relative" }}>
           <div>
             {messages.map((m: any) => {
-              console.log("messages.map messages.map messages.map");
-              console.log(m);
-
               return <MsgItem key={m._id} msg={m} />;
             })}
           </div>
@@ -319,8 +391,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onPropStartChatProp: (addedGroup: any, chatType: string) =>
-      dispatch(doChatUpdate(addedGroup, chatType)),
+    onAddChatIdProp: (chatId: string) => dispatch(doChatIdAdd(chatId)),
+    onRemoveChatProp: () => dispatch(doChatRemove()),
   };
 };
 

@@ -6,6 +6,7 @@ import FeedFilter from "../../components/Filter/FeedFilter";
 import {
   doChatUpdate,
   doChatInitialChatGroup,
+  doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
@@ -29,7 +30,15 @@ function GroupChatPg(props: any) {
   //   return p.userId;
   // });
 
-  const initialChatGroup = props.addedGroup;
+  // const initialChatGroup = props.addedGroup;
+  const initialChatGroup = props.initialChatGroup;
+  console.log("===> GroupChatPg <=====");
+
+  console.log("initialChatGroup");
+  console.log(props.initialChatGroup);
+
+  console.log("addedGroup");
+  console.log(props.addedGroup);
 
   const [addedGroupIds, setAddedGroupIds] = useState(
     props.addedGroup.map((p: any) => {
@@ -87,10 +96,6 @@ function GroupChatPg(props: any) {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("999999999999999999999");
-        console.log("999999999999999999999");
-        console.log(result);
-
         setPeople(result);
         setToggleView("users");
       }
@@ -110,9 +115,9 @@ function GroupChatPg(props: any) {
       console.log("must be all existing and added users");
       console.log(addedGroup);
 
-      props.onPropStartChatProp(addedGroup, props.chatType);
-      // props.onSetInitialChatGroup(initialChatGroup);
-      // props.onPropStartChatProp(addedGroup, props.chatType);
+      props.onPropStartChatProp(addedGroup);
+      props.doChatTypeUpdateProp(props.chatType);
+
       props.onSetInitialChatGroup(initialChatGroup);
       history.push("/chat");
     }
@@ -201,13 +206,16 @@ const mapStateToProps = (state: any) => {
     addedGroup: state.chatState.addedGroup,
     error: state.chatState.error,
     chatType: state.chatState.chatType,
+    initialChatGroup: state.chatState.initialChatGroup,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onPropStartChatProp: (addedGroup: any, chatType: string) =>
-      dispatch(doChatUpdate(addedGroup, chatType)),
+    doChatTypeUpdateProp: (chatType: any) =>
+      dispatch(doChatTypeUpdate(chatType)),
+    onPropStartChatProp: (addedGroup: any) =>
+      dispatch(doChatUpdate(addedGroup)),
     onSetInitialChatGroup: (initialChatGroup: any) =>
       dispatch(doChatInitialChatGroup(initialChatGroup)),
   };

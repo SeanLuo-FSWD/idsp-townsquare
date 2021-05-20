@@ -32,12 +32,13 @@ function FilterUserList({
     return p.userId;
   });
 
+  console.log("FilterUserList ----- initialChatGroup");
+  console.log(initialChatGroup);
+
   // const [initialChatGroup, setInitialGroup] = useState(addedGroupIds);
   const history = useHistory();
   // let initialChatGroup: any = [];
   useEffect(() => {
-    console.log("1111111111111111111111");
-    console.log(addedGroupIds);
     // initialChatGroup = addedGroupIds;
   }, []);
   const handleCheck = (event: any) => {
