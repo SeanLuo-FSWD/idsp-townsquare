@@ -23,24 +23,24 @@ function FilterUserList({
   setAddedGroupIds,
   addedGroupIds,
   chatType,
-  initialIdGroup,
+  initialChatGroup,
 }: any) {
   const { showModal, setModalProps, setShowModal, setCerror, currentUser } =
     useContext(LoginContext);
 
-  // const [initialIdGroup, setInitialGroup] = useState(addedGroupIds);
+  const initialChatGroupIds = initialChatGroup.map((p: any) => {
+    return p.userId;
+  });
+
+  // const [initialChatGroup, setInitialGroup] = useState(addedGroupIds);
   const history = useHistory();
-  // let initialIdGroup: any = [];
+  // let initialChatGroup: any = [];
   useEffect(() => {
     console.log("1111111111111111111111");
     console.log(addedGroupIds);
-    // initialIdGroup = addedGroupIds;
+    // initialChatGroup = addedGroupIds;
   }, []);
   const handleCheck = (event: any) => {
-    console.log("88888888888888888888");
-
-    console.log(event.target.value);
-    console.log(event.target.checked);
     function mapIdToUser(id: string) {
       for (let i = 0; i < people.length; i++) {
         if (people[i]._id === id) {
@@ -75,10 +75,6 @@ function FilterUserList({
     }
   };
 
-  console.log("999999999999999999999");
-  console.log("444444444444444444");
-  console.log(people);
-
   return (
     <>
       <Navbar currentPath={window.location.pathname} />
@@ -92,7 +88,7 @@ function FilterUserList({
           if (person._id === currentUser.userId) {
             return;
           }
-          if (initialIdGroup.includes(person._id)) {
+          if (initialChatGroupIds.includes(person._id)) {
             return;
           } else {
             return (

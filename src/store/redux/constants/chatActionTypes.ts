@@ -16,7 +16,7 @@ export interface ChatStateUpdateAction {
   type: typeof CHAT_STATE_UPDATE;
   addedGroup: any;
   chatType: string;
-  initialIdGroup: string[];
+  initialChatGroup: string[];
 }
 
 export interface ChatStateRemoveAction {
@@ -31,7 +31,7 @@ export interface ChatStateChatIdAdd {
 
 export interface ChatStateInitialIdGroup {
   type: typeof CHAT_INITIAL_ID_UPDATE;
-  initialIdGroup: string[];
+  initialChatGroup: string[];
 }
 
 type chatAction =

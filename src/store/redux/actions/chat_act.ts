@@ -22,11 +22,11 @@ const doChatUpdate =
     });
   };
 
-const doChatInitialIdGroup =
-  (initialIdGroup: string[]) => async (dispatch: Dispatch) => {
+const doChatInitialChatGroup =
+  (initialChatGroup: string[]) => async (dispatch: Dispatch) => {
     dispatch({
       type: CHAT_INITIAL_ID_UPDATE,
-      initialIdGroup: initialIdGroup,
+      initialChatGroup: initialChatGroup,
     });
   };
 
@@ -55,5 +55,5 @@ export {
   doChatError,
   doChatRemove,
   doChatIdAdd,
-  doChatInitialIdGroup,
+  doChatInitialChatGroup,
 };

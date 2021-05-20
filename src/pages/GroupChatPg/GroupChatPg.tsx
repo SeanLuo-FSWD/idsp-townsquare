@@ -5,7 +5,7 @@ import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
 import {
   doChatUpdate,
-  doChatInitialIdGroup,
+  doChatInitialChatGroup,
 } from "../../store/redux/actions/chat_act";
 import { getPeople } from "../../utils/api/people.api";
 import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
@@ -25,9 +25,11 @@ function GroupChatPg(props: any) {
   const [toggleView, setToggleView] = useState("chat");
   const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any; // array of ids
 
-  const initialIdGroup = props.addedGroup.map((p: any) => {
-    return p.userId;
-  });
+  // const initialChatGroup = props.addedGroup.map((p: any) => {
+  //   return p.userId;
+  // });
+
+  const initialChatGroup = props.addedGroup;
 
   const [addedGroupIds, setAddedGroupIds] = useState(
     props.addedGroup.map((p: any) => {
@@ -109,7 +111,9 @@ function GroupChatPg(props: any) {
       console.log(addedGroup);
 
       props.onPropStartChatProp(addedGroup, props.chatType);
-      props.onSetInitialIdGroup(initialIdGroup);
+      // props.onSetInitialChatGroup(initialChatGroup);
+      // props.onPropStartChatProp(addedGroup, props.chatType);
+      props.onSetInitialChatGroup(initialChatGroup);
       history.push("/chat");
     }
   }
@@ -128,7 +132,7 @@ function GroupChatPg(props: any) {
               addedGroupIds={addedGroupIds}
               setAddedGroupIds={setAddedGroupIds}
               chatType={props.chatType}
-              initialIdGroup={initialIdGroup}
+              initialChatGroup={initialChatGroup}
             />
             <div style={{ alignSelf: "flex-start", marginTop: "50px" }}>
               <h2>Added users</h2>
@@ -204,8 +208,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onPropStartChatProp: (addedGroup: any, chatType: string) =>
       dispatch(doChatUpdate(addedGroup, chatType)),
-    onSetInitialIdGroup: (initialIdGroup: string[]) =>
-      dispatch(doChatInitialIdGroup(initialIdGroup)),
+    onSetInitialChatGroup: (initialChatGroup: any) =>
+      dispatch(doChatInitialChatGroup(initialChatGroup)),
   };
 };
 

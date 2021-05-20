@@ -11,6 +11,8 @@ import Error from "../../components/Error/Error";
 import Feed from "../../components/Feed/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
 import { deletePost } from "../../utils/api/posts.api";
+import { getConversationByMembers } from "../../utils/api/realtime.api";
+
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
 import Post from "../../components/Post/Post";
@@ -20,7 +22,11 @@ import { useOnFollowHandle } from "../../helper/follow";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
 import GroupChat from "../GroupChatPg/GroupChat";
-import { doChatUpdate } from "../../store/redux/actions/chat_act";
+import {
+  doChatUpdate,
+  doChatInitialChatGroup,
+  doChatIdAdd,
+} from "../../store/redux/actions/chat_act";
 
 function Person(props: any) {
   const history = useHistory();
@@ -41,6 +47,21 @@ function Person(props: any) {
         setCerror(err.message);
       } else {
         setPerson(result.data);
+      }
+    });
+
+    getConversationByMembers(id, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        if (result) {
+          console.log("1111111111111111111111");
+          console.log("000000000000000000000");
+          console.log("666666666666666666");
+          console.log(result);
+
+          props.onSetChatIdGroup(result);
+        }
       }
     });
 
@@ -147,7 +168,7 @@ function Person(props: any) {
 
               <button
                 onClick={() => {
-                  props.onPropStartChatProp(addedGroup);
+                  props.onSetInitialChatGroup(addedGroup);
                   history.push(`/chat`);
                 }}
               >
@@ -211,6 +232,9 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onPropStartChatProp: (addedGroup: any) =>
       dispatch(doChatUpdate(addedGroup, "private")),
+    onSetInitialChatGroup: (initialChatGroup: any) =>
+      dispatch(doChatInitialChatGroup(initialChatGroup)),
+    onSetChatIdGroup: (chatId: any) => dispatch(doChatIdAdd(chatId)),
   };
 };
 

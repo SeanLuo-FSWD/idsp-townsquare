@@ -17,7 +17,7 @@ import socketIO from "socket.io-client";
 import {
   doChatRemove,
   doChatUpdate,
-  doChatInitialIdGroup,
+  doChatInitialChatGroup,
 } from "../../store/redux/actions/chat_act";
 import _ from "lodash";
 
@@ -28,7 +28,7 @@ function Chat(props: any) {
   const [chatId, setChatId] = useState("") as any;
 
   const [messages, setMessages] = useState([]) as any;
-  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
+  const [addedGroup, setAddedGroup] = useState(props.initialChatGroup) as any;
   // const [addedGroup, setAddedGroup] = useState([]) as any;
 
   const { currentUser, setModalProps, setShowModal, setCerror } =
@@ -36,76 +36,99 @@ function Chat(props: any) {
 
   useEffect(() => {
     console.log("3333333333333333");
-    console.log(props.initialIdGroup);
-    console.log(props.addedGroup);
-
     console.log("3333333333333333");
-    if (
-      props.chatId &&
-      (props.initialIdGroup.length === addedGroup.length ||
-        props.initialIdGroup.length === 0)
-    ) {
-      console.log("Existing chat: either private, or group member unchanged");
+    console.log(props.initialChatGroup);
+    console.log(props.addedGroup);
+    console.log(props.chatId);
+    console.log("3333333333333333");
+    console.log("3333333333333333");
 
-      setChatId(props.chatId);
-      setAddedGroup(props.addedGroup);
+    if (props.chatId) {
+      if (
+        props.initialChatGroup.length === props.addedGroup.length ||
+        props.initialChatGroup.length === 0
+      ) {
+        console.log("==========================================");
+        console.log("Existing chat: either private, or group member unchanged");
+        console.log("==========================================");
+        setChatId(props.chatId);
+        // setAddedGroup(props.addedGroup);
 
-      socket.emit("enter chatroom", { conversationId: props.chatId });
+        socket.emit("enter chatroom", { conversationId: props.chatId });
+      } else if (
+        // Detect if new users are added
+        props.initialChatGroup.length !== 0 &&
+        props.initialChatGroup.length !== props.addedGroup.length
+      ) {
+        console.log("==========================================");
 
+        console.log("Existing group chat with new members");
+        console.log("==========================================");
+
+        // 1. Extract the added users Ids into an array
+        let initialGroupIds = props.initialChatGroup.map((g: any) => {
+          return g.userId;
+        });
+        let addedGroupIds = props.addedGroup.map((g: any) => {
+          return g.userId;
+        });
+        let addedUsersIds: string[] = [];
+
+        addedUsersIds = addedGroupIds.filter(
+          (id: string) => !initialGroupIds.includes(id)
+        );
+
+        console.log("2. Emit that array along with conversation Id");
+        console.log(addedUsersIds);
+        console.log(props.chatId);
+
+        console.log("2. Emit that array along with conversation Id");
+
+        // 2. Emit that array along with conversation Id
+        socket.emit("addNewMemberToGroup", {
+          conversationId: props.chatId,
+          newMembers: addedUsersIds,
+        });
+      }
       getMessagesInConversation(props.chatId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
+          console.log(
+            "getMessagesInConversation getMessagesInConversation getMessagesInConversation"
+          );
+
+          console.log(result);
+
           setMessages(buildMessages(result.messages).reverse());
         }
       });
-    } else if (
-      // Detect if new users are added
-      props.chatId &&
-      props.initialIdGroup.length !== 0 &&
-      props.initialIdGroup.length !== addedGroup.length
-    ) {
-      console.log("Existing group chat with new members");
-
-      // 1. Extract the added users Ids into an array
-      let addedGroupIds = addedGroup.map((g: any) => {
-        return g.userId;
-      });
-      let addedUsersIds: string[] = [];
-      // props.initialIdGroup.forEach((id: string) => {
-      //   for (let i = 0; i < addedGroup.length; i++) {
-      //     if (addedGroup[i].userId !== id) {
-      //       addedUsersIds.push(id);
-      //     }
-      //   }
-      // });
-      addedUsersIds = addedGroupIds.filter(
-        (id: string) => !props.initialIdGroup.includes(id)
-      );
-
-      console.log("2. Emit that array along with conversation Id");
-      console.log(addedUsersIds);
-      console.log("2. Emit that array along with conversation Id");
-
-      // 2. Emit that array along with conversation Id
-      socket.emit("addNewMemberToGroup", {
-        conversationId: props.chatId,
-        newMembers: addedUsersIds,
-      });
     } else {
+      console.log("==========================================");
       console.log("new chat here, either private or group");
-      setAddedGroup(props.addedGroup);
+
       let addedUsersIds: string[] = [];
-      for (let i = 0; i < addedGroup.length; i++) {
-        addedUsersIds.push(addedGroup[i].userId);
+      for (let i = 0; i < props.addedGroup.length; i++) {
+        addedUsersIds.push(props.addedGroup[i].userId);
       }
-      // setAddedGroup(props.initialIdGroup);
+      console.log(addedUsersIds);
+
+      console.log("==========================================");
+      // setAddedGroup(props.initialChatGroup);
       createConversation(addedUsersIds, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
           socket.emit("enter chatroom", { conversationId: result });
+          console.log("2222222222222222");
+          console.log(result);
+          console.log(addedGroup);
+
           setChatId(result);
+          // setAddedGroup((addedGroup: any) => {
+          //   return addedGroup;
+          // });
+          setAddedGroup(props.addedGroup);
         }
       });
     }
@@ -127,7 +150,7 @@ function Chat(props: any) {
 
     return () => {
       socket.off("received");
-      // socket.off("addNewMemberToGroup");
+      socket.off("addNewMemberToGroup");
     };
   }, []);
 
@@ -238,7 +261,6 @@ function Chat(props: any) {
           </p>
         </SubNav>
 
-        <Navbar currentPath={window.location.pathname} />
         <div style={{ position: "relative" }}>
           <div>
             {messages.map((m: any) => {
@@ -264,6 +286,7 @@ function Chat(props: any) {
           </form>
         </div>
       </div>
+      <Navbar currentPath={window.location.pathname} />
 
       {/* <PortalModal
         message="Are you sure to leave? This empty chat won't be saved."
@@ -290,7 +313,7 @@ const mapStateToProps = (state: any) => {
     addedGroup: state.chatState.addedGroup,
     error: state.chatState.error,
     chatType: state.chatState.chatType,
-    initialIdGroup: state.chatState.initialIdGroup,
+    initialChatGroup: state.chatState.initialChatGroup,
   };
 };
 
@@ -298,7 +321,6 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     onPropStartChatProp: (addedGroup: any, chatType: string) =>
       dispatch(doChatUpdate(addedGroup, chatType)),
-    onRemoveChatProp: () => dispatch(doChatRemove()),
   };
 };
 

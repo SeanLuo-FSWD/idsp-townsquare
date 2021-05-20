@@ -15,14 +15,14 @@ const INITIAL_STATE: {
   error: null | string;
   chatId: string;
   addedGroup: IAddedGroup[];
-  initialIdGroup: string[];
+  initialChatGroup: IAddedGroup[];
   chatType: string;
 } = {
   error: null,
   chatId: "",
   addedGroup: [],
   chatType: "",
-  initialIdGroup: [],
+  initialChatGroup: [],
 };
 
 function chatReducer(chatState = INITIAL_STATE, action: ChatActionTypes) {
@@ -44,7 +44,7 @@ function chatReducer(chatState = INITIAL_STATE, action: ChatActionTypes) {
       console.log("CHAT_INITIAL_ID_UPDATE");
       const newChatState = {
         ...chatState,
-        initialIdGroup: action.initialIdGroup,
+        initialChatGroup: action.initialChatGroup,
       };
       // change state here
       return newChatState;

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { connect } from "react-redux";
-import { doChatUpdate, doChatIdAdd } from "../../store/redux/actions/chat_act";
+import {
+  doChatUpdate,
+  doChatIdAdd,
+  doChatInitialChatGroup,
+} from "../../store/redux/actions/chat_act";
 import { useHistory, useParams } from "react-router-dom";
 
 function ChatListItem(props: any) {
@@ -34,8 +38,8 @@ function ChatListItem(props: any) {
     console.log("props.convo.conversationId");
 
     console.log(props.convo.conversationId);
-
-    props.onPropStartChatProp(props.convo.members, chatType);
+    props.onPropStartChatProp(props.convo.members);
+    props.onSetInitialChatGroup(props.convo.members, chatType);
     props.onAddChatIdProp(props.convo.conversationId);
 
     history.push("/chat");
@@ -76,6 +80,8 @@ const mapDispatchToProps = (dispatch: any) => {
     onAddChatIdProp: (chatId: string) => dispatch(doChatIdAdd(chatId)),
     onPropStartChatProp: (addedGroup: any, chatType: string) =>
       dispatch(doChatUpdate(addedGroup, chatType)),
+    onSetInitialChatGroup: (initialChatGroup: any) =>
+      dispatch(doChatInitialChatGroup(initialChatGroup)),
   };
 };
 

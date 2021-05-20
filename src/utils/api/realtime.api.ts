@@ -47,4 +47,30 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
     });
 };
 
-export { createConversation, getMessagesInConversation };
+const getConversationByMembers = (personId: string, cb: Function) => {
+  axios
+    .post(
+      `${API_URL}/conversation/person`,
+      { target: personId },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      console.log("getMessagesInConversation response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("getMessagesInConversation error");
+      console.log(error);
+
+      cb(null, error.response.data.message);
+    });
+};
+
+export {
+  createConversation,
+  getMessagesInConversation,
+  getConversationByMembers,
+};
