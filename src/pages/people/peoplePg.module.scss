@@ -11,8 +11,27 @@
   padding: 0px 10px;
 }
 
+.townSquareLogo {
+  min-width: 30px;
+  display: inline-block;
+  width: 10px;
+  height: auto;
+  border-radius: 50%;
+  border: solid;
+  border-color: black;
+  align-items: center;
+  text-align: center;
+}
+
+.logoAndGreeting {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+}
+
 .userIcons {
   width: 1.3rem;
+  margin-left: 10px;
 }
 
 .peopleNav {
@@ -33,6 +52,13 @@
   justify-content: space-around;
 }
 
+.subNavIcons {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
 .detailedViewToggle {
   background: none;
   border: none;
@@ -46,9 +72,12 @@
 .nav {
   padding: 0;
   
+  
+  
 }
 
 .userContainer {
-  padding-top: 150px;
-  padding-bottom: 150px;
+  position: relative;
+  top: 70px;
+  padding: 0px 0px 70px 0px;
 }

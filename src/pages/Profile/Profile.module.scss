@@ -13,29 +13,66 @@
   text-align: center;
   min-height: 100vh;
   padding: 0px 10px;
+  background-color: #f6efe8;
+}
+
+.townSquareLogo {
+  min-width: 30px;
+  display: inline-block;
+  width: 10px;
+  height: auto;
+  border-radius: 50%;
+  border: solid;
+  border-color: black;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
 }
 
 .profileImg {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
 }
 
 .updateMessage {
   text-align: center;
+  color: white;
+}
+
+.userPageIcons {
+
+  width: 1.3rem;
+  padding: 5px;
+}
+
+.logoutIcon {
+  width: 1.3rem;
+}
+
+.inputField {
+  width: 60px;
+}
+
+.containerCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 20px 7px;
+  border-radius: 10px;
+  background-color: #92002F ;
+  // background-color: #2E4057;
+  // background-color: #5C5D8D;
 }
 
 .container {
 
   position: relative;
-  width: 70%;
+
   text-align: center;
-
   align-items: center;
-
-
-
   justify-content: center;
   display: block;
+  display: flex;
+  justify-content: center;
 
   // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   // border-radius: 5px; /* 5px rounded corners */
@@ -51,14 +88,16 @@
 
 .items {
   display: flex;
-  padding: 0px 4px;
+  padding: 0px 6px;
+  font-size: 16px;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 300px;
-  height: 50px;
+  height: 3rem;
   border-radius: 5px; /* 5px rounded corners */
-  margin: 10px 10px;
+  margin: 15px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background-color: #f6efe8;
   :nth-child(3) {
     box-shadow: none;
@@ -112,11 +151,11 @@ select {
 }
 
 .saveChanges {
-  font-size: 20px;
+  font-size: 16px;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-right: 50px;
   padding-left: 50px;
   border-color: white;

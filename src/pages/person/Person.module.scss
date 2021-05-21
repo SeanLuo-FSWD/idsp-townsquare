@@ -8,9 +8,9 @@
   background-color: #f6efe8;
   text-align: center;
   position: relative;
-  margin: 80px 7px 0px 7px;
+  margin: 65px 7px 15px 7px;
   padding: 19px 0px 1px 0px;
-  top: 20%;
+  top: 0px;
   font-size: 16px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-width: 4px;
@@ -22,12 +22,15 @@
   margin: 0px 7px 0px 7px;
   border-radius: 6px;
   position: relative;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
+  background-color: #f6efe8;
 }
 
 .createdAt {
-  margin: 25px 0px 0px 30px;
-  padding: 15px 0px;
+  margin: 15px 25px 0px 25px;
+  display: flex;
+  justify-content: space-between;
+  padding: 17px 0px 5px 0px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -40,3 +43,32 @@
   grid-gap: 5px;
   background-color: blue;
 }
+<<<<<<< HEAD
+=======
+
+.postContainer {
+
+  padding-bottom: 50px;
+
+}
+
+.followButtons {
+  display: flex;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 0px 10px;
+}
+
+.followUnfollowIcons {
+  padding-left: 2px;
+  width: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27

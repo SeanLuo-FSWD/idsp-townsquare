@@ -13,6 +13,7 @@ import logoutImage from "./assets/logout.svg";
 import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
 import saveChanges from "./assets/save.svg";
+import townSquareLogo from "./assets/townSquareLogo.png"
 import { connect } from "react-redux";
 import {
   doFeedFilterUpdate,
@@ -199,8 +200,9 @@ function Profile(props: any) {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
+            <img className={styles.townSquareLogo} src={townSquareLogo}/>
             <div className={styles.profileUserName}>{currentUser.username}</div>
-            <img src={logoutImage} onClick={handleLogout} />
+            <img className={styles.logoutIcon} src={logoutImage} onClick={handleLogout} />
           </div>
         </SubNav>
 
@@ -210,6 +212,7 @@ function Profile(props: any) {
           </div>
         )}
         <div className={styles.profileContainer}>
+          <div className={styles.containerCard}>
           <div>
             <div className={styles.container}>
               <img
@@ -227,6 +230,7 @@ function Profile(props: any) {
             </div>
           </div>
           <div className={styles.items}>
+<<<<<<< HEAD
             <img
               src={changeProfileImg}
               data-edit="editImg"
@@ -250,10 +254,33 @@ function Profile(props: any) {
               </div>
             )}
           </div>
+=======
+          <img
+                className={styles.userPageIcons}
+                src={changeProfileImg}
+                data-edit="editImg"
+                onClick={handleEditOpen}
+              />
+            {fieldArr.find((ele: string) => ele === "editImg") && (
+                <div className={`flex`}>
+                  <input
+                    className={styles.uploadImage}
+                    type="file"
+                    id="myFile"
+                    name="avatar"
+                    accept="image"
+                    onChange={(e) => getImg(e)}
+                  />
+                  <img className={styles.userPageIcons} src={closeIcon} data-edit="editImg" onClick={handleEditClose}/>
+                </div>
+              )}
+            </div>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
           <div>
             <div className={styles.items}>
-              <div>username: {initPerson.username}</div>
+              <div>Username: {initPerson.username}</div>
               <img
+                className={styles.userPageIcons}
                 src={editImage}
                 data-edit="editUsername"
                 onClick={handleEditOpen}
@@ -262,6 +289,7 @@ function Profile(props: any) {
               {fieldArr.find((ele: string) => ele === "editUsername") && (
                 <div className={`flex`}>
                   <input
+                    className={styles.inputField}
                     type="username"
                     id="username"
                     name="username"
@@ -275,14 +303,19 @@ function Profile(props: any) {
                     data-edit="editUsername"
                     onClick={handleEditClose}
                   />
+<<<<<<< HEAD
+=======
+                  <img className={styles.userPageIcons} src={closeIcon} data-edit="editUsername" onClick={handleEditClose}/>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
                 </div>
               )}
             </div>
           </div>
           <div>
             <div className={styles.items}>
-              <div>age: {initPerson.age}</div>
+              <div>Age: {initPerson.age}</div>
               <img
+                className={styles.userPageIcons}
                 src={editImage}
                 data-edit="editAge"
                 onClick={handleEditOpen}
@@ -301,11 +334,15 @@ function Profile(props: any) {
                       return <option key={year}>{year}</option>;
                     })}
                   </select>
+<<<<<<< HEAD
                   <img
                     src={closeIcon}
                     data-edit="editAge"
                     onClick={handleEditClose}
                   />
+=======
+                  <img className={styles.userPageIcons} src={closeIcon} data-edit="editAge" onClick={handleEditClose}/>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
                 </div>
               )}
             </div>
@@ -314,6 +351,7 @@ function Profile(props: any) {
             <div className={styles.items}>
               <div>Location: {initPerson.location}</div>
               <img
+                className={styles.userPageIcons}
                 src={editImage}
                 data-edit="editLocation"
                 onClick={handleEditOpen}
@@ -334,11 +372,15 @@ function Profile(props: any) {
                     <option value="Richmond">Richmond</option>
                     <option value="Vancouver">Vancouver</option>
                   </select>
+<<<<<<< HEAD
                   <img
                     src={closeIcon}
                     data-edit="editLocation"
                     onClick={handleEditClose}
                   />
+=======
+                  <img className={styles.userPageIcons} src={closeIcon} data-edit="editLocation" onClick={handleEditClose}/>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
                 </div>
               )}
             </div>
@@ -347,6 +389,7 @@ function Profile(props: any) {
             <div className={styles.items}>
               <div>gender: {initPerson.gender}</div>
               <img
+                className={styles.userPageIcons}
                 src={editImage}
                 data-edit="editGender"
                 onClick={handleEditOpen}
@@ -365,14 +408,26 @@ function Profile(props: any) {
                     <option value="male">male</option>
                     <option value="other">other</option>
                   </select>
+<<<<<<< HEAD
                   <img
                     src={closeIcon}
                     data-edit="editGender"
                     onClick={handleEditClose}
                   />
+=======
+                  <img className={styles.userPageIcons} src={closeIcon} data-edit="editGender" onClick={handleEditClose}/>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
                 </div>
+                
               )}
+              
             </div>
+            
+
+
+          </div>
+
+
             <div className={styles.submitButton}>
               <button
                 className={styles.saveChanges}
@@ -380,12 +435,23 @@ function Profile(props: any) {
               >
                 Save
               </button>
+
+              
             </div>
+<<<<<<< HEAD
             <div className={styles.updateMessage}>
               {updateStatus && <p>Profile updated!</p>}
             </div>
           </div>
+=======
+
+            <div className={styles.updateMessage}>
+              {updateStatus && <div>Profile updated!</div>}
+            </div>
         </div>
+>>>>>>> a4ce699f09614e47cd54432c74a54c3122684e27
+        </div>
+          
 
         {/* <form>
           <div className="form-control">

@@ -23,21 +23,23 @@
 .right_arrow {
   // position: absolute;
   right: 0;
-  font-size: 3em;
+  font-size: 2em;
   color: black;
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  margin-right: 10px;
 }
 
 .left_arrow {
   // position: absolute;
   left: 0;
-  font-size: 3em;
+  font-size: 2em;
   color: black;
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  margin-left: 10px;
 }
 
 .slide {

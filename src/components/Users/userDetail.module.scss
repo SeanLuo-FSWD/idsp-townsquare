@@ -5,4 +5,131 @@
 .dropDownWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 0px;
+  margin-bottom: 80px;
+}
+
+.createGroupButton {
+  border: none;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  margin: 5px 0px;
+  width: 120px;
+  padding: 5px 0px;
+  background-color: #92002f;
+  color: white;
+}
+
+.userDescription {
+  margin: 0px 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: left;
+}
+
+.muiDropDown {
+
+}
+
+.followButtons {
+  display: flex;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 0px 10px;
+  
+}
+
+.detailedCards {
+  background-color: #f6efe8;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  display: flex;
+  margin: 10px;
+  border-radius: 10px;
+  
+}
+
+.detailedButtons {
+  
+  display: flex;
+  flex-direction: column-reverse;
+
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 5px 0px;
+  margin: 5px 5px 10px 5px;
+  justify-content: space-around;
+  background-color: #92002f;
+  color: white;
+
+}
+
+.followUnfollowButtons {
+
+  display: flex;
+ 
+}
+
+.verticalAlign {
+  display:flex;
+  flex-direction: column;
+}
+
+.avatarAndInfoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatarAndButtons {
+
+  margin: 5px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.buttonIcons {
+  width: .9rem;
+  margin-bottom: 2px;
+}
+
+.cardWrapper {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputForm {
+  width: 120px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 10px;
 }

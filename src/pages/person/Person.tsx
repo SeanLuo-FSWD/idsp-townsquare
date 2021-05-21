@@ -28,6 +28,10 @@ import {
   doChatIdAdd,
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
+import followIcon from "./assets/follow.svg";
+import unfollowIcon from "./assets/unfollow.svg";
+import followBlackIcon from "./assets/followBlack.svg";
+import unfollowBlackIcon from "./assets/unfollowBlack.svg";
 
 function Person(props: any) {
   const history = useHistory();
@@ -183,12 +187,26 @@ function Person(props: any) {
               <img src={backIcon} onClick={history.goBack} />
               {person.user.userId !== currentUser.userId ? (
                 checkFollowed() ? (
-                  <button onClick={() => onFollowHandle(person.user.userId)}>
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
                     Unfollow
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={unfollowBlackIcon}
+                    />
                   </button>
                 ) : (
-                  <button onClick={() => onFollowHandle(person.user.userId)}>
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
                     Follow
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={followBlackIcon}
+                    />
                   </button>
                 )
               ) : null}
@@ -209,37 +227,44 @@ function Person(props: any) {
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
-        <div className={styles.personContainer}>
-          <img className={styles.profileImg} src={person.user.avatar} alt="" />
-          <div>
-            <p>Username: {person.user.username}</p>
-            <p>Age: {person.user.age}</p>
-            <p>Gender: {person.user.gender}</p>
-            <p>Location: {person.user.location}</p>
+        <div className={styles.postContainer}>
+          <div className={styles.personContainer}>
+            <img
+              className={styles.profileImg}
+              src={person.user.avatar}
+              alt=""
+            />
+            <div>
+              <p>Username: {person.user.username}</p>
+              <p>Age: {person.user.age}</p>
+              <p>Gender: {person.user.gender}</p>
+              <p>Location: {person.user.location}</p>
+            </div>
           </div>
+
+          {person.posts.map((post: any) => {
+            return (
+              <div key={post._id} className={styles.postWrapper}>
+                <div>
+                  <div className={styles.createdAt}>
+                    {new Date(post.createdAt).toDateString()}
+                    {post.userId === currentUser.userId && (
+                      <img
+                        src={deleteIcon}
+                        onClick={() => {
+                          onRemovePost(post._id);
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <Post post={post}></Post>
+              </div>
+            );
+          })}
         </div>
 
-        {person.posts.map((post: any) => {
-          return (
-            <div key={post._id} className={styles.postWrapper}>
-              <div>
-                <p className={styles.createdAt}>
-                  {new Date(post.createdAt).toDateString()}
-                  {post.userId === currentUser.userId && (
-                    <img
-                      src={deleteIcon}
-                      onClick={() => {
-                        onRemovePost(post._id);
-                      }}
-                    />
-                  )}
-                </p>
-              </div>
-
-              <Post post={post}></Post>
-            </div>
-          );
-        })}
         {/* <Feed feed={person.feed} /> */}
       </div>
     );
