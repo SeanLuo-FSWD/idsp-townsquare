@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { connect } from "react-redux";
+import styles from "./ChatList.module.scss";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -54,17 +55,17 @@ function ChatListItem(props: any) {
   return (
     <>
       <div onClick={mapThenRedirect}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex"}}>
           <div>{getAvatars()}</div>
-          <div>
-            <span>
+          <div className={styles.chatListItemContainer}>
+            <div className={styles.chatTimeStamp}>
               {new Date(props.convo.messages[0].createdAt).toLocaleString(
                 "en-US",
                 {
                   timeZone: "America/Los_Angeles",
                 }
               )}
-            </span>
+            </div>
             <p>{props.convo.messages[0].text}</p>
           </div>
         </div>

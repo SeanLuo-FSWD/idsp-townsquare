@@ -28,7 +28,7 @@ function Chat(props: any) {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <p>Chat</p>
-          <button onClick={mapThenRedirect}>
+          <button className={styles.startGroupChatButton} onClick={mapThenRedirect}>
             {/* <Link to="/groupchat">Start group Chat</Link> */}
             Start group Chat
           </button>

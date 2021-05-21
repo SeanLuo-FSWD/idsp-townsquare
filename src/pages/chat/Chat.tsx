@@ -6,7 +6,8 @@ import PortalModal from "../../UI/PortalModal";
 import Overlay from "../../UI/Overlay";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import styles from "./chat.module.scss";
+import backIcon from "./assets/back.svg"
 import {
   getConversationByConversationId,
   getMessagesInConversation,
@@ -22,6 +23,7 @@ import {
   doChatIdAdd,
 } from "../../store/redux/actions/chat_act";
 import _ from "lodash";
+import { StylesProvider } from "@material-ui/styles";
 
 function Chat(props: any) {
   const history = useHistory();
@@ -122,7 +124,7 @@ function Chat(props: any) {
 
       setMessages((messages: any) => {
         const merged_msg = [
-          ...messages.slice(-4),
+          ...messages.slice(-10),
           ...buildMessages([data.newMsg]),
         ];
 
@@ -268,56 +270,71 @@ function Chat(props: any) {
     <>
       <div>
         <SubNav className="flex--space-between">
+          <div className={styles.chatSubNavWrapper}>
           {/* Changed from addedGroup to props.addedGroup as that's what Groupchat uses. */}
           {props.addedGroup.length > 1 ? (
             <div>
-              <button onClick={toChatPage}>Go back</button>
+              <img src={backIcon} onClick={toChatPage}/>
               {/* <button onClick={addUserFilter}>Add user</button> */}
             </div>
           ) : (
-            <div>
-              <button
+
+              <img
+                src={backIcon}
                 onClick={() => {
                   history.goBack();
                 }}
-              >
-                Go back
-              </button>
-            </div>
+              />
+            
           )}
 
-          <p>
+          <div className={styles.chatNavUserInfo}>
             {/* Chatting with: {getAvatars(addedGroup)} */}
             Chatting with:
-            {props.chatType.new && props.chatType.group
-              ? getAvatars(props.addedGroup)
-              : getAvatars(addedGroup)}
-            {/* {getAvatars(props.initialChatGroup)} */}
-            {addedGroup.length > 4 && <span>...</span>}
-          </p>
+            <div className={styles.avatarNav}>
+              {props.chatType.new && props.chatType.group
+                ? getAvatars(props.addedGroup)
+                : getAvatars(addedGroup)}
+              {/* {getAvatars(props.initialChatGroup)} */}
+              {addedGroup.length > 4 && <span>...</span>}
+            </div>
+
+          </div>
+          </div>
+
         </SubNav>
 
+        <div className={styles.messageContainer}>
         <div style={{ position: "relative" }}>
-          <div>
+          <div className={styles.chatRows}>
             {messages.map((m: any) => {
               return <MsgItem key={m._id} msg={m} />;
             })}
           </div>
 
-          <form
-            onSubmit={submitMessage}
-            style={{ display: "flex", bottom: "0" }}
-          >
-            <input
-              type="text"
-              id="inputTxt"
-              name="inputTxt"
-              value={inputTxt}
-              style={{ flex: "1" }}
-              onChange={(e) => setInputTxt(e.target.value)}
-            />
-            <button type="submit">Send</button>
-          </form>
+
+            <form
+              onSubmit={submitMessage}
+              style={{ display: "flex", bottom: "0" }}
+            >
+              <div   className={styles.chatFieldContainer}>
+              <input
+                className={styles.messageField}
+                type="text"
+                id="inputTxt"
+                name="inputTxt"
+                value={inputTxt}
+                style={{ flex: "1" }}
+                onChange={(e) => setInputTxt(e.target.value)}
+              />
+              <button className={styles.sendButton} type="submit">Send</button>
+              </div>
+              
+            </form>
+
+        </div>
+        
+
         </div>
       </div>
       <Navbar currentPath={window.location.pathname} />

@@ -2,9 +2,23 @@
     margin: 0;
     position: relative;
     top: 10%;
-
-
+    display: flex;
+    flex-direction: row;
     img {
         border-radius: 50%;
+        margin: 0px 10px;
     }
+
 }
+
+.startGroupChatButton {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 30px;
+    width: 120px;
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;;
+
+    background-color: white;
+    color: #000000;
+  }

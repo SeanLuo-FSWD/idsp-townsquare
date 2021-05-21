@@ -1,0 +1,26 @@
+.messageContentContainer {
+    
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    overflow-wrap: anywhere;
+    padding: 0px 5px;
+}
+
+.chatMessageAvatar {
+    border-radius: 50%;
+    margin: 0px 5px;
+}
+
+.chatFeedWrapper {
+    margin: 7px 10px;
+    
+    
+}
+
+.chatTimestamp {
+    color: #9c9c9c;
+    font-size: 14px;
+    margin: 0px 5px;
+    
+}

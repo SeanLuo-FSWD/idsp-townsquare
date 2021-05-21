@@ -214,6 +214,7 @@ function Person(props: any) {
               {/* <button onClick={() => setToggleChat(true)}>Chat</button> */}
 
               <button
+                className={styles.followButtons}
                 onClick={() => {
                   history.push(`/chat`);
                 }}

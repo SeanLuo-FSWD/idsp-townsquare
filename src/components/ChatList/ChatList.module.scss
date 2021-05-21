@@ -8,3 +8,15 @@
 .displayPicture {
     margin: 0px 10px 0px 0px;
 }
+
+.chatTimeStamp {
+    color: #9c9c9c;
+    font-size: 14px;
+}
+
+.chatListItemContainer { 
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
