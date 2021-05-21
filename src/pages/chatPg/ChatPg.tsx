@@ -6,6 +6,7 @@ import styles from "./Chat.module.scss";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
   doChatRemove,
   doChatTypeUpdate,
@@ -32,8 +33,8 @@ function Chat(props: any) {
           <p>Chat</p>
           <button className={styles.startGroupChatButton} onClick={mapThenRedirect}>
             {/* <Link to="/groupchat">Start group Chat</Link> */}
-            Start group Chat
-
+            New Group Chat
+            <img className={styles.groupChatIcon} src={groupChatIcon}/>
           </button>
           {/* <button onClick={setNewGroupChat(true)}>Start group Chat</button> */}
         </SubNav>

@@ -15,15 +15,19 @@
 }
 
 .startGroupChatButton {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     height: 30px;
     width: 120px;
     border: none;
     font-size: 14px;
     border-radius: 10px;;
-
-    background-color: white;
-    color: #000000;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    background-color:#92002f;
+    color: #ffffff;
+    font-size: 12px;
   }
 
 .townSquareLogo {
@@ -37,4 +41,8 @@
     border-color: #f6efe8;
     align-items: center;
     text-align: center;
+}
+
+.groupChatIcon {
+    width: 1rem;
 }

@@ -63,10 +63,16 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
         )}
         <div  className={styles.showLikesButton} onClick={() => setShowLikes(!showLikes)}>{likesCount}</div>
         {showLikes && (
-          <div>
+          <div className={styles.likedByContainer}>
+            <div className={styles.likedBy}>
+            Liked by: 
+            </div>
+
+
             {likes.map((like: any) => {
               return <div className={styles.likesNames} key={like._id}>{like.username}</div>;
             })}
+
           </div>
         )}
       </div>

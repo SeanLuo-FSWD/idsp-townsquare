@@ -3,6 +3,9 @@
 .showLikesButton {
 
     padding: 0px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -11,8 +14,8 @@
     padding: 0px 7px 0px 0px;
     display: inline-block;
     flex-wrap: wrap;
-    font-size: 12px;
-    font-style: italic;
+    font-size: 14px;
+    color: #9c9c9c;
 
 }
 
@@ -23,3 +26,16 @@
    
 }
 
+.likedByContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    color: #9c9c9c;
+}
+
+.likedBy {
+    margin-right: 5px;
+    font-size: 15px;
+    align-items: baseline;
+
+}

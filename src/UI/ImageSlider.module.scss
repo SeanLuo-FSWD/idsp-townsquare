@@ -21,25 +21,32 @@
 }
 
 .right_arrow {
-  // position: absolute;
+  position: absolute;
   right: 0;
   font-size: 2em;
-  color: black;
+  color: rgba(0, 0, 0, 0.808);
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  margin-right: 10px;
+  padding: 10px 0px;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.233);
+  
 }
 
 .left_arrow {
-  // position: absolute;
+  position: absolute;
   left: 0;
   font-size: 2em;
-  color: black;
+  color: rgba(0, 0, 0, 0.808);
+  padding: 10px 0px;
+  border-radius: 10px;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  margin-left: 10px;
+  margin-left: 20px;
+  background-color: rgba(255, 255, 255, 0.233);
 }
 
 .slide {
@@ -50,7 +57,7 @@
   img {
     
     background-size: 100% 100%;
-    width: 420px;
+    width: 600px;
     max-height: 400px;
     object-fit: cover;
     // height: auto;
