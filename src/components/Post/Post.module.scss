@@ -16,7 +16,9 @@
 
 .textContainer {
   margin: 5px 25px 10px 25px;
-  padding: 2px 0px;
+  display: flex;
+  justify-content: left;
+
   font-size: 15px;
   text-align: left;
 }
@@ -34,7 +36,6 @@
   flex-direction: row;
   margin: 0;
   margin: 2px 0px;
-
 }
 
 .commentCounter {
@@ -49,7 +50,7 @@
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0px 10px;
+  margin: 0px 15px;
 }
 
 
@@ -78,7 +79,7 @@
   justify-content: center;
 }
 
-input {
+.input {
   border-radius: 5px;
   border: none;
   height: 20px;

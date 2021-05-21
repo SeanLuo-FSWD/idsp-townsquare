@@ -11,6 +11,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { connect } from "react-redux";
 import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
+import townSquareLogo from "./assets/townSquareLogo.png"
 import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
 
@@ -57,21 +58,26 @@ const PeoplePg = (props: any) => {
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
         {/* <div className={styles.header}> */}
-        <div>Hi {currentUser.username}! </div>
-
-
-        <button
-          className={styles.detailedViewToggle}
-          onClick={() => {
-            setDetailView(!detailView);
-          }}
-        >
-          <img className={styles.userIcons} src={detailedViewIcon}></img>
-          {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
-        </button>
-        <div className={styles.filterIcon}>
-          <img className={styles.userIcons} src={filter} onClick={() => setShowModal("filter")} />
+        <div className={styles.logoAndGreeting}>
+          <img className={styles.townSquareLogo} src={townSquareLogo}/>
+          <div>Hi {currentUser.username}! </div>
         </div>
+        
+
+        <div className={styles.subNavIcons}>
+          <img
+          className={styles.userIcons}
+          onClick={() => { setDetailView(!detailView);}}
+          src={detailedViewIcon}/>
+          {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
+
+          <img
+          className={styles.userIcons}
+          src={filter}
+          onClick={() => setShowModal("filter")}/>
+
+        </div>
+        
       </SubNav>
 
       {detailView ? (

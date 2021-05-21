@@ -21,6 +21,8 @@ import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
 import followIcon from "./assets/follow.svg";
 import unfollowIcon from "./assets/unfollow.svg";
+import followBlackIcon from "./assets/followBlack.svg";
+import unfollowBlackIcon from "./assets/unfollowBlack.svg";
 
 function Person() {
   const history = useHistory();
@@ -190,12 +192,14 @@ function Person() {
           ) : null} */}
           {person.user.userId !== currentUser.userId ? (
             checkFollowed() ? (
-              <button onClick={() => onFollowHandle(person.user.userId)}>
+              <button className={styles.followButtons} onClick={() => onFollowHandle(person.user.userId)}>
                 Unfollow
+                <img className={styles.followUnfollowIcons} src={unfollowBlackIcon}/>
               </button>
             ) : (
-              <button onClick={() => onFollowHandle(person.user.userId)}>
+              <button className={styles.followButtons} onClick={() => onFollowHandle(person.user.userId)}>
                 Follow
+                <img className={styles.followUnfollowIcons} src={followBlackIcon}/>
               </button>
             )
           ) : null}
@@ -203,6 +207,7 @@ function Person() {
         {/* <Link to="/users" className="btn">
           Back
         </Link> */}
+      <div className={styles.postContainer}>
         <div className={styles.personContainer}>
           <img className={styles.profileImg} src={person.user.avatar} alt="" />
           <div>
@@ -217,7 +222,7 @@ function Person() {
           return (
             <div key={post.id} className={styles.postWrapper}>
               <div>
-                <p className={styles.createdAt}>
+                <div className={styles.createdAt}>
                   {new Date(post.createdAt).toDateString()}
                   {post.userId === currentUser.userId && (
                     <img
@@ -227,13 +232,16 @@ function Person() {
                       }}
                     />
                   )}
-                </p>
+                </div>
               </div>
 
               <Post post={post}></Post>
             </div>
           );
         })}
+
+      </div>
+
         {/* <Feed feed={person.feed} /> */}
       </div>
     );

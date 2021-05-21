@@ -15,10 +15,13 @@ function UserGrid(props: any) {
         console.log(user);
         return (
           <div key={user._id} className={`${styles.userTile} flex--center`}>
+            <div className={`${styles.cardContainer} flex--center`}>
+              
+            </div>
             <img src={profile_pic}></img>
-            <p className={styles.tileUsername} style={{ position: "absolute", bottom: "0" }}>
+            <div className={styles.tileUsername} style={{ position: "absolute", bottom: "0" }}>
               {user.username}
-            </p>
+            </div>
             <Link to={`/person/${user._id}`} />
           </div>
         );

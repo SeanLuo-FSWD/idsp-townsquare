@@ -13,6 +13,7 @@ import logoutImage from "./assets/logout.svg";
 import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
 import saveChanges from "./assets/save.svg";
+import townSquareLogo from "./assets/townSquareLogo.png"
 import { connect } from "react-redux";
 import {
   doFeedFilterUpdate,
@@ -184,6 +185,7 @@ function Profile(props: any) {
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
+            <img className={styles.townSquareLogo} src={townSquareLogo}/>
             <div className={styles.profileUserName}>{currentUser.username}</div>
             <img className={styles.logoutIcon} src={logoutImage} onClick={handleLogout} />
           </div>

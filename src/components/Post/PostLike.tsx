@@ -48,12 +48,14 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
       <div className={"flex"}>
         {checkLiked() ? (
           <ThumbUpIcon
+              className={styles.liked}
               onClick={() => {
               handleLikeProp();
             }}
           />
         ) : (
           <ThumbUpAltOutlinedIcon
+            className={styles.unliked}
             onClick={() => {
               handleLikeProp();
             }}

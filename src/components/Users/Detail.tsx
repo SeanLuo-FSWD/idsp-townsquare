@@ -12,6 +12,9 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItemText from "@material-ui/core/ListItemText";
+import addToGroupIcon from "./assets/addToGroup.svg";
+import unfollowIcon from "./assets/unfollow.svg";
+import followIcon from "./assets/follow.svg";
 
 function Detail({ user, onFollowHandleProp, followed }: any) {
   const [groupDd, setAddedGroupDd] = useState(false) as any;
@@ -112,78 +115,106 @@ function Detail({ user, onFollowHandleProp, followed }: any) {
   };
 
   return (
-    <div key={user._id} className="flex" style={{ justifyContent: "center" }}>
-      <Link to={`/person/${user._id}`}>
-        <img
-          className={styles2.profileImage}
-          style={{ height: "100px", width: "100px" }}
-          src={user.avatar}
-        ></img>
-      </Link>
+    <div className={styles2.detailedCards}>
+      <div className={styles2.cardWrapper}>
+        <div key={user._id} className="flex" style={{ justifyContent: "center" }}>
+          <div className={styles2.vertialAlign}>
+            <div className={styles2.avatarAndInfoWrapper}>
 
-      <div>
-        <div>
-          <h4>{user.username}</h4>
-          {user._id !== currentUser.userId ? (
-            checkFollowed(user._id) ? (
-              <button onClick={() => onFollowHandleProp(user._id)}>
-                Unfollow
-              </button>
-            ) : (
-              <button onClick={() => onFollowHandleProp(user._id)}>
-                Follow
-              </button>
-            )
-          ) : null}
+              <div className={styles2.avatarAndButtons}>
 
-          <button onClick={() => fetchAvailableGroups(!groupDd)}>
-            Add to Group
-          </button>
-
-          {groupDd && (
-            <FormGroup style={{ flexDirection: "column" }}>
-              <div className={styles2.dropDownWrapper}>
-                {availableGroup.map((name: any) => (
-                  <MenuItem key={name}>
-                    <Checkbox
-                      value={name}
-                      onChange={handleGroupCheck}
-                      checked={addedGroup.indexOf(name) > -1}
-                    />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
+                <Link to={`/person/${user._id}`}>
+                  <img
+                    className={styles2.profileImage}
+                    style={{ height: "100px", width: "100px" }}
+                    src={user.avatar}
+                  ></img>
+                </Link>
               </div>
-              <form>
-                <input type="text" name="newGroup" onChange={handleChange} />
-                <button type="submit" onClick={createNewGroup}>
-                  create new group
+
+
+              <div className={styles2.userDescription}>
+                <div>{user.username}</div>
+
+                <div>
+                  <span style={{ marginRight: "5px" }}>Location</span>
+                  <span>{user.location}</span>
+                </div>
+
+                <div>
+                  <span style={{ marginRight: "5px" }}>Age</span>
+                  <span>{user.age}</span>
+                </div>
+
+                <div>
+                  <span style={{ marginRight: "5px" }}>Gender</span>
+                  <span>{user.gender}</span>
+                </div>
+              </div>
+
+            </div>
+            <div className={styles2.followUnfollowButtons}>
+              {user._id !== currentUser.userId ? (
+                checkFollowed(user._id) ? (
+                  <button className={styles2.detailedButtons} onClick={() => onFollowHandleProp(user._id)}>
+                    Unfollow
+                    <img className={styles2.buttonIcons} src={unfollowIcon} />
+                  </button>
+                ) : (
+                  <button className={styles2.detailedButtons} onClick={() => onFollowHandleProp(user._id)}>
+                    Follow
+                    <img className={styles2.buttonIcons} src={followIcon} />
+                  </button>
+                )
+              ) : null}
+
+
+              <button className={styles2.detailedButtons} onClick={() => fetchAvailableGroups(!groupDd)}>
+                Add to Group
+            <img className={styles2.buttonIcons} src={addToGroupIcon} />
+              </button>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        {groupDd && (
+          <FormGroup style={{ flexDirection: "column" }}>
+            <div className={styles2.dropDownWrapper}>
+
+              {availableGroup.map((name: any) => (
+                <MenuItem key={name}>
+                  <Checkbox
+                    className={styles2.muiDropDown}
+                    value={name}
+                    onChange={handleGroupCheck}
+                    checked={addedGroup.indexOf(name) > -1}
+                  />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+
+              <form className={styles2.inputForm}>
+                <input className={styles2.inputForm} type="text" name="newGroup" onChange={handleChange} />
+                <button className={styles2.createGroupButton} type="submit" onClick={createNewGroup}>
+                  Create Group
                 </button>
+                <button className={styles2.createGroupButton} type="submit" onClick={onAddGroupSubmit}>
+                  Add
+              </button>
               </form>
 
-              <button type="submit" onClick={onAddGroupSubmit}>
-                Add
-              </button>
-            </FormGroup>
-          )}
-        </div>
 
-        <div style={{ display: "flex" }}>
-          <span style={{ marginRight: "20px" }}>Location</span>
-          <span>{user.location}</span>
-        </div>
-
-        <div style={{ display: "flex" }}>
-          <span style={{ marginRight: "20px" }}>age</span>
-          <span>{user.age}</span>
-        </div>
-
-        <div style={{ display: "flex" }}>
-          <span style={{ marginRight: "20px" }}>gender</span>
-          <span>{user.gender}</span>
-        </div>
+            </div>
+          </FormGroup>
+        )}
       </div>
+
     </div>
+
   );
 }
 

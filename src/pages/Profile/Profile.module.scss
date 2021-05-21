@@ -16,6 +16,19 @@
   background-color: #f6efe8;
 }
 
+.townSquareLogo {
+  min-width: 30px;
+  display: inline-block;
+  width: 10px;
+  height: auto;
+  border-radius: 50%;
+  border: solid;
+  border-color: black;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
+}
+
 .profileImg {
   height: 100px;
   width: 100px;
@@ -24,6 +37,7 @@
 
 .updateMessage {
   text-align: center;
+  color: white;
 }
 
 .userPageIcons {
