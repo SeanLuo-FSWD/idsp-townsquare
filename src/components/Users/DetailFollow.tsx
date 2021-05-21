@@ -10,7 +10,13 @@ import {
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
 import { connect } from "react-redux";
-
+import FormGroup from "@material-ui/core/FormGroup";
+import MenuItem from "@material-ui/core/MenuItem";
+import Checkbox from "@material-ui/core/Checkbox";
+import ListItemText from "@material-ui/core/ListItemText";
+import addToGroupIcon from "./assets/addToGroup.svg";
+import unfollowIcon from "./assets/unfollow.svg";
+import followIcon from "./assets/follow.svg";
 // function DetailFollow({ person, onFollowHandleProp, followed }: any) {
 
 function DetailFollow({
@@ -48,31 +54,75 @@ function DetailFollow({
   }
 
   return (
-    <div key={person._id} className="flex" style={{ justifyContent: "center" }}>
-      <Link to={`/person/${person._id}`}>
-        <img
-          className={styles2.profileImage}
-          style={{ height: "100px", width: "100px" }}
-          src={person.avatar}
-        ></img>
-      </Link>
+    <div className={styles2.detailedCards}>
+      <div className={styles2.cardWrapper}>
+        <div
+          key={person._id}
+          className="flex"
+          style={{ justifyContent: "center" }}
+        >
+          <div className={styles2.vertialAlign}>
+            <div className={styles2.avatarAndInfoWrapper}>
+              <div className={styles2.avatarAndButtons}>
+                <Link to={`/person/${person._id}`}>
+                  <img
+                    className={styles2.profileImage}
+                    style={{ height: "100px", width: "100px" }}
+                    src={person.avatar}
+                  ></img>
+                </Link>
+              </div>
 
-      <button onClick={() => mapThenRedirect()}>Chat</button>
+              <div className={styles2.userDescription}>
+                <div>{person.username}</div>
 
-      <div>
-        <div>
-          <h4>{person.username}</h4>
-          {person._id !== currentUser.userId ? (
-            checkFollowed(person._id) ? (
-              <button onClick={() => onFollowHandleProp(person._id)}>
-                Unfollow
-              </button>
-            ) : (
-              <button onClick={() => onFollowHandleProp(person._id)}>
-                Follow
-              </button>
-            )
-          ) : null}
+                <div>
+                  <span style={{ marginRight: "5px" }}>Location</span>
+                  <span>{person.location}</span>
+                </div>
+
+                <div>
+                  <span style={{ marginRight: "5px" }}>Age</span>
+                  <span>{person.age}</span>
+                </div>
+
+                <div>
+                  <span style={{ marginRight: "5px" }}>Gender</span>
+                  <span>{person.gender}</span>
+                </div>
+              </div>
+            </div>
+            <div className={styles2.followUnfollowButtons}>
+              {person._id !== currentUser.userId ? (
+                checkFollowed(person._id) ? (
+                  <button
+                    className={styles2.detailedButtons}
+                    onClick={() => onFollowHandleProp(person._id)}
+                  >
+                    Unfollow
+                    <img className={styles2.buttonIcons} src={unfollowIcon} />
+                  </button>
+                ) : (
+                  <button
+                    className={styles2.detailedButtons}
+                    onClick={() => onFollowHandleProp(person._id)}
+                  >
+                    Follow
+                    <img className={styles2.buttonIcons} src={followIcon} />
+                  </button>
+                )
+              ) : null}
+              {person._id !== currentUser.userId && (
+                <button
+                  className={styles2.detailedButtons}
+                  onClick={() => mapThenRedirect()}
+                >
+                  Chat
+                  <img className={styles2.buttonIcons} src={addToGroupIcon} />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

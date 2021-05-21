@@ -77,7 +77,7 @@ function UserDetail(props: any) {
               followed={followed}
             />
 
-            <div style={{ display: "flex" }}>
+            {/* <div style={{ display: "flex" }}>
               <span style={{ marginRight: "20px" }}>Location</span>
               <span>{person.location}</span>
             </div>
@@ -88,7 +88,7 @@ function UserDetail(props: any) {
             <div style={{ display: "flex" }}>
               <span style={{ marginRight: "20px" }}>gender</span>
               <span>{person.gender}</span>
-            </div>
+            </div> */}
           </div>
         );
       })}

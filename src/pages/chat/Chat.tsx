@@ -6,6 +6,7 @@ import PortalModal from "../../UI/PortalModal";
 import Overlay from "../../UI/Overlay";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 import {
   getConversationByConversationId,
   getMessagesInConversation,
@@ -302,6 +303,7 @@ function Chat(props: any) {
               return <MsgItem key={m._id} msg={m} />;
             })}
           </div>
+
           <form
             onSubmit={submitMessage}
             style={{ display: "flex", bottom: "0" }}
