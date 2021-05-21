@@ -33,6 +33,9 @@ const getConversationByConversationId = (
 };
 
 const getMessagesInConversation = (chatId: string, cb: Function) => {
+  console.log("getMessagesInConversation --------- getMessagesInConversation");
+  console.log(chatId);
+
   axios
     .get(`${API_URL}/conversation/${chatId}/message`, {
       withCredentials: true,

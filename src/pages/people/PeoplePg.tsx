@@ -71,7 +71,11 @@ const PeoplePg = (props: any) => {
           {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
         </button>
         <div className={styles.filterIcon}>
-          <img className={styles.userIcons} src={filter} onClick={() => setShowModal("filter")} />
+          <img
+            className={styles.userIcons}
+            src={filter}
+            onClick={() => setShowModal("filter")}
+          />
         </div>
       </SubNav>
 
@@ -83,7 +87,7 @@ const PeoplePg = (props: any) => {
               return <DetailFollow people={people} />;
             }} */}
 
-            {(person: any, onFollowHandleProp: any, followed: any) => {
+            {/* {(person: any, onFollowHandleProp: any, followed: any) => {
               return (
                 <DetailFollow
                   person={person}
@@ -91,7 +95,7 @@ const PeoplePg = (props: any) => {
                   followed={followed}
                 />
               );
-            }}
+            }} */}
           </UserDetail>
         </div>
       ) : (

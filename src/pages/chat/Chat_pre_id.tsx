@@ -30,7 +30,6 @@ function Chat(props: any) {
 
   const [messages, setMessages] = useState([]) as any;
   const [addedGroup, setAddedGroup] = useState(props.initialChatGroup) as any;
-  const [isNew, setIsNew] = useState(false) as any;
 
   // let goingToFilter = false;
   const { currentUser, setModalProps, setShowModal, setCerror } =
@@ -51,69 +50,64 @@ function Chat(props: any) {
     console.log("3333333333333333");
     console.log("3333333333333333");
 
-    let addedUsersIds: string[] = [];
-    if (!props.chatType.group) {
-      console.log("private chat");
-      console.log(addedGroup);
+    if (props.chatId) {
+      console.log("==========================================");
+      console.log("Existing chat: either private, or group member unchanged");
+      console.log("==========================================");
+      props.onAddChatIdProp(props.chatId);
 
-      for (let i = 0; i < addedGroup.length; i++) {
-        addedUsersIds.push(addedGroup[i].userId);
-      }
-    } else {
-      console.log("group chat");
-      console.log(props.addedGroup);
-      for (let i = 0; i < props.addedGroup.length; i++) {
-        addedUsersIds.push(props.addedGroup[i].userId);
-      }
-    }
-
-    getConversationByConversationId(
-      addedUsersIds,
-      (err: Error, result: any) => {
+      socket.emit("enter chatroom", { conversationId: props.chatId });
+      getMessagesInConversation(props.chatId, (err: Error, result: any) => {
         if (err) {
           setCerror(err.message);
         } else {
-          socket.emit("enter chatroom", { conversationId: result._id });
           console.log(
-            "-------->>> getConversationByConversationId <<<---------"
+            "getMessagesInConversation getMessagesInConversation getMessagesInConversation"
           );
+
           console.log(result);
 
-          props.onAddChatIdProp(result._id);
+          setMessages(buildMessages(result.messages).reverse());
+        }
+      });
+    } else {
+      console.log("==========================================");
+      console.log("new chat here, either private or group");
+      console.log("==========================================");
 
-          if (!result.isNewConversation) {
-            console.log("==========================================");
-            console.log(
-              "Existing chat: either private, or group member unchanged"
-            );
-            console.log("==========================================");
-            getMessagesInConversation(
-              // props.chatId,
-              result._id,
-              (err: Error, result: any) => {
-                if (err) {
-                  setCerror(err.message);
-                } else {
-                  console.log(
-                    "getMessagesInConversation getMessagesInConversation getMessagesInConversation"
-                  );
+      let addedUsersIds: string[] = [];
+      if (!props.chatType.group) {
+        console.log("private chat");
+        console.log(addedGroup);
 
-                  console.log(result);
-
-                  setMessages(buildMessages(result.messages).reverse());
-                  setIsNew(false);
-                }
-              }
-            );
-          } else {
-            console.log("==========================================");
-            console.log("NEW chat: either private, or group");
-            console.log("==========================================");
-            setIsNew(true);
-          }
+        for (let i = 0; i < addedGroup.length; i++) {
+          addedUsersIds.push(addedGroup[i].userId);
+        }
+      } else {
+        console.log("group chat");
+        console.log(props.addedGroup);
+        for (let i = 0; i < props.addedGroup.length; i++) {
+          addedUsersIds.push(props.addedGroup[i].userId);
         }
       }
-    );
+
+      getConversationByConversationId(
+        addedUsersIds,
+        (err: Error, result: any) => {
+          if (err) {
+            setCerror(err.message);
+          } else {
+            socket.emit("enter chatroom", { conversationId: result });
+            console.log(
+              "retrieved new convo id: getConversationByConversationId"
+            );
+            console.log(result);
+
+            props.onAddChatIdProp(result);
+          }
+        }
+      );
+    }
 
     socket.on("received", (data: any) => {
       console.log("msg received received received ");
@@ -174,7 +168,7 @@ function Chat(props: any) {
 
     console.log(addedGroup);
 
-    if (isNew && props.chatType.group) {
+    if (props.chatType.new && props.chatType.group) {
       msgArr.forEach((m: any) => {
         for (let i = 0; i < props.addedGroup.length; i++) {
           if (m.userId === props.addedGroup[i].userId) {
@@ -253,6 +247,10 @@ function Chat(props: any) {
 
     setInputTxt("");
   };
+
+  function addUserFilter() {
+    history.push("/groupchat");
+  }
 
   function toChatPage() {
     history.push("/chatPage");

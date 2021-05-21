@@ -86,6 +86,21 @@ function Profile(props: any) {
   function handleProfileEdit(e: any) {
     e.preventDefault();
 
+    const required_arr = ["gender", "location", "age"];
+    for (let i = 0; i < required_arr.length; i++) {
+      console.log("check if filled");
+
+      console.log(person[required_arr[i]]);
+
+      if (
+        person[required_arr[i]] === null ||
+        person[required_arr[i]] === undefined
+      ) {
+        alert("You must fill all the fields: username, age, gender, location");
+        return;
+      }
+    }
+
     console.log("handleProfileEdit handleProfileEdit handleProfileEdit person");
     console.log(person);
 
@@ -190,7 +205,9 @@ function Profile(props: any) {
         </SubNav>
 
         {currentUser.firstTime && (
-          <div>Welcome {currentUser.username}, please fill your info first.</div>
+          <div>
+            Welcome {currentUser.username}, please fill your info first.
+          </div>
         )}
         <div className={styles.profileContainer}>
           <div>
@@ -207,37 +224,33 @@ function Profile(props: any) {
                   alt=""
                 />
               )}
-
-            
             </div>
           </div>
           <div className={styles.items}>
-          <img
-                src={changeProfileImg}
-                data-edit="editImg"
-                onClick={handleEditOpen}
-              />
+            <img
+              src={changeProfileImg}
+              data-edit="editImg"
+              onClick={handleEditOpen}
+            />
             {fieldArr.find((ele: string) => ele === "editImg") && (
-                <div className={`flex`}>
-                  <input
-                    className={styles.uploadImage}
-                    type="file"
-                    id="myFile"
-                    name="avatar"
-                    accept="image"
-                    onChange={(e) => getImg(e)}
-                  />
-                  <img
-                    src={closeIcon}
-                    data-edit="editImg"
-                    onClick={handleEditClose}
-                  />
-                </div>
-              )}
-            </div>
+              <div className={`flex`}>
+                <input
+                  className={styles.uploadImage}
+                  type="file"
+                  id="myFile"
+                  name="avatar"
+                  accept="image"
+                  onChange={(e) => getImg(e)}
+                />
+                <img
+                  src={closeIcon}
+                  data-edit="editImg"
+                  onClick={handleEditClose}
+                />
+              </div>
+            )}
+          </div>
           <div>
-          
-
             <div className={styles.items}>
               <div>username: {initPerson.username}</div>
               <img
@@ -255,6 +268,7 @@ function Profile(props: any) {
                     placeholder="Create a username"
                     // value={person.username}
                     onChange={handleChange}
+                    required
                   />
                   <img
                     src={closeIcon}
@@ -276,7 +290,13 @@ function Profile(props: any) {
 
               {fieldArr.find((ele: string) => ele === "editAge") && (
                 <div className={`flex`}>
-                  <select name="age" onChange={handleChange} value={person.age}>
+                  <select
+                    name="age"
+                    onChange={handleChange}
+                    value={person.age}
+                    defaultValue={initPerson.age}
+                    required
+                  >
                     {ageArr.map((year) => {
                       return <option key={year}>{year}</option>;
                     })}
@@ -305,6 +325,8 @@ function Profile(props: any) {
                     name="location"
                     onChange={handleChange}
                     value={person.location}
+                    defaultValue={initPerson.location}
+                    required
                   >
                     <option value="Surrey">Surrey</option>
                     <option value="Burnaby">Burnaby</option>
@@ -333,10 +355,11 @@ function Profile(props: any) {
               {fieldArr.find((ele: string) => ele === "editGender") && (
                 <div className={`flex`}>
                   <select
-
                     name="gender"
                     onChange={handleChange}
                     value={person.gender}
+                    defaultValue={initPerson.gender}
+                    required
                   >
                     <option value="female">female</option>
                     <option value="male">male</option>

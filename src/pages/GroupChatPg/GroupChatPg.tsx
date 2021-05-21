@@ -118,7 +118,10 @@ function GroupChatPg(props: any) {
       props.onPropStartChatProp(addedGroup);
       props.doChatTypeUpdateProp(props.chatType);
 
-      props.onSetInitialChatGroup(initialChatGroup);
+      // props.onSetInitialChatGroup(initialChatGroup);
+
+      // Since not implemented addnewmember, must use addedGroup as initialGroup is null
+      props.onSetInitialChatGroup(addedGroup);
       history.push("/chat");
     }
   }

@@ -14,9 +14,9 @@ import { useHistory, useParams } from "react-router-dom";
 function Chat(props: any) {
   const history = useHistory();
 
-  useEffect(() => {
-    props.onRemoveChatProp();
-  }, []);
+  // useEffect(() => {
+  //   props.onRemoveChatProp();
+  // }, []);
 
   function mapThenRedirect() {
     props.doChatTypeUpdateProp({ new: true, group: true });

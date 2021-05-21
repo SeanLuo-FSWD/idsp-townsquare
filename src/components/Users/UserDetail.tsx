@@ -7,6 +7,8 @@ import {
   toggleFollowing,
 } from "../../utils/api/people.api";
 
+import DetailFollow from "../../components/Users/DetailFollow";
+
 function UserDetail(props: any) {
   console.log("UserDetail UserDetail UserDetail: user");
   console.log(props.people);
@@ -68,7 +70,12 @@ function UserDetail(props: any) {
           //   onFollowHandleProp={onFollowHandleProp}
           // ></DetailFollow>
           <div key={person._id}>
-            {props.children(person, onFollowHandleProp, followed)}
+            {/* {props.children(person, onFollowHandleProp, followed)} */}
+            <DetailFollow
+              person={person}
+              onFollowHandleProp={onFollowHandleProp}
+              followed={followed}
+            />
 
             <div style={{ display: "flex" }}>
               <span style={{ marginRight: "20px" }}>Location</span>

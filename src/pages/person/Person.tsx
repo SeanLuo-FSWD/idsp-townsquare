@@ -53,28 +53,40 @@ function Person(props: any) {
         setCerror(err.message);
       } else {
         setPerson(result.data);
+        const personObj = {
+          avatar: result.data.user.avatar,
+          userId: result.data.user.userId,
+          username: result.data.user.username,
+        };
+        console.log("personObj");
+
+        console.log(personObj);
+
+        props.onSetInitialChatGroup([personObj]);
       }
     });
 
-    getConversationByMembers([id], (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        if (result) {
-          console.log(
-            "---------- getConversationByMembers: existing chat with ChatId ---------"
-          );
-          props.onSetChatIdGroup(result);
-          props.doChatTypeUpdateProp({ new: false, group: false });
-        } else {
-          console.log(
-            "---------- getConversationByMembers: NEW chat ---------"
-          );
-          props.doChatTypeUpdateProp({ new: true, group: false });
-        }
-        // props.onSetInitialChatGroup(addedGroup);
-      }
-    });
+    props.doChatTypeUpdateProp({ new: false, group: false });
+
+    // getConversationByMembers([id], (err: Error, result: any) => {
+    //   if (err) {
+    //     setCerror(err.message);
+    //   } else {
+    //     if (result) {
+    //       console.log(
+    //         "---------- getConversationByMembers: existing chat with ChatId ---------"
+    //       );
+    //       props.onSetChatIdGroup(result);
+    //       props.doChatTypeUpdateProp({ new: false, group: false });
+    //     } else {
+    //       console.log(
+    //         "---------- getConversationByMembers: NEW chat ---------"
+    //       );
+    //       props.doChatTypeUpdateProp({ new: true, group: false });
+    //     }
+    //     // props.onSetInitialChatGroup(addedGroup);
+    //   }
+    // });
 
     getFollowingUsers((err: Error, result: any) => {
       if (err) {
@@ -85,23 +97,22 @@ function Person(props: any) {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("[person] [person] [person] [person] [person]");
+  // useEffect(() => {
+  //   console.log("[person] [person] [person] [person] [person]");
 
-    if (person) {
-      const personObj = {
-        avatar: person.user.avatar,
-        userId: person.user.userId,
-        username: person.user.username,
-      };
-      // setAddedGroup([personObj]);
-      console.log("personObj");
+  //   if (person) {
+  //     const personObj = {
+  //       avatar: person.user.avatar,
+  //       userId: person.user.userId,
+  //       username: person.user.username,
+  //     };
+  //     console.log("personObj");
 
-      console.log(personObj);
+  //     console.log(personObj);
 
-      props.onSetInitialChatGroup([personObj]);
-    }
-  }, [person]);
+  //     props.onSetInitialChatGroup([personObj]);
+  //   }
+  // }, [person]);
 
   const onFollowHandle = (followUserId: string) => {
     // SetFollowState({ userId: userId, follow: follow });
