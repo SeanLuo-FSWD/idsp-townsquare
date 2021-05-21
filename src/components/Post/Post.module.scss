@@ -15,7 +15,7 @@
 }
 
 .textContainer {
-  margin: 5px 25px 10px 25px;
+  margin: 0px 15px 15px 15px;
   display: flex;
   justify-content: left;
 
@@ -24,7 +24,7 @@
 }
 
 .likeCommentContainer {
-  padding: 0px 15px 10px 15px;
+  padding: 5px 15px 10px 15px;
   border-radius: 4px;
 
 }
@@ -93,6 +93,6 @@
 .likeCommentNav {
   display: flex;
   justify-content: space-between;
-  margin: 10px 10px;
+  margin: 10px 0px;
   padding: 0px 0px;
 }
