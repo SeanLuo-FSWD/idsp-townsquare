@@ -87,20 +87,22 @@ function Profile(props: any) {
   function handleProfileEdit(e: any) {
     e.preventDefault();
 
-    const required_arr = ["gender", "location", "age"];
-    for (let i = 0; i < required_arr.length; i++) {
-      console.log("check if filled");
+    // const required_arr = ["gender", "location", "age"];
+    // for (let i = 0; i < required_arr.length; i++) {
+    //   console.log("check if filled");
 
-      console.log(person[required_arr[i]]);
+    //   console.log(person[required_arr[i]]);
 
-      if (
-        person[required_arr[i]] === null ||
-        person[required_arr[i]] === undefined
-      ) {
-        alert("You must fill all the fields: username, age, gender, location");
-        return;
-      }
-    }
+    //   if (
+    //     (person[required_arr[i]] === null ||
+    //       person[required_arr[i]] === undefined) &&
+    //     (initPerson[required_arr[i]] === null ||
+    //       initPerson[required_arr[i]] === undefined)
+    //   ) {
+    //     alert("You must fill all the fields: username, age, gender, location");
+    //     return;
+    //   }
+    // }
 
     console.log("handleProfileEdit handleProfileEdit handleProfileEdit person");
     console.log(person);
