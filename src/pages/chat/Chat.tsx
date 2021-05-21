@@ -7,7 +7,7 @@ import Overlay from "../../UI/Overlay";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./chat.module.scss";
-import backIcon from "./assets/back.svg"
+import backIcon from "./assets/back.svg";
 import {
   getConversationByConversationId,
   getMessagesInConversation,
@@ -271,70 +271,63 @@ function Chat(props: any) {
       <div>
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
-          {/* Changed from addedGroup to props.addedGroup as that's what Groupchat uses. */}
-          {props.addedGroup.length > 1 ? (
-            <div>
-              <img src={backIcon} onClick={toChatPage}/>
-              {/* <button onClick={addUserFilter}>Add user</button> */}
-            </div>
-          ) : (
-
+            {/* Changed from addedGroup to props.addedGroup as that's what Groupchat uses. */}
+            {props.addedGroup.length > 1 ? (
+              <div>
+                <img src={backIcon} onClick={toChatPage} />
+                {/* <button onClick={addUserFilter}>Add user</button> */}
+              </div>
+            ) : (
               <img
                 src={backIcon}
                 onClick={() => {
                   history.goBack();
                 }}
               />
-            
-          )}
+            )}
 
-          <div className={styles.chatNavUserInfo}>
-            {/* Chatting with: {getAvatars(addedGroup)} */}
-            Chatting with:
-            <div className={styles.avatarNav}>
-              {props.chatType.new && props.chatType.group
-                ? getAvatars(props.addedGroup)
-                : getAvatars(addedGroup)}
-              {/* {getAvatars(props.initialChatGroup)} */}
-              {addedGroup.length > 4 && <span>...</span>}
+            <div className={styles.chatNavUserInfo}>
+              {/* Chatting with: {getAvatars(addedGroup)} */}
+              Chatting with:
+              <div className={styles.avatarNav}>
+                {props.chatType.new && props.chatType.group
+                  ? getAvatars(props.addedGroup)
+                  : getAvatars(addedGroup)}
+                {/* {getAvatars(props.initialChatGroup)} */}
+                {addedGroup.length > 4 && <span>...</span>}
+              </div>
             </div>
-
           </div>
-          </div>
-
         </SubNav>
 
         <div className={styles.messageContainer}>
-        <div style={{ position: "relative" }}>
-          <div className={styles.chatRows}>
-            {messages.map((m: any) => {
-              return <MsgItem key={m._id} msg={m} />;
-            })}
-          </div>
-
+          <div className={styles.messageBox}>
+            <div className={styles.chatRows}>
+              {messages.map((m: any) => {
+                return <MsgItem key={m._id} msg={m} />;
+              })}
+            </div>
 
             <form
               onSubmit={submitMessage}
               style={{ display: "flex", bottom: "0" }}
             >
-              <div   className={styles.chatFieldContainer}>
-              <input
-                className={styles.messageField}
-                type="text"
-                id="inputTxt"
-                name="inputTxt"
-                value={inputTxt}
-                style={{ flex: "1" }}
-                onChange={(e) => setInputTxt(e.target.value)}
-              />
-              <button className={styles.sendButton} type="submit">Send</button>
+              <div className={styles.chatFieldContainer}>
+                <input
+                  className={styles.messageField}
+                  type="text"
+                  id="inputTxt"
+                  name="inputTxt"
+                  value={inputTxt}
+                  style={{ flex: "1" }}
+                  onChange={(e) => setInputTxt(e.target.value)}
+                />
+                <button className={styles.sendButton} type="submit">
+                  Send
+                </button>
               </div>
-              
             </form>
-
-        </div>
-        
-
+          </div>
         </div>
       </div>
       <Navbar currentPath={window.location.pathname} />
