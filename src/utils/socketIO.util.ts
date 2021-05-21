@@ -9,7 +9,7 @@ const connectionOptions = {
   autoConnect: false,
 } as any;
 
-const socket = socketIO("http://localhost:8000", {
+const socket = socketIO("http://34.145.97.81/", {
   withCredentials: true,
   autoConnect: false,
 });
