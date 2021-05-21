@@ -4,6 +4,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
 import styles from "./RegisterPg.module.scss";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 
 const Register = () => {
   const history = useHistory();
@@ -56,7 +57,7 @@ const Register = () => {
           <img
             className={styles.logo}
             id="logo"
-            src="https://i.imgur.com/0ldmkwI.png"
+            src={townSquareLogo}
             alt="TownSquareLogo"
           ></img>
           <h1 className="signUpTitle">Sign Up</h1>

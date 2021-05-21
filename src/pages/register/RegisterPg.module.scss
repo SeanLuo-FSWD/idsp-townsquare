@@ -21,6 +21,8 @@ body {
     .alreadyHaveAccount {
         color: #85171B;
         font-size: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
 
     }
 
@@ -98,14 +100,18 @@ body {
     }
 
     .logo {
-        display: block;
         min-width: 100px;
+        border-radius: 33%;
+        border: solid;
+        border-width: 2px;
+        border-color: #f6efe8;
+        display: block;
         margin-left: auto;
         margin-right: auto;
-
         width: 25%;
+        max-width: 100px;
         height: auto;
-        border-radius: 18px; /* 5px rounded corners */
+        border-radius: 18px;
     }
 
     .card {

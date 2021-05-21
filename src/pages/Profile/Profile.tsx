@@ -13,7 +13,7 @@ import logoutImage from "./assets/logout.svg";
 import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
 import saveChanges from "./assets/save.svg";
-import townSquareLogo from "./assets/townSquareLogo.png";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 import { connect } from "react-redux";
 import {
   doFeedFilterUpdate,

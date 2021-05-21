@@ -12,7 +12,7 @@ import styles from "./FeedPg.module.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import createPost from "./assets/createPost.svg";
 import filter from "./assets/filter.svg";
-import townSquareLogo from "./assets/townSquareLogo.png";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 import _ from "lodash";
 import { Filter } from "@material-ui/icons";
 import FeedFilter from "../../components/Filter/FeedFilter";

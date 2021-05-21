@@ -11,7 +11,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { connect } from "react-redux";
 import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
-import townSquareLogo from "./assets/townSquareLogo.png";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
 import DetailFollow from "../../components/Users/DetailFollow";

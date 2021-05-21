@@ -3,7 +3,7 @@ import ChatList from "../../components/ChatList/ChatList";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
-import townSquareLogo from "./assets/townSquareLogo.png";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {

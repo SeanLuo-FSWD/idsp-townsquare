@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
 import styles from "./LoginPg.module.scss";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 
 function Login() {
   const history = useHistory();
@@ -62,7 +63,7 @@ function Login() {
         <div>
           <img
             className={styles.logo}
-            src="https://i.imgur.com/0ldmkwI.png"
+            src={townSquareLogo}
             alt="TownSquareLogo"
           ></img>
           <h1 className="townSquareTitle">TownSquare</h1>

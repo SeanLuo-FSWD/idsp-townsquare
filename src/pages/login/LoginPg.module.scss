@@ -19,23 +19,6 @@
 
     }
 
-    .inputField {
-        position: relative;
-        max-width: 225px;
-        margin: 10px 0px;
-        width: 75%;
-        padding: 7px;
-        height: 1.5em;
-        border-radius: 10px;
-        color: white;
-        border-color: white;
-        border-style: solid;
-        border-width: 2px;
-        background-color: #92002F;
-        font-family: 'Poppins', sans-serif;
-        text-align: center;
-
-    }
 
     ::placeholder {
         color: white;
@@ -63,10 +46,15 @@
         top: 10px;
         bottom: 20px;
         padding: 20px;
+        margin: 10px 0px;
     }
 
     .logo {
         min-width: 100px;
+        border-radius: 33%;
+        border: solid;
+        border-width: 2px;
+        border-color: #f6efe8;
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -100,12 +88,10 @@
       .loginButton {
           font-size: 28px;
           position: relative;
+          width: 210px;
           top: 20px;
           bottom: 20px;
-          padding-top: 20px;
-          padding-bottom: 20px;
-          padding-right: 100px;
-          padding-left: 100px;
+          padding: 10px 70px;
           border-color: white;
           border-style: none;
           border-radius: 50px; /* 5px rounded corners */
@@ -113,14 +99,37 @@
           max-width: 300px;
           text-decoration: none;
           margin: auto;
+          align-items: center;
       }
+
+        .inputField {
+            position: relative;
+            height: 500px;
+            width: 200px;
+            max-width: 225px;
+            padding: 10px 0px;
+            margin: 10px 0px;
+            align-items: center;
+            height: 20px;
+            border-radius: 10px;
+            color: white;
+            border-color: white;
+            border-style: solid;
+            border-width: 2px;
+            background-color: #92002F;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+
+        }
 
       .registerButton {
         font-size: 18px;
-        padding-top: 1em;
-        padding-bottom: 1em;
-        padding-right: 3em;
-        padding-left: 3em;
+        width: 100px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
         border-radius: 50px; /* 5px rounded corners */
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         border-color: white;
