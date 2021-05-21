@@ -124,7 +124,7 @@ function Chat(props: any) {
 
       setMessages((messages: any) => {
         const merged_msg = [
-          ...messages.slice(-10),
+          ...messages.slice(-25),
           ...buildMessages([data.newMsg]),
         ];
 

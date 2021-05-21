@@ -3,6 +3,7 @@ import ChatList from "../../components/ChatList/ChatList";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
+import townSquareLogo from "./assets/townSquareLogo.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -27,10 +28,12 @@ function Chat(props: any) {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
+          <img className={styles.townSquareLogo} src={townSquareLogo}/>
           <p>Chat</p>
           <button className={styles.startGroupChatButton} onClick={mapThenRedirect}>
             {/* <Link to="/groupchat">Start group Chat</Link> */}
             Start group Chat
+
           </button>
           {/* <button onClick={setNewGroupChat(true)}>Start group Chat</button> */}
         </SubNav>

@@ -1,14 +1,17 @@
 .chatContainer {
     margin: 0;
     position: relative;
-    top: 10%;
+    top: 43px;
+    padding: 35px 10px;
     display: flex;
     flex-direction: row;
     img {
         border-radius: 50%;
         margin: 0px 10px;
     }
-
+    #root {
+        background-color: blue;
+    }
 }
 
 .startGroupChatButton {
@@ -22,3 +25,15 @@
     background-color: white;
     color: #000000;
   }
+
+.townSquareLogo {
+    min-width: 30px;
+    display: inline-block;
+    width: 10px;
+    height: auto;
+    border-radius: 50%;
+    border: solid;
+    border-color: black;
+    align-items: center;
+    text-align: center;
+}

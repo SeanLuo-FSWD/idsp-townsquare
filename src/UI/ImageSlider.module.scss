@@ -48,7 +48,16 @@
   display: flex;
   justify-content: center;
   img {
-    max-height: 300px;
+    
+    background-size: 100% 100%;
+    width: 420px;
+    height: 400px;
+    object-fit: cover;
+    // height: auto;
+    // width: 700px;
+    // max-height: 300px;
+    // overflow-y: visible;
+    // background-size: auto 100%;
   }
 }
 
