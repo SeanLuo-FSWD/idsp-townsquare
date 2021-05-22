@@ -202,7 +202,6 @@ function GroupChatPg(props: any) {
   );
 }
 
-// export default FeedFilterModalContent;
 const mapStateToProps = (state: any) => {
   return {
     chatId: state.chatState.chatId,

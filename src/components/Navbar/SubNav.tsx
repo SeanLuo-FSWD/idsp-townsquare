@@ -6,6 +6,11 @@ import Badge from "@material-ui/core/Badge";
 import { Link } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
+import { connect } from "react-redux";
+import {
+  doNoticeError,
+  doNoticeAdd,
+} from "../../store/redux/actions/notice_act";
 
 function SubNav(props: any) {
   const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
@@ -51,7 +56,7 @@ function SubNav(props: any) {
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
-      {/* <div>
+      <div>
         <Badge badgeContent={currentUser.alert.length} color="primary">
           <NotificationsIcon
             onClick={() => {
@@ -72,9 +77,29 @@ function SubNav(props: any) {
             </ul>
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }
 
-export default SubNav;
+const mapStateToProps = (state: any) => {
+  return {
+    noticeState: state.noticeReducer.noticeState,
+    error: state.chatState.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    doNoticeErrorProp: (error: any) => dispatch(doNoticeError(error)),
+    doNoticeAddProp: (notice: {
+      message: string;
+      link: string;
+      timestamp: Date;
+    }) => dispatch(doNoticeAdd(notice)),
+    doNoticeRemove: (notice: string) => dispatch(doNoticeAdd(notice)),
+  };
+};
+
+// export default SubNav;
+export default connect(mapStateToProps, mapDispatchToProps)(SubNav);
