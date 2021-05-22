@@ -23,7 +23,7 @@ const Routing = () => {
           {cerror && <Error message={cerror} />}
           <Register />
         </Route>
-        <Route path="/api/user/verify">
+        <Route path="/user/verify">
           {cerror && <Error message={cerror} />}
           <Verify />
         </Route>

@@ -55,18 +55,34 @@ function ChatListItem(props: any) {
   return (
     <>
       <div onClick={mapThenRedirect}>
-        <div style={{ display: "flex"}}>
+        <div style={{ display: "flex" }}>
           <div>{getAvatars()}</div>
           <div className={styles.chatListItemContainer}>
-            <div className={styles.chatTimeStamp}>
-              {new Date(props.convo.messages[0].createdAt).toLocaleString(
-                "en-US",
-                {
-                  timeZone: "America/Los_Angeles",
-                }
-              )}
-            </div>
-            <p>{props.convo.messages[0].text}</p>
+            {props.convo.latestMessage.length > 0 ? (
+              <>
+                <div className={styles.chatTimeStamp}>
+                  {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
+                  {new Date(
+                    props.convo.latestMessage[0].createdAt
+                  ).toLocaleString("en-US", {
+                    timeZone: "America/Los_Angeles",
+                  })}
+                </div>
+
+                <p>{props.convo.latestMessage[0].text}</p>
+              </>
+            ) : (
+              <>
+                <div className={styles.chatTimeStamp}>
+                  <span>
+                    new conversation created at: &nbsp; <br />
+                    {new Date(props.convo.createdAt).toLocaleString("en-US", {
+                      timeZone: "America/Los_Angeles",
+                    })}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
