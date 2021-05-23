@@ -81,8 +81,9 @@ function PeopleFilterModalContent(props: any) {
       props.onFeedFilterSubmit(feedPgSlice);
     }
 
-    setModalProps(null);
-    setShowModal("");
+    // setModalProps(null);
+    // setShowModal("");
+    props.toggleFilterProp(false);
   };
 
   if (props.error) {
@@ -129,9 +130,10 @@ function PeopleFilterModalContent(props: any) {
         <button onClick={onPeopleFilterClick}>Submit</button>
         <button
           onClick={() => {
-            setModalProps(null);
-            setShowModal("");
+            // setModalProps(null);
+            // setShowModal("");
             props.onPeopleFilterRemove();
+            props.toggleFilterProp(false);
           }}
         >
           Cancel

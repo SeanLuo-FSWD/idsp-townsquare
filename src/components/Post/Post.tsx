@@ -1,26 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import { TComment } from "../../interfaces/IPost";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import PostLike from "./PostLike";
-import PostComment from "./PostComment";
 import { LoginContext } from "../../store/context/LoginContext";
-import _, { countBy } from "lodash";
-import { v4 as uuidv4 } from "uuid";
-import { connect } from "react-redux";
-
+import _ from "lodash";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
-import user from "./user.svg";
 import comments from "./comments.svg";
-import sendIcon from "./assets/send.svg";
 import ImageSlider from "../../UI/ImageSlider";
-import {
-  fetchFeed,
-  createComment,
-  toggleLikePost,
-  postCreate,
-} from "../../utils/api/posts.api";
+import { createComment, toggleLikePost } from "../../utils/api/posts.api";
 import socket from "../../utils/socketIO.util";
 
 import { IPost, TLikes } from "../../interfaces/IPost";

@@ -16,8 +16,6 @@ function GroupChat({
   const [openPortal, setOpenPortal] = useState(false);
   const [addedPeople, setAddedPeople] = useState(addedGroup);
 
-  const [messages, setMessages] = useState([]) as any;
-
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let person_id = params.get("id");

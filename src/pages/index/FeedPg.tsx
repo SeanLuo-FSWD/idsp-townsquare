@@ -36,6 +36,7 @@ const FeedPg = (props: any) => {
   const [followState, SetFollowState] = useState(null) as any;
   const { postId } = useParams() as any;
   const [followed, setFollowed] = useState([]) as any;
+  const [showFilter, setShowFilter] = useState(false);
 
   // const newUser = useOnFollowHandle(followState);
 
@@ -106,6 +107,10 @@ const FeedPg = (props: any) => {
     });
   };
 
+  const toggleFilterProp = (showState: boolean) => {
+    setShowFilter(showState);
+  };
+
   const onFollowHandle = (followUserId: string) => {
     // SetFollowState({ userId: userId, follow: follow });
     toggleFollowing(followUserId, (err: Error, result: any) => {
@@ -172,65 +177,72 @@ const FeedPg = (props: any) => {
             <img
               className={styles.filter}
               src={filter}
-              onClick={() => setShowModal("filter")}
+              // onClick={() => setShowModal("filter")}
+              onClick={() => setShowFilter(true)}
             />
             {/* </div> */}
           </div>
         </SubNav>
-        <div className={styles.feedContainer}>
-          {/* <Feed feed={feed} /> */}
 
-          {feed.map((post: any) => {
-            return (
-              <div key={post._id} className={styles.postWrapper}>
-                <div className="flex--space-postNav">
-                  <div
-                    className={styles.flexpostNav}
-                    onClick={() => profileRedirect(post.userId)}
-                  >
-                    <img
-                      src={post.avatar}
-                      alt=""
-                      className={styles.postWrapper__img}
-                    />
-                  </div>
+        {showFilter ? (
+          <FeedFilterModalContent toggleFilterProp={toggleFilterProp} />
+        ) : (
+          <div className={styles.feedContainer}>
+            {/* <Feed feed={feed} /> */}
 
-                  <div className={styles.flexpostNavDetails}>
-                    <div className={styles.uName}>{post.username}</div>
-                    <div className={styles.dateInfo}>
-                      {new Date(post.createdAt).toDateString()}
+            {feed.map((post: any) => {
+              return (
+                <div key={post._id} className={styles.postWrapper}>
+                  <div className="flex--space-postNav">
+                    <div
+                      className={styles.flexpostNav}
+                      onClick={() => profileRedirect(post.userId)}
+                    >
+                      <img
+                        src={post.avatar}
+                        alt=""
+                        className={styles.postWrapper__img}
+                      />
                     </div>
+
+                    <div className={styles.flexpostNavDetails}>
+                      <div className={styles.uName}>{post.username}</div>
+                      <div className={styles.dateInfo}>
+                        {new Date(post.createdAt).toDateString()}
+                      </div>
+                    </div>
+
+                    {post.userId === currentUser.userId ? (
+                      <img
+                        src={deletePostIcon}
+                        className={styles.followUnfollowDelete}
+                        onClick={() => {
+                          onRemovePost(post._id);
+                        }}
+                      />
+                    ) : checkFollowed(post.userId) ? (
+                      <img
+                        className={styles.followUnfollowDelete}
+                        src={unfollow}
+                        onClick={() => onFollowHandle(post.userId)}
+                      />
+                    ) : (
+                      <img
+                        className={styles.followUnfollowDelete}
+                        src={follow}
+                        onClick={() => onFollowHandle(post.userId)}
+                      />
+                    )}
                   </div>
 
-                  {post.userId === currentUser.userId ? (
-                    <img
-                      src={deletePostIcon}
-                      className={styles.followUnfollowDelete}
-                      onClick={() => {
-                        onRemovePost(post._id);
-                      }}
-                    />
-                  ) : checkFollowed(post.userId) ? (
-                    <img
-                      className={styles.followUnfollowDelete}
-                      src={unfollow}
-                      onClick={() => onFollowHandle(post.userId)}
-                    />
-                  ) : (
-                    <img
-                      className={styles.followUnfollowDelete}
-                      src={follow}
-                      onClick={() => onFollowHandle(post.userId)}
-                    />
-                  )}
+                  <Post post={post}></Post>
                 </div>
+              );
+            })}
+          </div>
+        )}
 
-                <Post post={post}></Post>
-              </div>
-            );
-          })}
-        </div>
-        {showModal ? (
+        {/* {showModal ? (
           showModal === "postUpload" ? (
             <Modal>
               <PostModalContent feed={feed} addPostProp={addPostProp} />
@@ -240,7 +252,15 @@ const FeedPg = (props: any) => {
               <FeedFilterModalContent />
             </Modal>
           )
-        ) : null}
+        ) : null} */}
+
+        {showModal
+          ? showModal === "postUpload" && (
+              <Modal>
+                <PostModalContent feed={feed} addPostProp={addPostProp} />
+              </Modal>
+            )
+          : null}
 
         <Navbar currentPath={window.location.pathname} />
       </>

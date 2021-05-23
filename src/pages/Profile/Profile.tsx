@@ -32,6 +32,7 @@ function Profile(props: any) {
   const history = useHistory();
 
   let imgFile: any = null;
+
   useEffect(() => {
     console.log("state refresh");
     console.log(currentUser);
@@ -46,15 +47,13 @@ function Profile(props: any) {
       value = parseInt(value);
     }
 
-    console.log("fffffffffffffffffffffff");
-    console.log("88888888888888888888");
-
-    console.log({ ...person, [name]: value });
-
     setPerson({ ...person, [name]: value });
   };
 
   function handleEditOpen(e: any) {
+    console.log("fffffffffffffffffffffff");
+    console.log("88888888888888888888");
+    setUpdateStatus(false);
     setFieldArr([...fieldArr, e.target.getAttribute("data-edit")]);
   }
 
@@ -243,11 +242,6 @@ function Profile(props: any) {
                       // value={person.username}
                       onChange={handleChange}
                       required
-                    />
-                    <img
-                      src={closeIcon}
-                      data-edit="editUsername"
-                      onClick={handleEditClose}
                     />
                     <img
                       className={styles.userPageIcons}

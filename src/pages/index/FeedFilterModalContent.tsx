@@ -5,7 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
-import styles from "./FeedFilterModalContent.module.scss"
+import styles from "./FeedFilterModalContent.module.scss";
 import { LoginContext } from "../../store/context/LoginContext";
 import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
@@ -19,9 +19,8 @@ import {
 import { connect } from "react-redux";
 
 function FeedFilterModalContent(props: any) {
-  const { showModal, setModalProps, setShowModal, setCerror } = useContext(
-    LoginContext
-  );
+  const { showModal, setModalProps, setShowModal, setCerror } =
+    useContext(LoginContext);
 
   const [showPeopleFilter, setShowPeopleFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState(props.feedPg.feed);
@@ -94,7 +93,8 @@ function FeedFilterModalContent(props: any) {
     }
 
     // setModalProps(null);
-    setShowModal("");
+    // setShowModal("");
+    props.toggleFilterProp(false);
   };
 
   if (props.error) {
@@ -136,29 +136,30 @@ function FeedFilterModalContent(props: any) {
         feedPg_People={props.feedPg.people}
       />
 
-
-
-        <button className={styles.submitButton} onClick={onFeedFilterClick}>Submit</button>
-        <button
-          onClick={() => {
-            // setModalProps(null);
-            setShowModal("");
-            props.onFeedFilterRemove();
-          }}
-        >
-          Cancel
-        </button>
-        <FormControlLabel
-          control={
-            <Checkbox
-              // checked={hasSync}
-              onChange={handleHasSyncFilter}
-              name="Have_image"
-            />
-          }
-          label="Apply to User page"
-        />
-        </div>
+      <button className={styles.submitButton} onClick={onFeedFilterClick}>
+        Submit
+      </button>
+      <button
+        onClick={() => {
+          // setModalProps(null);
+          // setShowModal("");
+          props.onFeedFilterRemove();
+          props.toggleFilterProp(false);
+        }}
+      >
+        Cancel
+      </button>
+      <FormControlLabel
+        control={
+          <Checkbox
+            // checked={hasSync}
+            onChange={handleHasSyncFilter}
+            name="Have_image"
+          />
+        }
+        label="Apply to User page"
+      />
+    </div>
   );
 }
 

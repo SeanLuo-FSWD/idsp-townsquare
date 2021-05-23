@@ -19,6 +19,7 @@ import DetailFollow from "../../components/Users/DetailFollow";
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
   const [detailView, setDetailView] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
 
   const {
     showModal,
@@ -39,8 +40,12 @@ const PeoplePg = (props: any) => {
     });
   }, [props.peoplePg]);
 
-  const filterPeopleProp = (result: any) => {
-    setPeople(result);
+  // const filterPeopleProp = (result: any) => {
+  //   setPeople(result);
+  // };
+
+  const toggleFilterProp = (showState: boolean) => {
+    setShowFilter(showState);
   };
 
   if (!people) {
@@ -77,12 +82,16 @@ const PeoplePg = (props: any) => {
           <img
             className={styles.userIcons}
             src={filter}
-            onClick={() => setShowModal("filter")}
+            // onClick={() => setShowModal("filter")}
+            onClick={() => setShowFilter(true)}
           />
         </div>
       </SubNav>
 
-      {detailView ? (
+      {showFilter ? (
+        // <PeopleFilterModalContent filterPostProp={filterPeopleProp} />
+        <PeopleFilterModalContent toggleFilterProp={toggleFilterProp} />
+      ) : detailView ? (
         <div className={styles2.detailedViewContainer}>
           <UserDetail people={people}>
             {/* <UserDetail>
@@ -107,13 +116,24 @@ const PeoplePg = (props: any) => {
         </div>
       )}
 
+      {/* {detailView ? (
+        <div className={styles2.detailedViewContainer}>
+          <UserDetail people={people}>
+          </UserDetail>
+        </div>
+      ) : (
+        <div className={styles.userContainer}>
+          <UserGrid people={people} />
+        </div>
+      )}
+
       {showModal
         ? showModal === "filter" && (
             <Modal>
               <PeopleFilterModalContent filterPostProp={filterPeopleProp} />
             </Modal>
           )
-        : null}
+        : null} */}
     </>
   );
 };
