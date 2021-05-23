@@ -6,6 +6,7 @@ import {
   getFollowingUsers,
   toggleFollowing,
 } from "../../utils/api/people.api";
+import socket from "../../utils/socketIO.util";
 
 import DetailFollow from "../../components/Users/DetailFollow";
 
@@ -35,11 +36,19 @@ function UserDetail(props: any) {
       if (err) {
         setCerror(err.message);
       } else {
-        if (result === "followed") {
+        if (result.follow_status === "followed") {
+          console.log("UserDetail.tsx - followed : result");
+
           setFollowed([
             ...followed,
             { followingUserId: followUserId, userId: currentUser.userId },
           ]);
+
+          const notification_obj = result.notification_result;
+
+          if (notification_obj) {
+            socket.emit("notification", notification_obj);
+          }
         } else {
           const new_follow_arr = _.filter(
             followed,
@@ -57,38 +66,13 @@ function UserDetail(props: any) {
   return (
     <div>
       {props.people.map((person: any) => {
-        const propObj = {
-          person: person,
-          onFollowHandleProp: "onFollowHandleProp",
-          followed: "followed",
-        };
-
         return (
-          // <DetailFollow
-          //   person={person}
-          //   followed={followed}
-          //   onFollowHandleProp={onFollowHandleProp}
-          // ></DetailFollow>
           <div key={person._id}>
-            {/* {props.children(person, onFollowHandleProp, followed)} */}
             <DetailFollow
               person={person}
               onFollowHandleProp={onFollowHandleProp}
               followed={followed}
             />
-
-            {/* <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "20px" }}>Location</span>
-              <span>{person.location}</span>
-            </div>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "20px" }}>age</span>
-              <span>{person.age}</span>
-            </div>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "20px" }}>gender</span>
-              <span>{person.gender}</span>
-            </div> */}
           </div>
         );
       })}

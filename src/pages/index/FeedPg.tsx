@@ -27,6 +27,7 @@ import { getFollowingUsers, toggleFollowing } from "../../utils/api/people.api";
 import follow from "./follow.svg";
 import deletePostIcon from "./delete.svg";
 import unfollow from "./unfollow.svg";
+import socket from "../../utils/socketIO.util";
 
 const FeedPg = (props: any) => {
   const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
@@ -119,11 +120,17 @@ const FeedPg = (props: any) => {
         // userId: "6099dff94ed44209b8b49fb5";
         // _id: "609c64dc439f85859d80c8b5";
 
-        if (result === "followed") {
+        if (result.follow_status === "followed") {
           setFollowed([
             ...followed,
             { followingUserId: followUserId, userId: currentUser.userId },
           ]);
+
+          const notification_obj = result.notification_result;
+
+          if (notification_obj) {
+            socket.emit("notification", notification_obj);
+          }
         } else {
           const new_follow_arr = _.filter(
             followed,

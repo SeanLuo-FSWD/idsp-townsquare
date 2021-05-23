@@ -25,13 +25,13 @@ function SubNav(props: any) {
 
   const [showDD, setShowDD] = useState(false);
 
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log("props.notices");
-
   // console.log(props.notices);
   // useEffect(() => {
-  //   setNoticeState(props.notices);
-  // }, [props.notices]);
+  //   document.body.addEventListener("click", (e) => {
+  //     e.stopPropagation();
+  //     setShowDD(false);
+  //   });
+  // }, []);
 
   function removeMapThenRedirect(
     link: string,
@@ -69,8 +69,9 @@ function SubNav(props: any) {
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
       <div>
-        <Badge badgeContent={props.notices.length} color="primary">
+        <Badge badgeContent={props.notices.length} max={10} color="primary">
           <NotificationsIcon
+            className={styles.notificationIcon}
             onClick={() => {
               setShowDD(!showDD);
             }}

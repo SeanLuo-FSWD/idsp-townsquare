@@ -32,6 +32,7 @@ import followIcon from "./assets/follow.svg";
 import unfollowIcon from "./assets/unfollow.svg";
 import followBlackIcon from "./assets/followBlack.svg";
 import unfollowBlackIcon from "./assets/unfollowBlack.svg";
+import socket from "../../utils/socketIO.util";
 
 function Person(props: any) {
   const history = useHistory();
@@ -72,26 +73,6 @@ function Person(props: any) {
 
     props.doChatTypeUpdateProp({ new: false, group: false });
 
-    // getConversationByMembers([id], (err: Error, result: any) => {
-    //   if (err) {
-    //     setCerror(err.message);
-    //   } else {
-    //     if (result) {
-    //       console.log(
-    //         "---------- getConversationByMembers: existing chat with ChatId ---------"
-    //       );
-    //       props.onSetChatIdGroup(result);
-    //       props.doChatTypeUpdateProp({ new: false, group: false });
-    //     } else {
-    //       console.log(
-    //         "---------- getConversationByMembers: NEW chat ---------"
-    //       );
-    //       props.doChatTypeUpdateProp({ new: true, group: false });
-    //     }
-    //     // props.onSetInitialChatGroup(addedGroup);
-    //   }
-    // });
-
     getFollowingUsers((err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
@@ -101,34 +82,24 @@ function Person(props: any) {
     });
   }, []);
 
-  // useEffect(() => {
-  //   console.log("[person] [person] [person] [person] [person]");
-
-  //   if (person) {
-  //     const personObj = {
-  //       avatar: person.user.avatar,
-  //       userId: person.user.userId,
-  //       username: person.user.username,
-  //     };
-  //     console.log("personObj");
-
-  //     console.log(personObj);
-
-  //     props.onSetInitialChatGroup([personObj]);
-  //   }
-  // }, [person]);
-
   const onFollowHandle = (followUserId: string) => {
     // SetFollowState({ userId: userId, follow: follow });
     toggleFollowing(followUserId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        if (result === "followed") {
+        if (result.follow_status === "followed") {
+          console.log("Person.tsx - followed : result");
+
           setFollowed([
             ...followed,
             { followingUserId: followUserId, userId: currentUser.userId },
           ]);
+          const notification_obj = result.notification_result;
+
+          if (notification_obj) {
+            socket.emit("notification", notification_obj);
+          }
         } else {
           const new_follow_arr = _.filter(
             followed,

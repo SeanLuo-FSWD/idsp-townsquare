@@ -29,9 +29,7 @@ const PeoplePg = (props: any) => {
     setCerror,
   } = useContext(LoginContext);
 
-  console.log("1111111111111111111111 PeoplePg");
   useEffect(() => {
-    console.log("2222222222222222 PeoplePg");
     getPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
