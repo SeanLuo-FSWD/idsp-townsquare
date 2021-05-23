@@ -35,25 +35,8 @@ function Profile(props: any) {
   useEffect(() => {
     console.log("state refresh");
     console.log(currentUser);
-    // let search = window.location.search;
-    // let firstTime = new URLSearchParams(search).get("firstTime") as string;
-
-    // getPerson(currentUser.userId, (err: Error, result: any) => {
-    //   if (err) {
-    //     setCerror(err.message);
-    //   } else {
-    //     setInitPerson(result);
-    //   }
-    // });
 
     setInitPerson(currentUser);
-
-    // if (firstTime === "true") {
-    //   console.log("1111111111111111111111");
-    //   console.log("1111111111111111111111");
-    //   console.log(firstTime);
-    //   setInitPerson({ ...currentUser, ["firstTime"]: true });
-    // }
   }, [currentUser]);
 
   const handleChange = (e: any) => {
@@ -87,23 +70,6 @@ function Profile(props: any) {
   function handleProfileEdit(e: any) {
     e.preventDefault();
 
-    // const required_arr = ["gender", "location", "age"];
-    // for (let i = 0; i < required_arr.length; i++) {
-    //   console.log("check if filled");
-
-    //   console.log(person[required_arr[i]]);
-
-    //   if (
-    //     (person[required_arr[i]] === null ||
-    //       person[required_arr[i]] === undefined) &&
-    //     (initPerson[required_arr[i]] === null ||
-    //       initPerson[required_arr[i]] === undefined)
-    //   ) {
-    //     alert("You must fill all the fields: username, age, gender, location");
-    //     return;
-    //   }
-    // }
-
     console.log("handleProfileEdit handleProfileEdit handleProfileEdit person");
     console.log(person);
 
@@ -118,29 +84,10 @@ function Profile(props: any) {
       }
     }
 
-    console.log("000000000000000000000");
-    console.log(bodyFormData);
-
     updateProfile(bodyFormData, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        // for (const key in result) {
-        //   if (key === "username" || key === "img") {
-        //     setCurrentUser({
-        //       ...currentUser,
-        //       [key]: result[key],
-        //     });
-        //   }
-        // }
-        // setCurrentUser(result);
-
-        // You will have to let state change refresh to grab fetch again
-        console.log("greeeeeat successs!! person");
-        console.log(person);
-        console.log("currentUser below");
-        console.log(currentUser);
-
         setPerson({});
         setUpdateStatus(true);
         setFieldArr([]);
@@ -149,12 +96,13 @@ function Profile(props: any) {
           newCurrrentUser = { ...currentUser, [key]: person[key] };
         }
 
-        console.log(
-          "setCurrentUser setCurrentUser setCurrentUser result.data : "
-        );
-        console.log(result.data);
-
-        setCurrentUser(result.data);
+        if (currentUser.firstTime) {
+          setTimeout(() => {
+            setCurrentUser(result.data);
+          }, 2000);
+        } else {
+          setCurrentUser(result.data);
+        }
       }
     });
   }
@@ -212,12 +160,22 @@ function Profile(props: any) {
           </div>
         </SubNav>
 
-        {currentUser.firstTime && (
-          <div>
-            Welcome {currentUser.username}, please fill your info first.
-          </div>
-        )}
         <div className={styles.profileContainer}>
+          {currentUser.firstTime ? (
+            <div>
+              <h3>
+                Welcome {currentUser.username}. Please fill your Age, Location
+                and Gender,
+                <br /> so you are searcheable by others.
+              </h3>
+            </div>
+          ) : (
+            <div>
+              <h4>
+                Remember to fill Age, Location and Gender to be searchable!
+              </h4>
+            </div>
+          )}
           <div className={styles.containerCard}>
             <div>
               <div className={styles.container}>
@@ -263,7 +221,10 @@ function Profile(props: any) {
             </div>
             <div>
               <div className={styles.items}>
-                <div>Username: {initPerson.username}</div>
+                <div>
+                  <strong>Username: </strong>
+                  {initPerson.username}
+                </div>
                 <img
                   className={styles.userPageIcons}
                   src={editImage}
@@ -300,7 +261,9 @@ function Profile(props: any) {
             </div>
             <div>
               <div className={styles.items}>
-                <div>Age: {initPerson.age}</div>
+                <div>
+                  <strong>Age: </strong> {initPerson.age}
+                </div>
                 <img
                   className={styles.userPageIcons}
                   src={editImage}
@@ -333,7 +296,10 @@ function Profile(props: any) {
             </div>
             <div>
               <div className={styles.items}>
-                <div>Location: {initPerson.location}</div>
+                <div>
+                  <strong>Location: </strong>
+                  {initPerson.location}
+                </div>
                 <img
                   className={styles.userPageIcons}
                   src={editImage}
@@ -350,6 +316,7 @@ function Profile(props: any) {
                       defaultValue={initPerson.location}
                       required
                     >
+                      <option value=""></option>
                       <option value="Surrey">Surrey</option>
                       <option value="Burnaby">Burnaby</option>
                       <option value="Coquitlam">Coquitlam</option>
@@ -368,7 +335,9 @@ function Profile(props: any) {
             </div>
             <div>
               <div className={styles.items}>
-                <div>gender: {initPerson.gender}</div>
+                <div>
+                  <strong>gender: </strong> {initPerson.gender}
+                </div>
                 <img
                   className={styles.userPageIcons}
                   src={editImage}
@@ -385,6 +354,7 @@ function Profile(props: any) {
                       defaultValue={initPerson.gender}
                       required
                     >
+                      <option value=""></option>
                       <option value="female">female</option>
                       <option value="male">male</option>
                       <option value="other">other</option>
@@ -411,49 +381,17 @@ function Profile(props: any) {
 
             <div className={styles.updateMessage}>
               {updateStatus && <div>Profile updated!</div>}
+
+              {updateStatus && currentUser.firstTime && (
+                <div>
+                  You will be
+                  <br />
+                  redirected to home page shortly
+                </div>
+              )}
             </div>
           </div>
         </div>
-
-        {/* <form>
-          <div className="form-control">
-            <label htmlFor="username">username : </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Edit username"
-              value={person.username}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="age">age : </label>
-            <input
-              type="text"
-              id="age"
-              name="age"
-              placeholder="Edit age"
-              value={person.age}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="location">location : </label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              placeholder="Edit location"
-              value={person.location}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button type="submit" onClick={handleProfileEdit}>
-            Submit Edit
-          </button>
-        </form> */}
       </div>
     );
   }

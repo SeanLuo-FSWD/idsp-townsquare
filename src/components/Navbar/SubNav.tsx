@@ -27,8 +27,8 @@ function SubNav(props: any) {
 
   // console.log(props.notices);
   // useEffect(() => {
-  //   document.body.addEventListener("click", (e) => {
-  //     e.stopPropagation();
+  //   document.getElementById("root").addEventListener("click", (e) => {
+  //     // e.stopPropagation();
   //     setShowDD(false);
   //   });
   // }, []);
@@ -61,6 +61,7 @@ function SubNav(props: any) {
         setCerror(err.message);
       } else {
         props.doNoticeSetProp([]);
+        setShowDD(false);
       }
     });
   }

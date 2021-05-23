@@ -7,7 +7,7 @@ import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
 
-const PostLike = ({ postId, likesCount, handleLikeProp, paramPostId }: any) => {
+const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
   const [likes, setLikes] = useState([]);
   const [showLikes, setShowLikes] = useState(false);
 
@@ -20,11 +20,6 @@ const PostLike = ({ postId, likesCount, handleLikeProp, paramPostId }: any) => {
     setCerror,
   } = useContext(LoginContext);
 
-  useEffect(() => {
-    if (paramPostId) {
-      setShowLikes(true);
-    }
-  }, []);
   useEffect(() => {
     getLikesByPostId(postId, (err: Error, result: any) => {
       if (err) {

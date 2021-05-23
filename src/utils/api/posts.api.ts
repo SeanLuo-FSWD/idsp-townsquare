@@ -102,8 +102,6 @@ const postCreate = (bodyFormData: any, cb: Function) => {
 };
 
 const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log("fetchFeed");
   axios
     .post(
       `${API_URL}/post`,
@@ -113,6 +111,9 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
       }
     )
     .then((response) => {
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log("fetchFeed");
+      console.log(response.data);
       cb(null, response.data);
     })
     .catch((error) => {
