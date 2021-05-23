@@ -16,6 +16,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
 import GroupChat from "./GroupChat";
 import { connect } from "react-redux";
+import styles from "./GroupChatPg.module.scss";
 
 // function GroupChatPg({ startPage, chatId }: any) {
 function GroupChatPg(props: any) {
@@ -184,8 +185,8 @@ function GroupChatPg(props: any) {
               feedFilterProps={feedFilterProps}
               feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
             />
-            <div className="flex">
-              <button onClick={onGroupFilterSubmit}>Submit</button>
+            <div >
+              <button  onClick={onGroupFilterSubmit}>Submit</button>
               <button
                 onClick={() => {
                   setModalProps(null);

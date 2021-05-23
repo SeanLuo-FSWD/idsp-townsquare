@@ -141,6 +141,7 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
           <FormControlLabel
             control={
               <Checkbox
+                className={styles.filterBottomActions}
                 checked={Burnaby}
                 onChange={handleLocationFilter}
                 name="Burnaby"

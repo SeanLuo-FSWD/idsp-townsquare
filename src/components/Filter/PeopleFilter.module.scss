@@ -3,10 +3,10 @@
     border-radius: 7px;
     text-align: center;
     display: flex;
-    padding: 10px 20px;
+    padding: 0px 20px;
 
     justify-content: space-around;
-    font-size: 14px;
+    font-size: 13px;
     grid-gap: 0px 10px;
     flex-wrap: wrap;
 
@@ -16,6 +16,7 @@
 
     flex-direction: row;
     width: 80%;
+    font-size: 13px;
 
 
     
@@ -26,18 +27,23 @@
     background: #92002f;
     border-radius: 7px;
     width: 100%;
+    font-size: 13px;
+}
+
+.test {
+
 }
 
 .locationFilter {
 
     display: flex;
     flex-direction: row;
-
+    font-size: 13px;
     justify-content: space-around;
 }
 
 .gender {
-
+    font-size: 13px;
     display: flex;
     flex-direction: row;
     text-align: center;
