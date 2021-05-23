@@ -8,7 +8,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import _, { countBy } from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { doPostComment, doLikePost } from "../../store/redux/actions/feed_act";
+
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
 import user from "./user.svg";
@@ -21,6 +21,7 @@ import {
   toggleLikePost,
   postCreate,
 } from "../../utils/api/posts.api";
+import socket from "../../utils/socketIO.util";
 
 import { IPost, TLikes } from "../../interfaces/IPost";
 import PostCommentList from "./PostCommentList";
@@ -35,6 +36,7 @@ const Post = (props: any) => {
   const [commentsCount, setCommentsCount] = useState(0);
   const [commentsVisible, setCommentsVisible] = useState(false);
   const { postId } = useParams() as any;
+
   useEffect(() => {
     setLikesCount(props.post.likesCount);
     setCommentsCount(props.post.commentsCount);
@@ -45,17 +47,37 @@ const Post = (props: any) => {
   }, []);
 
   const handleLikeProp = () => {
-    toggleLikePost(props.post._id, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        console.log("toggleLikePost toggleLikePost toggleLikePost");
-        console.log(result);
-        result.message === "liked"
-          ? setLikesCount(likesCount + 1)
-          : setLikesCount(likesCount - 1);
+    toggleLikePost(
+      props.post._id,
+      props.post.userId,
+      (err: Error, result: any) => {
+        if (err) {
+          setCerror(err.message);
+        } else {
+          console.log("toggleLikePost toggleLikePost toggleLikePost");
+
+          console.log(result);
+          console.log("props.post");
+          console.log(props.post);
+
+          result.data.like_status === "liked"
+            ? setLikesCount(likesCount + 1)
+            : setLikesCount(likesCount - 1);
+
+          console.log("result.data.notification_result");
+
+          console.log(result.data.notification_result);
+
+          const notification_obj = result.data.notification_result;
+
+          // {receiverId: "60a76224da25031a2c9d38d0", createdAt: "Sat May 22 2021 00:06:33 GMT-0700 (Pacific Daylight Time)", message: "sponge bob has liked your post", link: "/post/60a76986e29a171eb6d18661", _id: "60a8ad7997502532370ff646"}
+
+          if (notification_obj) {
+            socket.emit("notification", notification_obj);
+          }
+        }
       }
-    });
+    );
     // props.post.onLikeComment(like_obj);
   };
 
@@ -67,6 +89,7 @@ const Post = (props: any) => {
     const comment_obj: any = {
       text: comment,
       postId: props.post._id,
+      receiverId: props.post.userId,
     };
 
     createComment(comment_obj, (err: Error, result: any) => {
@@ -116,6 +139,7 @@ const Post = (props: any) => {
                   postId={props.post._id}
                   likesCount={likesCount}
                   handleLikeProp={handleLikeProp}
+                  paramPostId={postId}
                 />
               </div>
             </div>

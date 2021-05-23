@@ -7,7 +7,7 @@ import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
 
-const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
+const PostLike = ({ postId, likesCount, handleLikeProp, paramPostId }: any) => {
   const [likes, setLikes] = useState([]);
   const [showLikes, setShowLikes] = useState(false);
 
@@ -20,6 +20,11 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
     setCerror,
   } = useContext(LoginContext);
 
+  useEffect(() => {
+    if (paramPostId) {
+      setShowLikes(true);
+    }
+  }, []);
   useEffect(() => {
     getLikesByPostId(postId, (err: Error, result: any) => {
       if (err) {
@@ -48,8 +53,8 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
       <div className={"flex"}>
         {checkLiked() ? (
           <ThumbUpIcon
-              className={styles.liked}
-              onClick={() => {
+            className={styles.liked}
+            onClick={() => {
               handleLikeProp();
             }}
           />
@@ -61,18 +66,23 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
             }}
           />
         )}
-        <div  className={styles.showLikesButton} onClick={() => setShowLikes(!showLikes)}>{likesCount}</div>
+        <div
+          className={styles.showLikesButton}
+          onClick={() => setShowLikes(!showLikes)}
+        >
+          {likesCount}
+        </div>
         {showLikes && (
           <div className={styles.likedByContainer}>
-            <div className={styles.likedBy}>
-            Liked by: 
-            </div>
-
+            <div className={styles.likedBy}>Liked by:</div>
 
             {likes.map((like: any) => {
-              return <div className={styles.likesNames} key={like._id}>{like.username}</div>;
+              return (
+                <div className={styles.likesNames} key={like._id}>
+                  {like.username}
+                </div>
+              );
             })}
-
           </div>
         )}
       </div>

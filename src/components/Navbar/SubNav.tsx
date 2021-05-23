@@ -10,54 +10,66 @@ import { connect } from "react-redux";
 import {
   doNoticeError,
   doNoticeAdd,
+  doNoticeRemove,
+  doNoticeSet,
 } from "../../store/redux/actions/notice_act";
+import {
+  removeNoticeById,
+  clearAllNotifications,
+} from "../../utils/api/auth.api";
 
 function SubNav(props: any) {
   const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
     useContext(LoginContext);
+  const history = useHistory();
 
   const [showDD, setShowDD] = useState(false);
 
-  function createAlert(alert_obj: any) {
-    let text = "";
-    let link = "";
-    switch (alert_obj.type) {
-      case "liked":
-        text = `${alert_obj.username} liked your post`;
-        link = `/post/${alert_obj.postId}`;
-        break;
-      case "commented":
-        text = `${alert_obj.username} commented on your post`;
-        link = `/post/${alert_obj.postId}`;
-        break;
-      case "followed":
-        text = `${alert_obj.username} followed you`;
-        link = `/person/${alert_obj.userId}`;
-        break;
-      default:
-        break;
-    }
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log("props.notices");
 
-    console.log(link);
-    console.log(text);
-    return <Link to={link}>{text}</Link>;
+  // console.log(props.notices);
+  // useEffect(() => {
+  //   setNoticeState(props.notices);
+  // }, [props.notices]);
+
+  function removeMapThenRedirect(
+    link: string,
+    noticeId: string,
+    receiverId: string
+  ) {
+    const notice_obj = {
+      notificationId: noticeId,
+      receiverId: receiverId,
+    };
+    removeNoticeById(notice_obj, (err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        console.log("SubNav - getNotice : result <=====================");
+
+        console.log(result);
+        props.doNoticeSetProp(result);
+        history.push(link);
+      }
+    });
   }
 
-  function removeAlert(alertId: string) {
-    // let newAlertArr = currentUser.alert.filter((a: any) => {
-    //   a.id !== alertId;
-    // });
-
-    const newAlertArr = currentUser.alert.filter((a: any) => a.id !== alertId);
-
-    setCurrentUser({ ...currentUser, alert: newAlertArr });
+  function clearAll() {
+    clearAllNotifications((err: Error, result: any) => {
+      if (err) {
+        setCerror(err.message);
+      } else {
+        props.doNoticeSetProp([]);
+      }
+    });
   }
 
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
       <div>
-        <Badge badgeContent={currentUser.alert.length} color="primary">
+        <Badge badgeContent={props.notices.length} color="primary">
           <NotificationsIcon
             onClick={() => {
               setShowDD(!showDD);
@@ -66,15 +78,34 @@ function SubNav(props: any) {
         </Badge>
         {showDD && (
           <div className={styles.alert}>
-            <ul>
-              {currentUser.alert.map((a: any) => {
-                return (
-                  <li onClick={() => removeAlert(a.id)} key={a.id}>
-                    {createAlert(a)}
-                  </li>
-                );
-              })}
-            </ul>
+            {props.notices.map((n: any) => {
+              return (
+                // <li onClick={() => removeAlert(a.id)} key={a.id}>
+                //   {createAlert(a)}
+                // </li>
+
+                // {
+                //   receiverId: '60a76224da25031a2c9d38d0',
+                //   createdAt: 'Sat May 22 2021 00:17:27 GMT-0700 (Pacific Daylight Time)',
+                //   message: 'sponge bob has liked your post',
+                //   link: '/post/60a76986e29a171eb6d18661',
+                //   _id: '60a8b0072a244a32f6f7015d'
+                // }
+                <div key={n._id}>
+                  <p
+                    style={{ color: "black" }}
+                    onClick={() =>
+                      removeMapThenRedirect(n.link, n._id, n.receiverId)
+                    }
+                  >
+                    {/* <Link to={n.link}>{n.message}</Link> */}
+                    {n.message} - {new Date(n.createdAt).toDateString()}
+                  </p>
+                </div>
+              );
+            })}
+
+            <button onClick={clearAll}>Clear all</button>
           </div>
         )}
       </div>
@@ -84,7 +115,7 @@ function SubNav(props: any) {
 
 const mapStateToProps = (state: any) => {
   return {
-    noticeState: state.noticeReducer.noticeState,
+    notices: state.noticeState.notices,
     error: state.chatState.error,
   };
 };
@@ -93,11 +124,14 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     doNoticeErrorProp: (error: any) => dispatch(doNoticeError(error)),
     doNoticeAddProp: (notice: {
+      _id: string;
       message: string;
       link: string;
-      timestamp: Date;
+      createdAt: Date;
     }) => dispatch(doNoticeAdd(notice)),
-    doNoticeRemove: (notice: string) => dispatch(doNoticeAdd(notice)),
+    doNoticeRemoveProp: (noticeId: string) =>
+      dispatch(doNoticeRemove(noticeId)),
+    doNoticeSetProp: (notices: any) => dispatch(doNoticeSet(notices)),
   };
 };
 

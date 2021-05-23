@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   usersState: userReducer,
   filterState: filterReducer,
   chatState: chatReducer,
-  noticeReducer: noticeReducer,
+  noticeState: noticeReducer,
 });
 
 export default rootReducer;

@@ -25,18 +25,17 @@ const doPostCreate = (post_obj: any) => async (dispatch: Dispatch) => {
   // });
 };
 
-const doFetchFeed = (f_filter_obj: Object | null) => async (
-  dispatch: Dispatch
-) => {
-  // fetchFeed(f_filter_obj, (err: Error, result: IPost[]) => {
-  //   if (err) {
-  //     dispatch({ type: API_ERROR, error: err.message });
-  //   } else {
-  //     result.reverse();
-  //     dispatch({ type: FEED_FETCH, posts: result });
-  //   }
-  // });
-};
+const doFetchFeed =
+  (f_filter_obj: Object | null) => async (dispatch: Dispatch) => {
+    // fetchFeed(f_filter_obj, (err: Error, result: IPost[]) => {
+    //   if (err) {
+    //     dispatch({ type: API_ERROR, error: err.message });
+    //   } else {
+    //     result.reverse();
+    //     dispatch({ type: FEED_FETCH, posts: result });
+    //   }
+    // });
+  };
 
 const doFetchFeedError = (error: string) => ({
   type: API_ERROR,
@@ -53,20 +52,20 @@ const doPostComment = (comment_obj: TComment) => async (dispatch: Dispatch) => {
   });
 };
 
-const doLikePost = (like_obj: any) => async (dispatch: Dispatch) => {
-  toggleLikePost(like_obj, (err: Error, result: any) => {
-    if (err) {
-      dispatch({ type: API_ERROR, error: err.message });
-    } else {
-      dispatch({ type: POST_LIKE, post_like: result });
-    }
-  });
-};
+// const doLikePost = (like_obj: any) => async (dispatch: Dispatch) => {
+//   toggleLikePost(like_obj, (err: Error, result: any) => {
+//     if (err) {
+//       dispatch({ type: API_ERROR, error: err.message });
+//     } else {
+//       dispatch({ type: POST_LIKE, post_like: result });
+//     }
+//   });
+// };
 
 export {
   doFetchFeed,
   doFetchFeedError,
   doPostComment,
-  doLikePost,
+  // doLikePost,
   doPostCreate,
 };

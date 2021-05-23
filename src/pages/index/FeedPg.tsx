@@ -62,7 +62,10 @@ const FeedPg = (props: any) => {
           setCerror(err.message);
           return;
         } else {
-          setFeed(result);
+          console.log("FeedPg - Single Post - getFullPostByPostId : result");
+          console.log(result);
+
+          setFeed([result.data]);
           return;
         }
       });

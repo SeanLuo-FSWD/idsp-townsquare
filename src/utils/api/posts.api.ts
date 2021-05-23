@@ -121,9 +121,13 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
     });
 };
 
-const toggleLikePost = (postId: any, cb: Function) => {
+const toggleLikePost = (postId: string, receiverId: string, cb: Function) => {
   axios
-    .post(`${API_URL}/post/like`, { postId: postId }, { withCredentials: true })
+    .post(
+      `${API_URL}/post/like`,
+      { postId, receiverId },
+      { withCredentials: true }
+    )
     .then((response) => {
       console.log("toggleLikePost response");
       console.log(response);

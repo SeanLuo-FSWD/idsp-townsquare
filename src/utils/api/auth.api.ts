@@ -4,6 +4,60 @@ import API_URL from "../../constants/api_url";
 import { db } from "../../FakeDb/FakeDb";
 // axios.defaults.withCredentials = true;
 
+// const getNotice = (userId: string, cb: Function) => {
+const getNotice = (cb: Function) => {
+  axios
+    // .get(`${API_URL}/notification?id=${userId}`, {
+    .get(`${API_URL}/notification`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("getNotice response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("getNotice error");
+      cb(error.response.data.message);
+    });
+};
+
+const clearAllNotifications = (cb: Function) => {
+  axios
+    .get(`${API_URL}/notification/clear`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("clearAllNotifications response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("clearAllNotifications error");
+      cb(error.response.data.message);
+    });
+};
+
+const removeNoticeById = (notice_obj: object, cb: Function) => {
+  console.log("removeNoticeById - notificationId");
+  console.log(notice_obj);
+
+  axios
+    .post(`${API_URL}/notification/delete`, notice_obj, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      console.log("removeNoticeById response");
+      console.log(response);
+      cb(null, response.data);
+    })
+    .catch((error) => {
+      console.log("removeNoticeById error");
+      console.log(error);
+      cb(error.response.data.message);
+    });
+};
+
 const verify = (query: string, cb: Function) => {
   axios
     .get(`${API_URL}/user/verify?id=${query}`, {
@@ -123,8 +177,16 @@ const register = (user_obj: {}, cb: Function) => {
       console.log(error);
       cb(error.response.data.message);
     });
-
-  // cb(null, user_obj);
 };
 
-export { register, login, logout, authenticate, updateProfile, verify };
+export {
+  register,
+  login,
+  logout,
+  authenticate,
+  updateProfile,
+  verify,
+  getNotice,
+  removeNoticeById,
+  clearAllNotifications,
+};
