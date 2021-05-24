@@ -10,8 +10,8 @@ export interface ILoginContext {
   setShowModal: Dispatch<SetStateAction<string>>;
   modalProps: any;
   setModalProps: Dispatch<SetStateAction<any>>;
-  cerror: any;
-  setCerror: Dispatch<SetStateAction<any>>;
+  cerror: string;
+  setCerror: Dispatch<SetStateAction<string>>;
   groupChat: string[];
   setGroupChat: Dispatch<SetStateAction<string[]>>;
 }

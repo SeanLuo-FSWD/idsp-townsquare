@@ -1,38 +1,30 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import UserInfo from "./UserInfo";
 import {
   getPerson,
   getFollowingUsers,
   toggleFollowing,
 } from "../../utils/api/people.api";
-import Error from "../../components/Error/Error";
-import Feed from "../../components/Feed/Feed";
 import { LoginContext } from "../../store/context/LoginContext";
 import { deletePost } from "../../utils/api/posts.api";
-import { getConversationByMembers } from "../../utils/api/realtime.api";
-
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Person.module.scss";
 import Post from "../../components/Post/Post";
 import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
-import { useOnFollowHandle } from "../../helper/follow";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
-import GroupChat from "../GroupChatPg/GroupChat";
 import {
   doChatUpdate,
   doChatInitialChatGroup,
   doChatIdAdd,
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
-import followIcon from "./assets/follow.svg";
-import unfollowIcon from "./assets/unfollow.svg";
 import followBlackIcon from "./assets/followBlack.svg";
 import unfollowBlackIcon from "./assets/unfollowBlack.svg";
 import socket from "../../utils/socketIO.util";
+import Error from "../../components/Error/Error";
 
 function Person(props: any) {
   const history = useHistory();
@@ -45,7 +37,7 @@ function Person(props: any) {
   const [followed, setFollowed] = useState([]) as any;
   const [addedGroup, setAddedGroup] = useState([]) as any;
 
-  const { currentUser, setCerror, setCurrentUser } = useContext(LoginContext);
+  const { currentUser, setCerror, cerror } = useContext(LoginContext);
 
   console.log("------- person id -------");
   console.log(id);
@@ -63,10 +55,6 @@ function Person(props: any) {
           userId: result.data.user.userId,
           username: result.data.user.username,
         };
-        console.log("personObj");
-
-        console.log(personObj);
-
         props.onSetInitialChatGroup([personObj]);
       }
     });
@@ -139,15 +127,6 @@ function Person(props: any) {
     return false;
   }
 
-  //  if (toggleChat) {
-  //    const p: any = {
-  //      avatar: person.user.avatar,
-  //      username: person.user.username,
-  //      _id: person.user.userId,
-  //    };
-  //    return <GroupChat addedGroup={[p]} />;
-  //  } else
-
   if (person) {
     return (
       <div>
@@ -182,8 +161,6 @@ function Person(props: any) {
                 )
               ) : null}
 
-              {/* <button onClick={() => setToggleChat(true)}>Chat</button> */}
-
               <button
                 className={styles.followButtons}
                 onClick={() => {
@@ -195,10 +172,7 @@ function Person(props: any) {
             </SubNav>
           </div>
         )}
-
-        {/* <Link to="/users" className="btn">
-          Back
-        </Link> */}
+        {cerror && <Error message={cerror} />}
         <div className={styles.postContainer}>
           <div className={styles.personContainer}>
             <img
@@ -236,8 +210,6 @@ function Person(props: any) {
             );
           })}
         </div>
-
-        {/* <Feed feed={person.feed} /> */}
       </div>
     );
   }

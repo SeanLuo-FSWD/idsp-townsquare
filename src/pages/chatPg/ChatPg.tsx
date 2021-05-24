@@ -4,7 +4,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
 import townSquareLogo from "./assets/townSquareLogo.svg";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
@@ -12,13 +11,12 @@ import {
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
 import { useHistory, useParams } from "react-router-dom";
+import { LoginContext } from "../../store/context/LoginContext";
+import Error from "../../components/Error/Error";
 
 function Chat(props: any) {
   const history = useHistory();
-
-  // useEffect(() => {
-  //   props.onRemoveChatProp();
-  // }, []);
+  const { cerror } = useContext(LoginContext);
 
   function mapThenRedirect() {
     props.doChatTypeUpdateProp({ new: true, group: true });
@@ -29,17 +27,19 @@ function Chat(props: any) {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <img className={styles.townSquareLogo} src={townSquareLogo}/>
+          <img className={styles.townSquareLogo} src={townSquareLogo} />
           <p>Chat</p>
-          <button className={styles.startGroupChatButton} onClick={mapThenRedirect}>
-            {/* <Link to="/groupchat">Start group Chat</Link> */}
+          <button
+            className={styles.startGroupChatButton}
+            onClick={mapThenRedirect}
+          >
             New Group Chat
-            <img className={styles.groupChatIcon} src={groupChatIcon}/>
+            <img className={styles.groupChatIcon} src={groupChatIcon} />
           </button>
-          {/* <button onClick={setNewGroupChat(true)}>Start group Chat</button> */}
         </SubNav>
       </div>
       <div className={styles.chatContainer}>
+        {cerror && <Error message={cerror} />}
         <ChatList />
       </div>
     </>

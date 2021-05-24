@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
@@ -7,15 +7,12 @@ import styles from "./RegisterPg.module.scss";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 
 const Register = () => {
-  const history = useHistory();
-
   const [person, setPerson] = useState({
     username: "",
     email: "",
     password: "",
   });
-  const { setSignUpStatus, setCerror } = useContext(LoginContext);
-  const [signUpError, setSignUpError] = useState("");
+  const { setSignUpStatus, setCerror, cerror } = useContext(LoginContext);
   const [registerStatus, setRegisterStatus] = useState(false);
 
   const handleChange = (e: any) => {
@@ -31,14 +28,12 @@ const Register = () => {
         email: person.email,
         password: person.password,
       };
-      register(user_obj, (err: any, result: any) => {
+      register(user_obj, (err: Error, result: any) => {
         if (err) {
           console.log(err);
-          setCerror(err);
+          setCerror(err.message);
         } else {
           setSignUpStatus(true);
-          console.log("registration result message");
-          console.log(result.data.message);
           setRegisterStatus(true);
 
           // history.push("/");
@@ -70,21 +65,19 @@ const Register = () => {
             </div>
           ) : (
             <article className="form">
-              {signUpError && <Error message={signUpError} />}
+              {cerror && <Error message={cerror} />}
               <form>
                 <div className={"form-control"}>
-                    {/* <label  className={styles.labelText} htmlFor="username">username : </label> */}
-                    <input
-                      className={styles.inputForm}
-                      type="username"
-                      id="username"
-                      name="username"
-                      placeholder="Create a username"
-                      value={person.username}
-                      onChange={handleChange}
-                    />
+                  <input
+                    className={styles.inputForm}
+                    type="username"
+                    id="username"
+                    name="username"
+                    placeholder="Create a username"
+                    value={person.username}
+                    onChange={handleChange}
+                  />
                   <div className="form-control">
-                    {/* <label className={styles.labelText} htmlFor="email">Email : </label> */}
                     <input
                       className={styles.inputForm}
                       type="email"
@@ -96,7 +89,6 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-control">
-                    {/* <label className={styles.labelText} htmlFor="password">Password : </label> */}
                     <input
                       className={styles.inputForm}
                       type="password"
@@ -110,18 +102,17 @@ const Register = () => {
                 </div>
               </form>
               <button
-                  className={styles.registerButton}
-                  type="submit"
-                  onClick={handleRegister}
-                >
-                  Sign Up
-                </button>
+                className={styles.registerButton}
+                type="submit"
+                onClick={handleRegister}
+              >
+                Sign Up
+              </button>
             </article>
           )}
         </div>
         <div className={styles.loginButtonContainer}>
           <p className={styles.alreadyHaveAccount}>Already have an account?</p>
-          {/* <button className={styles.backToSignUp}>Log In</button> */}
           <Link className={styles.backToSignUp} to="/">
             Log In
           </Link>

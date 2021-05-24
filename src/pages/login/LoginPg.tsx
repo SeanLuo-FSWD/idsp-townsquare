@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { login } from "../../utils/api/auth.api";
 import Error from "../../components/Error/Error";
@@ -8,16 +8,7 @@ import styles from "./LoginPg.module.scss";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 
 function Login() {
-  const history = useHistory();
-
-  const {
-    signUpStatus,
-    setSignUpStatus,
-    currentUser,
-    setCurrentUser,
-    cerror,
-    setCerror,
-  } = useContext(LoginContext);
+  const { setCurrentUser, cerror, setCerror } = useContext(LoginContext);
 
   const [person, setPerson] = useState({
     email: "",
@@ -40,16 +31,14 @@ function Login() {
       };
       login(user_obj, (err: Error, result: any) => {
         if (err) {
-          setCerror(err);
+          console.log("1111111111111111111111");
+          console.log(err.message);
+          console.log(err);
+
+          setCerror(err.message);
         } else {
           setCerror("");
-
-          // setSignUpStatus(false);
           setCurrentUser(result.data);
-
-          // if (result.data.firstTime) {
-          //   history.push("/");
-          // }
         }
       });
     } else {
@@ -68,12 +57,8 @@ function Login() {
           ></img>
           <h1 className="townSquareTitle">TownSquare</h1>
 
-          {signUpStatus && <h2>Sign up success</h2>}
-          {/* <h4>bob@bob.com</h4> */}
           <form className={styles.loginForm}>
-            <label htmlFor="uname">
-              {/* <p className={styles.labelText}>Email</p> */}
-            </label>
+            <label htmlFor="uname"></label>
             <input
               className={styles.inputField}
               type="text"
@@ -84,9 +69,7 @@ function Login() {
               onChange={handleChange}
             />
             <br></br>
-            <label htmlFor="psw">
-              {/* <p className={styles.labelText}>Password</p> */}
-            </label>
+            <label htmlFor="psw"></label>
             <input
               className={styles.inputField}
               type="password"
@@ -97,6 +80,7 @@ function Login() {
               onChange={handleChange}
             />
           </form>
+          {cerror && <Error message={cerror} />}
           <button className={styles.loginButton} onClick={handleLogin}>
             Login
           </button>

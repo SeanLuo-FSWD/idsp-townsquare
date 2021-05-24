@@ -2,10 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
-import PortalModal from "../../UI/PortalModal";
-import Overlay from "../../UI/Overlay";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import styles from "./chat.module.scss";
 import backIcon from "./assets/back.svg";
 import {
@@ -15,15 +12,9 @@ import {
 import { LoginContext } from "../../store/context/LoginContext";
 import socket from "../../utils/socketIO.util";
 import MsgItem from "./MsgItem";
-import socketIO from "socket.io-client";
-import {
-  doChatRemove,
-  doChatUpdate,
-  doChatInitialChatGroup,
-  doChatIdAdd,
-} from "../../store/redux/actions/chat_act";
+import { doChatRemove, doChatIdAdd } from "../../store/redux/actions/chat_act";
 import _ from "lodash";
-import { StylesProvider } from "@material-ui/styles";
+import Error from "../../components/Error/Error";
 
 function Chat(props: any) {
   const history = useHistory();
@@ -36,24 +27,13 @@ function Chat(props: any) {
   const [isNew, setIsNew] = useState(false) as any;
 
   // let goingToFilter = false;
-  const { currentUser, setModalProps, setShowModal, setCerror } =
-    useContext(LoginContext);
+  const { currentUser, cerror, setCerror } = useContext(LoginContext);
 
   console.log("top chat id --------------------");
 
   console.log(props.chatId);
 
   useEffect(() => {
-    console.log("3333333333333333");
-    console.log("3333333333333333");
-    console.log(props.initialChatGroup);
-    console.log(props.addedGroup);
-    console.log(props.chatId);
-    console.log(props.chatType);
-
-    console.log("3333333333333333");
-    console.log("3333333333333333");
-
     let addedUsersIds: string[] = [];
     if (!props.chatType.group) {
       console.log("private chat");
@@ -97,12 +77,6 @@ function Chat(props: any) {
                 if (err) {
                   setCerror(err.message);
                 } else {
-                  console.log(
-                    "getMessagesInConversation getMessagesInConversation getMessagesInConversation"
-                  );
-
-                  console.log(result);
-
                   setMessages(buildMessages(result.messages).reverse());
                   setIsNew(false);
                 }
@@ -137,15 +111,7 @@ function Chat(props: any) {
     });
 
     return () => {
-      console.log("cleanup cleanup cleanup cleanup");
-      console.log(!props.chatType.new);
-
-      // if (props.chatType === "private") {
-      // if (!props.chatType.new) {
-      //   console.log("onRemoveChatProp");
-
       props.onRemoveChatProp();
-      // }
 
       socket.emit("leaveChatroom", {
         conversationId: props.chatId,
@@ -156,26 +122,8 @@ function Chat(props: any) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("chatIdddddddd");
-  //     console.log(chatId);
-  //     socket.emit("leaveChatroom", {
-  //       conversationId: chatId,
-  //     });
-  //   };
-  // }, [chatId]);
-
-  // function togglePortalProp() {
-  //   setOpenPortal(false);
-  // }
-
   function buildMessages(msgArr: any) {
     let msgObjArr: any = [];
-
-    console.log("addedGroup addedGroup addedGroup");
-
-    console.log(addedGroup);
 
     if (isNew && props.chatType.group) {
       msgArr.forEach((m: any) => {
@@ -229,17 +177,11 @@ function Chat(props: any) {
     }
 
     const arr_img = selectGroup.map((g: any) => {
-      // return <img key={g._id} src={g.avatar} height="50px" width="50px" />;
       return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
     });
 
     return arr_img;
   }
-
-  // const updateTextInput = (e: any) => {
-  //   e.preventDefault();
-  //   setInputTxt(e.target.value);
-  // }
 
   const submitMessage = (e: any) => {
     e.preventDefault();
@@ -261,21 +203,14 @@ function Chat(props: any) {
     history.push("/chatPage");
   }
 
-  console.log("before return return return");
-  console.log(props.initialChatGroup);
-
-  console.log(addedGroup);
-
   return (
     <>
       <div>
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
-            {/* Changed from addedGroup to props.addedGroup as that's what Groupchat uses. */}
             {props.addedGroup.length > 1 ? (
               <div>
                 <img src={backIcon} onClick={toChatPage} />
-                {/* <button onClick={addUserFilter}>Add user</button> */}
               </div>
             ) : (
               <img
@@ -287,18 +222,17 @@ function Chat(props: any) {
             )}
 
             <div className={styles.chatNavUserInfo}>
-              {/* Chatting with: {getAvatars(addedGroup)} */}
               Chatting with:
               <div className={styles.avatarNav}>
                 {props.chatType.new && props.chatType.group
                   ? getAvatars(props.addedGroup)
                   : getAvatars(addedGroup)}
-                {/* {getAvatars(props.initialChatGroup)} */}
                 {addedGroup.length > 4 && <span>...</span>}
               </div>
             </div>
           </div>
         </SubNav>
+        {cerror && <Error message={cerror} />}
 
         <div className={styles.messageContainer}>
           <div className={styles.messageBox}>
@@ -331,22 +265,6 @@ function Chat(props: any) {
         </div>
       </div>
       <Navbar currentPath={window.location.pathname} />
-
-      {/* <PortalModal
-        message="Are you sure to leave? This empty chat won't be saved."
-        isOpen={openPortal}
-        onClose={() => setOpenPortal(false)}
-      >
-        <button
-          onClick={() => {
-            document.body.classList.remove("disable_scroll");
-            history.goBack();
-          }}
-        >
-          Leave
-        </button>
-      </PortalModal>
-      {openPortal && <Overlay togglePortalProp={togglePortalProp} />} */}
     </>
   );
 }

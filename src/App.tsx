@@ -17,7 +17,7 @@ function App(props: any) {
   const [signUpStatus, setSignUpStatus] = useState(false);
   const [showModal, setShowModal] = useState("");
   const [modalProps, setModalProps] = useState(false);
-  const [cerror, setCerror] = useState("");
+  const [cerror, setCerror] = useState("ddddddd eeeee");
   const [currentUser, setCurrentUser] = useState<any | null>(null);
   const [groupChat, setGroupChat] = useState([]) as any;
 

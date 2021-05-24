@@ -1,22 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import { login, verify } from "../../utils/api/auth.api";
-import API_URL from "../../constants/api_url";
+import { verify } from "../../utils/api/auth.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import { useHistory } from "react-router-dom";
+import Error from "../../components/Error/Error";
 
 function Verify() {
   const [status, setStatus] = useState(false);
 
   const history = useHistory();
 
-  const {
-    showModal,
-    setShowModal,
-    modalProps,
-    setCurrentUser,
-    setModalProps,
-    setCerror,
-  } = useContext(LoginContext);
+  const { cerror, setCerror } = useContext(LoginContext);
 
   useEffect(() => {
     let search = window.location.search;
@@ -38,6 +31,7 @@ function Verify() {
 
   return !status ? (
     <div>
+      {cerror && <Error message={cerror} />}
       <h2>Please wait as we verify you</h2>
     </div>
   ) : (

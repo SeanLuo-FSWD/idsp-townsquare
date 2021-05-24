@@ -12,37 +12,29 @@ const LoggedInRoutesKeeper = (props: any) => {
   useEffect(() => {
     authenticate((err: Error, result: any) => {
       if (err) {
-        // setCerror(err.message);
-        console.log("authentication in LoggedInRoutesKeeper");
-        console.log("bbbbbbbbbbbbbbbbbb");
-        console.log(err);
         setCurrentUser(null);
       } else {
-        console.log(result.data);
-
         setCurrentUser(result.data);
       }
     });
   }, []);
 
-  if (cerror) {
-    return <Error message={cerror} />;
-  } else {
-    // return <>{currentUser ? props.children : <Login />}</>;
-    return (
-      <>
-        {!currentUser ? (
-          <Login />
-        ) : currentUser.firstTime ? (
-          <Profile />
-        ) : (
-          props.children
-        )}
-      </>
-    );
-  }
-
-  // return props.children;
+  // if (cerror) {
+  //   return <Error message={cerror} />;
+  // } else {
+  return (
+    <>
+      {/* {cerror && <Error message={cerror} />} */}
+      {!currentUser ? (
+        <Login />
+      ) : currentUser.firstTime ? (
+        <Profile />
+      ) : (
+        props.children
+      )}
+    </>
+  );
+  // }
 };
 
 export default LoggedInRoutesKeeper;

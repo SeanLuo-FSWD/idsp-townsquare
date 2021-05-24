@@ -9,26 +9,17 @@ import Error from "../../components/Error/Error";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { connect } from "react-redux";
-import Modal from "../../UI/Modal";
 import filter from "./filter.svg";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 import detailedViewIcon from "./assets/detailedView.svg";
 import PeopleFilterModalContent from "./PeopleFilterModalContent";
-import DetailFollow from "../../components/Users/DetailFollow";
 
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null);
   const [detailView, setDetailView] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
 
-  const {
-    showModal,
-    setShowModal,
-    modalProps,
-    setModalProps,
-    currentUser,
-    setCerror,
-  } = useContext(LoginContext);
+  const { cerror, currentUser, setCerror } = useContext(LoginContext);
 
   useEffect(() => {
     getPeople(props.peoplePg, (err: Error, result: any) => {
@@ -39,10 +30,6 @@ const PeoplePg = (props: any) => {
       }
     });
   }, [props.peoplePg]);
-
-  // const filterPeopleProp = (result: any) => {
-  //   setPeople(result);
-  // };
 
   const toggleFilterProp = (showState: boolean) => {
     setShowFilter(showState);
@@ -63,7 +50,6 @@ const PeoplePg = (props: any) => {
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
-        {/* <div className={styles.header}> */}
         <div className={styles.logoAndGreeting}>
           <img className={styles.townSquareLogo} src={townSquareLogo} />
           <div>Hi {currentUser.username}! </div>
@@ -77,63 +63,25 @@ const PeoplePg = (props: any) => {
             }}
             src={detailedViewIcon}
           />
-          {/* {detailView ? <span>Grid view</span> : <span>Detail view</span>} */}
-
           <img
             className={styles.userIcons}
             src={filter}
-            // onClick={() => setShowModal("filter")}
             onClick={() => setShowFilter(true)}
           />
         </div>
       </SubNav>
-
+      {cerror && <Error message={cerror} />}
       {showFilter ? (
-        // <PeopleFilterModalContent filterPostProp={filterPeopleProp} />
         <PeopleFilterModalContent toggleFilterProp={toggleFilterProp} />
       ) : detailView ? (
         <div className={styles2.detailedViewContainer}>
-          <UserDetail people={people}>
-            {/* <UserDetail>
-            {() => {
-              return <DetailFollow people={people} />;
-            }} */}
-
-            {/* {(person: any, onFollowHandleProp: any, followed: any) => {
-              return (
-                <DetailFollow
-                  person={person}
-                  onFollowHandleProp={onFollowHandleProp}
-                  followed={followed}
-                />
-              );
-            }} */}
-          </UserDetail>
+          <UserDetail people={people} />
         </div>
       ) : (
         <div className={styles.userContainer}>
           <UserGrid people={people} />
         </div>
       )}
-
-      {/* {detailView ? (
-        <div className={styles2.detailedViewContainer}>
-          <UserDetail people={people}>
-          </UserDetail>
-        </div>
-      ) : (
-        <div className={styles.userContainer}>
-          <UserGrid people={people} />
-        </div>
-      )}
-
-      {showModal
-        ? showModal === "filter" && (
-            <Modal>
-              <PeopleFilterModalContent filterPostProp={filterPeopleProp} />
-            </Modal>
-          )
-        : null} */}
     </>
   );
 };

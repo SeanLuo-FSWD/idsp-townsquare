@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { updateProfile } from "../../utils/api/auth.api";
-import { getPerson } from "../../utils/api/people.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import { useHistory } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
@@ -12,15 +11,13 @@ import changeProfileImg from "./assets/image.svg";
 import logoutImage from "./assets/logout.svg";
 import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
-import saveChanges from "./assets/save.svg";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 import { connect } from "react-redux";
 import {
-  doFeedFilterUpdate,
   doFeedFilterRemove,
-  doPeopleFilterUpdate,
   doPeopleFilterRemove,
 } from "../../store/redux/actions/filter_act";
+import Error from "../../components/Error/Error";
 
 function Profile(props: any) {
   const [initPerson, setInitPerson] = useState(null) as any;
@@ -28,7 +25,8 @@ function Profile(props: any) {
   //   const [pwRetype, setPwRetype] = useState(false);
   const [fieldArr, setFieldArr] = useState([]) as any;
   const [updateStatus, setUpdateStatus] = useState(false);
-  const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
+  const { currentUser, setCurrentUser, cerror, setCerror } =
+    useContext(LoginContext);
   const history = useHistory();
 
   let imgFile: any = null;
@@ -51,8 +49,6 @@ function Profile(props: any) {
   };
 
   function handleEditOpen(e: any) {
-    console.log("fffffffffffffffffffffff");
-    console.log("88888888888888888888");
     setUpdateStatus(false);
     setFieldArr([...fieldArr, e.target.getAttribute("data-edit")]);
   }
@@ -113,10 +109,6 @@ function Profile(props: any) {
     const blob = new Blob(binaryData);
     const img_src = window.URL.createObjectURL(blob);
 
-    console.log("777777777777777777777");
-    console.log("getImg");
-    console.log(img_src);
-
     let newPerson = { ...person, ["avatar"]: imgFile };
     newPerson = { ...newPerson, ["avatarlink"]: img_src };
 
@@ -158,6 +150,8 @@ function Profile(props: any) {
             />
           </div>
         </SubNav>
+
+        {cerror && <Error message={cerror} />}
 
         <div className={styles.profileContainer}>
           {currentUser.firstTime ? (

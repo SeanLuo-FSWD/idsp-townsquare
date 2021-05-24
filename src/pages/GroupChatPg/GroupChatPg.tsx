@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
-import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
 import {
@@ -13,33 +12,19 @@ import FILTER_INITIAL_STATE from "../../constants/filter_initial_state";
 import FilterUserList from "./FilterUserList";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
-import { useHistory, useParams } from "react-router-dom";
-import GroupChat from "./GroupChat";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import Error from "../../components/Error/Error";
 
 // function GroupChatPg({ startPage, chatId }: any) {
 function GroupChatPg(props: any) {
   const history = useHistory();
-  const { showModal, setModalProps, setShowModal, setCerror } =
+  const { cerror, setModalProps, setShowModal, setCerror } =
     useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const [toggleView, setToggleView] = useState("chat");
-  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any; // array of ids
-
-  // const initialChatGroup = props.addedGroup.map((p: any) => {
-  //   return p.userId;
-  // });
-
-  // const initialChatGroup = props.addedGroup;
+  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
   const initialChatGroup = props.initialChatGroup;
-  console.log("===> GroupChatPg <=====");
-
-  console.log("initialChatGroup");
-  console.log(props.initialChatGroup);
-
-  console.log("addedGroup");
-  console.log(props.addedGroup);
-
   const [addedGroupIds, setAddedGroupIds] = useState(
     props.addedGroup.map((p: any) => {
       return p.userId;
@@ -53,8 +38,6 @@ function GroupChatPg(props: any) {
   const [peopleFilter, setPeopleFilter] = useState(
     FILTER_INITIAL_STATE.peoplePg.people
   );
-
-  useEffect(() => {}, []);
 
   const peopleFilterProps = (ppl_filter: any) => {
     const key_name_pair = Object.entries(ppl_filter)[0];
@@ -79,10 +62,6 @@ function GroupChatPg(props: any) {
       ...feedFilter,
       [key_name_pair[0]]: key_name_pair[1],
     });
-    // feedFilterHolder = {
-    //   ...feedFilterHolder,
-    //   [key_name_pair[0]]: key_name_pair[1],
-    // };
   };
 
   const onGroupFilterSubmit = () => {
@@ -110,17 +89,8 @@ function GroupChatPg(props: any) {
     if (addedGroup.length === 0) {
       window.alert("You must select at least one user!");
     } else {
-      // setToggleView("chat");
-      console.log("ggggggggggggggggggggggg");
-      console.log("must be all existing and added users");
-      console.log(addedGroup);
-
       props.onPropStartChatProp(addedGroup);
       props.doChatTypeUpdateProp(props.chatType);
-
-      // props.onSetInitialChatGroup(initialChatGroup);
-
-      // Since not implemented addnewmember, must use addedGroup as initialGroup is null
       props.onSetInitialChatGroup(addedGroup);
       history.push("/chat");
     }
@@ -145,9 +115,6 @@ function GroupChatPg(props: any) {
             <div style={{ alignSelf: "flex-start", marginTop: "50px" }}>
               <h2>Added users</h2>
               {addedGroup.map((person: any) => {
-                console.log("55555555555555555");
-                console.log(person);
-
                 return (
                   <div key={person.userId}>
                     <div>
@@ -169,6 +136,7 @@ function GroupChatPg(props: any) {
             <button onClick={history.goBack}>Back</button>
           </SubNav>
           <div style={{ marginTop: "50px" }}>
+            {cerror && <Error message={cerror} />}
             <PeopleFilter
               peopleFilterProps={peopleFilterProps}
               feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}

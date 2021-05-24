@@ -14,15 +14,12 @@ import createPost from "./assets/createPost.svg";
 import filter from "./assets/filter.svg";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 import _ from "lodash";
-import { Filter } from "@material-ui/icons";
-import FeedFilter from "../../components/Filter/FeedFilter";
-import { v4 as uuidv4 } from "uuid";
+import Error from "../../components/Error/Error";
 import PostModalContent from "./PostModalContent";
 import FeedFilterModalContent from "./FeedFilterModalContent";
 import { connect } from "react-redux";
 import Post from "../../components/Post/Post";
 import { useHistory, useParams } from "react-router-dom";
-import { useOnFollowHandle } from "../../helper/follow";
 import { getFollowingUsers, toggleFollowing } from "../../utils/api/people.api";
 import follow from "./follow.svg";
 import deletePostIcon from "./delete.svg";
@@ -30,23 +27,13 @@ import unfollow from "./unfollow.svg";
 import socket from "../../utils/socketIO.util";
 
 const FeedPg = (props: any) => {
-  const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
+  const { currentUser, showModal, setShowModal, setCerror, cerror } =
     useContext(LoginContext);
   const [feed, setFeed] = useState(null) as any;
   const [followState, SetFollowState] = useState(null) as any;
   const { postId } = useParams() as any;
   const [followed, setFollowed] = useState([]) as any;
   const [showFilter, setShowFilter] = useState(false);
-
-  // const newUser = useOnFollowHandle(followState);
-
-  // useEffect(() => {
-  //   if (newUser) {
-  //     SetFollowState(null);
-  //     setCurrentUser(newUser);
-  //   }
-  // });
-
   const history = useHistory();
 
   useEffect(() => {
@@ -98,10 +85,6 @@ const FeedPg = (props: any) => {
         setCerror(err.message);
       } else {
         const newFeed = _.filter(feed, (p) => p._id !== postId);
-        console.log("444444444444444444");
-        console.log("444444444444444444");
-        console.log(newFeed);
-
         setFeed(newFeed);
       }
     });
@@ -112,19 +95,10 @@ const FeedPg = (props: any) => {
   };
 
   const onFollowHandle = (followUserId: string) => {
-    // SetFollowState({ userId: userId, follow: follow });
     toggleFollowing(followUserId, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
-        console.log("88888888888888888888");
-        console.log("88888888888888888888");
-        console.log(result);
-
-        // followingUserId: "609ac3c7c8442904d4cf818b";
-        // userId: "6099dff94ed44209b8b49fb5";
-        // _id: "609c64dc439f85859d80c8b5";
-
         if (result.follow_status === "followed") {
           setFollowed([
             ...followed,
@@ -166,7 +140,6 @@ const FeedPg = (props: any) => {
         <SubNav>
           <div className={styles.SubNavWrap}>
             <img className={styles.logo} src={townSquareLogo} />
-            {/* <div className={styles.filterAndCreate}> */}
 
             <div className={styles.townSquareTitle}>TownSquare</div>
             <img
@@ -177,13 +150,11 @@ const FeedPg = (props: any) => {
             <img
               className={styles.filter}
               src={filter}
-              // onClick={() => setShowModal("filter")}
               onClick={() => setShowFilter(true)}
             />
-            {/* </div> */}
           </div>
         </SubNav>
-
+        {cerror && <Error message={cerror} />}
         {showFilter ? (
           <FeedFilterModalContent toggleFilterProp={toggleFilterProp} />
         ) : (
@@ -241,18 +212,6 @@ const FeedPg = (props: any) => {
             })}
           </div>
         )}
-
-        {/* {showModal ? (
-          showModal === "postUpload" ? (
-            <Modal>
-              <PostModalContent feed={feed} addPostProp={addPostProp} />
-            </Modal>
-          ) : (
-            <Modal>
-              <FeedFilterModalContent />
-            </Modal>
-          )
-        ) : null} */}
 
         {showModal
           ? showModal === "postUpload" && (

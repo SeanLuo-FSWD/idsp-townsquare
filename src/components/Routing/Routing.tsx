@@ -8,9 +8,6 @@ import { authenticate } from "../../utils/api/auth.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Error from "../../components/Error/Error";
 import Verify from "../../pages/verify/Verify";
-import { login } from "../../utils/api/auth.api";
-import Login from "../../pages/login/LoginPg";
-import socket from "../../utils/socketIO.util";
 
 const Routing = () => {
   const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
@@ -28,14 +25,11 @@ const Routing = () => {
           <Verify />
         </Route>
         <LoggedInRoutesKeeper>
-          {cerror ? <Error message={cerror} /> : <LoggedInRoutes />}
+          <LoggedInRoutes />
         </LoggedInRoutesKeeper>
       </Switch>
     </Router>
   );
-  // } else {
-  //   return <Login />;
-  // }
 };
 
 export default Routing;
