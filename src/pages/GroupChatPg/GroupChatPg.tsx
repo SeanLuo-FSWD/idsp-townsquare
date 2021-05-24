@@ -31,6 +31,11 @@ function GroupChatPg(props: any) {
     })
   ) as any;
 
+  useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
   // const [showFeedFilter, setShowFeedFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState(
     FILTER_INITIAL_STATE.peoplePg.feed

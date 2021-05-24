@@ -30,7 +30,11 @@ function Profile(props: any) {
   const history = useHistory();
 
   let imgFile: any = null;
-
+  useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
   useEffect(() => {
     console.log("state refresh");
     console.log(currentUser);

@@ -18,7 +18,7 @@ const getNotice = (cb: Function) => {
     })
     .catch((error) => {
       console.log("getNotice error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -34,7 +34,7 @@ const clearAllNotifications = (cb: Function) => {
     })
     .catch((error) => {
       console.log("clearAllNotifications error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -54,7 +54,7 @@ const removeNoticeById = (notice_obj: object, cb: Function) => {
     .catch((error) => {
       console.log("removeNoticeById error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -70,7 +70,7 @@ const verify = (query: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("verify error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -91,7 +91,7 @@ const updateProfile = (bodyFormData: any, cb: Function) => {
     })
     .catch((error) => {
       console.log("updateProfile error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -109,7 +109,7 @@ const authenticate = (cb: Function) => {
       console.log("authenticate error");
       console.log(error);
       console.log(error.response.data);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 
   // for (let i = 0; i < db.users.length; i++) {
@@ -139,7 +139,7 @@ const logout = (cb: Function) => {
     .catch((error) => {
       console.log("user logout error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -159,7 +159,7 @@ const login = (user_obj: any, cb: Function) => {
     .catch((error) => {
       console.log("user login error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
   // cb(new Error("login user not found"));
 };
@@ -175,7 +175,7 @@ const register = (user_obj: {}, cb: Function) => {
     .catch((error) => {
       console.log("post register error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 

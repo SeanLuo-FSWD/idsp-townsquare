@@ -35,7 +35,6 @@ function Person(props: any) {
 
   const [person, setPerson] = useState(null) as any;
   const [followed, setFollowed] = useState([]) as any;
-  const [addedGroup, setAddedGroup] = useState([]) as any;
 
   const { currentUser, setCerror, cerror } = useContext(LoginContext);
 
@@ -68,6 +67,9 @@ function Person(props: any) {
         setFollowed(result.data); //all the users CURRENT guy follow.
       }
     });
+    return () => {
+      setCerror("");
+    };
   }, []);
 
   const onFollowHandle = (followUserId: string) => {

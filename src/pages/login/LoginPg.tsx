@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -15,6 +15,11 @@ function Login() {
     password: "",
   });
 
+  useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;

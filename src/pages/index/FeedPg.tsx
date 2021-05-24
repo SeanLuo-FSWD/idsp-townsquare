@@ -37,6 +37,12 @@ const FeedPg = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
+
+  useEffect(() => {
     getFollowingUsers((err: Error, result: any) => {
       if (err) {
         setCerror(err.message);

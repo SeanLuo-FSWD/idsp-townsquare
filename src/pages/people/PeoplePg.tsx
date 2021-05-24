@@ -22,6 +22,12 @@ const PeoplePg = (props: any) => {
   const { cerror, currentUser, setCerror } = useContext(LoginContext);
 
   useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
+
+  useEffect(() => {
     getPeople(props.peoplePg, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);

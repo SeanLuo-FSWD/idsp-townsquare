@@ -18,7 +18,7 @@ const getLikesByPostId = (postId: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("getLikesByPostId error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -34,7 +34,7 @@ const getAllCommentsByPostId = (postId: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("getFullPostByPostId error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -118,7 +118,7 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
     })
     .catch((error) => {
       console.log("fetchFeed error");
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 

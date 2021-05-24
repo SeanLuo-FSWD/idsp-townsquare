@@ -17,11 +17,9 @@ const Routing = () => {
     <Router>
       <Switch>
         <Route path="/register">
-          {cerror && <Error message={cerror} />}
           <Register />
         </Route>
         <Route path="/user/verify">
-          {cerror && <Error message={cerror} />}
           <Verify />
         </Route>
         <LoggedInRoutesKeeper>

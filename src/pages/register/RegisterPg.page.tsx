@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import { register } from "../../utils/api/auth.api";
@@ -14,7 +14,11 @@ const Register = () => {
   });
   const { setSignUpStatus, setCerror, cerror } = useContext(LoginContext);
   const [registerStatus, setRegisterStatus] = useState(false);
-
+  useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
   const handleChange = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;

@@ -24,7 +24,7 @@ const addPersonGroup = (submitObj: string[], cb: Function) => {
     .catch((error) => {
       console.log("addPersonGroup error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -45,7 +45,7 @@ const toggleFollowing = (followUserId: string, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -114,7 +114,7 @@ const getPeople = (peoplePg: any, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 
@@ -129,7 +129,7 @@ const getPerson = (id: string, cb: Function) => {
     .catch((error) => {
       console.log("getPerson error");
       console.log(error);
-      cb(error.response.data.message);
+      cb(error.response.data);
     });
 };
 

@@ -10,14 +10,18 @@ import {
   doChatRemove,
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../store/context/LoginContext";
 import Error from "../../components/Error/Error";
 
 function Chat(props: any) {
   const history = useHistory();
-  const { cerror } = useContext(LoginContext);
-
+  const { cerror, setCerror } = useContext(LoginContext);
+  useEffect(() => {
+    return () => {
+      setCerror("");
+    };
+  }, []);
   function mapThenRedirect() {
     props.doChatTypeUpdateProp({ new: true, group: true });
     history.push("/groupchat");

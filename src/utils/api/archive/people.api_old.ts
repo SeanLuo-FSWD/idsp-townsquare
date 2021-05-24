@@ -45,7 +45,7 @@ const getPeople = (peoplePg: any, cUser: any, cb: Function) => {
   //   .catch((error) => {
   //     console.log("getPeople error");
   //     console.log(error);
-  //     cb(error.response.data.message);
+  //     cb(error.response.data);
   //   });
 
   if (!peoplePg.applied) {
@@ -88,7 +88,7 @@ const getPerson = (id: string, cb: Function) => {
   //   .catch((error) => {
   //     console.log("getPerson error");
   //     console.log(error);
-  //     cb(error.response.data.message);
+  //     cb(error.response.data);
   //   });
   let profile_obj;
 

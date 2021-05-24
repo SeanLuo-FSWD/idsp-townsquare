@@ -145,7 +145,7 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
 
     //   cb(null, db.posts.data);
     // } catch (error) {
-    //   cb(error.response.data.message);
+    //   cb(error.response.data);
     // }
   }
 };

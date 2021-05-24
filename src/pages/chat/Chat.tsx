@@ -32,8 +32,14 @@ function Chat(props: any) {
   console.log("top chat id --------------------");
 
   console.log(props.chatId);
+  console.log(props.addedGroup);
+  console.log(addedGroup);
 
   useEffect(() => {
+    if (!props.chatId && !props.addedGroup && !addedGroup) {
+      history.goBack();
+    }
+
     let addedUsersIds: string[] = [];
     if (!props.chatType.group) {
       console.log("private chat");
@@ -112,11 +118,10 @@ function Chat(props: any) {
 
     return () => {
       props.onRemoveChatProp();
-
       socket.emit("leaveChatroom", {
         conversationId: props.chatId,
       });
-
+      setCerror("");
       socket.off("received");
       socket.off("addNewMemberToGroup");
     };
