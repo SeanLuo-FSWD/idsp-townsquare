@@ -54,7 +54,7 @@ function Person(props: any) {
           userId: result.data.user.userId,
           username: result.data.user.username,
         };
-        props.onSetInitialChatGroup([personObj]);
+        props.onPropStartChatProp([personObj]);
       }
     });
 

@@ -44,7 +44,7 @@ function ChatListItem(props: any) {
 
     console.log(props.convo.conversationId);
     props.onPropStartChatProp(props.convo.members);
-    props.onSetInitialChatGroup(props.convo.members);
+    // props.onSetInitialChatGroup(props.convo.members);
     props.doChatTypeUpdateProp(chatType);
 
     props.onAddChatIdProp(props.convo.conversationId);

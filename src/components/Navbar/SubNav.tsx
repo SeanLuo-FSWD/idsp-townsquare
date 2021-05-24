@@ -3,9 +3,7 @@ import { LoginContext } from "../../store/context/LoginContext";
 import styles from "./SubNav.module.scss";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
-import { Link } from "react-router-dom";
-import { useHistory, useParams } from "react-router-dom";
-import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   doNoticeError,
@@ -17,10 +15,10 @@ import {
   removeNoticeById,
   clearAllNotifications,
 } from "../../utils/api/auth.api";
+import HelpIcon from "@material-ui/icons/Help";
 
 function SubNav(props: any) {
-  const { currentUser, showModal, setShowModal, setCerror, setCurrentUser } =
-    useContext(LoginContext);
+  const { setCerror } = useContext(LoginContext);
   const history = useHistory();
 
   const [showDD, setShowDD] = useState(false);
@@ -69,6 +67,13 @@ function SubNav(props: any) {
   return (
     <div className={`flex--space-between ${styles.subNav}`}>
       {props.children}
+      <HelpIcon
+        onClick={() => {
+          history.push("/help");
+        }}
+      >
+        {/* <Link to="/help" /> */}
+      </HelpIcon>
       <div>
         <Badge badgeContent={props.notices.length} max={10} color="primary">
           <NotificationsIcon

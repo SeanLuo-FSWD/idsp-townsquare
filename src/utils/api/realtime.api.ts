@@ -5,13 +5,8 @@ import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import API_URL from "../../constants/api_url";
 
-const getConversationByConversationId = (
-  addedGroupIds: string[],
-  cb: Function
-) => {
-  console.log(
-    "getConversationByConversationId getConversationByConversationId getConversationByConversationId called"
-  );
+const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
+  console.log("getConversationByMembers called");
   console.log(addedGroupIds);
 
   axios
@@ -21,16 +16,42 @@ const getConversationByConversationId = (
       { withCredentials: true }
     )
     .then((response) => {
-      console.log("getConversationByConversationId response");
+      console.log("getConversationByMembers response");
       console.log(response);
       cb(null, response.data);
     })
     .catch((err) => {
-      console.log("getConversationByConversationId error");
+      console.log("getConversationByMembers error");
       console.log(err);
       cb(err);
     });
 };
+
+// const getConversationByMembers = (personIds: string[], cb: Function) => {
+//   console.log(
+//     "getConversationByMembers getConversationByMembers getConversationByMembers"
+//   );
+
+//   axios
+//     .post(
+//       `${API_URL}/conversation/person`,
+//       { target: personIds },
+//       {
+//         withCredentials: true,
+//       }
+//     )
+//     .then((response) => {
+//       console.log("getConversationByMembers response");
+//       console.log(response);
+//       cb(null, response.data);
+//     })
+//     .catch((error) => {
+//       console.log("getConversationByMembers error");
+//       console.log(error);
+
+//       cb(null, error.response.data.message);
+//     });
+// };
 
 const getMessagesInConversation = (chatId: string, cb: Function) => {
   console.log("getMessagesInConversation --------- getMessagesInConversation");
@@ -53,34 +74,4 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
     });
 };
 
-const getConversationByMembers = (personIds: string[], cb: Function) => {
-  console.log(
-    "getConversationByMembers getConversationByMembers getConversationByMembers"
-  );
-
-  axios
-    .post(
-      `${API_URL}/conversation/person`,
-      { target: personIds },
-      {
-        withCredentials: true,
-      }
-    )
-    .then((response) => {
-      console.log("getConversationByMembers response");
-      console.log(response);
-      cb(null, response.data);
-    })
-    .catch((error) => {
-      console.log("getConversationByMembers error");
-      console.log(error);
-
-      cb(null, error.response.data.message);
-    });
-};
-
-export {
-  getConversationByConversationId,
-  getMessagesInConversation,
-  getConversationByMembers,
-};
+export { getConversationByMembers, getMessagesInConversation };

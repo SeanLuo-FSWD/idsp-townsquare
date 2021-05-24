@@ -8,6 +8,7 @@ import { authenticate } from "../../utils/api/auth.api";
 import { LoginContext } from "../../store/context/LoginContext";
 import Error from "../../components/Error/Error";
 import Verify from "../../pages/verify/Verify";
+import Help from "../../pages/help/Help";
 
 const Routing = () => {
   const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
@@ -18,6 +19,9 @@ const Routing = () => {
       <Switch>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/help">
+          <Help />
         </Route>
         <Route path="/user/verify">
           <Verify />

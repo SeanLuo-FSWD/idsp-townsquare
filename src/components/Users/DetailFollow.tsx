@@ -10,10 +10,6 @@ import {
   doChatTypeUpdate,
 } from "../../store/redux/actions/chat_act";
 import { connect } from "react-redux";
-import FormGroup from "@material-ui/core/FormGroup";
-import MenuItem from "@material-ui/core/MenuItem";
-import Checkbox from "@material-ui/core/Checkbox";
-import ListItemText from "@material-ui/core/ListItemText";
 import addToGroupIcon from "./assets/addToGroup.svg";
 import unfollowIcon from "./assets/unfollow.svg";
 import followIcon from "./assets/follow.svg";
@@ -25,6 +21,7 @@ function DetailFollow({
   followed,
   onSetInitialChatGroup,
   doChatTypeUpdateProp,
+  onPropStartChatProp,
 }: any) {
   const { currentUser, setCerror, showModal, setShowModal } =
     useContext(LoginContext);
@@ -48,7 +45,9 @@ function DetailFollow({
       username: person.username,
     };
 
-    onSetInitialChatGroup([personObj]);
+    // onSetInitialChatGroup([personObj]);
+    onPropStartChatProp([personObj]);
+
     doChatTypeUpdateProp({ new: false, group: false });
     history.push(`/chat`);
   }

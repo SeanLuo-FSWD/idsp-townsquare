@@ -97,7 +97,7 @@ function GroupChatPg(props: any) {
     } else {
       props.onPropStartChatProp(addedGroup);
       props.doChatTypeUpdateProp(props.chatType);
-      props.onSetInitialChatGroup(addedGroup);
+      // props.onSetInitialChatGroup(addedGroup);
       history.push("/chat");
     }
   }

@@ -23,11 +23,9 @@ function FilterUserList({
   onStartChatProp,
   setAddedGroupIds,
   addedGroupIds,
-  chatType,
   initialChatGroup,
 }: any) {
-  const { showModal, setModalProps, setShowModal, setCerror, currentUser } =
-    useContext(LoginContext);
+  const { currentUser } = useContext(LoginContext);
 
   const initialChatGroupIds = initialChatGroup.map((p: any) => {
     return p.userId;
@@ -55,7 +53,6 @@ function FilterUserList({
       }
     }
     if (event.target.checked) {
-      // setAddedGroupProp([...addedGroup, event.target.value]);
       setAddedGroupIds([...addedGroupIds, event.target.value]);
       const mappedUser = mapIdToUser(event.target.value);
 
@@ -100,7 +97,6 @@ function FilterUserList({
                   <FormControlLabel
                     control={
                       <Checkbox
-                        //   value={person._id}
                         value={person._id}
                         onChange={handleCheck}
                         checked={addedGroupIds.indexOf(person._id) > -1}
