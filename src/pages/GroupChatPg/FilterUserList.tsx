@@ -7,6 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
+import styles from "./FilterUserList.module.scss";
 
 import FilterUser from "./FilterUser";
 
@@ -84,7 +85,7 @@ function FilterUserList({
         <button onClick={onStartChatProp}>Start Chatting</button>
         <button onClick={history.goBack}>Cancel</button>
       </SubNav>
-      <div style={{ marginTop: "50px" }}>
+      <div className={styles.listWrapper}>
         {people.map((person: any) => {
           if (person._id === currentUser.userId) {
             return;
@@ -95,7 +96,6 @@ function FilterUserList({
             return (
               <div key={person._id}>
                 <FilterUser person={person} />
-
                 <FormGroup style={{ flexDirection: "row" }}>
                   <FormControlLabel
                     control={

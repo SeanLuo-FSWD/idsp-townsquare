@@ -15,6 +15,7 @@ import SubNav from "../../components/Navbar/SubNav";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Error from "../../components/Error/Error";
+import styles from "./GroupChatPg.module.scss";
 
 // function GroupChatPg({ startPage, chatId }: any) {
 function GroupChatPg(props: any) {
@@ -91,8 +92,8 @@ function GroupChatPg(props: any) {
   }
 
   function onStartChatProp() {
-    if (addedGroup.length === 0) {
-      window.alert("You must select at least one user!");
+    if (addedGroup.length < 2) {
+      window.alert("You must select at least two user!");
     } else {
       props.onPropStartChatProp(addedGroup);
       props.doChatTypeUpdateProp(props.chatType);
@@ -101,38 +102,55 @@ function GroupChatPg(props: any) {
     }
   }
 
+  function getAvatars(addedGroup: any) {
+    console.log("getAvatars getAvatars getAvatars");
+    console.log(addedGroup);
+
+    const length = addedGroup.length > 5 ? 5 : addedGroup.length;
+
+    let selectGroup: any = [];
+    for (let i = 0; i < length; i++) {
+      selectGroup.push(addedGroup[i]);
+    }
+
+    const arr_user = selectGroup.map((u: any) => {
+      return (
+        <div key={u.userId}>
+          <div>
+            <img src={u.avatar} height="50px" width="50px" />
+          </div>
+          {/* <div style={{ display: "flex" }}>
+            <span>{u.username}</span>
+          </div> */}
+        </div>
+      );
+    });
+
+    return arr_user;
+  }
+
   return (
-    <div>
+    <>
       {toggleView === "users" ? (
         <>
-          <div className="flex">
-            <FilterUserList
-              people={people}
-              toggleFilterProp={toggleFilterProp}
-              addedGroup={addedGroup}
-              setAddedGroupProp={setAddedGroupProp}
-              onStartChatProp={onStartChatProp}
-              addedGroupIds={addedGroupIds}
-              setAddedGroupIds={setAddedGroupIds}
-              chatType={props.chatType}
-              initialChatGroup={initialChatGroup}
-            />
-            <div style={{ alignSelf: "flex-start", marginTop: "50px" }}>
-              <h2>Added users</h2>
-              {addedGroup.map((person: any) => {
-                return (
-                  <div key={person.userId}>
-                    <div>
-                      <img src={person.avatar} height="50px" width="50px" />
-                    </div>
-                    <div style={{ display: "flex" }}>
-                      <span>{person.username}</span>
-                    </div>
-                  </div>
-                );
-              })}
+          <div className={styles.addedUserContainer}>
+            <h2>Added users</h2>
+            <div className={styles.addedList}>
+              {getAvatars(addedGroup)}
+              {addedGroup.length > 5 && <h3>. . .</h3>}
             </div>
           </div>
+          <FilterUserList
+            people={people}
+            toggleFilterProp={toggleFilterProp}
+            addedGroup={addedGroup}
+            setAddedGroupProp={setAddedGroupProp}
+            onStartChatProp={onStartChatProp}
+            addedGroupIds={addedGroupIds}
+            setAddedGroupIds={setAddedGroupIds}
+            chatType={props.chatType}
+            initialChatGroup={initialChatGroup}
+          />
         </>
       ) : (
         <>
@@ -171,7 +189,7 @@ function GroupChatPg(props: any) {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
 
