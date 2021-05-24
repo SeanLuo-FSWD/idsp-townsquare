@@ -175,7 +175,7 @@ function GroupChatPg(props: any) {
               feedFilterProps={feedFilterProps}
               feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
             />
-            <div className="flex">
+            <div>
               <button onClick={onGroupFilterSubmit}>Submit</button>
               <button
                 onClick={() => {

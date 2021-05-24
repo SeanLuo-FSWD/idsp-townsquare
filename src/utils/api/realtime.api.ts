@@ -23,7 +23,7 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
     .catch((err) => {
       console.log("getConversationByMembers error");
       console.log(err);
-      cb(err);
+      cb(err.response.data);
     });
 };
 
