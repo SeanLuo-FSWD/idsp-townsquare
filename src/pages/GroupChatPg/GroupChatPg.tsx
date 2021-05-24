@@ -24,13 +24,15 @@ function GroupChatPg(props: any) {
     useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const [toggleView, setToggleView] = useState("chat");
-  const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
+  // const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
+  const [addedGroup, setAddedGroup] = useState([]) as any;
   const initialChatGroup = props.initialChatGroup;
-  const [addedGroupIds, setAddedGroupIds] = useState(
-    props.addedGroup.map((p: any) => {
-      return p.userId;
-    })
-  ) as any;
+  // const [addedGroupIds, setAddedGroupIds] = useState(
+  //   props.addedGroup.map((p: any) => {
+  //     return p.userId;
+  //   })
+  // ) as any;
+  const [addedGroupIds, setAddedGroupIds] = useState([]);
 
   useEffect(() => {
     return () => {
