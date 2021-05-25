@@ -16,9 +16,17 @@ const getLikesByPostId = (postId: string, cb: Function) => {
     .then((response) => {
       cb(null, response);
     })
-    .catch((error) => {
+    .catch((err) => {
       console.log("getLikesByPostId error");
-      cb(error.response.data);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -32,9 +40,17 @@ const getAllCommentsByPostId = (postId: string, cb: Function) => {
       console.log(response);
       cb(null, response);
     })
-    .catch((error) => {
+    .catch((err) => {
       console.log("getFullPostByPostId error");
-      cb(error.response.data);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -48,9 +64,17 @@ const getFullPostByPostId = (postId: string, cb: Function) => {
       console.log(response);
       cb(null, response);
     })
-    .catch((error) => {
+    .catch((err) => {
       console.log("getFullPostByPostId error");
-      cb(null, error.response.data);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -71,7 +95,15 @@ const deletePost = (postId: string, cb: Function) => {
     .catch((err) => {
       console.log("deletePost error");
       console.log(err);
-      cb(err);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -97,7 +129,15 @@ const postCreate = (bodyFormData: any, cb: Function) => {
     .catch(function (err) {
       console.log("postCreate error");
       console.log(err);
-      cb(err);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -116,9 +156,17 @@ const fetchFeed = (feedPg: any, cUser: any, cb: Function) => {
       console.log(response.data);
       cb(null, response.data);
     })
-    .catch((error) => {
+    .catch((err) => {
       console.log("fetchFeed error");
-      cb(error.response.data);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 };
 
@@ -137,7 +185,15 @@ const toggleLikePost = (postId: string, receiverId: string, cb: Function) => {
     .catch((err) => {
       console.log("toggleLikePost error");
       console.log(err);
-      cb(err);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
   // cb(null, like_arr);
 };
@@ -156,7 +212,15 @@ const createComment = (comment_obj: TComment, cb: Function) => {
     .catch((err) => {
       console.log("add_comment error");
       console.log(err);
-      cb(err);
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
     });
 
   // cb(null, comment_obj);

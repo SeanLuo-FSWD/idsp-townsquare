@@ -95,7 +95,7 @@ function DetailFollow({
               {person._id !== currentUser.userId ? (
                 checkFollowed(person._id) ? (
                   <button
-                    className={styles2.detailedButtons}
+                    className={`pointer ${styles2.detailedButtons}`}
                     onClick={() => onFollowHandleProp(person._id)}
                   >
                     Unfollow
@@ -103,7 +103,7 @@ function DetailFollow({
                   </button>
                 ) : (
                   <button
-                    className={styles2.detailedButtons}
+                    className={`pointer ${styles2.detailedButtons}`}
                     onClick={() => onFollowHandleProp(person._id)}
                   >
                     Follow
@@ -113,7 +113,7 @@ function DetailFollow({
               ) : null}
               {person._id !== currentUser.userId && (
                 <button
-                  className={styles2.detailedButtons}
+                  className={`pointer ${styles2.detailedButtons}`}
                   onClick={() => mapThenRedirect()}
                 >
                   Chat

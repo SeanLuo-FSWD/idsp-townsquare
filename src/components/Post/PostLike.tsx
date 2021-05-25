@@ -48,21 +48,21 @@ const PostLike = ({
       <div className={"flex"}>
         {checkLiked() ? (
           <ThumbUpIcon
-            className={styles.liked}
+            className={`pointer ${styles.liked}`}
             onClick={() => {
               handleLikeProp();
             }}
           />
         ) : (
           <ThumbUpAltOutlinedIcon
-            className={styles.unliked}
+            className={`pointer ${styles.unliked}`}
             onClick={() => {
               handleLikeProp();
             }}
           />
         )}
         <div
-          className={styles.showLikesButton}
+          className={`pointer ${styles.showLikesButton}`}
           onClick={() => setShowLikes(!showLikes)}
         >
           {likesArr.length}

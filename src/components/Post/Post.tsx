@@ -112,19 +112,6 @@ const Post = (props: any) => {
         <div className={styles.likeCommentContainer}>
           <div className={styles.likeCommentNav}>
             <div className={styles.likesNames}>
-              {/* {checkLiked() ? (
-                <ThumbUpIcon
-                  onClick={() => {
-                    handleLike();
-                  }}
-                />
-              ) : (
-                <ThumbUpAltOutlinedIcon
-                  onClick={() => {
-                    handleLike();
-                  }}
-                />
-              )} */}
               <div>
                 <PostLike
                   postId={props.post._id}
@@ -141,6 +128,7 @@ const Post = (props: any) => {
             <div className={styles.likesNames}>
               <img
                 src={comments}
+                className="pointer"
                 onClick={() => setCommentsVisible(!commentsVisible)}
               />
 

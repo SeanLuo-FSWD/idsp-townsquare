@@ -28,7 +28,7 @@ function Chat(props: any) {
   }
   return (
     <>
-      <div>
+      <div className="pagePadding">
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <img className={styles.townSquareLogo} src={townSquareLogo} />

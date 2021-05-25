@@ -143,12 +143,16 @@ function Person(props: any) {
 
   if (person) {
     return (
-      <div key={uuidv4()}>
+      <div key={uuidv4()} className="pagePadding">
         {!props.personId && (
           <div>
             <Navbar currentPath={window.location.pathname} />
             <SubNav className="flex--space-between">
-              <img src={backIcon} onClick={history.goBack} />
+              <img
+                className="pointer"
+                src={backIcon}
+                onClick={history.goBack}
+              />
               {person.user.userId !== currentUser.userId ? (
                 checkFollowed() ? (
                   <button
@@ -211,6 +215,7 @@ function Person(props: any) {
                     {post.userId === currentUser.userId && (
                       <img
                         src={deleteIcon}
+                        className="pointer"
                         onClick={() => {
                           onRemovePost(post._id);
                         }}
@@ -227,7 +232,14 @@ function Person(props: any) {
       </div>
     );
   }
-  return <div>Loading</div>;
+  return (
+    <>
+      <div className="pagePadding">
+        {cerror && <Error message={cerror} />}
+        <h2>Loading</h2>
+      </div>
+    </>
+  );
 }
 
 // export default Person;

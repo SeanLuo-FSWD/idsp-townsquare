@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import Modal from "../../UI/Modal";
-import Feed from "../../components/Feed/Feed";
 import {
   fetchFeed,
   getFullPostByPostId,
@@ -57,9 +56,6 @@ const FeedPg = (props: any) => {
           setCerror(err.message);
           return;
         } else {
-          console.log("FeedPg - Single Post - getFullPostByPostId : result");
-          console.log(result);
-
           setFeed([result.data]);
           return;
         }
@@ -143,95 +139,99 @@ const FeedPg = (props: any) => {
   if (feed) {
     return (
       <>
-        <SubNav>
-          <div className={styles.SubNavWrap}>
-            <img className={styles.logo} src={townSquareLogo} />
-
-            <div className={styles.townSquareTitle}>TownSquare</div>
+        <div className="pagePadding">
+          <SubNav>
+            {/* <div className={styles.townSquareTitle}>TownSquare</div> */}
             <img
-              className={styles.createPost}
+              className={`pointer ${styles.createPost}`}
               src={createPost}
               onClick={() => setShowModal("postUpload")}
             />
             <img
-              className={styles.filter}
+              className={`pointer ${styles.createPost}`}
               src={filter}
               onClick={() => setShowFilter(true)}
             />
-          </div>
-        </SubNav>
-        {cerror && <Error message={cerror} />}
-        {showFilter ? (
-          <FeedFilterModalContent toggleFilterProp={toggleFilterProp} />
-        ) : (
-          <div className={styles.feedContainer}>
-            {/* <Feed feed={feed} /> */}
+          </SubNav>
+          {cerror && <Error message={cerror} />}
 
-            {feed.map((post: any) => {
-              return (
-                <div key={post._id} className={styles.postWrapper}>
-                  <div className="flex--space-postNav">
-                    <div
-                      className={styles.flexpostNav}
-                      onClick={() => profileRedirect(post.userId)}
-                    >
-                      <img
-                        src={post.avatar}
-                        alt=""
-                        className={styles.postWrapper__img}
-                      />
-                    </div>
-
-                    <div className={styles.flexpostNavDetails}>
-                      <div className={styles.uName}>{post.username}</div>
-                      <div className={styles.dateInfo}>
-                        {new Date(post.createdAt).toDateString()}
+          {showFilter ? (
+            <FeedFilterModalContent toggleFilterProp={toggleFilterProp} />
+          ) : (
+            <div className={styles.feedContainer}>
+              {feed.map((post: any) => {
+                return (
+                  <div key={post._id} className={styles.postWrapper}>
+                    <div className="flex--space-postNav">
+                      <div
+                        className={`pointer ${styles.flexpostNav}`}
+                        onClick={() => profileRedirect(post.userId)}
+                      >
+                        <img
+                          src={post.avatar}
+                          alt=""
+                          className={styles.postWrapper__img}
+                        />
                       </div>
+
+                      <div className={styles.flexpostNavDetails}>
+                        <div className={styles.uName}>{post.username}</div>
+                        <div className={styles.dateInfo}>
+                          {new Date(post.createdAt).toDateString()}
+                        </div>
+                      </div>
+
+                      {post.userId === currentUser.userId ? (
+                        <img
+                          src={deletePostIcon}
+                          className={`pointer ${styles.followUnfollowDelete}`}
+                          onClick={() => {
+                            onRemovePost(post._id);
+                          }}
+                        />
+                      ) : checkFollowed(post.userId) ? (
+                        <img
+                          className={`pointer ${styles.followUnfollowDelete}`}
+                          src={unfollow}
+                          onClick={() => onFollowHandle(post.userId)}
+                        />
+                      ) : (
+                        <img
+                          className={`pointer ${styles.followUnfollowDelete}`}
+                          src={follow}
+                          onClick={() => onFollowHandle(post.userId)}
+                        />
+                      )}
                     </div>
 
-                    {post.userId === currentUser.userId ? (
-                      <img
-                        src={deletePostIcon}
-                        className={styles.followUnfollowDelete}
-                        onClick={() => {
-                          onRemovePost(post._id);
-                        }}
-                      />
-                    ) : checkFollowed(post.userId) ? (
-                      <img
-                        className={styles.followUnfollowDelete}
-                        src={unfollow}
-                        onClick={() => onFollowHandle(post.userId)}
-                      />
-                    ) : (
-                      <img
-                        className={styles.followUnfollowDelete}
-                        src={follow}
-                        onClick={() => onFollowHandle(post.userId)}
-                      />
-                    )}
+                    <Post post={post}></Post>
                   </div>
+                );
+              })}
+            </div>
+          )}
 
-                  <Post post={post}></Post>
-                </div>
-              );
-            })}
-          </div>
-        )}
+          {showModal
+            ? showModal === "postUpload" && (
+                <Modal>
+                  <PostModalContent feed={feed} addPostProp={addPostProp} />
+                </Modal>
+              )
+            : null}
 
-        {showModal
-          ? showModal === "postUpload" && (
-              <Modal>
-                <PostModalContent feed={feed} addPostProp={addPostProp} />
-              </Modal>
-            )
-          : null}
-
-        <Navbar currentPath={window.location.pathname} />
+          <Navbar currentPath={window.location.pathname} />
+        </div>
       </>
     );
   } else {
-    return <h2>Loading</h2>;
+    return (
+      <>
+        <div className="pagePadding">
+          {cerror && <Error message={cerror} />}
+          <h2>Loading</h2>
+        </div>
+      </>
+    );
   }
 };
 

@@ -1,32 +1,14 @@
 import { Home } from "@material-ui/icons";
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../../store/context/LoginContext";
-import { logout } from "../../utils/api/auth.api";
+
 import styles from "./Navbar.module.scss";
 import homeIcon from "./home.svg";
 import settingsIcon from "./settings.svg";
-import logoutIcon from "./logoutIcon.svg";
 import usersIcon from "./users.svg";
 import chatIcon from "./chat.svg";
-import Chat from "../../pages/chatPg/ChatPg";
-import ChatBubbleOutlinedIcon from "@material-ui/icons/ChatBubbleOutlined";
+
 function Navbar(props: any) {
-  const [currentPath, setCurrentPath] = useState("");
-
-  const { currentUser, setCurrentUser, setCerror } = useContext(LoginContext);
-  // function handleLogout() {
-  //   logout((err: Error, result: any) => {
-  //     if (err) {
-  //       console.log(err);
-  //       setCerror(err.message);
-  //     } else {
-  //       setCerror("");
-  //       setCurrentUser(null);
-  //     }
-  //   });
-  // }
-
   return (
     <div className={`${styles.navBar} flex--navBar`}>
       <div
@@ -52,8 +34,6 @@ function Navbar(props: any) {
         </Link>
       </div>
 
-
-      
       <div
         className={
           props.currentPath == "/chat"
@@ -76,9 +56,6 @@ function Navbar(props: any) {
           <img className={styles.navIcon} src={settingsIcon}></img>
         </Link>
       </div>
-      {/* <div className={styles.navBar__item}>
-        <img src={logoutIcon} onClick={handleLogout} />
-      </div> */}
     </div>
   );
 }

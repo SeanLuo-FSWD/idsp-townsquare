@@ -54,7 +54,7 @@ function ChatListItem(props: any) {
 
   return (
     <>
-      <div onClick={mapThenRedirect}>
+      <div className="pointer" onClick={mapThenRedirect}>
         <div style={{ display: "flex" }}>
           <div>{getAvatars()}</div>
           <div className={styles.chatListItemContainer}>

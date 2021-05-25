@@ -7,7 +7,7 @@ function Help() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="pagePadding">
       <Navbar currentPath={window.location.pathname} />
       <SubNav className="flex--space-between">
         <button
