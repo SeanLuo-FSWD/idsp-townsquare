@@ -91,7 +91,10 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
     <div className={styles.peopleFilterContainer}>
       <div className={styles.filterStyling}>
         <div className={styles.filterTitles}>age</div>
-        <div style={{ display: "flex" }} className={styles.minMaxAge}>
+        <div
+          style={{ display: "flex", marginTop: "10px" }}
+          className={styles.minMaxAge}
+        >
           <div>Min age: {age[0]}</div>
           <div>Max age: {age[1]}</div>
         </div>
@@ -204,7 +207,7 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
                 name="followed"
               />
             }
-            label="followed"
+            label="followed (Match with only followed users)"
           />
         </FormGroup>
       </div>

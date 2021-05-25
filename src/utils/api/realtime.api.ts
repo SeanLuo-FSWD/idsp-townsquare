@@ -12,8 +12,8 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
   axios
     .post(
       `${API_URL}/conversation`,
-      // { target: addedGroupIds },
-      { target: null },
+      { target: addedGroupIds },
+      // { target: null },
       { withCredentials: true }
     )
     .then((response) => {

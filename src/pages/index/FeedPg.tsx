@@ -24,6 +24,7 @@ import follow from "./follow.svg";
 import deletePostIcon from "./delete.svg";
 import unfollow from "./unfollow.svg";
 import socket from "../../utils/socketIO.util";
+import Badge from "@material-ui/core/Badge";
 
 const FeedPg = (props: any) => {
   const { currentUser, showModal, setShowModal, setCerror, cerror } =
@@ -142,16 +143,34 @@ const FeedPg = (props: any) => {
         <div className="pagePadding">
           <SubNav>
             {/* <div className={styles.townSquareTitle}>TownSquare</div> */}
+
             <img
               className={`pointer ${styles.createPost}`}
               src={createPost}
               onClick={() => setShowModal("postUpload")}
             />
-            <img
-              className={`pointer ${styles.createPost}`}
-              src={filter}
-              onClick={() => setShowFilter(true)}
-            />
+            {props.feedPg.applied ? (
+              <Badge
+                color="primary"
+                badgeContent=" "
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <img
+                  className={`pointer ${styles.createPost}`}
+                  src={filter}
+                  onClick={() => setShowFilter(true)}
+                />
+              </Badge>
+            ) : (
+              <img
+                className={`pointer ${styles.createPost}`}
+                src={filter}
+                onClick={() => setShowFilter(true)}
+              />
+            )}
           </SubNav>
           {cerror && <Error message={cerror} />}
 

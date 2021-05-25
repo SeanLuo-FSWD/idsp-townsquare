@@ -13,7 +13,7 @@ function Navbar(props: any) {
     <div className={`${styles.navBar} flex--navBar`}>
       <div
         className={
-          props.currentPath == "/"
+          props.currentPath === "/"
             ? `${styles.navBar__item} ${styles.active}`
             : `${styles.navBar__item}`
         }
@@ -24,7 +24,7 @@ function Navbar(props: any) {
       </div>
       <div
         className={
-          props.currentPath == "/users"
+          props.currentPath === "/users"
             ? `${styles.navBar__item} ${styles.active}`
             : `${styles.navBar__item}`
         }
@@ -36,7 +36,7 @@ function Navbar(props: any) {
 
       <div
         className={
-          props.currentPath == "/chat"
+          props.currentPath === "/chatPage"
             ? `${styles.navBar__item} ${styles.active}`
             : `${styles.navBar__item}`
         }
@@ -47,7 +47,7 @@ function Navbar(props: any) {
       </div>
       <div
         className={
-          props.currentPath == "/profile"
+          props.currentPath === "/profile"
             ? `${styles.navBar__item} ${styles.active}`
             : `${styles.navBar__item}`
         }

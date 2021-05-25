@@ -1,14 +1,45 @@
 .filterContainer {
-    text-align: center;
+  text-align: center;
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-around;
+  font-size: 13px;
+  flex-wrap: wrap;
+
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgb(223, 223, 223);
+  padding: 20px 20px;
+  border-radius: 7px;
+  height: 70%;
+}
+
+.filterStyling {
+  flex-direction: row;
+  width: 80%;
+  font-size: 13px;
+  margin-top: 20px;
+
+  .filter {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    font-size: 13px;
+  }
 }
 
 .keywordSearch {
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(148, 148, 148);
-    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px 0px;
-    margin: 3px 0px;
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(148, 148, 148);
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 0px;
+  margin: 3px 0px;
+}
+
+.filterTitles {
+  color: white;
+  background: #92002f;
+  border-radius: 7px;
+  width: 150px;
+  font-size: 13px;
+  padding: 0 20px;
 }

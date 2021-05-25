@@ -17,6 +17,7 @@
   flex-direction: row;
   width: 80%;
   font-size: 13px;
+  margin-top: 20px;
 
   .filter {
     display: flex;
@@ -35,15 +36,11 @@
   color: white;
   background: #92002f;
   border-radius: 7px;
-  width: 100%;
+  width: 150px;
   font-size: 13px;
+  padding: 0 20px;
 }
-.footerWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 
-  .submitButton {
-    color: blue;
-  }
+.submitButton {
+  color: blue;
 }

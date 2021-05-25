@@ -74,15 +74,19 @@ function FeedFilterModalContent(props: any) {
 
   return (
     <div className={styles.mainFilterCard}>
+      <div className={styles.filterInfo}>
+        <p style={{ fontSize: "1.8em" }}>Main filter</p>
+      </div>
       <FeedFilter
         feedFilterProps={feedFilterProps}
         feedPg_Feed={props.feedPg.feed}
       />
 
       <div className={styles.filterInfo}>
-        <div className={styles.filterInfo}>
-          Apply user filter to posts (Will show posts from matching users only)
-        </div>
+        <p style={{ fontSize: "1.8em" }}>User filter</p>
+        <p style={{ marginBottom: "10px" }}>
+          Will show posts from matching users only
+        </p>
       </div>
 
       <PeopleFilter
@@ -91,20 +95,22 @@ function FeedFilterModalContent(props: any) {
       />
 
       <div className={styles.footerWrapper}>
-        <div>
-          <button className={styles.submitButton} onClick={onFeedFilterClick}>
-            Submit
-          </button>
+        <button
+          className={styles.submitButton}
+          style={{ marginRight: "10px" }}
+          onClick={onFeedFilterClick}
+        >
+          Submit
+        </button>
 
-          <FormControlLabel
-            control={
-              <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
-            }
-            label="Apply to User page"
-          />
-        </div>
+        <FormControlLabel
+          control={
+            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
+          }
+          label="Also apply to User page"
+        />
 
-        <div>
+        <div style={{ marginLeft: "auto" }}>
           <button
             onClick={() => {
               props.onFeedFilterRemove();
