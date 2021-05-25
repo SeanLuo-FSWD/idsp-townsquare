@@ -23,6 +23,8 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
     .catch((err) => {
       console.log("getConversationByMembers error");
       console.log(err);
+      console.log(err.response);
+      console.log(err.response.data);
       cb(err.response.data);
     });
 };
@@ -49,7 +51,7 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
 //       console.log("getConversationByMembers error");
 //       console.log(error);
 
-//       cb(null, error.response.data.message);
+//       cb(null, error.response.data);
 //     });
 // };
 
@@ -70,7 +72,7 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
       console.log("getMessagesInConversation error");
       console.log(error);
 
-      cb(null, error.response.data.message);
+      cb(null, error.response.data);
     });
 };
 

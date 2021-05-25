@@ -6,20 +6,19 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
+import { Link } from "react-router-dom";
 
-const PostLike = ({ postId, likesCount, handleLikeProp, likesArr }: any) => {
+const PostLike = ({
+  showLikes,
+  setShowLikes,
+  handleLikeProp,
+  likesArr,
+}: any) => {
   const [likes, setLikes] = useState(likesArr);
 
-  const [showLikes, setShowLikes] = useState(false);
+  // const [showLikes, setShowLikes] = useState(false);
 
-  const {
-    currentUser,
-    showModal,
-    setShowModal,
-    modalProps,
-    setModalProps,
-    setCerror,
-  } = useContext(LoginContext);
+  const { currentUser } = useContext(LoginContext);
 
   // useEffect(() => {
   //   getLikesByPostId(postId, (err: Error, result: any) => {
@@ -31,12 +30,7 @@ const PostLike = ({ postId, likesCount, handleLikeProp, likesArr }: any) => {
   //   });
   // }, [likesCount]);
 
-  console.log("PostLike :--------------: likes");
-  console.log(likesArr);
-
   function checkLiked() {
-    console.log(likesArr);
-
     let liked_arr = _.filter(
       likesArr,
       (o: any) => o.userId === currentUser.userId
@@ -78,12 +72,9 @@ const PostLike = ({ postId, likesCount, handleLikeProp, likesArr }: any) => {
             <div className={styles.likedBy}>Liked by:</div>
 
             {likesArr.map((like: any) => {
-              console.log("bob bob bob<<<");
-              console.log(like);
-
               return (
                 <div className={styles.likesNames} key={like._id}>
-                  {like.username}
+                  <Link to={`/person/${like.userId}`}>{like.username}</Link>,
                 </div>
               );
             })}

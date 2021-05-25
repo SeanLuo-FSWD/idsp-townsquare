@@ -26,6 +26,7 @@ const Post = (props: any) => {
   const [commentsCount, setCommentsCount] = useState(0);
   const [commentsVisible, setCommentsVisible] = useState(false);
   const { postId } = useParams() as any;
+  const [showLikes, setShowLikes] = useState(false);
 
   useEffect(() => {
     setLikesCount(props.post.likesCount);
@@ -98,9 +99,6 @@ const Post = (props: any) => {
     // props.post.onPostComment(comment_obj);
   };
 
-  console.log("Post.tsx return - likesArr : likesArr");
-
-  console.log(likesArr);
   return (
     <div className={styles.postContainer} key={uuidv4()}>
       <div key={props.post._id} className={styles.post}>
@@ -134,6 +132,8 @@ const Post = (props: any) => {
                   // likesCount={likesCount}
                   handleLikeProp={handleLikeProp}
                   paramPostId={postId}
+                  showLikes={showLikes}
+                  setShowLikes={setShowLikes}
                 />
               </div>
             </div>

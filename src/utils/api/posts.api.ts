@@ -50,7 +50,7 @@ const getFullPostByPostId = (postId: string, cb: Function) => {
     })
     .catch((error) => {
       console.log("getFullPostByPostId error");
-      cb(null, error.response.data.message);
+      cb(null, error.response.data);
     });
 };
 

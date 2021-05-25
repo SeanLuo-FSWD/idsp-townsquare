@@ -61,7 +61,7 @@ const getFollowingUsers = (cb: Function) => {
     })
     .catch((error) => {
       console.log("getFollowingUsers error");
-      cb(null, error.response.data.message);
+      cb(null, error.response.data);
     });
 };
 const addChatMsg = (msgObj: any, cb: Function) => {
@@ -98,7 +98,7 @@ const getAllConversationsByUserId = (cb: Function) => {
     })
     .catch((error) => {
       console.log("getAllConversationsByUserId error");
-      cb(null, error.response.data.message);
+      cb(null, error.response.data);
     });
 };
 
