@@ -124,7 +124,9 @@ const postCreate = (bodyFormData: any, cb: Function) => {
     .then(function (response) {
       console.log("postCreate response");
       console.log(response);
-      cb(null, response.data);
+      let post_obj = response.data;
+      post_obj["like_arr"] = [];
+      cb(null, post_obj);
     })
     .catch(function (err) {
       console.log("postCreate error");
