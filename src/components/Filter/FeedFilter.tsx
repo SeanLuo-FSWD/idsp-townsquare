@@ -18,8 +18,9 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
 
   return (
     <div className={styles.filterContainer}>
-      <div>
-        <label htmlFor="site-search">Filter posts by keyword</label>
+      <div className={styles.filterStyling}>
+        {/* <label htmlFor="site-search">Filter posts by keyword</label> */}
+        <div className={styles.filterTitles}>Matching keyword(s)</div>
         <input
           className={styles.keywordSearch}
           type="search"
@@ -30,10 +31,13 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label>Has images</label>
+      <div className={styles.filterStyling}>
+        <div className={styles.filterTitles}>With images</div>
+
+        {/* <label>Has images</label> */}
 
         <FormControlLabel
+          style={{ float: "left" }}
           control={
             <Checkbox
               checked={hasImg}
@@ -41,7 +45,7 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
               name="Have_image"
             />
           }
-          label=""
+          label="Only posts with images"
         />
       </div>
     </div>
