@@ -7,8 +7,9 @@ import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
 
-const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
-  const [likes, setLikes] = useState([]);
+const PostLike = ({ postId, likesCount, handleLikeProp, likesArr }: any) => {
+  const [likes, setLikes] = useState(likesArr);
+
   const [showLikes, setShowLikes] = useState(false);
 
   const {
@@ -20,19 +21,24 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
     setCerror,
   } = useContext(LoginContext);
 
-  useEffect(() => {
-    getLikesByPostId(postId, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        setLikes(result.data);
-      }
-    });
-  }, [likesCount]);
+  // useEffect(() => {
+  //   getLikesByPostId(postId, (err: Error, result: any) => {
+  //     if (err) {
+  //       setCerror(err.message);
+  //     } else {
+  //       setLikes(result.data);
+  //     }
+  //   });
+  // }, [likesCount]);
+
+  console.log("PostLike :--------------: likes");
+  console.log(likesArr);
 
   function checkLiked() {
+    console.log(likesArr);
+
     let liked_arr = _.filter(
-      likes,
+      likesArr,
       (o: any) => o.userId === currentUser.userId
     );
 
@@ -65,13 +71,16 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
           className={styles.showLikesButton}
           onClick={() => setShowLikes(!showLikes)}
         >
-          {likesCount}
+          {likesArr.length}
         </div>
         {showLikes && (
           <div className={styles.likedByContainer}>
             <div className={styles.likedBy}>Liked by:</div>
 
-            {likes.map((like: any) => {
+            {likesArr.map((like: any) => {
+              console.log("bob bob bob<<<");
+              console.log(like);
+
               return (
                 <div className={styles.likesNames} key={like._id}>
                   {like.username}

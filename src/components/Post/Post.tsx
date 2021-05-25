@@ -6,16 +6,20 @@ import { useHistory, useParams } from "react-router-dom";
 import styles from "./Post.module.scss";
 import comments from "./comments.svg";
 import ImageSlider from "../../UI/ImageSlider";
-import { createComment, toggleLikePost } from "../../utils/api/posts.api";
+import {
+  createComment,
+  toggleLikePost,
+  getLikesByPostId,
+} from "../../utils/api/posts.api";
 import socket from "../../utils/socketIO.util";
-
-import { IPost, TLikes } from "../../interfaces/IPost";
+import { v4 as uuidv4 } from "uuid";
 import PostCommentList from "./PostCommentList";
 
 const Post = (props: any) => {
   const history = useHistory();
   const { setCerror, currentUser } = useContext(LoginContext);
   const [likesCount, setLikesCount] = useState("") as any;
+  const [likesArr, setLikesArr] = useState(props.post.like_arr);
 
   // const [comment, setComment] = useState("");
   // const [commentList, setCommentList] = useState([]) as any;
@@ -46,17 +50,21 @@ const Post = (props: any) => {
           console.log("props.post");
           console.log(props.post);
 
-          result.data.like_status === "liked"
-            ? setLikesCount(likesCount + 1)
-            : setLikesCount(likesCount - 1);
+          // result.data.like_status === "liked"
+          //   ? setLikesCount(likesCount + 1)
+          //   : setLikesCount(likesCount - 1);
 
-          console.log("result.data.notification_result");
+          getLikesByPostId(props.post._id, (err: Error, result: any) => {
+            if (err) {
+              setCerror(err.message);
+            } else {
+              console.log("Post : getLikesByPostId --- result.data");
+              console.log(result.data);
 
-          console.log(result.data.notification_result);
-
+              setLikesArr(result.data);
+            }
+          });
           const notification_obj = result.data.notification_result;
-
-          // {receiverId: "60a76224da25031a2c9d38d0", createdAt: "Sat May 22 2021 00:06:33 GMT-0700 (Pacific Daylight Time)", message: "sponge bob has liked your post", link: "/post/60a76986e29a171eb6d18661", _id: "60a8ad7997502532370ff646"}
 
           if (notification_obj) {
             socket.emit("notification", notification_obj);
@@ -68,10 +76,6 @@ const Post = (props: any) => {
   };
 
   const commentSubmitProp = (comment: string, cb: Function) => {
-    console.log("vvvvvvvvvvvvvvvvvvv");
-    console.log("vvvvvvvvvvvvvvvvvvv");
-    console.log(comment);
-
     const comment_obj: any = {
       text: comment,
       postId: props.post._id,
@@ -94,8 +98,11 @@ const Post = (props: any) => {
     // props.post.onPostComment(comment_obj);
   };
 
+  console.log("Post.tsx return - likesArr : likesArr");
+
+  console.log(likesArr);
   return (
-    <div className={styles.postContainer}>
+    <div className={styles.postContainer} key={uuidv4()}>
       <div key={props.post._id} className={styles.post}>
         <div className={styles.textContainer}>
           {/* <div>{props.title}</div> */}
@@ -123,7 +130,8 @@ const Post = (props: any) => {
               <div>
                 <PostLike
                   postId={props.post._id}
-                  likesCount={likesCount}
+                  likesArr={likesArr}
+                  // likesCount={likesCount}
                   handleLikeProp={handleLikeProp}
                   paramPostId={postId}
                 />
