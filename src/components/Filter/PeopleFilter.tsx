@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
-import styles from "./PeopleFilter.module.scss"
+import styles from "./PeopleFilter.module.scss";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
@@ -91,8 +91,10 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
     <div className={styles.peopleFilterContainer}>
       <div className={styles.filterStyling}>
         <div className={styles.filterTitles}>age</div>
-        <div>Min age: {age[0]}</div>
-        <div>Max age: {age[1]}</div>
+        <div style={{ display: "flex" }} className={styles.minMaxAge}>
+          <div>Min age: {age[0]}</div>
+          <div>Max age: {age[1]}</div>
+        </div>
         <Slider
           value={age}
           onChange={handleAgeFilter}
@@ -101,8 +103,8 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
         />
       </div>
       <div className={styles.filterStyling}>
-        <div  className={styles.filterTitles}>gender</div>
-        <FormGroup className={styles.gender}>
+        <div className={styles.filterTitles}>gender</div>
+        <FormGroup className={styles.filter}>
           <FormControlLabel
             control={
               <Checkbox
@@ -137,7 +139,7 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
       </div>
       <div className={styles.filterStyling}>
         <div className={styles.filterTitles}>location</div>
-        <FormGroup className={styles.locationFilter}>
+        <FormGroup className={styles.filter}>
           <FormControlLabel
             control={
               <Checkbox
@@ -193,7 +195,7 @@ function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
       </div>
       <div className={styles.filterStyling}>
         <div className={styles.filterTitles}>Followed</div>
-        <FormGroup style={{ flexDirection: "row" }}>
+        <FormGroup className={styles.filter}>
           <FormControlLabel
             control={
               <Checkbox

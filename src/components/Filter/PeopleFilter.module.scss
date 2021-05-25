@@ -1,56 +1,49 @@
 .peopleFilterContainer {
+  text-align: center;
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-around;
+  font-size: 13px;
+  flex-wrap: wrap;
 
-    border-radius: 7px;
-    text-align: center;
-    display: flex;
-    padding: 0px 20px;
-
-    justify-content: space-around;
-    font-size: 13px;
-    grid-gap: 0px 10px;
-    flex-wrap: wrap;
-
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgb(223, 223, 223);
+  padding: 20px 20px;
+  border-radius: 7px;
+  height: 70%;
 }
 
 .filterStyling {
+  flex-direction: row;
+  width: 80%;
+  font-size: 13px;
 
+  .filter {
+    display: flex;
     flex-direction: row;
-    width: 80%;
     font-size: 13px;
+  }
 
-
-    
+  .minMaxAge {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
 }
 
 .filterTitles {
-    color: white;
-    background: #92002f;
-    border-radius: 7px;
-    width: 100%;
-    font-size: 13px;
+  color: white;
+  background: #92002f;
+  border-radius: 7px;
+  width: 100%;
+  font-size: 13px;
 }
+.footerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 
-.test {
-
-}
-
-.locationFilter {
-
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-    justify-content: space-around;
-}
-
-.gender {
-    font-size: 13px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-around;
-    
-}
-
-.submitButton {
+  .submitButton {
     color: blue;
+  }
 }

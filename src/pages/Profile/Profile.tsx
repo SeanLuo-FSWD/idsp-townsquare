@@ -144,15 +144,11 @@ function Profile(props: any) {
       <div className="pagePadding">
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <div className={`flex--space-around ${styles.SubNavWrap}`}>
-            <img className={styles.townSquareLogo} src={townSquareLogo} />
-            <div className={styles.profileUserName}>{currentUser.username}</div>
-            <img
-              className={`pointer ${styles.logoutIcon}`}
-              src={logoutImage}
-              onClick={handleLogout}
-            />
-          </div>
+          <img
+            className={`pointer ${styles.logoutIcon}`}
+            src={logoutImage}
+            onClick={handleLogout}
+          />
         </SubNav>
 
         {cerror && <Error message={cerror} />}

@@ -90,21 +90,31 @@ function FeedFilterModalContent(props: any) {
         feedPg_People={props.feedPg.people}
       />
 
-      <button className={styles.submitButton} onClick={onFeedFilterClick}>
-        Submit
-      </button>
-      <button
-        onClick={() => {
-          props.onFeedFilterRemove();
-          props.toggleFilterProp(false);
-        }}
-      >
-        Cancel
-      </button>
-      <FormControlLabel
-        control={<Checkbox onChange={handleHasSyncFilter} name="Have_image" />}
-        label="Apply to User page"
-      />
+      <div className={styles.footerWrapper}>
+        <div>
+          <button className={styles.submitButton} onClick={onFeedFilterClick}>
+            Submit
+          </button>
+
+          <FormControlLabel
+            control={
+              <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
+            }
+            label="Apply to User page"
+          />
+        </div>
+
+        <div>
+          <button
+            onClick={() => {
+              props.onFeedFilterRemove();
+              props.toggleFilterProp(false);
+            }}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

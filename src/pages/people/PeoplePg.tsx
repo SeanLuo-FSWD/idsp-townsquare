@@ -59,25 +59,18 @@ const PeoplePg = (props: any) => {
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav className={styles.nav}>
-        <div className={styles.logoAndGreeting}>
-          <img className={styles.townSquareLogo} src={townSquareLogo} />
-          <div>Hi {currentUser.username}! </div>
-        </div>
-
-        <div className={styles.subNavIcons}>
-          <img
-            className={`pointer ${styles.userIcons}`}
-            onClick={() => {
-              setDetailView(!detailView);
-            }}
-            src={detailedViewIcon}
-          />
-          <img
-            className={`pointer ${styles.userIcons}`}
-            src={filter}
-            onClick={() => setShowFilter(true)}
-          />
-        </div>
+        <img
+          className={`pointer ${styles.userIcons}`}
+          onClick={() => {
+            setDetailView(!detailView);
+          }}
+          src={detailedViewIcon}
+        />
+        <img
+          className={`pointer ${styles.userIcons}`}
+          src={filter}
+          onClick={() => setShowFilter(true)}
+        />
       </SubNav>
       {cerror && <Error message={cerror} />}
       {showFilter ? (

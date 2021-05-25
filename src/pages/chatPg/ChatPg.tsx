@@ -31,8 +31,6 @@ function Chat(props: any) {
       <div className="pagePadding">
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <img className={styles.townSquareLogo} src={townSquareLogo} />
-          <p>Chat</p>
           <button
             className={styles.startGroupChatButton}
             onClick={mapThenRedirect}

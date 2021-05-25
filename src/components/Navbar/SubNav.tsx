@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from "uuid";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 
 function SubNav(props: any) {
-  const { setCerror } = useContext(LoginContext);
+  const { setCerror, currentUser } = useContext(LoginContext);
   const history = useHistory();
 
   const [showDD, setShowDD] = useState(false);
@@ -73,19 +73,17 @@ function SubNav(props: any) {
   return (
     <div className={`${styles.subNav}`}>
       <div className={styles.logoWrap}>
-        <img className={styles.logo} src={townSquareLogo} />
-      </div>
-      <div className={styles.childrenWrap}>{props.children}</div>
-      <div className={styles.commonIcons}>
-        <HelpIcon
-          className="pointer"
+        <img
+          className={`pointer ${styles.logo}`}
+          src={townSquareLogo}
           onClick={() => {
             history.push("/help");
           }}
-        >
-          {/* <Link to="/help" /> */}
-        </HelpIcon>
-
+        />
+        <p style={{ paddingLeft: "20px" }}>{currentUser.username}</p>
+      </div>
+      <div className={styles.childrenWrap}>{props.children}</div>
+      <div className={styles.commonIcons}>
         <Badge
           className="pointer"
           badgeContent={props.notices.length}
