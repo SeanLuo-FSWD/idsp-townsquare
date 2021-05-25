@@ -135,58 +135,64 @@ function GroupChatPg(props: any) {
     <>
       {toggleView === "users" ? (
         <>
-          <div className={styles.addedUserContainer}>
-            <h2>Added users</h2>
-            <div className={styles.addedList}>
-              {getAvatars(addedGroup)}
-              {addedGroup.length > 5 && <h3>. . .</h3>}
+          <div className="pagePadding">
+            <div className={styles.addedUserContainer}>
+              <h2>Added users</h2>
+              <div className={styles.addedList}>
+                {getAvatars(addedGroup)}
+                {addedGroup.length > 5 && <h3>. . .</h3>}
+              </div>
             </div>
+            <FilterUserList
+              people={people}
+              toggleFilterProp={toggleFilterProp}
+              addedGroup={addedGroup}
+              setAddedGroupProp={setAddedGroupProp}
+              onStartChatProp={onStartChatProp}
+              addedGroupIds={addedGroupIds}
+              setAddedGroupIds={setAddedGroupIds}
+              chatType={props.chatType}
+              initialChatGroup={initialChatGroup}
+            />
           </div>
-          <FilterUserList
-            people={people}
-            toggleFilterProp={toggleFilterProp}
-            addedGroup={addedGroup}
-            setAddedGroupProp={setAddedGroupProp}
-            onStartChatProp={onStartChatProp}
-            addedGroupIds={addedGroupIds}
-            setAddedGroupIds={setAddedGroupIds}
-            chatType={props.chatType}
-            initialChatGroup={initialChatGroup}
-          />
         </>
       ) : (
         <>
-          <Navbar currentPath={window.location.pathname} />
-          <SubNav>
-            <button onClick={history.goBack}>Back</button>
-          </SubNav>
-          <div style={{ marginTop: "50px" }}>
+          <div className="pagePadding">
+            <Navbar currentPath={window.location.pathname} />
+            <SubNav>
+              <button onClick={history.goBack}>Back</button>
+            </SubNav>
             {cerror && <Error message={cerror} />}
-            <PeopleFilter
-              peopleFilterProps={peopleFilterProps}
-              feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
-            />
-
-            <div className="flex">
-              <p>
-                Apply Feed filter to users (Will only show users who created
-                matched posts)
-              </p>
-            </div>
-            <FeedFilter
-              feedFilterProps={feedFilterProps}
-              feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
-            />
             <div>
-              <button onClick={onGroupFilterSubmit}>Submit</button>
-              <button
-                onClick={() => {
-                  setModalProps(null);
-                  setShowModal("");
-                }}
-              >
-                Cancel
-              </button>
+              <div className={styles.filterInfo}>
+                <p style={{ fontSize: "1.8em" }}>Main filter</p>
+              </div>
+              <PeopleFilter
+                peopleFilterProps={peopleFilterProps}
+                feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
+              />
+
+              <div className={styles.filterInfo}>
+                <p style={{ fontSize: "1.8em" }}>Post filter</p>
+                <p style={{ marginBottom: "10px" }}>
+                  Filter users who created matching posts only
+                </p>
+              </div>
+              <FeedFilter
+                feedFilterProps={feedFilterProps}
+                feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
+              />
+              <div className={styles.footerWrapper}>
+                {/* <button onClick={onGroupFilterSubmit}>Submit</button> */}
+                <button
+                  // className={styles.submitButton}
+                  style={{ marginRight: "10px" }}
+                  onClick={onGroupFilterSubmit}
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         </>

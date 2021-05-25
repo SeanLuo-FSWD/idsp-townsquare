@@ -179,14 +179,16 @@ function Person(props: any) {
                 )
               ) : null}
 
-              <button
-                className={styles.followButtons}
-                onClick={() => {
-                  history.push(`/chat`);
-                }}
-              >
-                Chat
-              </button>
+              {person.user.userId !== currentUser.userId && (
+                <button
+                  className={styles.followButtons}
+                  onClick={() => {
+                    history.push(`/chat`);
+                  }}
+                >
+                  Chat
+                </button>
+              )}
             </SubNav>
           </div>
         )}

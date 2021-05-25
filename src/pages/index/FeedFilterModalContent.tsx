@@ -73,7 +73,7 @@ function FeedFilterModalContent(props: any) {
   }
 
   return (
-    <div className={styles.mainFilterCard}>
+    <div>
       <div className={styles.filterInfo}>
         <p style={{ fontSize: "1.8em" }}>Main filter</p>
       </div>
@@ -85,7 +85,7 @@ function FeedFilterModalContent(props: any) {
       <div className={styles.filterInfo}>
         <p style={{ fontSize: "1.8em" }}>User filter</p>
         <p style={{ marginBottom: "10px" }}>
-          Will show posts from matching users only
+          Filter posts from matching users only
         </p>
       </div>
 
@@ -96,7 +96,7 @@ function FeedFilterModalContent(props: any) {
 
       <div className={styles.footerWrapper}>
         <button
-          className={styles.submitButton}
+          // className={styles.submitButton}
           style={{ marginRight: "10px" }}
           onClick={onFeedFilterClick}
         >

@@ -78,7 +78,7 @@ function FilterUserList({
     <>
       <Navbar currentPath={window.location.pathname} />
       <SubNav>
-        <button onClick={toggleFilterProp}>Back to filter</button>
+        {/* <button onClick={toggleFilterProp}>Back to filter</button> */}
         <button onClick={onStartChatProp}>Start Chatting</button>
         <button onClick={history.goBack}>Cancel</button>
       </SubNav>

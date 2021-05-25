@@ -57,33 +57,35 @@ const PeoplePg = (props: any) => {
   }
   return (
     <>
-      <Navbar currentPath={window.location.pathname} />
-      <SubNav className={styles.nav}>
-        <img
-          className={`pointer ${styles.userIcons}`}
-          onClick={() => {
-            setDetailView(!detailView);
-          }}
-          src={detailedViewIcon}
-        />
-        <img
-          className={`pointer ${styles.userIcons}`}
-          src={filter}
-          onClick={() => setShowFilter(true)}
-        />
-      </SubNav>
-      {cerror && <Error message={cerror} />}
-      {showFilter ? (
-        <PeopleFilterModalContent toggleFilterProp={toggleFilterProp} />
-      ) : detailView ? (
-        <div className={styles2.detailedViewContainer}>
-          <UserDetail people={people} />
-        </div>
-      ) : (
-        <div className={styles.userContainer}>
-          <UserGrid people={people} />
-        </div>
-      )}
+      <div className="pagePadding">
+        <Navbar currentPath={window.location.pathname} />
+        <SubNav className={styles.nav}>
+          <img
+            className={`pointer ${styles.userIcons}`}
+            onClick={() => {
+              setDetailView(!detailView);
+            }}
+            src={detailedViewIcon}
+          />
+          <img
+            className={`pointer ${styles.userIcons}`}
+            src={filter}
+            onClick={() => setShowFilter(true)}
+          />
+        </SubNav>
+        {cerror && <Error message={cerror} />}
+        {showFilter ? (
+          <PeopleFilterModalContent toggleFilterProp={toggleFilterProp} />
+        ) : detailView ? (
+          <div className={styles2.detailedViewContainer}>
+            <UserDetail people={people} />
+          </div>
+        ) : (
+          <div className={styles.userContainer}>
+            <UserGrid people={people} />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -157,6 +157,8 @@ const FeedPg = (props: any) => {
                   vertical: "top",
                   horizontal: "right",
                 }}
+                className="pointer"
+                onClick={() => setShowFilter(true)}
               >
                 <img
                   className={`pointer ${styles.createPost}`}

@@ -15,6 +15,8 @@ import {
   doFeedFilterUpdate,
   doFeedFilterRemove,
 } from "../../store/redux/actions/filter_act";
+import styles from "./PeopleFilterModalContent.module.scss";
+
 import { connect } from "react-redux";
 
 function PeopleFilterModalContent(props: any) {
@@ -53,10 +55,6 @@ function PeopleFilterModalContent(props: any) {
       ...feedFilter,
       [key_name_pair[0]]: key_name_pair[1],
     });
-    // feedFilterHolder = {
-    //   ...feedFilterHolder,
-    //   [key_name_pair[0]]: key_name_pair[1],
-    // };
   };
 
   const onPeopleFilterClick = () => {
@@ -81,8 +79,6 @@ function PeopleFilterModalContent(props: any) {
       props.onFeedFilterSubmit(feedPgSlice);
     }
 
-    // setModalProps(null);
-    // setShowModal("");
     props.toggleFilterProp(false);
   };
 
@@ -92,46 +88,66 @@ function PeopleFilterModalContent(props: any) {
   }
 
   return (
-    <div>
+    <div className={styles.mainFilterCard}>
+      <div className={styles.filterInfo}>
+        <p style={{ fontSize: "1.8em" }}>Main filter</p>
+      </div>
       <PeopleFilter
         peopleFilterProps={peopleFilterProps}
         feedPg_People={props.peoplePg.people}
       />
 
-      <div className="flex">
-        {/* {showFeedFilter ? (
-          <button onClick={() => setShowFeedFilter(false)}>
-            Hide Feed Filter
-          </button>
-        ) : (
-          <button onClick={() => setShowFeedFilter(true)}>
-            Show Feed Filter
-          </button>
-        )} */}
+      {/* <div className="flex">
         <p>
           Apply Feed filter to users (Will only show users who created matched
           posts)
         </p>
-      </div>
+      </div> */}
 
-      {/* {showFeedFilter && (
-        <FeedFilter
-          feedFilterProps={feedFilterProps}
-          feedPg_Feed={props.peoplePg.feed}
-        />
-      )} */}
+      <div className={styles.filterInfo}>
+        <p style={{ fontSize: "1.8em" }}>Post filter</p>
+        <p style={{ marginBottom: "10px" }}>
+          Filter users who created matching posts only
+        </p>
+      </div>
 
       <FeedFilter
         feedFilterProps={feedFilterProps}
         feedPg_Feed={props.peoplePg.feed}
       />
 
-      <div className="flex">
+      <div className={styles.footerWrapper}>
+        <button
+          // className={styles.submitButton}
+          style={{ marginRight: "10px" }}
+          onClick={onPeopleFilterClick}
+        >
+          Submit
+        </button>
+
+        <FormControlLabel
+          control={
+            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
+          }
+          label="Also apply to User page"
+        />
+
+        <div style={{ marginLeft: "auto" }}>
+          <button
+            onClick={() => {
+              props.onPeopleFilterRemove();
+              props.toggleFilterProp(false);
+            }}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+
+      {/* <div className="flex">
         <button onClick={onPeopleFilterClick}>Submit</button>
         <button
           onClick={() => {
-            // setModalProps(null);
-            // setShowModal("");
             props.onPeopleFilterRemove();
             props.toggleFilterProp(false);
           }}
@@ -144,7 +160,7 @@ function PeopleFilterModalContent(props: any) {
           }
           label="Apply to Feed page"
         />
-      </div>
+      </div> */}
     </div>
   );
 }
