@@ -16,6 +16,7 @@ import {
   clearAllNotifications,
 } from "../../utils/api/auth.api";
 import HelpIcon from "@material-ui/icons/Help";
+import { v4 as uuidv4 } from "uuid";
 
 function SubNav(props: any) {
   const { setCerror } = useContext(LoginContext);
@@ -48,7 +49,11 @@ function SubNav(props: any) {
 
         console.log(result);
         props.doNoticeSetProp(result);
-        history.push(link);
+        const linkTarget = {
+          pathname: link,
+          key: uuidv4(),
+        };
+        history.push(linkTarget);
       }
     });
   }

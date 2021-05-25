@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import { postCreate } from "../../utils/api/posts.api";
-import { v4 as uuidv4 } from "uuid";
 import { IPost } from "../../interfaces/IPost";
 import ImageSlider from "../../UI/ImageSlider";
 import _ from "lodash";

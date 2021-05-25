@@ -6,33 +6,33 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
+import { Link } from "react-router-dom";
 
-const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
-  const [likes, setLikes] = useState([]);
-  const [showLikes, setShowLikes] = useState(false);
+const PostLike = ({
+  showLikes,
+  setShowLikes,
+  handleLikeProp,
+  likesArr,
+}: any) => {
+  const [likes, setLikes] = useState(likesArr);
 
-  const {
-    currentUser,
-    showModal,
-    setShowModal,
-    modalProps,
-    setModalProps,
-    setCerror,
-  } = useContext(LoginContext);
+  // const [showLikes, setShowLikes] = useState(false);
 
-  useEffect(() => {
-    getLikesByPostId(postId, (err: Error, result: any) => {
-      if (err) {
-        setCerror(err.message);
-      } else {
-        setLikes(result.data);
-      }
-    });
-  }, [likesCount]);
+  const { currentUser } = useContext(LoginContext);
+
+  // useEffect(() => {
+  //   getLikesByPostId(postId, (err: Error, result: any) => {
+  //     if (err) {
+  //       setCerror(err.message);
+  //     } else {
+  //       setLikes(result.data);
+  //     }
+  //   });
+  // }, [likesCount]);
 
   function checkLiked() {
     let liked_arr = _.filter(
-      likes,
+      likesArr,
       (o: any) => o.userId === currentUser.userId
     );
 
@@ -65,16 +65,16 @@ const PostLike = ({ postId, likesCount, handleLikeProp, isLiked }: any) => {
           className={styles.showLikesButton}
           onClick={() => setShowLikes(!showLikes)}
         >
-          {likesCount}
+          {likesArr.length}
         </div>
         {showLikes && (
           <div className={styles.likedByContainer}>
             <div className={styles.likedBy}>Liked by:</div>
 
-            {likes.map((like: any) => {
+            {likesArr.map((like: any) => {
               return (
                 <div className={styles.likesNames} key={like._id}>
-                  {like.username}
+                  <Link to={`/person/${like.userId}`}>{like.username}</Link>,
                 </div>
               );
             })}

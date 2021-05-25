@@ -107,8 +107,10 @@ const authenticate = (cb: Function) => {
     })
     .catch((error) => {
       console.log("authenticate error");
-      console.log(error);
-      console.log(error.response.data);
+      console.log(error.message);
+
+      console.log(error.response);
+      console.log(error.response.message);
       cb(error.response.data);
     });
 

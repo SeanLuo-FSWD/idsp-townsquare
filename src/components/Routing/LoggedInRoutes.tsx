@@ -11,11 +11,7 @@ import ChatPg from "../../pages/chatPg/ChatPg";
 import Chat from "../../pages/chat/Chat";
 import { LoginContext } from "../../store/context/LoginContext";
 import GroupChatPg from "../../pages/GroupChatPg/GroupChatPg";
-import GroupChat from "../../pages/GroupChatPg/GroupChat";
-
-import socket from "../../utils/socketIO.util";
-
-import io from "socket.io-client";
+import { v4 as uuidv4 } from "uuid";
 
 const ReactRouterSetup = () => {
   const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
@@ -47,7 +43,15 @@ const ReactRouterSetup = () => {
         <GroupChatPg />
       </Route>
 
-      <Route path="/person/:id" children={<Person />}></Route>
+      {/* <Route
+        path="/person/:id"
+        children={<Person key={uuidv4()} />}
+        key={uuidv4()}
+      ></Route> */}
+
+      <Route path="/person/:id" key={uuidv4()}>
+        <Person key={uuidv4()} />
+      </Route>
       <Route path="/post/:postId" children={<Home />}></Route>
       {/* <Route path="/chat/:chatId" children={<Chat />}></Route> */}
       <Route path="/chat" children={<Chat />}></Route>

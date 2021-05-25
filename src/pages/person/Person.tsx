@@ -25,29 +25,41 @@ import followBlackIcon from "./assets/followBlack.svg";
 import unfollowBlackIcon from "./assets/unfollowBlack.svg";
 import socket from "../../utils/socketIO.util";
 import Error from "../../components/Error/Error";
+import { v4 as uuidv4 } from "uuid";
 
 function Person(props: any) {
   const history = useHistory();
   let { id } = useParams() as any;
-  if (!id) {
-    id = props.personId; // Use passed in prop id, if no param.
-  }
+  // if (!id) {
+  //   id = props.personId;
+  // }
+  const shared_id = id ? id : props.personId;
+
+  console.log("shared___________id");
+  console.log(shared_id);
 
   const [person, setPerson] = useState(null) as any;
   const [followed, setFollowed] = useState([]) as any;
+  // const [sharedId, setSharedId] = useState("") as any;
 
   const { currentUser, setCerror, cerror } = useContext(LoginContext);
 
-  console.log("------- person id -------");
-  console.log(id);
+  console.log("------- person shared_id -------");
+  console.log(shared_id);
 
+  // useEffect(() => {
+  //   // setSharedId(shared_id);
+  //   window.location.reload();
+  // }, [shared_id]);
   useEffect(() => {
-    console.log("person [] person [] person [] person [] person");
-
-    getPerson(id, (err: Error, result: any) => {
+    getPerson(shared_id, (err: Error, result: any) => {
       if (err) {
         setCerror(err.message);
       } else {
+        console.log("person [] person [] person [] person [] person");
+
+        console.log(result.data);
+
         setPerson(result.data);
         const personObj = {
           avatar: result.data.user.avatar,
@@ -120,7 +132,7 @@ function Person(props: any) {
   function checkFollowed() {
     const match_follow = _.filter(
       followed,
-      (f: any) => f.followingUserId === id
+      (f: any) => f.followingUserId === shared_id
     );
     if (match_follow[0]) {
       return true;
@@ -131,7 +143,7 @@ function Person(props: any) {
 
   if (person) {
     return (
-      <div>
+      <div key={uuidv4()}>
         {!props.personId && (
           <div>
             <Navbar currentPath={window.location.pathname} />
