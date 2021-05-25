@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory } from "react-router-dom";
+import styles from "./Help.module.scss";
+import backArrow from "./assets/backArrow.svg";
 
 function Help() {
   const history = useHistory();
@@ -10,14 +12,14 @@ function Help() {
     <div>
       <Navbar currentPath={window.location.pathname} />
       <SubNav className="flex--space-between">
-        <button
+        <img
+          src={backArrow}
           onClick={() => {
             history.goBack();
           }}
-        >
-          Back
-        </button>
+        />
       </SubNav>
+      <div className={styles.helpContainer}>
       <h2 style={{ marginTop: "60px" }}>Terms of use :</h2>
       <p>
         Please do not spam or post massive amounts of pictures(20+), as our
@@ -115,6 +117,8 @@ function Help() {
         We will actually shut down the site and wipe out all contents (images,
         user data, etc) after Friday, May 28th.
       </p>
+      </div>
+      
     </div>
   );
 }
