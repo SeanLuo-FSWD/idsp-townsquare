@@ -30,12 +30,12 @@ function Verify() {
   }, []);
 
   return !status ? (
-    <div>
+    <div className="pagePadding">
       {cerror && <Error message={cerror} />}
       <h2>Please wait as we verify you</h2>
     </div>
   ) : (
-    <div>
+    <div className="pagePadding">
       <h2>
         Authentication success! You will be redirected to Login page shortly
       </h2>

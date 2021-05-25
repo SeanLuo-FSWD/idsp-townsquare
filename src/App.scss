@@ -3,11 +3,19 @@
 /*** custom classes ***/
 .body {
   font-family: "Poppins", sans-serif;
-  
 }
 
 p {
   margin: 0;
+}
+
+.pointer,
+button {
+  cursor: pointer;
+}
+.pagePadding {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .disable_scroll {

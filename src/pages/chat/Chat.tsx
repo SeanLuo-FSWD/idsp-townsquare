@@ -170,16 +170,17 @@ function Chat(props: any) {
 
   return (
     <>
-      <div>
+      <div className="pagePadding">
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
             {addedGroup.length > 1 ? (
               <div>
-                <img src={backIcon} onClick={toChatPage} />
+                <img src={backIcon} className="pointer" onClick={toChatPage} />
               </div>
             ) : (
               <img
                 src={backIcon}
+                className="pointer"
                 onClick={() => {
                   history.goBack();
                 }}
@@ -189,9 +190,6 @@ function Chat(props: any) {
             <div className={styles.chatNavUserInfo}>
               Chatting with:
               <div className={styles.avatarNav}>
-                {/* {props.chatType.new && props.chatType.group
-                  ? getAvatars(props.addedGroup)
-                  : getAvatars(addedGroup)} */}
                 {getAvatars(addedGroup)}
                 {addedGroup.length > 4 && <span>...</span>}
               </div>

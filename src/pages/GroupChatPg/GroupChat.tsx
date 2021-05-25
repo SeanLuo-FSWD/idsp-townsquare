@@ -41,7 +41,7 @@ function GroupChat({
 
   return (
     <>
-      <div>
+      <div className="pagePadding">
         <SubNav className="flex--space-between">
           {!chatId ? (
             <button onClick={() => setOpenPortal(true)}>Back</button>

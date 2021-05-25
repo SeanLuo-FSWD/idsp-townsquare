@@ -141,14 +141,14 @@ function Profile(props: any) {
       ageArr.push(i);
     }
     return (
-      <div>
+      <div className="pagePadding">
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
           <div className={`flex--space-around ${styles.SubNavWrap}`}>
             <img className={styles.townSquareLogo} src={townSquareLogo} />
             <div className={styles.profileUserName}>{currentUser.username}</div>
             <img
-              className={styles.logoutIcon}
+              className={`pointer ${styles.logoutIcon}`}
               src={logoutImage}
               onClick={handleLogout}
             />
@@ -192,7 +192,7 @@ function Profile(props: any) {
             </div>
             <div className={styles.items}>
               <img
-                className={styles.userPageIcons}
+                className={`pointer ${styles.userPageIcons}`}
                 src={changeProfileImg}
                 data-edit="editImg"
                 onClick={handleEditOpen}
@@ -208,7 +208,7 @@ function Profile(props: any) {
                     onChange={(e) => getImg(e)}
                   />
                   <img
-                    className={styles.userPageIcons}
+                    className={`pointer ${styles.userPageIcons}`}
                     src={closeIcon}
                     data-edit="editImg"
                     onClick={handleEditClose}
@@ -223,7 +223,7 @@ function Profile(props: any) {
                   {initPerson.username}
                 </div>
                 <img
-                  className={styles.userPageIcons}
+                  className={`pointer ${styles.userPageIcons}`}
                   src={editImage}
                   data-edit="editUsername"
                   onClick={handleEditOpen}
@@ -242,7 +242,7 @@ function Profile(props: any) {
                       required
                     />
                     <img
-                      className={styles.userPageIcons}
+                      className={`pointer ${styles.userPageIcons}`}
                       src={closeIcon}
                       data-edit="editUsername"
                       onClick={handleEditClose}
@@ -257,7 +257,7 @@ function Profile(props: any) {
                   <strong>Age: </strong> {initPerson.age}
                 </div>
                 <img
-                  className={styles.userPageIcons}
+                  className={`pointer ${styles.userPageIcons}`}
                   src={editImage}
                   data-edit="editAge"
                   onClick={handleEditOpen}
@@ -277,7 +277,7 @@ function Profile(props: any) {
                       })}
                     </select>
                     <img
-                      className={styles.userPageIcons}
+                      className={`pointer ${styles.userPageIcons}`}
                       src={closeIcon}
                       data-edit="editAge"
                       onClick={handleEditClose}
@@ -293,7 +293,7 @@ function Profile(props: any) {
                   {initPerson.location}
                 </div>
                 <img
-                  className={styles.userPageIcons}
+                  className={`pointer ${styles.userPageIcons}`}
                   src={editImage}
                   data-edit="editLocation"
                   onClick={handleEditOpen}
@@ -316,7 +316,7 @@ function Profile(props: any) {
                       <option value="Vancouver">Vancouver</option>
                     </select>
                     <img
-                      className={styles.userPageIcons}
+                      className={`pointer ${styles.userPageIcons}`}
                       src={closeIcon}
                       data-edit="editLocation"
                       onClick={handleEditClose}
@@ -331,7 +331,7 @@ function Profile(props: any) {
                   <strong>gender: </strong> {initPerson.gender}
                 </div>
                 <img
-                  className={styles.userPageIcons}
+                  className={`pointer ${styles.userPageIcons}`}
                   src={editImage}
                   data-edit="editGender"
                   onClick={handleEditOpen}
@@ -352,7 +352,7 @@ function Profile(props: any) {
                       <option value="other">other</option>
                     </select>
                     <img
-                      className={styles.userPageIcons}
+                      className={`pointer ${styles.userPageIcons}`}
                       src={closeIcon}
                       data-edit="editGender"
                       onClick={handleEditClose}
@@ -364,7 +364,7 @@ function Profile(props: any) {
 
             <div className={styles.submitButton}>
               <button
-                className={styles.saveChanges}
+                className={`pointer ${styles.saveChanges}`}
                 onClick={handleProfileEdit}
               >
                 Save
@@ -387,7 +387,14 @@ function Profile(props: any) {
       </div>
     );
   }
-  return <h2>Loading</h2>;
+  return (
+    <>
+      <div className="pagePadding">
+        {cerror && <Error message={cerror} />}
+        <h2>Loading</h2>
+      </div>
+    </>
+  );
 }
 
 // export default Profile;

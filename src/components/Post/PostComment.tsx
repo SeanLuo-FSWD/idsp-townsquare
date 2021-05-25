@@ -20,7 +20,7 @@ const PostComment: React.FC<any> = (props) => {
         <div className={styles.commentContainer}>
           <img
             onClick={redirect}
-            className={styles.commentAvatar}
+            className={`pointer ${styles.commentAvatar}`}
             src={props.avatar}
             style={{ width: "50px", height: "50px" }}
           />

@@ -43,9 +43,12 @@ const PeoplePg = (props: any) => {
 
   if (!people) {
     return (
-      <div>
-        <h2>Loading</h2>
-      </div>
+      <>
+        <div className="pagePadding">
+          {cerror && <Error message={cerror} />}
+          <h2>Loading</h2>
+        </div>
+      </>
     );
   }
   if (props.error) {
@@ -63,14 +66,14 @@ const PeoplePg = (props: any) => {
 
         <div className={styles.subNavIcons}>
           <img
-            className={styles.userIcons}
+            className={`pointer ${styles.userIcons}`}
             onClick={() => {
               setDetailView(!detailView);
             }}
             src={detailedViewIcon}
           />
           <img
-            className={styles.userIcons}
+            className={`pointer ${styles.userIcons}`}
             src={filter}
             onClick={() => setShowFilter(true)}
           />

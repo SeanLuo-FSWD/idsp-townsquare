@@ -24,7 +24,15 @@ const addPersonGroup = (submitObj: string[], cb: Function) => {
     .catch((error) => {
       console.log("addPersonGroup error");
       console.log(error);
-      cb(error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 
@@ -45,7 +53,15 @@ const toggleFollowing = (followUserId: string, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 
@@ -61,25 +77,16 @@ const getFollowingUsers = (cb: Function) => {
     })
     .catch((error) => {
       console.log("getFollowingUsers error");
-      cb(null, error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
-};
-const addChatMsg = (msgObj: any, cb: Function) => {
-  if (msgObj) {
-    const msg_res = {
-      id: uuidv4(),
-      userId: msgObj.authorId,
-      timeStamp: new Date().toString(),
-      text: msgObj.message,
-    };
-    cb(null, msg_res);
-  } else {
-    cb(new Error("msg not sent"));
-  }
-};
-const getChat = (chatId: string, cb: Function) => {
-  const chat = db.chats.filter((c) => c.id === chatId);
-  cb(null, chat);
 };
 
 const getAllConversationsByUserId = (cb: Function) => {
@@ -88,23 +95,22 @@ const getAllConversationsByUserId = (cb: Function) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log(
-        "getAllConversationsByUserId getAllConversationsByUserId getAllConversationsByUserId"
-      );
-
-      console.log(response);
-
       cb(null, response.data);
     })
     .catch((error) => {
       console.log("getAllConversationsByUserId error");
-      cb(null, error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 
-const userFollow = (userId: string, follow: boolean, cb: Function) => {
-  cb(null, 200);
-};
 const getPeople = (peoplePg: any, cb: Function) => {
   axios
     .post(`${API_URL}/people`, peoplePg, { withCredentials: true })
@@ -114,7 +120,15 @@ const getPeople = (peoplePg: any, cb: Function) => {
     .catch((error) => {
       console.log("getPeople error");
       console.log(error);
-      cb(error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 
@@ -129,17 +143,22 @@ const getPerson = (id: string, cb: Function) => {
     .catch((error) => {
       console.log("getPerson error");
       console.log(error);
-      cb(error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 
 export {
   getPeople,
   getPerson,
-  userFollow,
   getAllConversationsByUserId,
-  getChat,
-  addChatMsg,
   getFollowingUsers,
   toggleFollowing,
   addPersonGroup,

@@ -14,8 +14,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  feedState: feedReducer,
-  usersState: userReducer,
+  // feedState: feedReducer,
+  // usersState: userReducer,
   filterState: filterReducer,
   chatState: chatReducer,
   noticeState: noticeReducer,

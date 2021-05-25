@@ -17,6 +17,7 @@ import {
 } from "../../utils/api/auth.api";
 import HelpIcon from "@material-ui/icons/Help";
 import { v4 as uuidv4 } from "uuid";
+import townSquareLogo from "./assets/townSquareLogo.svg";
 
 function SubNav(props: any) {
   const { setCerror } = useContext(LoginContext);
@@ -70,17 +71,27 @@ function SubNav(props: any) {
   }
 
   return (
-    <div className={`flex--space-between ${styles.subNav}`}>
-      {props.children}
-      <HelpIcon
-        onClick={() => {
-          history.push("/help");
-        }}
-      >
-        {/* <Link to="/help" /> */}
-      </HelpIcon>
-      <div>
-        <Badge badgeContent={props.notices.length} max={10} color="primary">
+    <div className={`${styles.subNav}`}>
+      <div className={styles.logoWrap}>
+        <img className={styles.logo} src={townSquareLogo} />
+      </div>
+      <div className={styles.childrenWrap}>{props.children}</div>
+      <div className={styles.commonIcons}>
+        <HelpIcon
+          className="pointer"
+          onClick={() => {
+            history.push("/help");
+          }}
+        >
+          {/* <Link to="/help" /> */}
+        </HelpIcon>
+
+        <Badge
+          className="pointer"
+          badgeContent={props.notices.length}
+          max={10}
+          color="primary"
+        >
           <NotificationsIcon
             className={styles.notificationIcon}
             onClick={() => {
@@ -92,20 +103,10 @@ function SubNav(props: any) {
           <div className={styles.alert}>
             {props.notices.map((n: any) => {
               return (
-                // <li onClick={() => removeAlert(a.id)} key={a.id}>
-                //   {createAlert(a)}
-                // </li>
-
-                // {
-                //   receiverId: '60a76224da25031a2c9d38d0',
-                //   createdAt: 'Sat May 22 2021 00:17:27 GMT-0700 (Pacific Daylight Time)',
-                //   message: 'sponge bob has liked your post',
-                //   link: '/post/60a76986e29a171eb6d18661',
-                //   _id: '60a8b0072a244a32f6f7015d'
-                // }
                 <div key={n._id}>
                   <p
                     style={{ color: "black" }}
+                    className="pointer"
                     onClick={() =>
                       removeMapThenRedirect(n.link, n._id, n.receiverId)
                     }
@@ -117,7 +118,9 @@ function SubNav(props: any) {
               );
             })}
 
-            <button onClick={clearAll}>Clear all</button>
+            <button className="pointer" onClick={clearAll}>
+              Clear all
+            </button>
           </div>
         )}
       </div>

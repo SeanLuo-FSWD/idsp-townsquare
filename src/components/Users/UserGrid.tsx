@@ -1,9 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
-import { IUser } from "../../interfaces/IUser";
 import styles from "./UserGrid.module.scss";
-import { getFeed, getFeedError } from "../../store/redux/selector/Feed";
 
 function UserGrid(props: any) {
   return (

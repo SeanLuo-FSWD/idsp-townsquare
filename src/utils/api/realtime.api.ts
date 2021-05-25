@@ -12,7 +12,8 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
   axios
     .post(
       `${API_URL}/conversation`,
-      { target: addedGroupIds },
+      // { target: addedGroupIds },
+      { target: null },
       { withCredentials: true }
     )
     .then((response) => {
@@ -22,10 +23,21 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
     })
     .catch((err) => {
       console.log("getConversationByMembers error");
-      console.log(err);
-      console.log(err.response);
-      console.log(err.response.data);
-      cb(err.response.data);
+      console.log(typeof err);
+
+      if (!err.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(err.response.data);
+      }
+
+      // console.log(err);
+      // console.log(err.response);
+      // console.log(err.response.data);
     });
 };
 
@@ -51,7 +63,15 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
 //       console.log("getConversationByMembers error");
 //       console.log(error);
 
-//       cb(null, error.response.data);
+//             if (!error.response) {
+//   cb(
+//     new Error(
+//       "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+//     )
+//   );
+// } else {
+//   cb(error.response.data);
+// }
 //     });
 // };
 
@@ -72,7 +92,15 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
       console.log("getMessagesInConversation error");
       console.log(error);
 
-      cb(null, error.response.data);
+      if (!error.response) {
+        cb(
+          new Error(
+            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+          )
+        );
+      } else {
+        cb(error.response.data);
+      }
     });
 };
 

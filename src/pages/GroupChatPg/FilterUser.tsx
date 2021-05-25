@@ -13,6 +13,7 @@ function FilterUser({ person }: any) {
     <div>
       <div>
         <img
+          className="pointer"
           onClick={() => setOpenPortal(true)}
           src={person.avatar}
           height="50px"
