@@ -18,11 +18,14 @@
 .chatListItemContainer { 
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 #root {
     background-color: red;
 }
 
+.newConvoCreatedat {
+    display: flex;
+    margin: 0px 0px;
+}

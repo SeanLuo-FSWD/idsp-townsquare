@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { connect } from "react-redux";
 import styles from "./ChatList.module.scss";
+import classes from "./chatListItem.module.scss";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -19,16 +20,40 @@ function ChatListItem(props: any) {
 
   function getAvatars() {
     const length =
-      props.convo.members.length > 4 ? 4 : props.convo.members.length;
+      props.convo.members.length > 2 ? 2 : props.convo.members.length;
 
     let selectGroup: any = [];
     for (let i = 0; i < length; i++) {
       selectGroup.push(props.convo.members[i]);
     }
 
-    const arr_img = selectGroup.map((g: any) => {
-      return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
-    });
+    let arr_img;
+
+    if (length === 2) {
+      arr_img = selectGroup.map((g: any, index: number) => {
+        return (
+          <div className={classes.groupAvatarWrapper}>
+          <img 
+            key={g.userId} 
+            className={classes[`image${index+1}`]}
+            src={g.avatar} 
+            height="50px" 
+            width="50px" />
+                        
+          </div>
+        );
+      });
+    } else {
+      arr_img = selectGroup.map((g: any, index: number) => {
+        return (
+          <img 
+            key={g.userId} 
+            src={g.avatar} 
+            height="50px" 
+            width="50px" />
+        );
+      });
+    }
 
     return arr_img;
   }
@@ -54,9 +79,11 @@ function ChatListItem(props: any) {
 
   return (
     <>
-      <div className="pointer" onClick={mapThenRedirect}>
-        <div style={{ display: "flex" }}>
-          <div>{getAvatars()}</div>
+      <div className={classes.ChatCard} onClick={mapThenRedirect}>
+        <div className={classes.cardItemWrapper}>
+          <div className={classes.avatarContainer}>
+            {getAvatars()}
+          </div>
           <div className={styles.chatListItemContainer}>
             {props.convo.latestMessage.length > 0 ? (
               <>
@@ -74,7 +101,7 @@ function ChatListItem(props: any) {
             ) : (
               <>
                 <div className={styles.chatTimeStamp}>
-                  <span>
+                  <span className={styles.newConvoCreatedat}>
                     new conversation created at: &nbsp; <br />
                     {new Date(props.convo.createdAt).toLocaleString("en-US", {
                       timeZone: "America/Los_Angeles",

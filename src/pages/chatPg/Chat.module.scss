@@ -1,17 +1,16 @@
 .chatContainer {
     margin: 0;
     position: relative;
-    top: 43px;
-    padding: 35px 10px;
-    display: flex;
+    top: 35px;
+    padding-bottom: 50px;
+    margin: 25px 5px;
+    // padding: 0px 10px;
     flex-direction: row;
     img {
         border-radius: 50%;
         margin: 0px 10px;
     }
-    #root {
-        background-color: blue;
-    }
+
 }
 
 .startGroupChatButton {
