@@ -65,6 +65,11 @@
   // background-color: #5C5D8D;
 }
 
+.rememberToFill {
+  margin: 15px;
+  max-width: 300px;
+}
+
 .container {
 
   position: relative;
@@ -168,6 +173,20 @@ select {
   align-items: center;
   text-align: center;
   background-color: #f6efe8;
+}
+
+.logoutButtonWrapper {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoutIcon {
+  margin-left: 3px;
+  width: auto;
+  height: 20px;
+  
 }
 
 // .saveChanges {

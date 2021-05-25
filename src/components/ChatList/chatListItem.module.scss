@@ -16,6 +16,7 @@
 .cardItemWrapper {
     display: flex;
     flex-direction: row;
+    flex-basis: 100%;
     align-items: center;
     padding: 10px 0px;
     width: 100%;
@@ -43,5 +44,7 @@
     width: 35px;
 }
 .groupAvatarWrapper {
+    display: flex;
+    flex-direction: column;
     margin-right: 15px;
 }

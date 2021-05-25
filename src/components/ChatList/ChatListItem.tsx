@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { connect } from "react-redux";
 import styles from "./ChatList.module.scss";
 import classes from "./chatListItem.module.scss";
+import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -39,7 +40,6 @@ function ChatListItem(props: any) {
             src={g.avatar} 
             height="50px" 
             width="50px" />
-                        
           </div>
         );
       });
@@ -101,7 +101,7 @@ function ChatListItem(props: any) {
             ) : (
               <>
                 <div className={styles.chatTimeStamp}>
-                  <span className={styles.newConvoCreatedat}>
+                  <span>
                     new conversation created at: &nbsp; <br />
                     {new Date(props.convo.createdAt).toLocaleString("en-US", {
                       timeZone: "America/Los_Angeles",
