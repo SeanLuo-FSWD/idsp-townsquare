@@ -15,6 +15,7 @@ import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
+import chatIcon from "./assets/chatIcon.svg";
 import {
   doChatUpdate,
   doChatInitialChatGroup,
@@ -153,40 +154,7 @@ function Person(props: any) {
                 src={backIcon}
                 onClick={history.goBack}
               />
-              {person.user.userId !== currentUser.userId ? (
-                checkFollowed() ? (
-                  <button
-                    className={styles.followButtons}
-                    onClick={() => onFollowHandle(person.user.userId)}
-                  >
-                    Unfollow
-                    <img
-                      className={styles.followUnfollowIcons}
-                      src={unfollowBlackIcon}
-                    />
-                  </button>
-                ) : (
-                  <button
-                    className={styles.followButtons}
-                    onClick={() => onFollowHandle(person.user.userId)}
-                  >
-                    Follow
-                    <img
-                      className={styles.followUnfollowIcons}
-                      src={followBlackIcon}
-                    />
-                  </button>
-                )
-              ) : null}
-
-              <button
-                className={styles.followButtons}
-                onClick={() => {
-                  history.push(`/chat`);
-                }}
-              >
-                Chat
-              </button>
+              
             </SubNav>
           </div>
         )}
@@ -203,6 +171,43 @@ function Person(props: any) {
               <p>Age: {person.user.age}</p>
               <p>Gender: {person.user.gender}</p>
               <p>Location: {person.user.location}</p>
+            {person.user.userId !== currentUser.userId ? (
+                checkFollowed() ? (
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={unfollowBlackIcon}
+                    />
+                    <div>Unfollow</div>
+
+                  </button>
+                ) : (
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={followBlackIcon}
+                    />
+                    <div>Follow</div>
+                  </button>
+                )
+              ) : null}
+
+              <button
+                className={styles.followButtons}
+                onClick={() => {
+                  history.push(`/chat`);
+                }}
+              >
+                <img className={styles.followUnfollowIcons} src={chatIcon}/>
+                <div>Chat
+                </div>
+              </button>
             </div>
           </div>
 
