@@ -17,9 +17,9 @@
 }
 .avatarNav {  
   display: flex;
-  position: absolute;
+  position: relative;
   flex-direction: row;
-  flex-wrap: wrap;
+
   
   img {
     border-radius: 50%;
@@ -70,11 +70,13 @@
   margin: 0px 0px 0px 15px;
   height: 30px;
   border-radius: 10px;
+  border: solid 2px #92002f;
+  background-color: rgb(255, 255, 255);
 }
 
 .sendButton {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  height: 30px;
+  height: 36px;
   width: 85px;
   border: none;
   border-radius: 10px;

@@ -89,7 +89,8 @@ function SubNav(props: any) {
             history.push("/help");
           }}
         />
-        <p style={{ paddingLeft: "20px" }}>{currentUser.username}</p>
+        {/* <p style={{ paddingLeft: "20px" }}>{currentUser.username}</p> */}
+        {/* <div>TownSquare</div> */}
       </div>
       <div className={styles.childrenWrap}>{props.children}</div>
       <div className={styles.commonIcons}>
@@ -111,29 +112,33 @@ function SubNav(props: any) {
             <div className={styles.alert}>
               {props.notices.map((n: any) => {
                 return (
-                  <div className={styles.notificationItems} key={n._id}>
-                    <p
-                      style={{ color: "black" }}
-                      className="pointer"
-                      onClick={() =>
-                        removeMapThenRedirect(n.link, n._id, n.receiverId)
-                      }
-                    >
-                      {/* <Link to={n.link}>{n.message}</Link> */}
-                      <div className={styles.notificationWrapper}>
+                  <div className={styles.notificationWrapper}>
+                    <div key={n._id}>
+                      <p
+                        style={{ color: "black" }}
+                        className="pointer"
+                        onClick={() =>
+                          removeMapThenRedirect(n.link, n._id, n.receiverId)
+                        }
+                      >
+                        {/* <Link to={n.link}>{n.message}</Link> */}
                         <div className={styles.userInfoWrapper}>
                           {n.message}
                         </div>
                         <div className={styles.dateWrapper}>
                           {new Date(n.createdAt).toDateString()}
                         </div>
-                      </div>
-                    </p>
+                      </p>
+                    </div>
                   </div>
                 );
               })}
 
-              <button className={styles.clearButton} onClick={clearAll}>
+              <button
+                className={styles.clearButton}
+                onClick={clearAll}
+                style={{ float: "right" }}
+              >
                 Clear all
               </button>
             </div>

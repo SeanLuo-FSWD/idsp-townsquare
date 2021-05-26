@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styles from "./ChatList.module.scss";
 import classes from "./chatListItem.module.scss";
-import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -14,6 +13,7 @@ import { useHistory, useParams } from "react-router-dom";
 function ChatListItem(props: any) {
   const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
   const history = useHistory();
+  const conversation = props.convo;
 
   useEffect(() => {
     setAddedGroup(props.convo.members);
@@ -39,7 +39,6 @@ function ChatListItem(props: any) {
         return (
           <div className={classes.groupAvatarWrapper} key={g.userId}>
             <img
-              key={g.userId}
               className={classes[`image${index + 1}`]}
               src={g.avatar}
               height="50px"
@@ -50,7 +49,15 @@ function ChatListItem(props: any) {
       });
     } else {
       arr_img = selectGroup.map((g: any, index: number) => {
-        return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+        return (
+          <img
+            className={classes.avatar}
+            key={g.userId}
+            src={g.avatar}
+            height="50px"
+            width="50px"
+          />
+        );
       });
     }
 
@@ -70,27 +77,71 @@ function ChatListItem(props: any) {
     history.push("/chat");
   }
 
+  let memberNames;
+  if (conversation.members.length > 1) {
+    memberNames = "";
+    for (let i = 0; i < conversation.members.length; i++) {
+      if (i === 0) {
+        memberNames += `${conversation.members[i].username}`;
+      } else if (i > 1) {
+        memberNames += ` and ${conversation.members.length - 2} other`;
+        break;
+      } else {
+        memberNames += `, ${conversation.members[i].username}`;
+      }
+    }
+  } else {
+    memberNames = conversation.members[0].username;
+  }
+
+  let latestMessage;
+  if (conversation.latestMessage[0]) {
+    if (conversation.latestMessage[0].userId === props.currentUser.userId) {
+      latestMessage = `You: ${conversation.latestMessage[0].text}`;
+    } else {
+      latestMessage = conversation.latestMessage[0].text;
+    }
+  } else {
+    latestMessage = "Click to start chatting.";
+  }
+
+  function checkIfToday(messageTimeStamp: any) {
+    const currentDate = new Date().toLocaleDateString("en-US", {
+      timeZone: "America/Los_Angeles",
+    });
+
+    const messageDate = new Date(messageTimeStamp).toLocaleDateString("en-US", {
+      timeZone: "America/Los_Angeles",
+    });
+    if (messageDate === currentDate) console.log("it's the same day");
+    return messageDate === currentDate;
+  }
+
+  let latestMessageTimeStamp;
+  if (conversation.latestMessage[0]) {
+    if (checkIfToday(conversation.latestMessage[0].createdAt)) {
+      latestMessageTimeStamp = new Date(conversation.latestMessage[0].createdAt)
+        .toTimeString()
+        .slice(0, 5);
+      console.log(latestMessageTimeStamp);
+    } else {
+      latestMessageTimeStamp = new Date(conversation.latestMessage[0].createdAt)
+        .toLocaleDateString("en-US", {
+          timeZone: "America/Los_Angeles",
+        })
+        .slice(0, 4);
+    }
+  }
+
   return (
     <>
       <div className={classes.ChatCard} onClick={mapThenRedirect}>
-        <div className={classes.cardItemWrapper}>
-          <div className={classes.avatarContainer}>{getAvatars()}</div>
-          <div className={styles.chatListItemContainer}>
-            {props.convo.latestMessage.length > 0 && (
-              <>
-                <div className={styles.chatTimeStamp}>
-                  {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
-                  {new Date(
-                    props.convo.latestMessage[0].createdAt
-                  ).toLocaleString("en-US", {
-                    timeZone: "America/Los_Angeles",
-                  })}
-                </div>
-                <p>{props.convo.latestMessage[0].text}</p>
-              </>
-            )}
-          </div>
+        <div className={classes.avatarContainer}>{getAvatars()}</div>
+        <div className={classes.chatListItemContainer}>
+          <p>{memberNames}</p>
+          <p className={classes.chatText}>{latestMessage}</p>
         </div>
+        <div className={classes.chatTimeStamp}>{latestMessageTimeStamp}</div>
       </div>
     </>
   );
