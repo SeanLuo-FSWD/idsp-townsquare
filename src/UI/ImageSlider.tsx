@@ -20,12 +20,17 @@ const ImageSlider = ({ slides }: any) => {
 
   const length = slides.length;
 
+  console.log("xxxxxxxxxxxxxxxxxxxxxx");
+  console.log(length);
+
   return (
     <section className={styles.slider}>
-      <IoIosArrowBack
-        className={`pointer ${styles.left_arrow}`}
-        onClick={prevSlide}
-      />
+      {slides.length > 1 && (
+        <IoIosArrowBack
+          className={`pointer ${styles.left_arrow}`}
+          onClick={prevSlide}
+        />
+      )}
 
       <div className={styles.img_container}>
         {slides.map((slide: any, index: number) => {
@@ -45,10 +50,12 @@ const ImageSlider = ({ slides }: any) => {
           );
         })}
       </div>
-      <IoIosArrowForward
-        className={`pointer ${styles.right_arrow}`}
-        onClick={nextSlide}
-      />
+      {slides.length > 1 && (
+        <IoIosArrowForward
+          className={`pointer ${styles.right_arrow}`}
+          onClick={nextSlide}
+        />
+      )}
     </section>
   );
 };

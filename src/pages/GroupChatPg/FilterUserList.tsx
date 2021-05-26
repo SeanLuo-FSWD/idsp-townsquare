@@ -91,20 +91,32 @@ function FilterUserList({
             return;
           } else {
             return (
-              <div key={person._id}>
-                <FilterUser person={person} />
-                <FormGroup style={{ flexDirection: "row" }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value={person._id}
-                        onChange={handleCheck}
-                        checked={addedGroupIds.indexOf(person._id) > -1}
-                      />
-                    }
-                    label="add"
+              <div key={person._id} className={styles.cardWrapper}>
+                <div className={styles.imgSelect}>
+                  <img
+                    // onClick={() => {
+                    //   history.push(`/person/${person._id}`);
+                    // }}
+                    src={person.avatar}
+                    height="50px"
+                    width="50px"
+                    style={{ marginRight: "10px" }}
                   />
-                </FormGroup>
+                  <FormGroup style={{ flexDirection: "row" }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={person._id}
+                          onChange={handleCheck}
+                          checked={addedGroupIds.indexOf(person._id) > -1}
+                        />
+                      }
+                      label="add"
+                    />
+                  </FormGroup>
+                </div>
+
+                <FilterUser person={person} />
               </div>
             );
           }

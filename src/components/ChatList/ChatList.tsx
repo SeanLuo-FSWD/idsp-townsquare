@@ -32,11 +32,13 @@ function ChatList() {
 
   if (chatList) {
     return (
-      <div>
+      <>
         {chatList.map((c: any) => {
           return <ChatListItem key={c.conversationId} convo={c} />;
         })}
-      </div>
+        {/* {getAvatars(chatList)}
+        {chatList.length > 4 && <span>...</span>} */}
+      </>
     );
   } else {
     return (

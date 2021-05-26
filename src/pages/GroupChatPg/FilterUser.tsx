@@ -11,7 +11,7 @@ function FilterUser({ person }: any) {
   }
   return (
     <div>
-      <div>
+      {/* <div>
         <img
           className="pointer"
           onClick={() => setOpenPortal(true)}
@@ -19,18 +19,24 @@ function FilterUser({ person }: any) {
           height="50px"
           width="50px"
         />
+      </div> */}
+      <div style={{ display: "flex" }}>
+        <p style={{ width: "90px" }}>
+          <strong>Location:</strong>
+        </p>
+        <p>{person.location}</p>
       </div>
       <div style={{ display: "flex" }}>
-        <span style={{ marginRight: "20px" }}>Location</span>
-        <span>{person.location}</span>
+        <p style={{ width: "90px" }}>
+          <strong>age:</strong>
+        </p>
+        <p>{person.age}</p>
       </div>
       <div style={{ display: "flex" }}>
-        <span style={{ marginRight: "20px" }}>age</span>
-        <span>{person.age}</span>
-      </div>
-      <div style={{ display: "flex" }}>
-        <span style={{ marginRight: "20px" }}>gender</span>
-        <span>{person.gender}</span>
+        <p style={{ width: "90px" }}>
+          <strong>gender:</strong>
+        </p>
+        <p>{person.gender}</p>
       </div>
 
       <PortalModal

@@ -137,10 +137,14 @@ function GroupChatPg(props: any) {
         <>
           <div className="pagePadding">
             <div className={styles.addedUserContainer}>
-              <h2>Added users</h2>
+              <h2>Added users:</h2>
               <div className={styles.addedList}>
                 {getAvatars(addedGroup)}
-                {addedGroup.length > 5 && <h3>. . .</h3>}
+                {addedGroup.length > 5 && (
+                  <h3 style={{ marginBottom: "0", marginLeft: "5px" }}>
+                    . . .
+                  </h3>
+                )}
               </div>
             </div>
             <FilterUserList

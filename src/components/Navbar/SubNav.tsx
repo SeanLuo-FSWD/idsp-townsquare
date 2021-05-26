@@ -107,29 +107,35 @@ function SubNav(props: any) {
           />
         </Badge>
         {showDD && (
-          <div className={styles.alert}>
-            {props.notices.map((n: any) => {
-              return (
-                <div key={n._id}>
-                  <p
-                    style={{ color: "black" }}
-                    className="pointer"
-                    onClick={() =>
-                      removeMapThenRedirect(n.link, n._id, n.receiverId)
-                    }
-                  >
-                    {/* <Link to={n.link}>{n.message}</Link> */}
-                    {n.message} - {new Date(n.createdAt).toDateString()}
-                  </p>
-                </div>
-              );
-            })}
+          <>
+            <div className={styles.alert}>
+              {props.notices.map((n: any) => {
+                return (
+                  <div key={n._id}>
+                    <p
+                      style={{ color: "black" }}
+                      className="pointer"
+                      onClick={() =>
+                        removeMapThenRedirect(n.link, n._id, n.receiverId)
+                      }
+                    >
+                      {/* <Link to={n.link}>{n.message}</Link> */}
+                      {n.message} - {new Date(n.createdAt).toDateString()}
+                    </p>
+                  </div>
+                );
+              })}
 
-            <button className="pointer" onClick={clearAll}>
-              Clear all
-            </button>
+              <button
+                className="pointer"
+                onClick={clearAll}
+                style={{ float: "right" }}
+              >
+                Clear all
+              </button>
+            </div>
             <Overlay transparent={true} togglePortalProp={togglePortalProp} />
-          </div>
+          </>
         )}
       </div>
     </div>

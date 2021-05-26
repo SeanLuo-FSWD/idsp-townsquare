@@ -1,28 +1,34 @@
 .chatBubbles {
-    background-color: #d3d5d9;
-    border-radius: 4px;
-    padding: 10px 10px;
-    margin: 0px 5px;
+  background-color: #d3d5d9;
+  border-radius: 4px;
+  padding: 10px 10px;
+  margin: 0px 5px;
+}
 
+.listItemRow {
+  display: flex;
+  border-style: outset;
+  align-items: center;
 }
 
 .displayPicture {
-    margin: 0px 10px 0px 0px;
+  margin: 0px 10px 0px 0px;
 }
 
 .chatTimeStamp {
-    color: #9c9c9c;
-    font-size: 14px;
+  color: #9c9c9c;
+  font-size: 14px;
 }
 
-.chatListItemContainer { 
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    margin-right: 10px;
+.chatListItemContainer {
+  display: flex;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  flex-direction: column;
+  margin-left: auto;
+  text-align: right;
 }
 
 #root {
-    background-color: red;
+  background-color: red;
 }
-

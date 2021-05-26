@@ -69,17 +69,19 @@
     border-left-style: solid;
     border-left-width: thin;
   }
-}
 
-.alert {
-  position: absolute;
-  margin-top: 31px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  right: 0;
-  background-color: white;
-  width: 100%;
-  border-radius: 4px;
-  width: max-content;
+  .alert {
+    position: absolute;
+    margin-top: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    right: 0;
+    background-color: white;
+    width: 100%;
+    border-radius: 4px;
+    width: max-content;
+    z-index: 10;
+    padding: 5px;
+  }
 }
 
 .peopleNav {

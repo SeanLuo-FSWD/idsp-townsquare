@@ -6,12 +6,7 @@
   margin: 0;
   align-items: center;
   grid-gap: 10px;
-  
-
-  
 }
-
-
 
 .townSquareTitle {
   flex-basis: 100%;
@@ -28,7 +23,6 @@
   border-color: #f6efe8;
   align-items: center;
   text-align: center;
-
 }
 
 .title {
@@ -37,15 +31,12 @@
 
 body {
   background: #e4dee0;
-  font-family: 'Poppins', sans-serif;
-  
+  font-family: "Poppins", sans-serif;
 }
 
 .navContainer {
   display: flex;
   align-items: center;
-  
-  
 }
 
 .createPost {
@@ -78,11 +69,9 @@ body {
 }
 
 .feedContainer {
-  margin-top: 77px;
+  // margin-top: 77px;
   padding-bottom: 50px;
 }
-
-
 
 .dateInfo {
   font-size: 14px;
@@ -93,8 +82,6 @@ body {
   align-items: center;
   font-size: 16px;
   padding-right: 5px;
-
-
 }
 
 .flexpostNavDetails {
@@ -104,14 +91,11 @@ body {
   flex: 0 0px 79%;
   flex-direction: column;
   font-size: 16px;
-
-
 }
 
 .flexpostNavCreatedTime {
   @extend .flexpostNav;
-  font-size:16px;
-
+  font-size: 16px;
 }
 
 .followUnfollowDelete {

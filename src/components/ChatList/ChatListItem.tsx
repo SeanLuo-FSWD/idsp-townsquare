@@ -54,38 +54,44 @@ function ChatListItem(props: any) {
 
   return (
     <>
-      <div className="pointer" onClick={mapThenRedirect}>
-        <div style={{ display: "flex" }}>
-          <div>{getAvatars()}</div>
-          <div className={styles.chatListItemContainer}>
-            {props.convo.latestMessage.length > 0 ? (
-              <>
-                <div className={styles.chatTimeStamp}>
-                  {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
-                  {new Date(
-                    props.convo.latestMessage[0].createdAt
-                  ).toLocaleString("en-US", {
+      {/* <div className="pointer" onClick={mapThenRedirect}> */}
+      <div
+        className={`pointer ${styles.listItemRow}`}
+        onClick={mapThenRedirect}
+      >
+        <div>{getAvatars()}</div>
+        {props.convo.members.length > 4 && (
+          <h2 style={{ marginLeft: "8px" }}>. . .</h2>
+        )}
+        <div className={styles.chatListItemContainer}>
+          {props.convo.latestMessage.length > 0 ? (
+            <>
+              <div className={styles.chatTimeStamp}>
+                {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
+                {new Date(
+                  props.convo.latestMessage[0].createdAt
+                ).toLocaleString("en-US", {
+                  timeZone: "America/Los_Angeles",
+                })}
+              </div>
+
+              <p>{props.convo.latestMessage[0].text}</p>
+            </>
+          ) : (
+            <>
+              <div className={styles.chatTimeStamp}>
+                <span>
+                  new conversation created at: &nbsp; <br />
+                  {new Date(props.convo.createdAt).toLocaleString("en-US", {
                     timeZone: "America/Los_Angeles",
                   })}
-                </div>
-
-                <p>{props.convo.latestMessage[0].text}</p>
-              </>
-            ) : (
-              <>
-                <div className={styles.chatTimeStamp}>
-                  <span>
-                    new conversation created at: &nbsp; <br />
-                    {new Date(props.convo.createdAt).toLocaleString("en-US", {
-                      timeZone: "America/Los_Angeles",
-                    })}
-                  </span>
-                </div>
-              </>
-            )}
-          </div>
+                </span>
+              </div>
+            </>
+          )}
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }

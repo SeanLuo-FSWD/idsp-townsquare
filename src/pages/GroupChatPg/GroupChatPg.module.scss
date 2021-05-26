@@ -7,11 +7,15 @@
   width: 100%;
   background-color: antiquewhite;
   z-index: 10;
+  display: flex;
+  justify-content: space-evenly;
+  height: 70px;
 }
 
 .addedList {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 .filterBottomActions {
   background-color: blue;

@@ -35,14 +35,15 @@ function Chat(props: any) {
             className={styles.startGroupChatButton}
             onClick={mapThenRedirect}
           >
-            New Group Chat
+            Add Group Chat
             <img className={styles.groupChatIcon} src={groupChatIcon} />
           </button>
         </SubNav>
-      </div>
-      <div className={styles.chatContainer}>
-        {cerror && <Error message={cerror} />}
-        <ChatList />
+
+        <div className={styles.chatContainer}>
+          {cerror && <Error message={cerror} />}
+          <ChatList />
+        </div>
       </div>
     </>
   );

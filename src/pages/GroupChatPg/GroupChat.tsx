@@ -18,11 +18,11 @@ function GroupChat({
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let person_id = params.get("id");
+  // let person_id = params.get("id");
 
-  function togglePortalProp() {
-    setOpenPortal(false);
-  }
+  // function togglePortalProp() {
+  //   setOpenPortal(false);
+  // }
 
   function getAvatars() {
     const length = addedPeople.length > 4 ? 4 : addedPeople.length;
@@ -44,7 +44,8 @@ function GroupChat({
       <div className="pagePadding">
         <SubNav className="flex--space-between">
           {!chatId ? (
-            <button onClick={() => setOpenPortal(true)}>Back</button>
+            // <button onClick={() => setOpenPortal(true)}>Back</button>
+            <button>Back</button>
           ) : (
             <button
               onClick={() => {
@@ -68,7 +69,7 @@ function GroupChat({
         <Navbar currentPath={window.location.pathname} />
       </div>
 
-      <PortalModal
+      {/* <PortalModal
         message="Are you sure to leave? This empty chat won't be saved."
         isOpen={openPortal}
         onClose={() => setOpenPortal(false)}
@@ -82,7 +83,7 @@ function GroupChat({
           Leave
         </button>
       </PortalModal>
-      {openPortal && <Overlay togglePortalProp={togglePortalProp} />}
+      {openPortal && <Overlay togglePortalProp={togglePortalProp} />} */}
     </>
   );
 }
