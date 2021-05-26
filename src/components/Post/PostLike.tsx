@@ -59,28 +59,41 @@ const PostLike = ({
         )}
         <div
           className={`pointer ${styles.showLikesButton}`}
-          onClick={() => setShowLikes(!showLikes)}
+          // onClick={() => setShowLikes(!showLikes)}
         >
           {likesArr.length}
         </div>
-        {showLikes && (
+
+        {likesArr.length > 0 && (
           <div className={styles.likedByContainer}>
             <div className={styles.likedBy}>Liked by:</div>
 
-            {likesArr.map((like: any) => {
-              return (
-                <div
-                  className={`pointer ${styles.likesNames}`}
-                  key={like._id}
-                  onClick={() => {
-                    // redirect_profile(`/person/${like.userId}`);
-                    history.push(`/person/${like.userId}`);
-                  }}
-                >
-                  {/* <Link to={`/person/${like.userId}`}>{like.username}</Link>, */}
-                  {like.username},
-                </div>
-              );
+            {likesArr.map((like: any, i: number) => {
+              if (likesArr.length === i + 1) {
+                return (
+                  <div
+                    className={`pointer ${styles.likesNames}`}
+                    key={like._id}
+                    onClick={() => {
+                      history.push(`/person/${like.userId}`);
+                    }}
+                  >
+                    {like.username}
+                  </div>
+                );
+              } else {
+                return (
+                  <div
+                    className={`pointer ${styles.likesNames}`}
+                    key={like._id}
+                    onClick={() => {
+                      history.push(`/person/${like.userId}`);
+                    }}
+                  >
+                    {like.username},
+                  </div>
+                );
+              }
             })}
           </div>
         )}
