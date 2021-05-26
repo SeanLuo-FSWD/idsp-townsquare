@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
@@ -168,6 +168,14 @@ function Chat(props: any) {
     history.push("/chatPage");
   }
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const anchor = scrollRef.current;
+    anchor?.scrollIntoView(false);
+    
+  })
+
   return (
     <>
         <SubNav className="flex--space-between">
@@ -202,10 +210,10 @@ function Chat(props: any) {
               {messages.map((m: any) => {
                 return <MsgItem key={m._id} msg={m} />;
               })}
+              <div id={styles.anchor} ref={scrollRef}></div>
           </div>
-          <form
+          <form className={styles.chatFieldContainer}
               onSubmit={submitMessage}>
-              <div className={styles.chatFieldContainer}>
                 <input
                   className={styles.messageField}
                   type="text"
@@ -218,7 +226,6 @@ function Chat(props: any) {
                 <button className={styles.sendButton} type="submit">
                   Send
                 </button>
-              </div>
             </form>
         </div>
       <Navbar currentPath={window.location.pathname} />

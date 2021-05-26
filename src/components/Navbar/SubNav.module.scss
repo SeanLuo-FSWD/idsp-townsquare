@@ -74,13 +74,34 @@
 
 .alert {
   position: absolute;
-  margin-top: 31px;
+  top: 50px;
+  margin-right: 15px;
+  max-width: 230px;
+  padding: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   right: 0;
   background-color: white;
   width: 100%;
   border-radius: 4px;
   width: max-content;
+}
+
+.notificationItems {
+  padding: 5px 10px;
+}
+
+.clearButton {
+  position: relative;
+  border: none;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 3px;
+  width: 100%;
+  background-color: #92002f;
+  color: white;
 }
 
 .peopleNav {

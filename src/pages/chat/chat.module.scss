@@ -9,14 +9,13 @@
 .messageBox {
   width: 100%;
   grid-row: 2/3;
-  padding-bottom: 20px;
-  overflow: auto;
+
   scroll-snap-type: mandatory;
-  
+
+  overflow-y: scroll;
 
 }
-
-.avatarNav {
+.avatarNav {  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -42,7 +41,7 @@
   background-color: white;
   height: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr 42px 50px;
+  grid-template-rows: 50px 1fr 52px 50px;
 }
 
 .chatFieldContainer {
@@ -52,8 +51,7 @@
   width: 100%;
   max-width: 600px;
   height: auto;
-  margin: 5px 0px;
-  bottom: 45px;
+  bottom: 50px;
   justify-content: space-around;
   align-items: center;
   display: flex;

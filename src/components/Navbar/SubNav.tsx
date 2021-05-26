@@ -101,7 +101,7 @@ function SubNav(props: any) {
           <div className={styles.alert}>
             {props.notices.map((n: any) => {
               return (
-                <div key={n._id}>
+                <div className={styles.notificationItems} key={n._id}>
                   <p
                     style={{ color: "black" }}
                     className="pointer"
@@ -116,7 +116,7 @@ function SubNav(props: any) {
               );
             })}
 
-            <button className="pointer" onClick={clearAll}>
+            <button className={styles.clearButton} onClick={clearAll}>
               Clear all
             </button>
           </div>
