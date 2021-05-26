@@ -10,7 +10,9 @@
   width: 100%;
   grid-row: 2/3;
   padding-bottom: 20px;
-  overflow-y: scroll;
+  overflow: auto;
+  scroll-snap-type: mandatory;
+  
 
 }
 

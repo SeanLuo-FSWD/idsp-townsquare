@@ -4,10 +4,10 @@
 }
 
 .profileContainer {
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  // margin-top: 40px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -66,6 +66,7 @@
 }
 
 .rememberToFill {
+  font-size: 15px;
   margin: 15px;
   max-width: 300px;
 }
