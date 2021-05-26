@@ -212,9 +212,8 @@ function Chat(props: any) {
               })}
               <div id={styles.anchor} ref={scrollRef}></div>
           </div>
-          <form
+          <form className={styles.chatFieldContainer}
               onSubmit={submitMessage}>
-              <div className={styles.chatFieldContainer}>
                 <input
                   className={styles.messageField}
                   type="text"
@@ -227,7 +226,6 @@ function Chat(props: any) {
                 <button className={styles.sendButton} type="submit">
                   Send
                 </button>
-              </div>
             </form>
         </div>
       <Navbar currentPath={window.location.pathname} />
