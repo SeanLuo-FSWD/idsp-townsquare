@@ -8,12 +8,14 @@
 
 .messageBox {
   width: 100%;
+
 }
 
 .avatarNav {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  
   img {
     border-radius: 50%;
     margin: 0px 3px;
@@ -26,11 +28,12 @@
 
 .img {
   border-radius: 50%;
+
 }
 
 .messageContainer {
   position: absolute;
-  bottom: 90px;
+  bottom: 100px;
   width: 100%;
   max-width: 600px;
 
@@ -82,4 +85,8 @@
 
 .chatRows {
   // background-color: royalblue;
+}
+
+.backgroundContainer {
+  background-color: blue;
 }

@@ -1,26 +1,117 @@
+.selfContainer {
+    display: grid;
+    grid-template-columns: 30px 1fr 70px;
+    column-gap: 20px;
+}
+
+.selfMessageWrapper {
+    position: relative;
+    grid-column: 2/3;
+}
+
+.selfAvatarContainer {
+    position: relative;
+    grid-column: 3/3;
+}
+
 .messageContentContainer {
-    
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    overflow-wrap: anywhere;
+
     padding: 0px 5px;
 }
 
 .chatMessageAvatar {
+    position: absolute;
+    bottom: 5px;
     border-radius: 50%;
     margin: 0px 5px;
+    height: 40px;
+    width: 40px;
+	border: solid;
+	border-width: 3px;
+	border-color: #E5E5E5;
 }
 
-.chatFeedWrapper {
+
+
+.selfMessageContainer {
+    float: right;
     margin: 7px 10px;
-    
-    
+    position: relative;
+    left: 0;
+    width: fit-content;
+    /* max-width: 60%; */
+    background-color: #868282;
+    color: white;
+    margin: 6px;
+    margin-left: 23px;
+    border-radius: 10px;
+    padding: 10px;
+    word-wrap: break-word;      /* IE 5.5-7 */
+    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+    white-space: pre-wrap;   
+}
+
+.selfMessageContainer:after {
+    content: '';
+	position: absolute;
+	right: 0;
+    bottom: 10px;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-left-color: #868282;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: 0px;
+	margin-right: -15px;
 }
 
 .chatTimestamp {
-    color: #9c9c9c;
+    color: #d6d0d0;
     font-size: 14px;
     margin: 0px 5px;
-    
+    text-align: right;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 50px 1fr 90px;
+} 
+
+.messageContainer {
+    float: left;
+    margin: 7px 10px;
+    position: relative;
+    left: 0;
+    width: fit-content;
+    /* max-width: 60%; */
+    color: white;
+    margin: 6px;
+    margin-left: 23px;
+    border-radius: 10px;
+    padding: 10px;
+    word-wrap: break-word;      /* IE 5.5-7 */
+    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+    white-space: pre-wrap; 
+	background-color: #92002F;
+}
+
+.messageContainer:after {
+    content: '';
+	position: absolute;
+	left: 0;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-right-color: #92002F;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: 10px;
+	margin-left: -15px;
+    bottom: 10px;
+}
+
+.avatarContainer {
+    position: relative;
+    grid-column: 1/2;
 }

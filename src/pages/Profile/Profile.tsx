@@ -363,22 +363,9 @@ function Profile(props: any) {
               </button>
             </div>
 
-            <div className={styles.logoutButton}>
-              <button
-                  className={`pointer ${styles.saveChanges}`}
-                  onClick={handleLogout}
-                >
-                  <div className={styles.logoutButtonWrapper}>
-                  Logout
-                    <img
-                      className={`pointer ${styles.logoutIcon}`}
-                      src={logoutImage}
-                      onClick={handleLogout}
-                    />
-                  </div>
-                  
-                </button>
-            </div>
+
+
+
 
             <div className={styles.updateMessage}>
               {updateStatus && <div>Profile updated!</div>}
@@ -391,7 +378,22 @@ function Profile(props: any) {
                 </div>
               )}
             </div>
+            
           </div>
+          <button
+                  className={`pointer ${styles.logoutButton}`}
+                  onClick={handleLogout}
+                >
+                  <div className={styles.logoutButtonWrapper}>
+                  Logout
+                    <img
+                      className={`pointer ${styles.logoutIcon}`}
+                      src={logoutImage}
+                      onClick={handleLogout}
+                    />
+                  </div>
+                  
+                </button>
         </div>
       </div>
     );

@@ -7,12 +7,12 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  
+  margin-top: 40px;
   justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 100vh;
-  padding: 0px 10px;
+  padding: 0px 10px 60px 10px;
   background-color: #f6efe8;
 }
 
@@ -187,6 +187,25 @@ select {
   width: auto;
   height: 20px;
   
+}
+
+.logoutButton {
+  margin-top: 20px;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-color: white;
+  border-style: none;
+  border-radius: 50px; /* 5px rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-width: 300px;
+  align-items: center;
+  text-align: center;
+  background-color: #f6efe8;
 }
 
 // .saveChanges {
