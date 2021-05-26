@@ -112,7 +112,8 @@ function SubNav(props: any) {
             <div className={styles.alert}>
               {props.notices.map((n: any) => {
                 return (
-                  <div key={n._id}>
+                  <div className={styles.notificationWrapper}>
+                    <div key={n._id}>
                     <p
                       style={{ color: "black" }}
                       className="pointer"
@@ -130,6 +131,8 @@ function SubNav(props: any) {
                       
                     </p>
                   </div>
+                  </div>
+                  
                 );
               })}
 
