@@ -110,7 +110,14 @@ function SubNav(props: any) {
                     }
                   >
                     {/* <Link to={n.link}>{n.message}</Link> */}
-                    {n.message} - {new Date(n.createdAt).toDateString()}
+                    <div className={styles.notificationWrapper}>
+                    <div className={styles.userInfoWrapper}>
+                    {n.message}
+                    </div>
+                    <div className={styles.dateWrapper}>
+                    {new Date(n.createdAt).toDateString()}
+                    </div>
+                    </div>
                   </p>
                 </div>
               );
