@@ -72,7 +72,7 @@ const FeedPg = (props: any) => {
         }
       });
     }
-  }, [props.feedPg]);
+  }, [props.feedPg, postId]);
 
   const addPostProp = (result: any) => {
     setFeed(_.concat(result, feed));
@@ -229,6 +229,12 @@ const FeedPg = (props: any) => {
                   </div>
                 );
               })}
+              {feed.length >= 5 && (
+                <h3>
+                  You have reached the maximum number of most recent posts, try
+                  use the filter above to narrow down your interest.
+                </h3>
+              )}
             </div>
           )}
 

@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 5px 0px;
   width: 120px;
   padding: 5px 0px;
@@ -34,7 +34,6 @@
   justify-content: left;
 }
 
-
 .followButtons {
   display: flex;
   text-decoration: none;
@@ -43,23 +42,24 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   padding: 0px 10px;
-  
 }
 
 .detailedCards {
   background-color: #f6efe8;
   padding: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   margin: 10px;
   border-radius: 10px;
-  
+}
+
+.detailedCards:first-of-type {
+  background-color: lightsteelblue;
 }
 
 .detailedButtons {
-  
   display: flex;
   flex-direction: column-reverse;
 
@@ -73,17 +73,14 @@
   justify-content: space-around;
   background-color: #92002f;
   color: white;
-
 }
 
 .followUnfollowButtons {
-
   display: flex;
- 
 }
 
 .verticalAlign {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -99,7 +96,6 @@
 }
 
 .avatarAndButtons {
-
   margin: 5px 5px;
   display: flex;
   flex-direction: column;
@@ -109,7 +105,7 @@
 }
 
 .buttonIcons {
-  width: .9rem;
+  width: 0.9rem;
   margin-bottom: 2px;
 }
 

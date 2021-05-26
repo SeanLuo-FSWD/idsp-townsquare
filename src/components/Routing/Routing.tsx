@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "../../pages/register/RegisterPg.page";
 import Verify from "../../pages/verify/Verify";
 import Help from "../../pages/help/Help";
-
 const Routing = () => {
   return (
     <Router>

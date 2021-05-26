@@ -3,7 +3,7 @@ import styles from "./Overlay.module.scss";
 import { LoginContext } from "../store/context/LoginContext";
 
 function Overlay({ togglePortalProp, transparent }: any) {
-  const { showModal, setShowModal, setModalProps } = useContext(LoginContext);
+  const { setShowModal, setModalProps } = useContext(LoginContext);
   return (
     <div
       // className={styles.overlay}

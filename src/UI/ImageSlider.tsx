@@ -20,9 +20,6 @@ const ImageSlider = ({ slides }: any) => {
 
   const length = slides.length;
 
-  console.log("xxxxxxxxxxxxxxxxxxxxxx");
-  console.log(length);
-
   return (
     <section className={styles.slider}>
       {slides.length > 1 && (

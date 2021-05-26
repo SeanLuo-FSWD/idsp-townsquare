@@ -67,13 +67,12 @@ function UserDetail(props: any) {
     <div>
       {props.people.map((person: any) => {
         return (
-          <div key={person._id}>
-            <DetailFollow
-              person={person}
-              onFollowHandleProp={onFollowHandleProp}
-              followed={followed}
-            />
-          </div>
+          <DetailFollow
+            person={person}
+            key={person._id}
+            onFollowHandleProp={onFollowHandleProp}
+            followed={followed}
+          />
         );
       })}
     </div>

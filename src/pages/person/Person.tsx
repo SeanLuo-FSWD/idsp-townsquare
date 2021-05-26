@@ -199,15 +199,21 @@ function Person(props: any) {
                 )
               ) : null}
             </div>
-            <button
-              className={styles.followButtons}
-              onClick={() => {
-                history.push(`/chat`);
-              }}
-            >
-              <img className={styles.followUnfollowIcons} src={chatIconWhite} />
-              <div>Chat</div>
-            </button>
+
+            {person.user.userId !== currentUser.userId && (
+              <button
+                className={styles.followButtons}
+                onClick={() => {
+                  history.push(`/chat`);
+                }}
+              >
+                <img
+                  className={styles.followUnfollowIcons}
+                  src={chatIconWhite}
+                />
+                <div>Chat</div>
+              </button>
+            )}
           </div>
 
           {person.posts.map((post: any) => {
