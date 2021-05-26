@@ -44,7 +44,6 @@ function ChatList() {
     return (
       <>
         <div className="pagePadding">
-          {cerror && <Error message={cerror} />}
           <h2>Loading</h2>
         </div>
       </>

@@ -70,6 +70,12 @@ function Help() {
         applied.
       </p>
 
+      <h4>How to unapply filter</h4>
+      <p>
+        On the filter page, click on the "clear" button on the bottom right.
+        This will cancel all applied criteria.
+      </p>
+
       <h3>How do I see the "followed" users?</h3>
       <p>
         As we are an "open world" app, by default you will see everything. To
@@ -83,6 +89,21 @@ function Help() {
         Everytime someone click into chat with you or if you click into chat
         with someone, a new chat is created and will show up on both you and the
         other person's chatlist. This is not a bug, but a feature!
+      </p>
+
+      <h3>Are there notification for chat?</h3>
+
+      <p>
+        We have not implemented that feature. However, if you go to the chat
+        list page, all incoming chats should be updated realtime.
+      </p>
+
+      <h3>How can I remove my posts?</h3>
+      <p>
+        You can do so either on the post page, or your profile view. On the post
+        page, all your posts will have a trash icon on top right. On your own
+        profile view, you will see all your posts with the trash icon below your
+        profile information
       </p>
       <h3>Can I remove my profile?</h3>
       <p>

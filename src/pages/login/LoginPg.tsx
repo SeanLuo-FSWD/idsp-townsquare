@@ -46,10 +46,6 @@ function Login() {
       };
       login(user_obj, (err: Error, result: any) => {
         if (err) {
-          console.log("1111111111111111111111");
-          console.log(err.message);
-          console.log(err);
-
           setCerror(err.message);
         } else {
           setCerror("");
@@ -63,59 +59,66 @@ function Login() {
 
   if (authCalled) {
     return (
-      <div className={styles.card}>
-        <div className={styles.container}>
-          <div>
-            <img
-              className={styles.logo}
-              src={townSquareLogo}
-              alt="TownSquareLogo"
-            ></img>
-            <h1 className="townSquareTitle">TownSquare</h1>
+      <>
+        {cerror && <Error message={cerror} />}
+        <div className={styles.card}>
+          <div className={styles.container}>
+            <div>
+              <img
+                className={styles.logo}
+                src={townSquareLogo}
+                alt="TownSquareLogo"
+              ></img>
+              <h1 className="townSquareTitle">TownSquare</h1>
 
-            <form className={styles.loginForm}>
-              <label htmlFor="uname"></label>
-              <input
-                className={styles.inputField}
-                type="text"
-                placeholder="Enter email"
-                name="email"
-                required
-                value={person.email}
-                onChange={handleChange}
-              />
-              <br></br>
-              <label htmlFor="psw"></label>
-              <input
-                className={styles.inputField}
-                type="password"
-                placeholder="Enter Password"
-                name="password"
-                required
-                value={person.password}
-                onChange={handleChange}
-              />
-            </form>
-            {cerror && <Error message={cerror} />}
-            <button className={styles.loginButton} onClick={handleLogin}>
-              Login
-            </button>
-          </div>
-          <div>
-            <p className={styles.noAccount}>Don't have an account?</p>
-            <div className="register">
-              <button className={styles.registerButton}>
-                <Link className={styles.link} to="/register">
-                  Register
-                </Link>
+              <form className={styles.loginForm}>
+                <label htmlFor="uname"></label>
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  placeholder="Enter email"
+                  name="email"
+                  required
+                  value={person.email}
+                  onChange={handleChange}
+                />
+                <br></br>
+                <label htmlFor="psw"></label>
+                <input
+                  className={styles.inputField}
+                  type="password"
+                  placeholder="Enter Password"
+                  name="password"
+                  required
+                  value={person.password}
+                  onChange={handleChange}
+                />
+              </form>
+              <button className={styles.loginButton} onClick={handleLogin}>
+                Login
               </button>
+            </div>
+            <div>
+              <p className={styles.noAccount}>Don't have an account?</p>
+              <div className="register">
+                <button className={styles.registerButton}>
+                  <Link className={styles.link} to="/register">
+                    Register
+                  </Link>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   } else {
-    return <h2>Authenticating</h2>;
+    return (
+      <>
+        {cerror && <Error message={cerror} />}
+        <h2>Authenticating</h2>
+      </>
+    );
   }
 }
 

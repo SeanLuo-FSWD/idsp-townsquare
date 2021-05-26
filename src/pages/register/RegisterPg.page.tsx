@@ -49,6 +49,7 @@ const Register = () => {
   };
   return (
     <>
+      {cerror && <Error message={cerror} />}
       <div className={styles.card}>
         <div className={styles.backgroundSquare}>
           <br></br>
@@ -69,7 +70,6 @@ const Register = () => {
             </div>
           ) : (
             <article className="form">
-              {cerror && <Error message={cerror} />}
               <form>
                 <div className={"form-control"}>
                   <input
