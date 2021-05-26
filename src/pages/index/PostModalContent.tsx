@@ -113,8 +113,9 @@ function PostModalContent({ addPostProp }: any) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <div>
+
             <input
+
               className={styles.chooseFiles}
               type="file"
               id="myFile"
@@ -124,7 +125,8 @@ function PostModalContent({ addPostProp }: any) {
               multiple
               onChange={(e) => getImg(e)}
             />
-          </div>
+
+
           <input className={styles.createPostSubmit} type="submit" />
         </form>
         <div className={styles.postPreview}>
