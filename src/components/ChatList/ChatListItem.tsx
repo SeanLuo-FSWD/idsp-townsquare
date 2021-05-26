@@ -46,7 +46,10 @@ function ChatListItem(props: any) {
       });
     } else {
       arr_img = selectGroup.map((g: any, index: number) => {
-        return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+        return <img 
+          className={classes.avatar}
+          key={g.userId} src={g.avatar} height="50px" width="50px" 
+          />;
       });
     }
 
@@ -69,14 +72,13 @@ function ChatListItem(props: any) {
   }
 
   let memberNames;
-  console.log("latestMessage", conversation.latestMessage[0]);
   if (conversation.members.length > 1) {
     memberNames = "";
     for (let i = 0; i < conversation.members.length; i++) {
       if (i === 0) {
         memberNames += `${conversation.members[i].username}`;
-      } else if ( i > 2) {
-         memberNames += `...(${conversation.members.length})`;
+      } else if ( i > 1) {
+         memberNames += ` and ${conversation.members.length - 2} other`;
          break;
       } else {
         memberNames += `, ${conversation.members[i].username}`;
@@ -86,31 +88,55 @@ function ChatListItem(props: any) {
     memberNames = conversation.members[0].username;
   }
 
+  let latestMessage;
+  if (conversation.latestMessage[0]) { 
+    if (conversation.latestMessage[0].userId === props.currentUser.userId) {
+      latestMessage = `You: ${conversation.latestMessage[0].text}`;
+    } else {
+      latestMessage = conversation.latestMessage[0].text;
+    }
+  } else {
+    latestMessage = "Click to start chatting.";
+  }
+
+  function checkIfToday(messageTimeStamp: any) {
+    const currentDate = new Date().toLocaleDateString("en-US", {
+      timeZone: "America/Los_Angeles",
+    });
+
+    const messageDate = new Date(messageTimeStamp).toLocaleDateString("en-US", {
+      timeZone: "America/Los_Angeles"
+    });
+    if (messageDate === currentDate) console.log("it's the same day");
+    return messageDate === currentDate;
+  }
+
+  let latestMessageTimeStamp;
+  if (conversation.latestMessage[0]) {
+    if (checkIfToday(conversation.latestMessage[0].createdAt)) {
+      latestMessageTimeStamp = new Date(conversation.latestMessage[0].createdAt).toTimeString().slice(0, 5);
+      console.log(latestMessageTimeStamp);
+    } else {
+      latestMessageTimeStamp = new Date(conversation.latestMessage[0].createdAt).toLocaleDateString("en-US", {
+        timeZone: "America/Los_Angeles"
+      }).slice(0, 4)
+    }
+  }
 
   return (
     <>
       <div className={classes.ChatCard} onClick={mapThenRedirect}>
-        <div className={classes.cardItemWrapper}>
-          <div className={classes.avatarContainer}>{getAvatars()}</div>
-          <div className={styles.chatListItemContainer}>
-            <div>
-              <p>{memberNames}</p>
-              <p className={classes.chatText}>
-                {conversation.latestMessage[0]? conversation.latestMessage[0].text : "Click to start chatting."}
-              </p>
-            </div>
-
-            {props.convo.latestMessage.length > 0 && (
-              <div className={styles.chatTimeStamp}>
-
-                {/* {new Date(
-                  props.convo.latestMessage[0].createdAt
-                ).toLocaleString("en-US", {
-                  timeZone: "America/Los_Angeles",
-                })} */} 
-              </div>
-            )}
-          </div>
+        <div className={classes.avatarContainer}>
+          {getAvatars()}
+        </div>
+        <div className={classes.chatListItemContainer}>
+          <p>{memberNames}</p>
+          <p className={classes.chatText}>
+            {latestMessage}
+          </p>
+        </div>
+        <div className={classes.chatTimeStamp}>
+          {latestMessageTimeStamp}
         </div>
       </div>
     </>
