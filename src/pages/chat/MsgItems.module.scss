@@ -31,8 +31,6 @@
 	border-color: #E5E5E5;
 }
 
-
-
 .selfMessageContainer {
     float: right;
     margin: 7px 10px;
@@ -48,7 +46,8 @@
     padding: 10px;
     word-wrap: break-word;      /* IE 5.5-7 */
     white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
-    white-space: pre-wrap;   
+    white-space: pre-wrap;
+    line-break: anywhere;
 }
 
 .selfMessageContainer:after {
@@ -94,6 +93,7 @@
     white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
     white-space: pre-wrap; 
 	background-color: #92002F;
+    line-break: anywhere;
 }
 
 .messageContainer:after {
