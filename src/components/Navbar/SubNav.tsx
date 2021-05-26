@@ -121,14 +121,20 @@ function SubNav(props: any) {
                       }
                     >
                       {/* <Link to={n.link}>{n.message}</Link> */}
-                      {n.message} - {new Date(n.createdAt).toDateString()}
+                      <div className={styles.userInfoWrapper}>
+                      {n.message}
+                      </div>
+                      <div className={styles.dateWrapper}>
+                      {new Date(n.createdAt).toDateString()}
+                      </div>
+                      
                     </p>
                   </div>
                 );
               })}
 
               <button
-                className="pointer"
+                className={styles.clearButton}
                 onClick={clearAll}
                 style={{ float: "right" }}
               >

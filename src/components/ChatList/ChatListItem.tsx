@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styles from "./ChatList.module.scss";
 import classes from "./chatListItem.module.scss";
-import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -14,6 +13,7 @@ import { useHistory, useParams } from "react-router-dom";
 function ChatListItem(props: any) {
   const [addedGroup, setAddedGroup] = useState([]) as any; // array of ids
   const history = useHistory();
+  const conversation = props.convo;
 
   useEffect(() => {
     setAddedGroup(props.convo.members);
@@ -63,11 +63,7 @@ function ChatListItem(props: any) {
       props.convo.members.length > 1
         ? { new: false, group: true }
         : { new: false, group: false };
-    console.log("ChatlistItem: mapThenRedirect mapThenRedirect ");
-    console.log(props.convo.members);
-    console.log("props.convo.conversationId");
 
-    console.log(props.convo.conversationId);
     props.onPropStartChatProp(props.convo.members);
     // props.onSetInitialChatGroup(props.convo.members);
     props.doChatTypeUpdateProp(chatType);
@@ -77,6 +73,25 @@ function ChatListItem(props: any) {
     history.push("/chat");
   }
 
+  let memberNames;
+  console.log("latestMessage", conversation.latestMessage[0]);
+  if (conversation.members.length > 1) {
+    memberNames = "";
+    for (let i = 0; i < conversation.members.length; i++) {
+      if (i === 0) {
+        memberNames += `${conversation.members[i].username}`;
+      } else if ( i > 2) {
+         memberNames += `...(${conversation.members.length})`;
+         break;
+      } else {
+        memberNames += `, ${conversation.members[i].username}`;
+      }
+    }
+  } else {
+    memberNames = conversation.members[0].username;
+  }
+
+
   return (
     <>
       <div className={classes.ChatCard} onClick={mapThenRedirect}>
@@ -85,30 +100,22 @@ function ChatListItem(props: any) {
             {getAvatars()}
           </div>
           <div className={styles.chatListItemContainer}>
-            {props.convo.latestMessage.length > 0 ? (
-              <>
-                <div className={styles.chatTimeStamp}>
-                  {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
-                  {new Date(
-                    props.convo.latestMessage[0].createdAt
-                  ).toLocaleString("en-US", {
-                    timeZone: "America/Los_Angeles",
-                  })}
-                </div>
+            <div>
+              <p>{memberNames}</p>
+              <p className={classes.chatText}>
+                {conversation.latestMessage[0]? conversation.latestMessage[0].text : "Click to start chatting."}
+              </p>
+            </div>
 
-                <p>{props.convo.latestMessage[0].text}</p>
-              </>
-            ) : (
-              <>
-                <div className={styles.chatTimeStamp}>
-                  <span>
-                    new conversation created at: &nbsp; <br />
-                    {new Date(props.convo.createdAt).toLocaleString("en-US", {
-                      timeZone: "America/Los_Angeles",
-                    })}
-                  </span>
-                </div>
-              </>
+            {props.convo.latestMessage.length > 0 && (
+              <div className={styles.chatTimeStamp}>
+
+                {/* {new Date(
+                  props.convo.latestMessage[0].createdAt
+                ).toLocaleString("en-US", {
+                  timeZone: "America/Los_Angeles",
+                })} */} 
+              </div>
             )}
           </div>
         </div>

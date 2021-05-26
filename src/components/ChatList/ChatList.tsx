@@ -31,6 +31,7 @@ function ChatList() {
   }, []);
 
   if (chatList) {
+    console.log("chatList", chatList);
     return (
       <>
         {chatList.map((c: any) => {

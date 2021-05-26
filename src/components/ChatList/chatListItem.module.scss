@@ -49,3 +49,10 @@
     flex-direction: column;
     margin-right: 15px;
 }
+
+.chatText {
+    color: rgb(122, 122, 122);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
