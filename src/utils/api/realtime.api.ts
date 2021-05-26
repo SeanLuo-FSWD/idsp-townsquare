@@ -1,6 +1,5 @@
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
-import { db } from "../../FakeDb/FakeDb";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import API_URL from "../../constants/api_url";

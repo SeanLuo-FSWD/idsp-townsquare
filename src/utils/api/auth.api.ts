@@ -1,7 +1,6 @@
 import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
-import { db } from "../../FakeDb/FakeDb";
 // axios.defaults.withCredentials = true;
 
 // const getNotice = (userId: string, cb: Function) => {
@@ -158,19 +157,6 @@ const authenticate = (cb: Function) => {
         cb(error.response.data);
       }
     });
-
-  // for (let i = 0; i < db.users.length; i++) {
-  //   if (
-  //     db.users[i].email === "bob@bob.com" &&
-  //     db.users[i].password === "bob@bob.com"
-  //   ) {
-  //     cb(null, db.users[i]);
-  //     // cb(null, null);
-
-  //     return;
-  //   }
-  // }
-  // cb(new Error("user not found"));
 };
 
 const logout = (cb: Function) => {

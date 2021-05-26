@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
 import styles from "./PeopleFilter.module.scss";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
-import { LoginContext } from "../../store/context/LoginContext";
-import { postFilterSubmit } from "../../utils/api/posts.api";
 
 function PeopleFilter({ peopleFilterProps, feedPg_People }: any) {
   let location_as_state = {

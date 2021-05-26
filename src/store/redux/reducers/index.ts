@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import feedReducer from "./feed";
-import userReducer from "./user";
+// import feedReducer from "./feed";
+// import userReducer from "./user";
 import filterReducer from "./filter";
 import chatReducer from "./chat.rdc";
 import noticeReducer from "./notice.rdc";

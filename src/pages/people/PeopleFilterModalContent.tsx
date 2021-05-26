@@ -6,7 +6,6 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Slider from "@material-ui/core/Slider";
 import { LoginContext } from "../../store/context/LoginContext";
-import { postFilterSubmit } from "../../utils/api/posts.api";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
 import {

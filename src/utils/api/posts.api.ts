@@ -4,8 +4,6 @@ import axios from "axios";
 // import MOCK_URL from "../../constants/mock_server_url";
 import API_URL from "../../constants/api_url";
 import { TComment } from "../../interfaces/IPost";
-import { db } from "../../FakeDb/FakeDb";
-import { DbHelper } from "./_dbHelper";
 import _ from "lodash";
 
 const getLikesByPostId = (postId: string, cb: Function) => {
@@ -105,12 +103,6 @@ const deletePost = (postId: string, cb: Function) => {
         cb(err.response.data);
       }
     });
-};
-
-const postFilterSubmit = (filter: any, cb: Function) => {
-  console.log("postFilterSubmit postFilterSubmit postFilterSubmit");
-
-  cb(null, db.posts);
 };
 
 const postCreate = (bodyFormData: any, cb: Function) => {
@@ -233,7 +225,6 @@ export {
   toggleLikePost,
   createComment,
   postCreate,
-  postFilterSubmit,
   deletePost,
   getFullPostByPostId,
   getAllCommentsByPostId,
