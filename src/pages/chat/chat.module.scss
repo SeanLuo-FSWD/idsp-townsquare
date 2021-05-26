@@ -9,14 +9,9 @@
 .messageBox {
   width: 100%;
   grid-row: 2/3;
+  padding-bottom: 20px;
   overflow-y: scroll;
-  overflow-anchor: none;
-  position: relative;
-}
 
-#anchor {
-  height: 1px;
-  overflow-anchor: auto;
 }
 
 .avatarNav {
@@ -51,7 +46,7 @@
 .chatFieldContainer {
   position: fixed;
   background-color: white;
-  padding: 10px 0px;
+  padding: 10px 0px 10px 0px;
   width: 100%;
   max-width: 600px;
   height: auto;
@@ -68,7 +63,7 @@
   border: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
-  margin: 0px 0px 0px 5px;
+  margin: 0px 0px 0px 15px;
   height: 30px;
   border-radius: 10px;
 }
