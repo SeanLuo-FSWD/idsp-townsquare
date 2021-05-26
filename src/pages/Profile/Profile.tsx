@@ -144,11 +144,7 @@ function Profile(props: any) {
       <div className="pagePadding">
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <img
-            className={`pointer ${styles.logoutIcon}`}
-            src={logoutImage}
-            onClick={handleLogout}
-          />
+
         </SubNav>
 
         {cerror && <Error message={cerror} />}
@@ -163,7 +159,7 @@ function Profile(props: any) {
               </h3>
             </div>
           ) : (
-            <div>
+            <div className={styles.rememberToFill}>
               <h4>
                 Remember to fill Age, Location and Gender to be searchable!
               </h4>
@@ -367,6 +363,10 @@ function Profile(props: any) {
               </button>
             </div>
 
+
+
+
+
             <div className={styles.updateMessage}>
               {updateStatus && <div>Profile updated!</div>}
 
@@ -378,7 +378,22 @@ function Profile(props: any) {
                 </div>
               )}
             </div>
+            
           </div>
+          <button
+                  className={`pointer ${styles.logoutButton}`}
+                  onClick={handleLogout}
+                >
+                  <div className={styles.logoutButtonWrapper}>
+                  Logout
+                    <img
+                      className={`pointer ${styles.logoutIcon}`}
+                      src={logoutImage}
+                      onClick={handleLogout}
+                    />
+                  </div>
+                  
+                </button>
         </div>
       </div>
     );

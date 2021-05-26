@@ -4,15 +4,15 @@
 }
 
 .profileContainer {
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
-  
+  // margin-top: 40px;
   justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 100vh;
-  padding: 0px 10px;
+  padding: 0px 10px 60px 10px;
   background-color: #f6efe8;
 }
 
@@ -63,6 +63,12 @@
   background-color: #92002F ;
   // background-color: #2E4057;
   // background-color: #5C5D8D;
+}
+
+.rememberToFill {
+  font-size: 15px;
+  margin: 15px;
+  max-width: 300px;
 }
 
 .container {
@@ -168,6 +174,40 @@ select {
   align-items: center;
   text-align: center;
   background-color: #f6efe8;
+}
+
+.logoutButtonWrapper {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoutIcon {
+  margin-left: 3px;
+  width: auto;
+  height: 20px;
+  
+}
+
+.logoutButton {
+  margin-top: 20px;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-color: white;
+  border-style: none;
+  border-radius: 50px; /* 5px rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-width: 300px;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-color: #333333;
 }
 
 // .saveChanges {

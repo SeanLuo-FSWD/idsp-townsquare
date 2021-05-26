@@ -1,14 +1,14 @@
 .chatContainer {
   margin: 0;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  top: 35px;
+  padding-bottom: 50px;
+  margin: 25px 5px;
+  // padding: 0px 10px;
+  flex-direction: row;
   img {
     border-radius: 50%;
-    // margin: 0px 10px;
-  }
-  #root {
-    background-color: blue;
+    margin: 0px 10px;
   }
 }
 

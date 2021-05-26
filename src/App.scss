@@ -9,14 +9,19 @@ p {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+}
+
 .pointer,
 button {
   cursor: pointer;
 }
-.pagePadding {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
+
+// .pagePadding {
+//   padding-top: 50px;
+//   padding-bottom: 50px;
+// }
 
 .disable_scroll {
   height: 100%;

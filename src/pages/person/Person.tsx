@@ -15,6 +15,10 @@ import _ from "lodash";
 import SubNav from "../../components/Navbar/SubNav";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
+import chatIcon from "./assets/chatIcon.svg";
+import chatIconWhite from "./assets/chatIconWhite.svg";
+import followIconWhite from "./assets/followIconWhite.svg";
+import unfollowIconWhite from "./assets/unfollowWhite.svg";
 import {
   doChatUpdate,
   doChatInitialChatGroup,
@@ -153,42 +157,6 @@ function Person(props: any) {
                 src={backIcon}
                 onClick={history.goBack}
               />
-              {person.user.userId !== currentUser.userId ? (
-                checkFollowed() ? (
-                  <button
-                    className={styles.followButtons}
-                    onClick={() => onFollowHandle(person.user.userId)}
-                  >
-                    Unfollow
-                    <img
-                      className={styles.followUnfollowIcons}
-                      src={unfollowBlackIcon}
-                    />
-                  </button>
-                ) : (
-                  <button
-                    className={styles.followButtons}
-                    onClick={() => onFollowHandle(person.user.userId)}
-                  >
-                    Follow
-                    <img
-                      className={styles.followUnfollowIcons}
-                      src={followBlackIcon}
-                    />
-                  </button>
-                )
-              ) : null}
-
-              {person.user.userId !== currentUser.userId && (
-                <button
-                  className={styles.followButtons}
-                  onClick={() => {
-                    history.push(`/chat`);
-                  }}
-                >
-                  Chat
-                </button>
-              )}
             </SubNav>
           </div>
         )}
@@ -205,7 +173,41 @@ function Person(props: any) {
               <p>Age: {person.user.age}</p>
               <p>Gender: {person.user.gender}</p>
               <p>Location: {person.user.location}</p>
+              {person.user.userId !== currentUser.userId ? (
+                checkFollowed() ? (
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={unfollowIconWhite}
+                    />
+                    <div>Unfollow</div>
+                  </button>
+                ) : (
+                  <button
+                    className={styles.followButtons}
+                    onClick={() => onFollowHandle(person.user.userId)}
+                  >
+                    <img
+                      className={styles.followUnfollowIcons}
+                      src={followIconWhite}
+                    />
+                    <div>Follow</div>
+                  </button>
+                )
+              ) : null}
             </div>
+            <button
+              className={styles.followButtons}
+              onClick={() => {
+                history.push(`/chat`);
+              }}
+            >
+              <img className={styles.followUnfollowIcons} src={chatIconWhite} />
+              <div>Chat</div>
+            </button>
           </div>
 
           {person.posts.map((post: any) => {

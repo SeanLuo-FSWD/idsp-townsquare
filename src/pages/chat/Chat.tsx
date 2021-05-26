@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
@@ -168,9 +168,16 @@ function Chat(props: any) {
     history.push("/chatPage");
   }
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const anchor = scrollRef.current;
+    anchor?.scrollIntoView(false);
+    
+  })
+
   return (
     <>
-      <div className="pagePadding">
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
             {addedGroup.length > 1 ? (
@@ -200,17 +207,13 @@ function Chat(props: any) {
 
         <div className={styles.messageContainer}>
           <div className={styles.messageBox}>
-            <div className={styles.chatRows}>
               {messages.map((m: any) => {
                 return <MsgItem key={m._id} msg={m} />;
               })}
-            </div>
-
-            <form
-              onSubmit={submitMessage}
-              style={{ display: "flex", bottom: "0" }}
-            >
-              <div className={styles.chatFieldContainer}>
+              <div id={styles.anchor} ref={scrollRef}></div>
+          </div>
+          <form className={styles.chatFieldContainer}
+              onSubmit={submitMessage}>
                 <input
                   className={styles.messageField}
                   type="text"
@@ -223,11 +226,8 @@ function Chat(props: any) {
                 <button className={styles.sendButton} type="submit">
                   Send
                 </button>
-              </div>
             </form>
-          </div>
         </div>
-      </div>
       <Navbar currentPath={window.location.pathname} />
     </>
   );

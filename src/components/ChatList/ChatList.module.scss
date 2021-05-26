@@ -22,13 +22,15 @@
 
 .chatListItemContainer {
   display: flex;
-  margin-bottom: 20px;
-  margin-right: 10px;
   flex-direction: column;
-  margin-left: auto;
-  text-align: right;
+  margin-right: 5px;
 }
 
 #root {
   background-color: red;
+}
+
+.newConvoCreatedat {
+  display: flex;
+  margin: 0px 0px;
 }

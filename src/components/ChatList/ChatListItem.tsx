@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { connect } from "react-redux";
 import styles from "./ChatList.module.scss";
+import classes from "./chatListItem.module.scss";
+import groupChatIcon from "./assets/groupChatIcon.svg";
 import {
   doChatUpdate,
   doChatIdAdd,
@@ -19,16 +21,34 @@ function ChatListItem(props: any) {
 
   function getAvatars() {
     const length =
-      props.convo.members.length > 4 ? 4 : props.convo.members.length;
+      props.convo.members.length > 2 ? 2 : props.convo.members.length;
 
     let selectGroup: any = [];
     for (let i = 0; i < length; i++) {
       selectGroup.push(props.convo.members[i]);
     }
 
-    const arr_img = selectGroup.map((g: any) => {
-      return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
-    });
+    let arr_img;
+
+    if (length === 2) {
+      arr_img = selectGroup.map((g: any, index: number) => {
+        return (
+          <div className={classes.groupAvatarWrapper}>
+            <img
+              key={g.userId}
+              className={classes[`image${index + 1}`]}
+              src={g.avatar}
+              height="50px"
+              width="50px"
+            />
+          </div>
+        );
+      });
+    } else {
+      arr_img = selectGroup.map((g: any, index: number) => {
+        return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+      });
+    }
 
     return arr_img;
   }
@@ -54,18 +74,11 @@ function ChatListItem(props: any) {
 
   return (
     <>
-      {/* <div className="pointer" onClick={mapThenRedirect}> */}
-      <div
-        className={`pointer ${styles.listItemRow}`}
-        onClick={mapThenRedirect}
-      >
-        <div>{getAvatars()}</div>
-        {props.convo.members.length > 4 && (
-          <h2 style={{ marginLeft: "8px" }}>. . .</h2>
-        )}
-        <div className={styles.chatListItemContainer}>
-          {props.convo.latestMessage.length > 0 ? (
-            <>
+      <div className={classes.ChatCard} onClick={mapThenRedirect}>
+        <div className={classes.cardItemWrapper}>
+          <div className={classes.avatarContainer}>{getAvatars()}</div>
+          <div className={styles.chatListItemContainer}>
+            {props.convo.latestMessage.length > 0 && (
               <div className={styles.chatTimeStamp}>
                 {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
                 {new Date(
@@ -74,24 +87,10 @@ function ChatListItem(props: any) {
                   timeZone: "America/Los_Angeles",
                 })}
               </div>
-
-              <p>{props.convo.latestMessage[0].text}</p>
-            </>
-          ) : (
-            <>
-              <div className={styles.chatTimeStamp}>
-                <span>
-                  new conversation created at: &nbsp; <br />
-                  {new Date(props.convo.createdAt).toLocaleString("en-US", {
-                    timeZone: "America/Los_Angeles",
-                  })}
-                </span>
-              </div>
-            </>
-          )}
+            )}
+          </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }

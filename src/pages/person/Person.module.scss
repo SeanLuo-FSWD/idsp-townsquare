@@ -2,6 +2,8 @@
   height: 150px;
   width: 150px;
   border-radius: 50%;
+  border: solid;
+  border-color: #E5E5E5;
 }
 
 .personContainer {
@@ -49,21 +51,33 @@
 }
 
 .followButtons {
-  display: flex;
+  // display: flex;
+  // display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  grid-gap: 10px;
+  margin: 10px 0px;
+  color: white;
+  justify-content: space-around;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   text-decoration: none;
   border: none;
+  width: 200px;
+  background-color: #333333;
   border-radius: 50px;
   align-items: center;
-  justify-content: center;
   text-align: center;
   font-family: "Poppins", sans-serif;
-  padding: 0px 10px;
+
 }
 
 .followUnfollowIcons {
+  
   padding-left: 2px;
-  width: .8rem;
+  align-items: center;
+  width: 1.1rem;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 5px;
 }
