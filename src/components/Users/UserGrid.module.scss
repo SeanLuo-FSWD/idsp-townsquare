@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  margin: 0px 2px;
+  margin: 55px 2px -10px 2px;
   padding: 0px 5px;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   align-items: center;
@@ -16,7 +16,8 @@
     flex-wrap: wrap;
     padding: 15px 12px 38px 12px;
     margin: 5px 100px;
-    background-color: #f6efe8;
+    // background-color: #f6efe8;
+    background-color: #f5f5f5;
     flex-wrap: wrap;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 

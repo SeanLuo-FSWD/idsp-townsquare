@@ -34,19 +34,24 @@ function ChatListItem(props: any) {
       arr_img = selectGroup.map((g: any, index: number) => {
         return (
           <div className={classes.groupAvatarWrapper}>
-            <img
-              key={g.userId}
-              className={classes[`image${index + 1}`]}
-              src={g.avatar}
-              height="50px"
-              width="50px"
-            />
+          <img 
+            key={g.userId} 
+            className={classes[`image${index+1}`]}
+            src={g.avatar} 
+            height="50px" 
+            width="50px" />
           </div>
         );
       });
     } else {
       arr_img = selectGroup.map((g: any, index: number) => {
-        return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+        return (
+          <img 
+            key={g.userId} 
+            src={g.avatar} 
+            height="50px" 
+            width="50px" />
+        );
       });
     }
 
@@ -76,17 +81,34 @@ function ChatListItem(props: any) {
     <>
       <div className={classes.ChatCard} onClick={mapThenRedirect}>
         <div className={classes.cardItemWrapper}>
-          <div className={classes.avatarContainer}>{getAvatars()}</div>
+          <div className={classes.avatarContainer}>
+            {getAvatars()}
+          </div>
           <div className={styles.chatListItemContainer}>
-            {props.convo.latestMessage.length > 0 && (
-              <div className={styles.chatTimeStamp}>
-                {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
-                {new Date(
-                  props.convo.latestMessage[0].createdAt
-                ).toLocaleString("en-US", {
-                  timeZone: "America/Los_Angeles",
-                })}
-              </div>
+            {props.convo.latestMessage.length > 0 ? (
+              <>
+                <div className={styles.chatTimeStamp}>
+                  {/* {new Date(props.convo.messages[0].createdAt).toLocaleString( */}
+                  {new Date(
+                    props.convo.latestMessage[0].createdAt
+                  ).toLocaleString("en-US", {
+                    timeZone: "America/Los_Angeles",
+                  })}
+                </div>
+
+                <p>{props.convo.latestMessage[0].text}</p>
+              </>
+            ) : (
+              <>
+                <div className={styles.chatTimeStamp}>
+                  <span>
+                    new conversation created at: &nbsp; <br />
+                    {new Date(props.convo.createdAt).toLocaleString("en-US", {
+                      timeZone: "America/Los_Angeles",
+                    })}
+                  </span>
+                </div>
+              </>
             )}
           </div>
         </div>
