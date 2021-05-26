@@ -205,11 +205,9 @@ function Chat(props: any) {
                 return <MsgItem key={m._id} msg={m} />;
               })}
             </div>
-
-            <form
-              onSubmit={submitMessage}
-              style={{ display: "flex", bottom: "0" }}
-            >
+          </div>
+          <form
+              onSubmit={submitMessage}>
               <div className={styles.chatFieldContainer}>
                 <input
                   className={styles.messageField}
@@ -225,7 +223,6 @@ function Chat(props: any) {
                 </button>
               </div>
             </form>
-          </div>
         </div>
       </div>
       <Navbar currentPath={window.location.pathname} />

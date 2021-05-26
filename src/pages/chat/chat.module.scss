@@ -8,7 +8,8 @@
 
 .messageBox {
   width: 100%;
-
+  grid-row: 1/2;
+  
 }
 
 .avatarNav {
@@ -32,23 +33,23 @@
 }
 
 .messageContainer {
-  position: absolute;
-  bottom: 100px;
   width: 100%;
   max-width: 600px;
-
-
-  height: auto;
+  background-color: white;
+  height: calc(100% - 100px);
+  display: grid;
+  grid-template-rows: 1fr 42px;
 }
 
 .chatFieldContainer {
   position: fixed;
+  background-color: white;
+  padding: 10px 0px;
   width: 100%;
   max-width: 600px;
   height: auto;
   margin: 5px 0px;
-  padding: 5px;
-  bottom: 50px;
+  bottom: 45px;
   justify-content: space-around;
   align-items: center;
   display: flex;
