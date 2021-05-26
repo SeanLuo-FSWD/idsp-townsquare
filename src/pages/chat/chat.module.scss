@@ -12,7 +12,7 @@
   overflow-y: scroll;
 
 }
-.avatarNav {
+.avatarNav {  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -48,7 +48,6 @@
   width: 100%;
   max-width: 600px;
   height: auto;
-  margin: 5px 0px;
   bottom: 50px;
   justify-content: space-around;
   align-items: center;
