@@ -170,7 +170,6 @@ function Chat(props: any) {
 
   return (
     <>
-      <div className="pagePadding">
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
             {addedGroup.length > 1 ? (
@@ -200,11 +199,9 @@ function Chat(props: any) {
 
         <div className={styles.messageContainer}>
           <div className={styles.messageBox}>
-            <div className={styles.chatRows}>
               {messages.map((m: any) => {
                 return <MsgItem key={m._id} msg={m} />;
               })}
-            </div>
           </div>
           <form
               onSubmit={submitMessage}>
@@ -224,7 +221,6 @@ function Chat(props: any) {
               </div>
             </form>
         </div>
-      </div>
       <Navbar currentPath={window.location.pathname} />
     </>
   );
