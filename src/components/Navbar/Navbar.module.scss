@@ -28,14 +28,16 @@
 
   .navIcon {
     width: 1.3rem;
+
   }
 
   .active {
-    border-radius: 50px;
+    border-radius: 5px;
     border-style: solid;
-    padding: 8px;
+    padding: 1px;
     border-color: white;
     border-width: thin;
+
   }
 }
 

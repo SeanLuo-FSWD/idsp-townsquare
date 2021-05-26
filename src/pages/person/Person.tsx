@@ -16,6 +16,9 @@ import SubNav from "../../components/Navbar/SubNav";
 import deleteIcon from "./assets/delete.svg";
 import backIcon from "./assets/back.svg";
 import chatIcon from "./assets/chatIcon.svg";
+import chatIconWhite from "./assets/chatIconWhite.svg";
+import followIconWhite from "./assets/followIconWhite.svg";
+import unfollowIconWhite from "./assets/unfollowWhite.svg";
 import {
   doChatUpdate,
   doChatInitialChatGroup,
@@ -179,7 +182,7 @@ function Person(props: any) {
                   >
                     <img
                       className={styles.followUnfollowIcons}
-                      src={unfollowBlackIcon}
+                      src={unfollowIconWhite}
                     />
                     <div>Unfollow</div>
 
@@ -191,24 +194,25 @@ function Person(props: any) {
                   >
                     <img
                       className={styles.followUnfollowIcons}
-                      src={followBlackIcon}
+                      src={followIconWhite}
                     />
                     <div>Follow</div>
                   </button>
                 )
               ) : null}
 
-              <button
+
+            </div>
+            <button
                 className={styles.followButtons}
                 onClick={() => {
                   history.push(`/chat`);
                 }}
               >
-                <img className={styles.followUnfollowIcons} src={chatIcon}/>
+                <img className={styles.followUnfollowIcons} src={chatIconWhite}/>
                 <div>Chat
                 </div>
               </button>
-            </div>
           </div>
 
           {person.posts.map((post: any) => {
