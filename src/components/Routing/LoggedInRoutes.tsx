@@ -14,13 +14,13 @@ import GroupChatPg from "../../pages/GroupChatPg/GroupChatPg";
 import { v4 as uuidv4 } from "uuid";
 
 const ReactRouterSetup = () => {
-  const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
-    useContext(LoginContext);
+  // const { cerror, setCurrentUser, currentUser, setSignUpStatus, setCerror } =
+  //   useContext(LoginContext);
 
   return (
     <>
-      <Route exact path="/">
-        <Home />
+      <Route path="/person/:id">
+        <Person />
       </Route>
 
       {/* 
@@ -49,12 +49,13 @@ const ReactRouterSetup = () => {
         key={uuidv4()}
       ></Route> */}
 
-      <Route path="/person/:id" key={uuidv4()}>
-        <Person key={uuidv4()} />
-      </Route>
       <Route path="/post/:postId" children={<Home />}></Route>
       {/* <Route path="/chat/:chatId" children={<Chat />}></Route> */}
       <Route path="/chat" children={<Chat />}></Route>
+
+      <Route exact path="/">
+        <Home />
+      </Route>
     </>
   );
 };

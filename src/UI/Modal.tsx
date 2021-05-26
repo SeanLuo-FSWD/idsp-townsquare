@@ -4,7 +4,7 @@ import Overlay from "./Overlay";
 import { LoginContext } from "../store/context/LoginContext";
 
 function Modal(props: any) {
-  const { showModal, setShowModal } = useContext(LoginContext);
+  // const { showModal, setShowModal } = useContext(LoginContext);
 
   useEffect(() => {
     document.body.classList.add("disable_scroll");

@@ -6,7 +6,8 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import _ from "lodash";
 import styles from "./PostLike.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const PostLike = ({
   showLikes,
@@ -14,22 +15,8 @@ const PostLike = ({
   handleLikeProp,
   likesArr,
 }: any) => {
-  const [likes, setLikes] = useState(likesArr);
-
-  // const [showLikes, setShowLikes] = useState(false);
-
+  const history = useHistory();
   const { currentUser } = useContext(LoginContext);
-
-  // useEffect(() => {
-  //   getLikesByPostId(postId, (err: Error, result: any) => {
-  //     if (err) {
-  //       setCerror(err.message);
-  //     } else {
-  //       setLikes(result.data);
-  //     }
-  //   });
-  // }, [likesCount]);
-
   function checkLiked() {
     let liked_arr = _.filter(
       likesArr,
@@ -42,6 +29,15 @@ const PostLike = ({
 
     return false;
   }
+
+  // function redirect_profile(link: string) {
+  //   const linkTarget = {
+  //     pathname: link,
+  //     key: uuidv4(),
+  //   };
+
+  //   history.push(linkTarget);
+  // }
 
   return (
     <>
@@ -73,8 +69,16 @@ const PostLike = ({
 
             {likesArr.map((like: any) => {
               return (
-                <div className={styles.likesNames} key={like._id}>
-                  <Link to={`/person/${like.userId}`}>{like.username}</Link>,
+                <div
+                  className={`pointer ${styles.likesNames}`}
+                  key={like._id}
+                  onClick={() => {
+                    // redirect_profile(`/person/${like.userId}`);
+                    history.push(`/person/${like.userId}`);
+                  }}
+                >
+                  {/* <Link to={`/person/${like.userId}`}>{like.username}</Link>, */}
+                  {like.username},
                 </div>
               );
             })}

@@ -82,7 +82,7 @@ function Person(props: any) {
     return () => {
       setCerror("");
     };
-  }, []);
+  }, [shared_id]);
 
   const onFollowHandle = (followUserId: string) => {
     // SetFollowState({ userId: userId, follow: follow });

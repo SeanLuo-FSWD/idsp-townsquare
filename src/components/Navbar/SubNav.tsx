@@ -18,6 +18,7 @@ import {
 import HelpIcon from "@material-ui/icons/Help";
 import { v4 as uuidv4 } from "uuid";
 import townSquareLogo from "./assets/townSquareLogo.svg";
+import Overlay from "../../UI/Overlay";
 
 function SubNav(props: any) {
   const { setCerror, currentUser } = useContext(LoginContext);
@@ -26,12 +27,16 @@ function SubNav(props: any) {
   const [showDD, setShowDD] = useState(false);
 
   // console.log(props.notices);
-  // useEffect(() => {
-  //   document.getElementById("root").addEventListener("click", (e) => {
-  //     // e.stopPropagation();
-  //     setShowDD(false);
-  //   });
-  // }, []);
+  const tappable = new Set(["pagePadding", "vsc-initialized"]);
+  useEffect(() => {
+    document.body.addEventListener("click", (e: any) => {
+      // e.stopPropagation();
+      // debugger;
+      if (tappable.has(e.target.className)) {
+        setShowDD(false);
+      }
+    });
+  }, []);
 
   function removeMapThenRedirect(
     link: string,
@@ -68,6 +73,10 @@ function SubNav(props: any) {
         setShowDD(false);
       }
     });
+  }
+
+  function togglePortalProp() {
+    setShowDD(false);
   }
 
   return (
@@ -119,6 +128,7 @@ function SubNav(props: any) {
             <button className="pointer" onClick={clearAll}>
               Clear all
             </button>
+            <Overlay transparent={true} togglePortalProp={togglePortalProp} />
           </div>
         )}
       </div>
