@@ -47,7 +47,7 @@ function ChatList() {
           <Spinning />
       </>
     );
-  }
+  }    
 }
 
 export default ChatList;

@@ -92,6 +92,9 @@
   justify-content: space-between;
   flex-basis: 100%;
   align-items: center;
+  position: relative;
+  right: 30px;
+  top: 9px;
 }
 
 .chatRows {
@@ -100,4 +103,21 @@
 
 .backgroundContainer {
   background-color: blue;
+}
+
+.avatarContainer {
+  height: 60px;
+  box-sizing: border-box;
+  padding: 7px 0;
+  display: inline-flex;
+  position: absolute;
+}
+
+.avatarThumbnail {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #2D2B2C;
+  box-sizing: border-box;
 }
