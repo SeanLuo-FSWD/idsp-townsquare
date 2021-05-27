@@ -15,13 +15,14 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
     setHasImg(event.target.checked);
     feedFilterProps({ hasImg: event.target.checked });
   };
+  const placeholder = "Enter something!";
 
   return (
     <div className={styles.filterContainer}>
       <div className={styles.filterStyling}>
-        {/* <label htmlFor="site-search">Filter posts by keyword</label> */}
-        <div className={styles.filterTitles}>Matching keyword(s)</div>
+        <h3 className={styles.filterTitle}>Keyword</h3>
         <input
+          placeholder={placeholder}
           className={styles.keywordSearch}
           type="search"
           id="site-search"
@@ -31,13 +32,7 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
           onChange={handleChange}
         />
       </div>
-      <div className={styles.filterStyling}>
-        <div className={styles.filterTitles}>With images</div>
-
-        {/* <label>Has images</label> */}
-
         <FormControlLabel
-          style={{ float: "left" }}
           control={
             <Checkbox
               checked={hasImg}
@@ -47,7 +42,6 @@ function FeedFilter({ feedFilterProps, feedPg_Feed }: any) {
           }
           label="Only posts with images"
         />
-      </div>
     </div>
   );
 }

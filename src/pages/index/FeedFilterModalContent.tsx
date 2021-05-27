@@ -11,6 +11,8 @@ import {
   doPeopleFilterUpdate,
 } from "../../store/redux/actions/filter_act";
 import { connect } from "react-redux";
+//icons
+import questionMarkIcon from "./assets/question-mark-button-svgrepo-com.svg";
 
 function FeedFilterModalContent(props: any) {
   const { setCerror } = useContext(LoginContext);
@@ -73,53 +75,59 @@ function FeedFilterModalContent(props: any) {
   }
 
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <div className={styles.filterInfo}>
-        <p style={{ fontSize: "1.8em" }}>Main filter</p>
+      <div className={styles.pageTitle}>
+        <div>Filters</div>
+        <div className={styles.clearButtonContainer}>
+          <button
+            className={styles.clearButton}
+            onClick={() => {
+              props.onFeedFilterRemove();
+              props.toggleFilterProp(false);
+            }} >
+            Clear
+          </button>
+        </div>
       </div>
+      <hr />
+      <h2>Post</h2>
       <FeedFilter
         feedFilterProps={feedFilterProps}
         feedPg_Feed={props.feedPg.feed}
       />
+      <hr />
+      <div>
+        <h2>User
+          <span className={styles.note}>
+            (Filter posts from matching users only)
+          </span>
+        </h2>
 
-      <div className={styles.filterInfo}>
-        <p style={{ fontSize: "1.8em" }}>User filter</p>
-        <p style={{ marginBottom: "10px" }}>
-          Filter posts from matching users only
-        </p>
       </div>
-
       <PeopleFilter
         peopleFilterProps={peopleFilterProps}
         feedPg_People={props.feedPg.people}
       />
+      <FormControlLabel
+          control={
+            <Checkbox 
+              onChange={handleHasSyncFilter} 
+              name="Have_image" 
+              style={{
+                color: "#b4315b"
+              }}/>
+          }
+          label="Apply to User page" />
 
       <div className={styles.footerWrapper}>
         <button
-          // className={styles.submitButton}
-          style={{ marginRight: "10px" }}
+          className={styles.submitButton}
           onClick={onFeedFilterClick}
         >
           Submit
         </button>
-
-        <FormControlLabel
-          control={
-            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
-          }
-          label="Also apply to User page"
-        />
-
-        <div style={{ marginLeft: "auto" }}>
-          <button
-            onClick={() => {
-              props.onFeedFilterRemove();
-              props.toggleFilterProp(false);
-            }}
-          >
-            Clear
-          </button>
-        </div>
+      </div>
       </div>
     </div>
   );

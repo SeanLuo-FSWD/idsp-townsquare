@@ -29,3 +29,7 @@ html {
   min-width: 300px;
   
 }
+
+.MuiSlider-root {
+  color: black;
+}
