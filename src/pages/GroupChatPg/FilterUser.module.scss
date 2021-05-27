@@ -1,12 +1,23 @@
 .infoWrapper {
 
     justify-content: center;
-
-
 }
 
 .UserInfoItem {
     background-color: orange;
     display: flex;
     flex-direction: row;
+}
+
+.infoWrapper {
+    display: grid;
+    grid-template-columns: 1fr 90px auto 1fr;
+}
+
+.infoRow {
+    grid-column: 2 / 3;
+}
+
+.infoContent {
+    grid-column: 3 / 4;
 }

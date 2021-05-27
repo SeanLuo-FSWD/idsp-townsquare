@@ -1,7 +1,6 @@
 .addedUserContainer {
-  margin-top: "50px";
   text-align: left;
-  align-self: flex-start;
+
   position: fixed;
   top: 50px;
   max-width: 600px;
@@ -9,20 +8,42 @@
   background-color: #333333;
   color: white;
   z-index: 10;
-  display: flex;
-  justify-content: space-around;
-  height: 70px;
+  display: grid;
+  grid-template-columns: 20px 130px 20px 1fr;
+  height: 60px;
+}
+
+.titleContainer {
+  grid-column: 2 / 3;
+}
+
+.addedUserTitle {
+  font-size: 20px;
+  color: white;
+  line-height: 60px;
 }
 
 .addedList {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  position: relative;
   img {
     border-radius: 50%;
     border: solid;
     border-color: #E5E5E5;
   }
+  grid-column: 4 / 5;
+}
+
+.avatarContainer {
+  height: 60px;
+  box-sizing: border-box;
+  padding: 7px 0;
+  display: inline-flex;
+  position: absolute;
+}
+
+.avatarThumbnail {
+  height: 40px;
+  width: 40px;
 }
 
 .filterContainer {

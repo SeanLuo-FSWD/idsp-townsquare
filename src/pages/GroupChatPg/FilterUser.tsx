@@ -11,23 +11,23 @@ function FilterUser({ person }: any) {
   }
   return (
     <div className={styles.infoWrapper}>
-      <div style={{ display: "flex" }}>
-        <p style={{ width: "90px" }}>
-          <strong>Location:</strong>
-        </p>
-        <p>{person.location}</p>
+      <div className={styles.infoRow}>
+          <strong>Location:</strong>    
       </div>
-      <div style={{ display: "flex" }}>
-        <p style={{ width: "90px" }}>
+      <div className={styles.infoContent}>
+        {person.location}
+      </div>
+      <div className={styles.infoRow}>
           <strong>age:</strong>
-        </p>
+      </div>
+      <div className={styles.infoContent}>
         <p>{person.age}</p>
       </div>
-      <div style={{ display: "flex" }}>
-        <p style={{ width: "90px" }}>
-          <strong>gender:</strong>
-        </p>
-        <p>{person.gender}</p>
+      <div className={styles.infoRow}>
+        <strong>gender:</strong>
+      </div>
+      <div className={styles.infoContent}>
+        {person.gender}
       </div>
 
       <PortalModal
