@@ -127,11 +127,11 @@ const Post = (props: any) => {
 
             <div className={styles.likesNames}>
               <img
+                className={styles.commentIcon}
                 src={comments}
-                className="pointer"
+               
                 onClick={() => setCommentsVisible(!commentsVisible)}
               />
-
               <div className={styles.commentCounter}>{commentsCount}</div>
             </div>
           </div>
