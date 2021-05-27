@@ -25,6 +25,7 @@ import deletePostIcon from "./delete.svg";
 import unfollow from "./unfollow.svg";
 import socket from "../../utils/socketIO.util";
 import Badge from "@material-ui/core/Badge";
+import Spinning from "../../pages/spinning.page";
 
 const FeedPg = (props: any) => {
   const { currentUser, showModal, setShowModal, setCerror, cerror } =
@@ -253,10 +254,8 @@ const FeedPg = (props: any) => {
   } else {
     return (
       <>
-        <div className="pagePadding">
           {cerror && <Error message={cerror} />}
-          <h2>Loading</h2>
-        </div>
+          <Spinning />
       </>
     );
   }

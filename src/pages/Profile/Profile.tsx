@@ -18,6 +18,7 @@ import {
   doPeopleFilterRemove,
 } from "../../store/redux/actions/filter_act";
 import Error from "../../components/Error/Error";
+import Spinning from "../../pages/spinning.page";
 
 function Profile(props: any) {
   const [initPerson, setInitPerson] = useState(null) as any;
@@ -400,10 +401,8 @@ function Profile(props: any) {
   }
   return (
     <>
-      <div className="pagePadding">
-        {cerror && <Error message={cerror} />}
-        <h2>Loading</h2>
-      </div>
+      {cerror && <Error message={cerror} />}
+      <Spinning />
     </>
   );
 }

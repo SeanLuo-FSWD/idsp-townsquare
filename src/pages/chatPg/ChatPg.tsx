@@ -29,23 +29,21 @@ function Chat(props: any) {
   }
   return (
     <>
-      <div>
+      {/* <div> */}
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          
             {/* Add Group Chat */}
             <div className={styles.plusWrapper}>
               <img className={styles.groupChatIcon} onClick={mapThenRedirect} src={groupChatIcon} />
-              <img className={styles.plusIcon} src={plusIcon}/>
+              <img className={styles.plusIcon} src={plusIcon} />
             </div>
-
         </SubNav>
 
         <div className={styles.chatContainer}>
           {cerror && <Error message={cerror} />}
           <ChatList />
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

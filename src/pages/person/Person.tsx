@@ -30,6 +30,7 @@ import unfollowBlackIcon from "./assets/unfollowBlack.svg";
 import socket from "../../utils/socketIO.util";
 import Error from "../../components/Error/Error";
 import { v4 as uuidv4 } from "uuid";
+import Spinning from "../../pages/spinning.page";
 
 function Person(props: any) {
   const history = useHistory();
@@ -244,10 +245,8 @@ function Person(props: any) {
   }
   return (
     <>
-      <div className="pagePadding">
-        {cerror && <Error message={cerror} />}
-        <h2>Loading</h2>
-      </div>
+      {cerror && <Error message={cerror} />}
+      <Spinning />
     </>
   );
 }

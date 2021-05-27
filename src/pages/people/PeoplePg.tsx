@@ -16,6 +16,7 @@ import PeopleFilterModalContent from "./PeopleFilterModalContent";
 import Badge from "@material-ui/core/Badge";
 import _ from "lodash";
 import MenuIcon from "@material-ui/icons/Menu";
+import Spinning from "../../pages/spinning.page";
 
 const PeoplePg = (props: any) => {
   const [people, setPeople] = useState(null) as any;
@@ -53,10 +54,8 @@ const PeoplePg = (props: any) => {
   if (!people) {
     return (
       <>
-        <div className="pagePadding">
-          {cerror && <Error message={cerror} />}
-          <h2>Loading</h2>
-        </div>
+        {cerror && <Error message={cerror} />}
+        <Spinning />
       </>
     );
   }
