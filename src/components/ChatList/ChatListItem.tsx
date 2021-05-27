@@ -91,7 +91,9 @@ function ChatListItem(props: any) {
       }
     }
   } else {
-    memberNames = conversation.members[0].username;
+    if (conversation.members[0]) {
+      memberNames = conversation.members[0].username;
+    }
   }
 
   let latestMessage;

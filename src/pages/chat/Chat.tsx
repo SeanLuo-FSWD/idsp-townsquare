@@ -141,8 +141,13 @@ function Chat(props: any) {
       selectGroup.push(addedGroup[i]);
     }
 
-    const arr_img = selectGroup.map((g: any) => {
-      return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+    const arr_img = selectGroup.map((g: any, index: number) => {
+      // return <img key={g.userId} src={g.avatar} height="50px" width="50px" />;
+      return (
+        <div key={g.userId} className={styles.avatarContainer} style={{left: index * 22.5}}>
+          <img src={g.avatar} className={styles.avatarThumbnail} />
+        </div>
+      )
     });
 
     return arr_img;
@@ -181,22 +186,25 @@ function Chat(props: any) {
         <SubNav className="flex--space-between">
           <div className={styles.chatSubNavWrapper}>
             {addedGroup.length > 1 ? (
-              <div>
+              <div style={{ position: "relative", right: "30px", bottom: "6px" }}>
                 <img src={backIcon} className="pointer" onClick={toChatPage} />
               </div>
             ) : (
-              <img
-                src={backIcon}
-                className="pointer"
-                onClick={() => {
-                  history.goBack();
-                }}
-              />
+              <div style={{ position: "relative", right: "30px", bottom: "6px" }}>
+                <img src={backIcon} className="pointer" onClick={toChatPage} />
+              </div>
+              // <img
+              //   src={backIcon}
+              //   className="pointer"
+              //   onClick={() => {
+              //     history.goBack();
+              //   }}
+              // />
             )}
 
             <div className={styles.chatNavUserInfo}>
-              <div className={styles.avatarNav}>
-                {getAvatars(addedGroup)}
+              {getAvatars(addedGroup)}
+              <div className={styles.avatarNav} style={{position: "absolute", left: 100}}>
                 {addedGroup.length > 4 && <span>...</span>}
               </div>
             </div>
