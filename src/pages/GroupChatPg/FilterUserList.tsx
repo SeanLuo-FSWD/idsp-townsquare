@@ -95,34 +95,33 @@ function FilterUserList({
           } else {
             return (
               <div key={person._id} className={styles.cardWrapper}>
-                <div className={styles.cardStyling}>
-                <div className={styles.imgSelect}>
+                <div className={styles.avatarContainer}>
                   <img
                     // onClick={() => {
                     //   history.push(`/person/${person._id}`);
                     // }}
                     src={person.avatar}
-                    height="50px"
-                    width="50px"
-                    style={{ marginRight: "10px" }}
-                  />
-                  <FormGroup style={{ flexDirection: "row" }}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          value={person._id}
-                          onChange={handleCheck}
-                          checked={addedGroupIds.indexOf(person._id) > -1}
+                    className={styles.avatar} />
+                </div>
+                  <div className={styles.username}>
+                    {person.username}
+                  </div>
+                <FilterUser person={person} />
+                <div className={styles.addButtonContainer}>
+                  
+                  <FormGroup style={{ display: "inline-block" }}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              value={person._id}
+                              onChange={handleCheck}
+                              checked={addedGroupIds.indexOf(person._id) > -1}
+                            />
+                          }
+                          label="Invite"
                         />
-                      }
-                      label="add"
-                    />
                   </FormGroup>
                 </div>
-
-                <FilterUser person={person} />
-                </div>
-
               </div>
             );
           }

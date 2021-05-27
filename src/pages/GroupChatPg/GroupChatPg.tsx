@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { LoginContext } from "../../store/context/LoginContext";
 import PeopleFilter from "../../components/Filter/PeopleFilter";
 import FeedFilter from "../../components/Filter/FeedFilter";
@@ -34,6 +34,8 @@ function GroupChatPg(props: any) {
   //   })
   // ) as any;
   const [addedGroupIds, setAddedGroupIds] = useState([]);
+
+  const containerRef = useRef(null);
 
   useEffect(() => {
     return () => {
@@ -108,23 +110,17 @@ function GroupChatPg(props: any) {
   function getAvatars(addedGroup: any) {
     console.log("getAvatars getAvatars getAvatars");
     console.log(addedGroup);
-
-    const length = addedGroup.length > 5 ? 5 : addedGroup.length;
+    const length = addedGroup.length > 3 ? 3: addedGroup.length;
 
     let selectGroup: any = [];
     for (let i = 0; i < length; i++) {
       selectGroup.push(addedGroup[i]);
     }
 
-    const arr_user = selectGroup.map((u: any) => {
+    const arr_user = selectGroup.map((u: any, index: number) => {
       return (
-        <div key={u.userId}>
-          <div>
-            <img src={u.avatar} height="50px" width="50px" />
-          </div>
-          {/* <div style={{ display: "flex" }}>
-            <span>{u.username}</span>
-          </div> */}
+        <div key={u.userId} className={styles.avatarContainer} style={{left: index * 22.5}}>
+            <img src={u.avatar} className={styles.avatarThumbnail} />
         </div>
       );
     });
@@ -137,15 +133,16 @@ function GroupChatPg(props: any) {
       {toggleView === "users" ? (
         <>
           <div className="pagePadding">
-            <div className={styles.addedUserContainer}>
-              <div>
-              <h2>Added users:</h2>
+            <div className={styles.addedUserContainer} ref={containerRef}>
+              <div className={styles.titleContainer}>
+                <div className={styles.addedUserTitle}>Added users:</div>
               </div>
               <div className={styles.addedList}>
                 {getAvatars(addedGroup)}
-                {addedGroup.length > 5 && (
-                  <h3 style={{ marginBottom: "0", marginLeft: "5px" }}>
-                    . . .
+                {addedGroup.length > 3 && (
+                  <h3 style={{display: "inline-flex", position: "relative", left: 5 * 22.5 }}>
+                    {/* and {addedGroup.length - 3} other */}
+                    ...
                   </h3>
                 )}
               </div>
