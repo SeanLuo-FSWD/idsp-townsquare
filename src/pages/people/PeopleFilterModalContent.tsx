@@ -123,7 +123,7 @@ function PeopleFilterModalContent(props: any) {
           control={
             <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
           }
-          label="Also apply to User page"
+          label="Also apply to post page"
         />
 
         <div className={styles.footerWrapper}>

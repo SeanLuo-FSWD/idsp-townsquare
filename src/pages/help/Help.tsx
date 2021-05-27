@@ -135,8 +135,7 @@ function Help() {
         </p>
 
         <h3>Additional help</h3>
-        <p>For anything else, please see our instruction on "link"</p>
-        <p>Or you can ask Alex, Johnny or Sean on demo day via Discord. </p>
+        <p>You can ask Alex, Johnny or Sean on demo day via Discord. </p>
 
         <h2>Privacy policy :</h2>
         <p style={{ paddingBottom: "50px" }}>
