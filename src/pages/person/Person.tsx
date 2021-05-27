@@ -170,10 +170,13 @@ function Person(props: any) {
               alt=""
             />
             <div>
-              <p>Username: {person.user.username}</p>
-              <p>Age: {person.user.age}</p>
-              <p>Gender: {person.user.gender}</p>
-              <p>Location: {person.user.location}</p>
+              <div className={styles.infoContainer}>
+                <div className={styles.username}>{person.user.username}</div>
+                <div className={styles.infoContent}>Age: {person.user.age}</div>
+                <div className={styles.infoContent}>Gender: {person.user.gender}</div>
+                <div className={styles.infoContent}>Location: {person.user.location}</div>
+              </div>
+
               {person.user.userId !== currentUser.userId ? (
                 checkFollowed() ? (
                   <button
