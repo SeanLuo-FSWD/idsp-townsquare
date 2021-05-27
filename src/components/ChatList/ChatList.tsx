@@ -5,6 +5,8 @@ import _ from "lodash";
 import socket from "../../utils/socketIO.util";
 import ChatListItem from "./ChatListItem";
 import Error from "../../components/Error/Error";
+import styles from "./ChatList.module.scss";
+import "./loadingIcon.css";
 
 function ChatList() {
   const [chatList, setChatList] = useState(null) as any;
@@ -43,7 +45,9 @@ function ChatList() {
     return (
       <>
         <div className="pagePadding">
-          <h2>Loading</h2>
+          <div className={styles.loadingContainer}>
+            <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>
         </div>
       </>
     );
