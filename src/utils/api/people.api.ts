@@ -24,7 +24,7 @@ const addPersonGroup = (submitObj: string[], cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -53,7 +53,7 @@ const toggleFollowing = (followUserId: string, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -77,7 +77,7 @@ const getFollowingUsers = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -99,7 +99,7 @@ const getAllConversationsByUserId = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -120,7 +120,7 @@ const getPeople = (peoplePg: any, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -143,7 +143,7 @@ const getPerson = (id: string, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {

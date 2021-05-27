@@ -27,7 +27,7 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
       if (!err.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -65,7 +65,7 @@ const getConversationByMembers = (addedGroupIds: string[], cb: Function) => {
 //             if (!error.response) {
 //   cb(
 //     new Error(
-//       "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+//       "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
 //     )
 //   );
 // } else {
@@ -94,7 +94,7 @@ const getMessagesInConversation = (chatId: string, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {

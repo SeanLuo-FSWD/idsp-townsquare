@@ -20,7 +20,7 @@ const getNotice = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -44,7 +44,7 @@ const clearAllNotifications = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -72,7 +72,7 @@ const removeNoticeById = (notice_obj: object, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -96,7 +96,7 @@ const verify = (query: string, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -125,7 +125,7 @@ const updateProfile = (bodyFormData: any, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -150,7 +150,7 @@ const authenticate = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -175,7 +175,7 @@ const logout = (cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -203,7 +203,7 @@ const login = (user_obj: any, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
@@ -227,7 +227,7 @@ const register = (user_obj: {}, cb: Function) => {
       if (!error.response) {
         cb(
           new Error(
-            "Wow the server just crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
+            "Wow the server MAY have crashed...be a hero, and tell Alex, Johnny or Sean  ASAP. Please also remember the steps leading to this."
           )
         );
       } else {
