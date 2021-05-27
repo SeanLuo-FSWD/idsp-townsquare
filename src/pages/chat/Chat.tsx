@@ -195,7 +195,6 @@ function Chat(props: any) {
             )}
 
             <div className={styles.chatNavUserInfo}>
-              Chatting with:
               <div className={styles.avatarNav}>
                 {getAvatars(addedGroup)}
                 {addedGroup.length > 4 && <span>...</span>}
