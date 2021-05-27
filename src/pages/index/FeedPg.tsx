@@ -229,7 +229,7 @@ const FeedPg = (props: any) => {
                   </div>
                 );
               })}
-              {feed.length >= 5 && (
+              {feed.length >= 20 && (
                 <h3>
                   You have reached the maximum number of most recent posts, try
                   use the filter above to narrow down your interest.
