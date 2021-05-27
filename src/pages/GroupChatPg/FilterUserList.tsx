@@ -8,6 +8,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import SubNav from "../../components/Navbar/SubNav";
 import { useHistory, useParams } from "react-router-dom";
 import styles from "./FilterUserList.module.scss";
+import backIcon from "./assets/backIcon.svg";
+import startChatIcon from "./assets/startChatIcon.svg";
 
 import FilterUser from "./FilterUser";
 
@@ -79,8 +81,9 @@ function FilterUserList({
       <Navbar currentPath={window.location.pathname} />
       <SubNav>
         {/* <button onClick={toggleFilterProp}>Back to filter</button> */}
-        <button onClick={onStartChatProp}>Start Chatting</button>
-        <button onClick={history.goBack}>Cancel</button>
+        <img src={backIcon} onClick={history.goBack}/>
+        <img src={startChatIcon} onClick={onStartChatProp}/>
+
       </SubNav>
       <div className={styles.listWrapper}>
         {people.map((person: any) => {
@@ -92,6 +95,7 @@ function FilterUserList({
           } else {
             return (
               <div key={person._id} className={styles.cardWrapper}>
+                <div className={styles.cardStyling}>
                 <div className={styles.imgSelect}>
                   <img
                     // onClick={() => {
@@ -117,6 +121,8 @@ function FilterUserList({
                 </div>
 
                 <FilterUser person={person} />
+                </div>
+
               </div>
             );
           }

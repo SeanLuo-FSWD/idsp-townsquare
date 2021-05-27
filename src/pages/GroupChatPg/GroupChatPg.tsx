@@ -16,6 +16,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Error from "../../components/Error/Error";
 import styles from "./GroupChatPg.module.scss";
+import backIcon from "./assets/backIcon.svg";
 
 // function GroupChatPg({ startPage, chatId }: any) {
 function GroupChatPg(props: any) {
@@ -137,7 +138,9 @@ function GroupChatPg(props: any) {
         <>
           <div className="pagePadding">
             <div className={styles.addedUserContainer}>
+              <div>
               <h2>Added users:</h2>
+              </div>
               <div className={styles.addedList}>
                 {getAvatars(addedGroup)}
                 {addedGroup.length > 5 && (
@@ -165,7 +168,7 @@ function GroupChatPg(props: any) {
           <div className="pagePadding">
             <Navbar currentPath={window.location.pathname} />
             <SubNav>
-              <button onClick={history.goBack}>Back</button>
+              <img src={backIcon} onClick={history.goBack}/>
             </SubNav>
             {cerror && <Error message={cerror} />}
             <div className={styles.filterContainer}>

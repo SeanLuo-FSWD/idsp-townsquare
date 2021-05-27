@@ -1,22 +1,50 @@
-.listWrapper {
-  margin-top: 250px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 70px;
-  // grid-gap: 10px;
-  background-color: antiquewhite;
+
+@media only screen and (max-width: 525px) {
+  .listWrapper {
+    position: relative;
+    top: 150px;
+  
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    
+  
+    // grid-gap: 10px;
+  
+  }
+
 }
+
+@media only screen and (min-width: 525px) {
+  .listWrapper {
+    position: relative;
+    top: 150px;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  
+    // grid-gap: 10px;
+  
+  }
+}
+
 
 .imgSelect {
   display: flex;
   align-items: baseline;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .cardWrapper {
   background-color: white;
   padding: 20px;
+  border-radius: 7px;
   margin-right: 20px;
   margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
+  img {
+    border-radius: 50%;
+  }
 }

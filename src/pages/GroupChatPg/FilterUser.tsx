@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Overlay from "../../UI/Overlay";
-
+import styles from "./FilterUser.module.scss";
 import PortalModal from "../../UI/PortalModal";
 import Person from "../person/Person";
 function FilterUser({ person }: any) {
@@ -10,7 +10,7 @@ function FilterUser({ person }: any) {
     setOpenPortal(false);
   }
   return (
-    <div>
+    <div className={styles.infoWrapper}>
       <div style={{ display: "flex" }}>
         <p style={{ width: "90px" }}>
           <strong>Location:</strong>
