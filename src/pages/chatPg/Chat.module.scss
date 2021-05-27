@@ -14,7 +14,7 @@
 .startGroupChatButton {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 30px;
-  width: 105px;
+
   border: none;
   font-size: 14px;
   border-radius: 10px;
@@ -40,6 +40,23 @@
   text-align: center;
 }
 
+.plusWrapper {
+  position: relative;
+}
+
+.plusIcon {
+  width: 14px;
+  position: absolute;
+
+  top: -17px;
+  left: -15px;
+
+}
+
 .groupChatIcon {
-  width: 1rem;
+  width: 30px;
+  filter: invert(100%);
+  position: absolute;
+  left: -38px;
+  top: -15px;
 }
