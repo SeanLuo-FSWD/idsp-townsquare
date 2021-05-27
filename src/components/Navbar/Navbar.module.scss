@@ -24,19 +24,36 @@
     border-radius: 5px;
     display: flex;
     align-items: center;
+    
   }
 
   .navIcon {
-    width: 1.3rem;
+    width: 1.4rem;
+    padding: 5px;
+    border-radius: 5px;
+
+    
+    .navIcon:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+
+    }
 
   }
 
   .active {
     border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+
+    .navIcon {
+
+      filter: invert(23%) sepia(74%) saturate(7454%) hue-rotate(331deg) brightness(56%) contrast(112%);
+      
+    }
     
-    box-shadow: inset;
-    border-color: white;
     border-width: thin;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
   }
 }

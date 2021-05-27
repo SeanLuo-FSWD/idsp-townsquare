@@ -5,7 +5,8 @@ import SubNav from "../../components/Navbar/SubNav";
 import styles from "./Chat.module.scss";
 import townSquareLogo from "./assets/townSquareLogo.svg";
 import { connect } from "react-redux";
-import groupChatIcon from "./assets/groupChatIcon.svg";
+import groupChatIcon from "./assets/groupChatIcon.png";
+import plusIcon from "./assets/plus.svg";
 import {
   doChatRemove,
   doChatTypeUpdate,
@@ -31,13 +32,13 @@ function Chat(props: any) {
       <div>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
-          <button
-            className={styles.startGroupChatButton}
-            onClick={mapThenRedirect}
-          >
-            Add Group Chat
-            <img className={styles.groupChatIcon} src={groupChatIcon} />
-          </button>
+          
+            {/* Add Group Chat */}
+            <div className={styles.plusWrapper}>
+              <img className={styles.groupChatIcon} onClick={mapThenRedirect} src={groupChatIcon} />
+              <img className={styles.plusIcon} src={plusIcon}/>
+            </div>
+
         </SubNav>
 
         <div className={styles.chatContainer}>
