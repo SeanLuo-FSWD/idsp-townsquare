@@ -89,40 +89,35 @@ function PeopleFilterModalContent(props: any) {
   return (
     <div className={styles.mainFilterCard}>
       <div className={styles.filterInfo}>
-        <p style={{ fontSize: "1.8em" }}>Main filter</p>
-      </div>
-      <PeopleFilter
-        peopleFilterProps={peopleFilterProps}
-        feedPg_People={props.peoplePg.people}
-      />
-
-      {/* <div className="flex">
+        <div className={styles.pageTitle}>
+          <div>Filters</div>
+          <div className={styles.clearButtonContainer}>
+            <button
+              className={styles.clearButton}
+              onClick={() => {
+                props.onPeopleFilterRemove();
+                props.toggleFilterProp(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+        <hr />
+        <PeopleFilter
+          peopleFilterProps={peopleFilterProps}
+          feedPg_People={props.peoplePg.people}
+        />
+        <hr />
+        <h2>Post</h2>
         <p>
-          Apply Feed filter to users (Will only show users who created matched
-          posts)
-        </p>
-      </div> */}
-
-      <div className={styles.filterInfo}>
-        <p style={{ fontSize: "1.8em" }}>Post filter</p>
-        <p style={{ marginBottom: "10px" }}>
           Filter users who created matching posts only
         </p>
-      </div>
 
-      <FeedFilter
-        feedFilterProps={feedFilterProps}
-        feedPg_Feed={props.peoplePg.feed}
-      />
-
-      <div className={styles.footerWrapper}>
-        <button
-          // className={styles.submitButton}
-          style={{ marginRight: "10px" }}
-          onClick={onPeopleFilterClick}
-        >
-          Submit
-        </button>
+        <FeedFilter
+          feedFilterProps={feedFilterProps}
+          feedPg_Feed={props.peoplePg.feed}
+        />
 
         <FormControlLabel
           control={
@@ -131,35 +126,14 @@ function PeopleFilterModalContent(props: any) {
           label="Also apply to User page"
         />
 
-        <div style={{ marginLeft: "auto" }}>
+        <div className={styles.footerWrapper}>
           <button
-            onClick={() => {
-              props.onPeopleFilterRemove();
-              props.toggleFilterProp(false);
-            }}
-          >
-            Clear
+            className={styles.submitButton}
+            onClick={onPeopleFilterClick} >
+            Submit
           </button>
         </div>
       </div>
-
-      {/* <div className="flex">
-        <button onClick={onPeopleFilterClick}>Submit</button>
-        <button
-          onClick={() => {
-            props.onPeopleFilterRemove();
-            props.toggleFilterProp(false);
-          }}
-        >
-          Cancel
-        </button>
-        <FormControlLabel
-          control={
-            <Checkbox onChange={handleHasSyncFilter} name="Have_image" />
-          }
-          label="Apply to Feed page"
-        />
-      </div> */}
     </div>
   );
 }

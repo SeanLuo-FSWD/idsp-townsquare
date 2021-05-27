@@ -86,7 +86,7 @@ function FeedFilterModalContent(props: any) {
               props.onFeedFilterRemove();
               props.toggleFilterProp(false);
             }} >
-            Clear
+            Cancel
           </button>
         </div>
       </div>
