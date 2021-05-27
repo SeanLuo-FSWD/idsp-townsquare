@@ -11,15 +11,6 @@ function FilterUser({ person }: any) {
   }
   return (
     <div>
-      {/* <div>
-        <img
-          className="pointer"
-          onClick={() => setOpenPortal(true)}
-          src={person.avatar}
-          height="50px"
-          width="50px"
-        />
-      </div> */}
       <div style={{ display: "flex" }}>
         <p style={{ width: "90px" }}>
           <strong>Location:</strong>

@@ -168,34 +168,32 @@ function GroupChatPg(props: any) {
               <button onClick={history.goBack}>Back</button>
             </SubNav>
             {cerror && <Error message={cerror} />}
-            <div>
+            <div className={styles.filterContainer}>
               <div className={styles.filterInfo}>
-                <p style={{ fontSize: "1.8em" }}>Main filter</p>
+              <div className={styles.pageTitle}>
+                <div>Filters</div>
               </div>
-              <PeopleFilter
-                peopleFilterProps={peopleFilterProps}
-                feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
-              />
-
-              <div className={styles.filterInfo}>
-                <p style={{ fontSize: "1.8em" }}>Post filter</p>
-                <p style={{ marginBottom: "10px" }}>
-                  Filter users who created matching posts only
-                </p>
-              </div>
+              <hr />
+                <PeopleFilter
+                  peopleFilterProps={peopleFilterProps}
+                  feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
+                />
+              <hr />
+              <h2>Post</h2>
+              <p>
+                Filter users who created matching posts only
+              </p>
               <FeedFilter
                 feedFilterProps={feedFilterProps}
                 feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
               />
               <div className={styles.footerWrapper}>
-                {/* <button onClick={onGroupFilterSubmit}>Submit</button> */}
                 <button
-                  // className={styles.submitButton}
-                  style={{ marginRight: "10px" }}
-                  onClick={onGroupFilterSubmit}
-                >
+                  className={styles.submitButton}
+                  onClick={onGroupFilterSubmit} >
                   Submit
                 </button>
+              </div>
               </div>
             </div>
           </div>
