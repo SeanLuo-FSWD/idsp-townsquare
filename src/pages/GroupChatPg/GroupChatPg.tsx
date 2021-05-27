@@ -21,18 +21,12 @@ import backIcon from "./assets/backIcon.svg";
 // function GroupChatPg({ startPage, chatId }: any) {
 function GroupChatPg(props: any) {
   const history = useHistory();
-  const { cerror, setModalProps, setShowModal, setCerror } =
-    useContext(LoginContext);
+  const { cerror, setCerror } = useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const [toggleView, setToggleView] = useState("chat");
-  // const [addedGroup, setAddedGroup] = useState(props.addedGroup) as any;
   const [addedGroup, setAddedGroup] = useState([]) as any;
   const initialChatGroup = props.initialChatGroup;
-  // const [addedGroupIds, setAddedGroupIds] = useState(
-  //   props.addedGroup.map((p: any) => {
-  //     return p.userId;
-  //   })
-  // ) as any;
+
   const [addedGroupIds, setAddedGroupIds] = useState([]);
 
   const containerRef = useRef(null);
@@ -42,7 +36,6 @@ function GroupChatPg(props: any) {
       setCerror("");
     };
   }, []);
-  // const [showFeedFilter, setShowFeedFilter] = useState(false);
   const [feedFilter, setFeedFilter] = useState(
     FILTER_INITIAL_STATE.peoplePg.feed
   );
@@ -102,7 +95,6 @@ function GroupChatPg(props: any) {
     } else {
       props.onPropStartChatProp(addedGroup);
       props.doChatTypeUpdateProp(props.chatType);
-      // props.onSetInitialChatGroup(addedGroup);
       history.push("/chat");
     }
   }
@@ -110,7 +102,7 @@ function GroupChatPg(props: any) {
   function getAvatars(addedGroup: any) {
     console.log("getAvatars getAvatars getAvatars");
     console.log(addedGroup);
-    const length = addedGroup.length > 3 ? 3: addedGroup.length;
+    const length = addedGroup.length > 3 ? 3 : addedGroup.length;
 
     let selectGroup: any = [];
     for (let i = 0; i < length; i++) {
@@ -119,8 +111,12 @@ function GroupChatPg(props: any) {
 
     const arr_user = selectGroup.map((u: any, index: number) => {
       return (
-        <div key={u.userId} className={styles.avatarContainer} style={{left: index * 22.5}}>
-            <img src={u.avatar} className={styles.avatarThumbnail} />
+        <div
+          key={u.userId}
+          className={styles.avatarContainer}
+          style={{ left: index * 22.5 }}
+        >
+          <img src={u.avatar} className={styles.avatarThumbnail} />
         </div>
       );
     });
@@ -140,7 +136,13 @@ function GroupChatPg(props: any) {
               <div className={styles.addedList}>
                 {getAvatars(addedGroup)}
                 {addedGroup.length > 3 && (
-                  <h3 style={{display: "inline-flex", position: "relative", left: 5 * 22.5 }}>
+                  <h3
+                    style={{
+                      display: "inline-flex",
+                      position: "relative",
+                      left: 5 * 22.5,
+                    }}
+                  >
                     {/* and {addedGroup.length - 3} other */}
                     ...
                   </h3>
@@ -165,35 +167,38 @@ function GroupChatPg(props: any) {
           <div className="pagePadding">
             <Navbar currentPath={window.location.pathname} />
             <SubNav>
-              <img src={backIcon} onClick={history.goBack}/>
+              <img
+                className="pointer"
+                src={backIcon}
+                onClick={history.goBack}
+              />
             </SubNav>
             {cerror && <Error message={cerror} />}
             <div className={styles.filterContainer}>
               <div className={styles.filterInfo}>
-              <div className={styles.pageTitle}>
-                <div>Filters</div>
-              </div>
-              <hr />
+                <div className={styles.pageTitle}>
+                  <div>Filters</div>
+                </div>
+                <hr />
                 <PeopleFilter
                   peopleFilterProps={peopleFilterProps}
                   feedPg_People={FILTER_INITIAL_STATE.peoplePg.people}
                 />
-              <hr />
-              <h2>Post</h2>
-              <p>
-                Filter users who created matching posts only
-              </p>
-              <FeedFilter
-                feedFilterProps={feedFilterProps}
-                feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
-              />
-              <div className={styles.footerWrapper}>
-                <button
-                  className={styles.submitButton}
-                  onClick={onGroupFilterSubmit} >
-                  Submit
-                </button>
-              </div>
+                <hr />
+                <h2>Post</h2>
+                <p>Filter users who created matching posts only</p>
+                <FeedFilter
+                  feedFilterProps={feedFilterProps}
+                  feedPg_Feed={FILTER_INITIAL_STATE.peoplePg.feed}
+                />
+                <div className={styles.footerWrapper}>
+                  <button
+                    className={styles.submitButton}
+                    onClick={onGroupFilterSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
