@@ -1,5 +1,22 @@
 .error {
-  background-color: red;
+  background-color: #45393D;
   font-size: medium;
   border-radius: 7px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 80%;
+  padding: 10px;
+  box-sizing: border-box;
+  color: white;
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+
+
+
+
+
 }
