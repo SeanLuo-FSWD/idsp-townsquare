@@ -97,6 +97,7 @@ function Profile(props: any) {
         }
 
         if (currentUser.firstTime) {
+          setInitPerson({ ...initPerson, avatar: person.avatarlink });
           setTimeout(() => {
             setCurrentUser(result.data);
           }, 2000);
