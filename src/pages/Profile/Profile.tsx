@@ -171,21 +171,34 @@ function Profile(props: any) {
 
               <div className={styles.container}>
                 <div className={styles.avatarContainer}>
-                  <img
+                  {person.avatar && updateStatus === false? (
+                    <img
+                      className={styles.profileImg}
+                      src={person.avatarlink}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className={styles.profileImg}
+                      src={initPerson.avatar}
+                      alt="" />
+                  )
+                }
+                  {/* <img
                     className={styles.profileImg}
                     src={initPerson.avatar}
-                    alt="" />
+                    alt="" /> */}
                   <label htmlFor="myFile" className={styles.editLabel}>
                     <img src={editImage} className={styles.editIcon}/>
                   </label>
                 </div>
-                {person.avatar && updateStatus === false && (
+                {/* {person.avatar && updateStatus === false && (
                   <img
                     className={styles.profileImg}
                     src={person.avatarlink}
                     alt=""
                   />
-                )}
+                )} */}
               </div>
             {/* </div> */}
             <input
