@@ -79,6 +79,7 @@ const Register = () => {
                     name="username"
                     placeholder="Create a username"
                     value={person.username}
+                    maxLength={20}
                     onChange={handleChange}
                   />
                   <div className="form-control">
