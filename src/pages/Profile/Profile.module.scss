@@ -12,7 +12,7 @@
   align-items: center;
   text-align: center;
   min-height: 100vh;
-  padding: 0px 10px 60px 10px;
+  padding: 50px 10px 60px 10px;
   background-color: #f6efe8;
 }
 
@@ -31,9 +31,12 @@
 }
 
 .profileImg {
-  height: 100px;
-  width: 100px;
+  height: 170px;
+  width: 170px;
   margin: 10px;
+  object-fit: cover;
+  box-sizing: border-box;
+  border: 3px solid #2D2B2C;
 }
 
 .updateMessage {
@@ -53,13 +56,17 @@
 
 .inputField {
   width: 60px;
+  background-color: #e4dee0;
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
 }
 
 .containerCard {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 20px 7px;
   border-radius: 10px;
-  background-color: #92002F ;
+  background-color: #e4dee0 ;
   // background-color: #2E4057;
   // background-color: #5C5D8D;
 }
@@ -71,63 +78,53 @@
 }
 
 .container {
-
   position: relative;
-
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  display: block;
-  display: flex;
-  justify-content: center;
-
-  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  // border-radius: 5px; /* 5px rounded corners */
 }
 
 .uploadImage {
-  padding: 10px 10px 10px 10px;
+  display: none;
 }
 
 .profileUserName {
   padding-right: 7px;
 }
 
+.itemsContainer {
+  color: black;
+  padding: 0 20px;
+}
+
 .items {
-  display: flex;
-  padding: 0px 6px;
-  font-size: 16px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 300px;
-  height: 3rem;
-  border-radius: 5px; /* 5px rounded corners */
-  margin: 15px 10px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: #f6efe8;
-  :nth-child(3) {
-    box-shadow: none;
+  display: grid;
+  grid-template-columns: 120px 150px auto;
+  margin: 20px 0;
+  // height: 50px;
+}
 
-  }
-  :nth-child(1) {
-    box-shadow: none;
+.infoTitle {
+  // line-height: 50px;
+  text-align: left;
+}
 
-  }
-  :nth-child(2) {
-    box-shadow: none;
-    
+.infoContent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // line-height: 50px;
+  text-align: left;
+}
 
-  }
+.editButton {
+  color: gray;
+  cursor: pointer;
 }
 
 
 
-select {
-  box-shadow: none;
-  border: none;
-  border-radius: 5px;
-}
+// select {
+//   box-shadow: none;
+//   border: none;
+//   border-radius: 5px;
+// }
 
 .submitButton {
   display: flex;
@@ -215,3 +212,35 @@ select {
 //   align-items: center;
 //   text-align: center;
 // }
+
+.editLabel {
+  background-color: white;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: all 0.5s;
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+
+  &:active {
+    transition: all 0.5s;
+    transform: scale(1.1);
+  }
+}
+
+.editIcon {
+  height: 25px;
+  width: 25px;
+}
+
+.selectField {
+  background-color: #e4dee0;
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+}

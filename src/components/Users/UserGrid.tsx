@@ -11,7 +11,7 @@ function UserGrid(props: any) {
         return (
           <div key={user._id} className={`${styles.userTile} flex--center`}>
             <div className={`${styles.cardContainer} flex--center`}></div>
-            <img src={profile_pic}></img>
+            <img src={profile_pic} className={styles.profileAvatar}></img>
             <div
               className={styles.tileUsername}
               style={{ position: "absolute", bottom: "0" }}
