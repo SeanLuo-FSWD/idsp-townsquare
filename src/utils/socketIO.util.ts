@@ -1,5 +1,6 @@
 import socketIO from "socket.io-client";
-import domainName from "../constants/domainName";
+
+import domainName from '../constants/domainName';
 
 const connectionOptions = {
   "force new connection": true,
@@ -10,8 +11,8 @@ const connectionOptions = {
   autoConnect: false,
 } as any;
 
-const socket = socketIO("https://idsp.link/", {
-  // const socket = socketIO("http://localhost:8000", {
+
+const socket = socketIO(domainName, {
   withCredentials: true,
   autoConnect: false,
 });
