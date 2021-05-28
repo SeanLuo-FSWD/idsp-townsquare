@@ -168,6 +168,7 @@ function Profile(props: any) {
           )}
           <div className={styles.containerCard}>
             {/* <div> */}
+
               <div className={styles.container}>
                 <div className={styles.avatarContainer}>
                   <img

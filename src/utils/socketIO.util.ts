@@ -1,4 +1,5 @@
 import socketIO from "socket.io-client";
+
 import domainName from '../constants/domainName';
 
 const connectionOptions = {
@@ -9,6 +10,7 @@ const connectionOptions = {
   withCredentials: true,
   autoConnect: false,
 } as any;
+
 
 const socket = socketIO(domainName, {
   withCredentials: true,

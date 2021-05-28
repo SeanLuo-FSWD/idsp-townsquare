@@ -89,33 +89,31 @@ function SubNav(props: any) {
             history.push("/help");
           }}
         />
-        <div className={styles.logoTitle}>
-          TownSquare
-        </div>
+        <div className={styles.logoTitle}>TownSquare</div>
         {/* <p style={{ paddingLeft: "20px" }}>{currentUser.username}</p> */}
         {/* <div>TownSquare</div> */}
       </div>
 
       <div className={styles.commonIcons}>
-
-          {props.children}
+        {props.children}
 
         <div>
-
-        <Badge
-          className="pointer"
-          badgeContent={props.notices.length}
-          max={10}
-          color="primary"
-        >
-          <NotificationsIcon
-            className={styles.notificationIcon}
+          <Badge
+            className="pointer"
+            badgeContent={props.notices.length}
+            max={10}
+            color="primary"
             onClick={() => {
               setShowDD(!showDD);
             }}
-          />
-        </Badge>
-
+          >
+            <NotificationsIcon
+              className={styles.notificationIcon}
+              onClick={() => {
+                setShowDD(!showDD);
+              }}
+            />
+          </Badge>
         </div>
 
         {showDD && (
