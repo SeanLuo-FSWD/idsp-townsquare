@@ -1,4 +1,5 @@
 import socketIO from "socket.io-client";
+import domainName from "../constants/domainName";
 
 const connectionOptions = {
   "force new connection": true,

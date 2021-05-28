@@ -19,6 +19,7 @@ import {
 } from "../../store/redux/actions/filter_act";
 import Error from "../../components/Error/Error";
 import Spinning from "../../pages/spinning.page";
+import editIcon from "./assets/edit_icon.png";
 
 function Profile(props: any) {
   const [initPerson, setInitPerson] = useState(null) as any;
@@ -166,191 +167,189 @@ function Profile(props: any) {
             </div>
           )}
           <div className={styles.containerCard}>
-            <div>
-              <div className={styles.container}>
+            {/* <div> */}
+            <div className={styles.container}>
+              <img
+                className={styles.profileImg}
+                src={initPerson.avatar}
+                alt=""
+              />
+              <label htmlFor="myFile" className={styles.editLabel}>
+                <img src={editImage} className={styles.editIcon} />
+              </label>
+              {person.avatar && updateStatus === false && (
                 <img
                   className={styles.profileImg}
-                  src={initPerson.avatar}
+                  src={person.avatarlink}
                   alt=""
                 />
-                {person.avatar && updateStatus === false && (
-                  <img
-                    className={styles.profileImg}
-                    src={person.avatarlink}
-                    alt=""
-                  />
-                )}
-              </div>
-            </div>
-            <div className={styles.items}>
-              <img
-                className={`pointer ${styles.userPageIcons}`}
-                src={changeProfileImg}
-                data-edit="editImg"
-                onClick={handleEditOpen}
-              />
-              {fieldArr.find((ele: string) => ele === "editImg") && (
-                <div className={`flex`}>
-                  <input
-                    className={styles.uploadImage}
-                    type="file"
-                    id="myFile"
-                    name="avatar"
-                    accept="image"
-                    onChange={(e) => getImg(e)}
-                  />
-                  <img
-                    className={`pointer ${styles.userPageIcons}`}
-                    src={closeIcon}
-                    data-edit="editImg"
-                    onClick={handleEditClose}
-                  />
-                </div>
               )}
             </div>
-            <div>
+            {/* </div> */}
+            <input
+              className={styles.uploadImage}
+              type="file"
+              id="myFile"
+              name="avatar"
+              accept="image"
+              onChange={(e) => getImg(e)}
+            />
+            <hr />
+            <div className={styles.itemsContainer}>
               <div className={styles.items}>
-                <div>
-                  <strong>Username: </strong>
-                  {initPerson.username}
-                </div>
-                <img
-                  className={`pointer ${styles.userPageIcons}`}
-                  src={editImage}
-                  data-edit="editUsername"
-                  onClick={handleEditOpen}
-                />
-
-                {fieldArr.find((ele: string) => ele === "editUsername") && (
-                  <div className={`flex`}>
-                    <input
-                      className={styles.inputField}
-                      type="username"
-                      id="username"
-                      name="username"
-                      placeholder="Create a username"
-                      // value={person.username}
-                      onChange={handleChange}
-                      required
-                    />
-                    <img
-                      className={`pointer ${styles.userPageIcons}`}
-                      src={closeIcon}
+                <div className={styles.infoTitle}>Username</div>
+                {fieldArr.find((ele: string) => ele === "editUsername") ? (
+                  // &&
+                  <>
+                    <div className={styles.inputContainer}>
+                      <input
+                        className={styles.inputField}
+                        type="username"
+                        id="username"
+                        name="username"
+                        placeholder={initPerson.username}
+                        // value={initPerson.username}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div data-edit="editUsername" onClick={handleEditClose}>
+                      X
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.infoContent}>
+                      {initPerson.username}
+                    </div>
+                    <div
                       data-edit="editUsername"
-                      onClick={handleEditClose}
-                    />
-                  </div>
+                      onClick={handleEditOpen}
+                      className={styles.editButton}
+                    >
+                      edit
+                    </div>
+                  </>
                 )}
               </div>
-            </div>
-            <div>
-              <div className={styles.items}>
-                <div>
-                  <strong>Age: </strong> {initPerson.age}
+              <div>
+                <div className={styles.items}>
+                  <div className={styles.infoTitle}>Age</div>
+                  {fieldArr.find((ele: string) => ele === "editAge") ? (
+                    <>
+                      <div className={styles.inputContainer}>
+                        <select
+                          name="age"
+                          onChange={handleChange}
+                          value={person.age}
+                          defaultValue={initPerson.age}
+                          className={styles.selectField}
+                          required
+                        >
+                          {ageArr.map((year) => {
+                            return <option key={year}>{year}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div data-edit="editAge" onClick={handleEditClose}>
+                        X
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.infoContent}>{initPerson.age}</div>
+                      <div
+                        data-edit="editAge"
+                        onClick={handleEditOpen}
+                        className={styles.editButton}
+                      >
+                        edit
+                      </div>
+                    </>
+                  )}
                 </div>
-                <img
-                  className={`pointer ${styles.userPageIcons}`}
-                  src={editImage}
-                  data-edit="editAge"
-                  onClick={handleEditOpen}
-                />
-
-                {fieldArr.find((ele: string) => ele === "editAge") && (
-                  <div className={`flex`}>
-                    <select
-                      name="age"
-                      onChange={handleChange}
-                      value={person.age}
-                      defaultValue={initPerson.age}
-                      required
-                    >
-                      {ageArr.map((year) => {
-                        return <option key={year}>{year}</option>;
-                      })}
-                    </select>
-                    <img
-                      className={`pointer ${styles.userPageIcons}`}
-                      src={closeIcon}
-                      data-edit="editAge"
-                      onClick={handleEditClose}
-                    />
-                  </div>
-                )}
               </div>
-            </div>
-            <div>
-              <div className={styles.items}>
-                <div>
-                  <strong>Location: </strong>
-                  {initPerson.location}
+              <div>
+                <div className={styles.items}>
+                  <div className={styles.infoTitle}>Location</div>
+                  {fieldArr.find((ele: string) => ele === "editLocation") ? (
+                    <>
+                      <div className={styles.inputContainer}>
+                        <select
+                          name="location"
+                          onChange={handleChange}
+                          value={person.location}
+                          defaultValue={initPerson.location}
+                          required
+                          className={styles.selectField}
+                        >
+                          {/* <option value=""></option> */}
+                          <option value="Surrey">Surrey</option>
+                          <option value="Burnaby">Burnaby</option>
+                          <option value="Coquitlam">Coquitlam</option>
+                          <option value="Richmond">Richmond</option>
+                          <option value="Vancouver">Vancouver</option>
+                        </select>
+                      </div>
+                      <div data-edit="editLocation" onClick={handleEditClose}>
+                        X
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.infoContent}>
+                        {initPerson.location}
+                      </div>
+                      <div
+                        data-edit="editLocation"
+                        onClick={handleEditOpen}
+                        className={styles.editButton}
+                      >
+                        edit
+                      </div>
+                    </>
+                  )}
                 </div>
-                <img
-                  className={`pointer ${styles.userPageIcons}`}
-                  src={editImage}
-                  data-edit="editLocation"
-                  onClick={handleEditOpen}
-                />
-
-                {fieldArr.find((ele: string) => ele === "editLocation") && (
-                  <div className={`flex`}>
-                    <select
-                      name="location"
-                      onChange={handleChange}
-                      value={person.location}
-                      defaultValue={initPerson.location}
-                      required
-                    >
-                      <option value=""></option>
-                      <option value="Surrey">Surrey</option>
-                      <option value="Burnaby">Burnaby</option>
-                      <option value="Coquitlam">Coquitlam</option>
-                      <option value="Richmond">Richmond</option>
-                      <option value="Vancouver">Vancouver</option>
-                    </select>
-                    <img
-                      className={`pointer ${styles.userPageIcons}`}
-                      src={closeIcon}
-                      data-edit="editLocation"
-                      onClick={handleEditClose}
-                    />
-                  </div>
-                )}
               </div>
-            </div>
-            <div>
-              <div className={styles.items}>
-                <div>
-                  <strong>gender: </strong> {initPerson.gender}
+              <div>
+                <div className={styles.items}>
+                  <div className={styles.infoTitle}>gender</div>
+                  {fieldArr.find((ele: string) => ele === "editGender") ? (
+                    <>
+                      <div className={styles.inputContainer}>
+                        <select
+                          name="gender"
+                          onChange={handleChange}
+                          value={person.gender}
+                          defaultValue={initPerson.gender}
+                          className={styles.selectField}
+                          required
+                        >
+                          <option value=""></option>
+                          <option value="female">female</option>
+                          <option value="male">male</option>
+                          <option value="other">other</option>
+                        </select>
+                      </div>
+                      <div data-edit="editGender" onClick={handleEditClose}>
+                        X
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.infoContent}>
+                        {initPerson.gender}
+                      </div>
+                      <div
+                        data-edit="editGender"
+                        onClick={handleEditOpen}
+                        className={styles.editButton}
+                      >
+                        edit
+                      </div>
+                    </>
+                  )}
                 </div>
-                <img
-                  className={`pointer ${styles.userPageIcons}`}
-                  src={editImage}
-                  data-edit="editGender"
-                  onClick={handleEditOpen}
-                />
-
-                {fieldArr.find((ele: string) => ele === "editGender") && (
-                  <div className={`flex`}>
-                    <select
-                      name="gender"
-                      onChange={handleChange}
-                      value={person.gender}
-                      defaultValue={initPerson.gender}
-                      required
-                    >
-                      <option value=""></option>
-                      <option value="female">female</option>
-                      <option value="male">male</option>
-                      <option value="other">other</option>
-                    </select>
-                    <img
-                      className={`pointer ${styles.userPageIcons}`}
-                      src={closeIcon}
-                      data-edit="editGender"
-                      onClick={handleEditClose}
-                    />
-                  </div>
-                )}
               </div>
             </div>
 
@@ -362,7 +361,6 @@ function Profile(props: any) {
                 Save
               </button>
             </div>
-
             <div className={styles.updateMessage}>
               {updateStatus && <div>Profile updated!</div>}
 
