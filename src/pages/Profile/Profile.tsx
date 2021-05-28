@@ -97,6 +97,7 @@ function Profile(props: any) {
         }
 
         if (currentUser.firstTime) {
+          setInitPerson({ ...initPerson, avatar: person.avatarlink });
           setTimeout(() => {
             setCurrentUser(result.data);
           }, 2000);
@@ -144,9 +145,7 @@ function Profile(props: any) {
     return (
       <div className={styles.pagePadding}>
         <Navbar currentPath={window.location.pathname} />
-        <SubNav>
-
-        </SubNav>
+        <SubNav></SubNav>
 
         {cerror && <Error message={cerror} />}
 
@@ -380,22 +379,20 @@ function Profile(props: any) {
                 </div>
               )}
             </div>
-            
           </div>
           <button
-                  className={`pointer ${styles.logoutButton}`}
-                  onClick={handleLogout}
-                >
-                  <div className={styles.logoutButtonWrapper}>
-                  Logout
-                    <img
-                      className={`pointer ${styles.logoutIcon}`}
-                      src={logoutImage}
-                      onClick={handleLogout}
-                    />
-                  </div>
-                  
-                </button>
+            className={`pointer ${styles.logoutButton}`}
+            onClick={handleLogout}
+          >
+            <div className={styles.logoutButtonWrapper}>
+              Logout
+              <img
+                className={`pointer ${styles.logoutIcon}`}
+                src={logoutImage}
+                onClick={handleLogout}
+              />
+            </div>
+          </button>
         </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ const connectionOptions = {
 } as any;
 
 const socket = socketIO(domainName, {
-// const socket = socketIO("http://localhost:8000", {
   withCredentials: true,
   autoConnect: false,
 });
