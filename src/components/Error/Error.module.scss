@@ -1,14 +1,17 @@
 .error {
   background-color: #45393D;
-  font-size: medium;
+  font-size: 15px;
   border-radius: 7px;
   position: absolute;
+  top: -15px;
   left: 50%;
   transform: translate(-50%, 50%);
-  width: 80%;
+  width: 100%;
+  z-index: 10;
   padding: 10px;
   box-sizing: border-box;
   color: white;
+  max-width: 540px;
   display:flex;
   justify-content: center;
   text-align: center;

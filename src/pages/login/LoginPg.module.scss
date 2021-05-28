@@ -63,7 +63,7 @@
 .card {
   text-align: center;
   color: white;
-  background-color: #92002f;
+  background: linear-gradient(180deg, #92002F 0%, #85171B 100%);
   /* Add shadows to create the "card" effect */
   transition: 0.3s;
   width: auto;
@@ -111,7 +111,7 @@
   border-color: white;
   border-style: solid;
   border-width: 2px;
-  background-color: #92002f;
+  background-color: #90032d52;
   font-family: "Poppins", sans-serif;
   text-align: center;
 }
@@ -130,7 +130,7 @@
   border-style: solid;
   border-width: 2px;
 
-  background-color: #92002f;
+  background-color: #90032d52;
 }
 
 .link {

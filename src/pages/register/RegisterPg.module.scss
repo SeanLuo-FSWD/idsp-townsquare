@@ -7,7 +7,7 @@
 }
 
 .backgroundSquare {
-  background-color: #92002f;
+  background: linear-gradient(180deg, #92002F 0%, #85171B 100%);
   padding: 20px 0px 50px 0px;
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
@@ -44,9 +44,10 @@
   border-color: white;
   border-style: solid;
   border-width: 2px;
-  background-color: #92002f;
+  background-color: #90032d52;
   font-family: "Poppins", sans-serif;
   max-width: 295px;
+  max-width: 230px;
   margin: 7px 0px;
 }
 
