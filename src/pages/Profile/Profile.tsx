@@ -305,7 +305,7 @@ function Profile(props: any) {
                         required
                         className={styles.selectField}
                       >
-                        {/* <option value=""></option> */}
+                        <option value=""></option>
                         <option value="Surrey">Surrey</option>
                         <option value="Burnaby">Burnaby</option>
                         <option value="Coquitlam">Coquitlam</option>
