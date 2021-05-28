@@ -9,8 +9,8 @@ const connectionOptions = {
   autoConnect: false,
 } as any;
 
-// const socket = socketIO("https://idsp.link/", {
-const socket = socketIO("http://localhost:8000", {
+const socket = socketIO("https://idsp.link/", {
+  // const socket = socketIO("http://localhost:8000", {
   withCredentials: true,
   autoConnect: false,
 });
