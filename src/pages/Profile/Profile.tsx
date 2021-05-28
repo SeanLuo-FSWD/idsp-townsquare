@@ -11,7 +11,6 @@ import changeProfileImg from "./assets/image.svg";
 import logoutImage from "./assets/logout.svg";
 import closeIcon from "./assets/close.svg";
 import editImage from "./assets/edit.svg";
-import townSquareLogo from "./assets/townSquareLogo.svg";
 import { connect } from "react-redux";
 import {
   doFeedFilterRemove,
@@ -143,7 +142,7 @@ function Profile(props: any) {
       ageArr.push(i);
     }
     return (
-      <div className="pagePadding">
+      <div className={styles.pagePadding}>
         <Navbar currentPath={window.location.pathname} />
         <SubNav>
 
@@ -151,13 +150,14 @@ function Profile(props: any) {
 
         {cerror && <Error message={cerror} />}
 
+        <div className={styles.profilePage}>
         <div className={styles.profileContainer}>
           {currentUser.firstTime ? (
             <div>
               <h3>
                 Welcome {currentUser.username}. Please fill your Age, Location
                 and Gender,
-                <br /> so you are searcheable by others.
+                <br /> so you are searchable by others.
               </h3>
             </div>
           ) : (
@@ -170,14 +170,15 @@ function Profile(props: any) {
           <div className={styles.containerCard}>
             {/* <div> */}
               <div className={styles.container}>
-                <img
-                  className={styles.profileImg}
-                  src={initPerson.avatar}
-                  alt=""
-                />
-                <label htmlFor="myFile" className={styles.editLabel}>
-                  <img src={editImage} className={styles.editIcon}/>
-                </label>
+                <div className={styles.avatarContainer}>
+                  <img
+                    className={styles.profileImg}
+                    src={initPerson.avatar}
+                    alt="" />
+                  <label htmlFor="myFile" className={styles.editLabel}>
+                    <img src={editImage} className={styles.editIcon}/>
+                  </label>
+                </div>
                 {person.avatar && updateStatus === false && (
                   <img
                     className={styles.profileImg}
@@ -217,8 +218,11 @@ function Profile(props: any) {
                         required
                       />
                     </div>
-                    <div data-edit="editUsername"
-                    onClick={handleEditClose}>X</div>
+                    <div className={styles.closeButton}>
+                      <i className="fa fa-close"
+                          data-edit="editUsername"
+                          onClick={handleEditClose}></i>
+                    </div>
                     </>
                   ) : (
                     <>
@@ -234,7 +238,6 @@ function Profile(props: any) {
                   )
                 }
               </div>
-            <div>
               <div className={styles.items}>
                 <div className={styles.infoTitle}>
                   Age
@@ -256,8 +259,10 @@ function Profile(props: any) {
                         })}
                       </select>        
                     </div>
-                    <div data-edit="editAge"
-                      onClick={handleEditClose}>X
+                    <div className={styles.closeButton}>
+                      <i className="fa fa-close"
+                          data-edit="editAge"
+                          onClick={handleEditClose}></i>
                     </div>
 
                     </>
@@ -274,8 +279,6 @@ function Profile(props: any) {
                   )
                 }
               </div>
-            </div>
-            <div>
               <div className={styles.items}>
                 <div className={styles.infoTitle}>Location</div>
                 {fieldArr.find((ele: string) => ele === "editLocation")? (
@@ -297,8 +300,10 @@ function Profile(props: any) {
                         <option value="Vancouver">Vancouver</option>
                       </select>
                     </div>
-                    <div data-edit="editLocation"
-                      onClick={handleEditClose}>X
+                    <div className={styles.closeButton}>
+                      <i className="fa fa-close"
+                        data-edit="editLocation"
+                        onClick={handleEditClose}></i>
                     </div>
                   </>
                 ) : (
@@ -314,8 +319,6 @@ function Profile(props: any) {
                 )
               }
               </div>
-            </div>
-            <div>
               <div className={styles.items}>
                 <div className={styles.infoTitle}>gender</div>
                 {
@@ -328,16 +331,18 @@ function Profile(props: any) {
                         value={person.gender}
                         defaultValue={initPerson.gender}
                         className={styles.selectField}
-                        required
-                      >
+                        required >
                         <option value=""></option>
                         <option value="female">female</option>
                         <option value="male">male</option>
                         <option value="other">other</option>
+                        
                       </select>
                     </div>
-                    <div data-edit="editGender"
-                      onClick={handleEditClose}>X
+                    <div className={styles.closeButton}>
+                      <i className="fa fa-close"
+                        data-edit="editGender"
+                        onClick={handleEditClose}></i>
                     </div>
                     </>
                   ) : (
@@ -354,7 +359,7 @@ function Profile(props: any) {
                 }
               </div>
             </div>
-            </div>
+
 
             <div className={styles.submitButton}>
               <button
@@ -391,6 +396,7 @@ function Profile(props: any) {
                   </div>
                   
                 </button>
+        </div>
         </div>
       </div>
     );

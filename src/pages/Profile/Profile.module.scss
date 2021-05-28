@@ -1,43 +1,19 @@
-.body {
-  font-family: "Poppins", sans-serif;
-  overflow: hidden;
+.pagePadding {
+  padding: 50px 0 60px 0;
 }
 
 .profileContainer {
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  // margin-top: 40px;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  min-height: 100vh;
-  padding: 50px 10px 60px 10px;
-  background-color: #f6efe8;
+  max-width: 480px;
+  width: 80%;
+  margin: auto;
+
 }
 
-.townSquareLogo {
-  min-width: 30px;
-  display: inline-block;
-  width: 10px;
-  height: auto;
-  border-radius: 33%;
-  border: solid;
-  border-width: 2px;
-  border-color: #f6efe8;
-  align-items: center;
-  text-align: center;
-  margin-right: 10px;
+.profilePage {
+  
 }
 
-.profileImg {
-  height: 170px;
-  width: 170px;
-  margin: 10px;
-  object-fit: cover;
-  box-sizing: border-box;
-  border: 3px solid #2D2B2C;
-}
 
 .updateMessage {
   text-align: center;
@@ -55,30 +31,38 @@
 }
 
 .inputField {
-  width: 60px;
-  background-color: #e4dee0;
+  width: 100%;
+  background-color: #92002F;
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid white;
   outline: none;
+  font-size: 16px;
+  padding: 2px 6px 2px 6px;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+  color: white;
+
+  &::placeholder {
+    color: rgb(194, 194, 194);
+  }
 }
 
 .containerCard {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  padding: 20px 7px;
+  padding: 0px 7px 20px 7px;
   border-radius: 10px;
-  background-color: #e4dee0 ;
-  // background-color: #2E4057;
-  // background-color: #5C5D8D;
+  background-color: #92002F;
 }
 
 .rememberToFill {
   font-size: 15px;
-  margin: 15px;
+  margin: 15px auto;
   max-width: 300px;
 }
 
 .container {
-  position: relative;
+  height: 250px;
+
 }
 
 .uploadImage {
@@ -96,35 +80,44 @@
 
 .items {
   display: grid;
-  grid-template-columns: 120px 150px auto;
+  grid-template-columns: 2.5fr 3fr 10px 1fr;
   margin: 20px 0;
-  // height: 50px;
+  font-size: 16px;
+  color: white;
 }
 
 .infoTitle {
-  // line-height: 50px;
+  line-height: 30px;
   text-align: left;
 }
 
 .infoContent {
   overflow: hidden;
   text-overflow: ellipsis;
-  // line-height: 50px;
+  line-height: 30px;
   text-align: left;
+  padding: 0 6px;
 }
 
 .editButton {
-  color: gray;
+  color: rgb(212, 212, 212);
   cursor: pointer;
+  line-height: 28px;
+  border: 1px solid rgb(212, 212, 212);
+  box-sizing: border-box;
+  grid-column: 4 / 5;
+  min-width: 50px;
 }
 
+.closeButton {
+  color: rgb(212, 212, 212);
+  cursor: pointer;
+  line-height: 28px;
+  border: 1px solid #92002F;
+  // box-sizing: border-box;
+  grid-column: 4 / 5;
+}
 
-
-// select {
-//   box-shadow: none;
-//   border: none;
-//   border-radius: 5px;
-// }
 
 .submitButton {
   display: flex;
@@ -152,6 +145,15 @@
 .profileImg {
   border-radius: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 170px;
+  width: 170px;
+  object-fit: cover;
+  box-sizing: border-box;
+  border: 3px solid #2D2B2C;
 }
 
 .saveChanges {
@@ -206,26 +208,20 @@
   background-color: #333333;
 }
 
-// .saveChanges {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: center;
-// }
-
 .editLabel {
   background-color: white;
   height: 45px;
   width: 45px;
   border-radius: 50%;
   position: absolute;
-  bottom: 0;
-  right: 100px;
+  right: 20px;
+  bottom: 25px;
   padding: 10px;
   box-sizing: border-box;
   transition: all 0.5s;
   -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5); 
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 
   &:active {
     transition: all 0.5s;
@@ -239,8 +235,20 @@
 }
 
 .selectField {
-  background-color: #e4dee0;
+  background-color: #92002F;
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid white;
   outline: none;
+  width: 100%;
+  padding: 2px 2px 1px 2px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  color: white;
+}
+
+.avatarContainer {
+  position: relative;
+  height: 100%;
+  width: 170px;
+  margin: auto;
 }
